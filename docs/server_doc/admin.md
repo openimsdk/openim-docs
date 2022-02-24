@@ -354,10 +354,10 @@
 
 | 参数名      | 必选 | 类型   | 说明                                                         |
 | :---------- | :--- | :----- | ------------------------------------------------------------ |
-| uid         | 是   | string | 被拉黑的用户id                                               |
+| ToUserID    | 是   | string | 被拉黑的用户id                                               |
 | operationID | 是   | string | 操作id，用随机字符串                                         |
 | token       | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| fromUserID  |      |        | 用户id                                                       |
+| fromUserID  | 是   | string | 需要拉黑别人的                                               |
 
 ### **返回示例**
 
@@ -501,7 +501,7 @@ APP管理员更新用户信息
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/user/get_user_info`
+ - `http://x.x.x.x:10000/user/get_users_info`
 
 
 ### **请求方式**
@@ -514,7 +514,7 @@ APP管理员更新用户信息
   ```json
 {
     "operationID": "1111111222", 
-    "uidList": [
+    "userIDList": [
         "123", 
         "3434"
     ]
@@ -527,45 +527,25 @@ APP管理员更新用户信息
 | :---------: | :--: | :------: | :----------------------------------------------------------- |
 | operationID |  是  |  string  | 操作id，用随机字符串                                         |
 |    token    |  是  |  string  | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-|   uidList   |  是  | json数组 | 需要获取详细信息的用户Uid数组                                |
+| userIDList  |  是  | json数组 | 需要获取详细信息的用户Uid数组                                |
 
 
 ### **返回示例**
 
   ```json
 {
-    "errCode": 0, 
-    "errMsg": "", 
+    "errCode": 0,
+    "errMsg": "",
     "data": [
         {
-            "uid": "06577eb8ed751416", 
-            "name": "Oxcupb....cool", 
-            "icon": "", 
-            "gender": 0, 
-            "mobile": "", 
-            "birth": "", 
-            "email": "", 
-            "ex": ""
-        }, 
+            "faceURL": "ic_avatar_05",
+            "nickname": "Gordon",
+            "userID": "18349115126"
+        },
         {
-            "uid": "1308", 
-            "name": "Allen", 
-            "icon": "https://yt-bullet-s.oss-ap-southeast-1.aliyuncs.com/1-10.png", 
-            "gender": 0, 
-            "mobile": "", 
-            "birth": "", 
-            "email": "", 
-            "ex": ""
-        }, 
-        {
-            "uid": "1514", 
-            "name": "angel 1514", 
-            "icon": "https://indie-project-earthangle.oss-cn-beijing.aliyuncs.com/earthAngel/20210827043129233-6806.jpg", 
-            "gender": 0, 
-            "mobile": "", 
-            "birth": "", 
-            "email": "", 
-            "ex": ""
+            "faceURL": "ic_avatar_04",
+            "nickname": "OpenIM-sk",
+            "userID": "18666662412"
         }
     ]
 }
@@ -602,7 +582,7 @@ APP管理员更新用户信息
 {
     "operationID": "545454", 
     "userIDList": [
-        "18349115126","45","17396220460","sadsdf"
+        "17396220460","sadsdf"
     ]
 }
   ```
@@ -622,25 +602,15 @@ APP管理员更新用户信息
 {
     "errCode": 0,
     "errMsg": "",
-    "successResult": [
-        {
-            "userID": "18349115126",
-            "status": "online",
-            "detailPlatformStatus": [
-                {
-                    "platform": "Android",
-                    "status": "online"
-                }
-            ]
-        },
-        {
-            "userID": "45",
-            "status": "offline"
-        },
+    "data": [
         {
             "userID": "17396220460",
             "status": "online",
             "detailPlatformStatus": [
+                {
+                    "platform": "OSX",
+                    "status": "online"
+                },
                 {
                     "platform": "Web",
                     "status": "online"
@@ -657,14 +627,15 @@ APP管理员更新用户信息
 
 ### **返回参数**
 
-| 参数名        | 类型         | 说明                                                         |
-| :------------ | :----------- | ------------------------------------------------------------ |
-| errCode       | int          | 0成功，非0失败                                               |
-| errMsg        | string       | 错误信息                                                     |
-| successResult | json对象数组 | 获取的用户在线状态详细信息                                   |
-| userID        | string       | 用户ID                                                       |
-| status        | string       | 在线状态，目前只有offline和online两种                        |
-| platform      | string       | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
+| 参数名               | 类型         | 说明                                                         |
+| :------------------- | :----------- | ------------------------------------------------------------ |
+| errCode              | int          | 0成功，非0失败                                               |
+| errMsg               | string       | 错误信息                                                     |
+| data                 | json对象数组 | 获取的用户在线状态详细信息                                   |
+| userID               | string       | 用户ID                                                       |
+| detailPlatformStatus | json对象数组 | 包含各个平台的详细在线状态，如果用户离线则没有               |
+| status               | string       | 在线状态，目前只有offline和online两种                        |
+| platform             | string       | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
 
 
 
@@ -707,7 +678,7 @@ APP管理员更新用户信息
 {
     "errCode": 0, 
     "errMsg": "", 
-    "uidList": [
+    "data": [
         "122", 
         "466"
     ]
@@ -716,11 +687,11 @@ APP管理员更新用户信息
 
 ###  **返回参数**
 
-| 参数名  | 类型     | 说明                      |
-| :------ | :------- | ------------------------- |
-| errCode | int      | 0成功，非0失败            |
-| errMsg  | string   | 错误信息                  |
-| uidList | json数组 | 已经注册的所有用户Uid数组 |
+| 参数名  | 类型     | 说明                         |
+| :------ | :------- | ---------------------------- |
+| errCode | int      | 0成功，非0失败               |
+| errMsg  | string   | 错误信息                     |
+| data    | json数组 | 已经注册的所有用户userID数组 |
 
 ## **查询用户是否在IM中已经注册**
 
@@ -744,7 +715,7 @@ APP管理员更新用户信息
   ```json
 {
     "operationID":"1111",
-    "userIDList":["18349115126","111","222","17396220460"]
+    "checkUserIDList":["18349115126","111","222","17396220460"]
 }
   ```
 
@@ -752,16 +723,16 @@ APP管理员更新用户信息
 
 |   参数名    | 必选 |  类型  | 说明                                                         |
 | :---------: | :--: | :----: | :----------------------------------------------------------- |
-| operationID |  是  | string | 操作id，用随机字符串  |                                       |
+| operationID |  是  | string | 操作id，用随机字符串  |
 |    token    |  是  | string | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| userIDList |  是  | json字符串数组 | 需要check的用户Uid数组，单次数量不超过100 |      
+| checkUserIDList |  是  | json字符串数组 | 需要check的用户userID数组，单次数量不超过100 |
 
 
 ### **返回示例**
 
   ```json
 {
-    "result": [
+    "data": [
         {
             "userID": "18349115126",
             "accountStatus": "registered"
@@ -790,7 +761,7 @@ APP管理员更新用户信息
 | :------ | :------- | ------------------------- |
 | errCode | int      | 0成功，非0失败            |
 | errMsg  | string   | 错误信息                  |
-| result | json对象数组 | 每个用户的信息查询结果对象数组|
+| data | json对象数组 | 每个用户的信息查询结果对象数组|
 | accountStatus  | string   | 用户注册状态，registered代表已经注册， unregistered代表未注册                  |
 
 
@@ -818,8 +789,10 @@ APP管理员更新用户信息
     "operationID": "1111111222", 
     "sendID": "1111111222", 
     "recvID": "1111111222", 
-    "senderNickName": "张三", 
+    "groupID": "121212", 
+    "senderNickname": "Gordon", 
     "senderFaceURL": "http://www.head.com", 
+    "senderPlatformID": 1, 
     "forceList": [
         "122", 
         "223"
@@ -828,7 +801,15 @@ APP管理员更新用户信息
         "text": "nihao"
     }, 
     "contentType": 101, 
-    "sessionType": 1
+    "sessionType": 1, 
+    "isOnlineOnly": true, 
+    "offlinePushInfo": {
+        "title": "send message", 
+        "desc": "", 
+        "ex": "", 
+        "iOSPushSound": "default", 
+        "iOSBadgeCount": true
+    }
 }
   ```
 
@@ -839,15 +820,22 @@ APP管理员更新用户信息
 |  operationID   |  是  | string | 操作id，用随机字符串                                         |
 |     token      |  是  | string | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
 |     sendID     |  是  | string | 发送者ID                                                     |
-|     recvID     |  是  | string | 接收者ID，单聊为用户ID，如果是群聊，则为群ID                 |
-| senderNickName |  否  | string | 发送者昵称|
-| senderFaceURL  |  否  |  string  | 发送者头像|
+|     recvID     |  否  | string | 接收者ID，单聊为用户ID，如果是群聊，则不填            |
+| groupID | 否 | string | 群聊ID，如果为单聊，则不填 |
+| senderNickname |  否  | string | 发送者昵称|
+| senderFaceURL |  否  |  string  | 发送者头像|
 |senderPlatformID|否|int|发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux|
 |   forceList    |  否  | string[] | 当聊天类型为群聊时，使用@指定强推用户列表                    |
-|    content     |  是  |  string  | 消息的具体内容，内部是json 对象，其他消息的详细字段请参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
+|    content     |  是  |  json对象  | 消息的具体内容，内部是json 对象，其他消息的详细字段请参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
 |  contentType   |  是  |   int    | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
 |  sessionType   |  是  |   int    | 发送的消息是单聊还是群聊,单聊为1，群聊为2                    |
 |isOnlineOnly|否|bool|改字段设置为true时候，发送的消息服务器不会存储，接收者在线才会收到并存储到本地，不在线该消息丢失，当消息的类型为113->typing时候，接收者本地也不会做存储|
+|offlinePushInfo|否|json对象|离线推送的具体内容，如果不填写，使用服务器默认推送标题|
+|title|否|string|推送的标题|
+|desc|否|string|推送的具体描述|
+|ex|否|string|扩展字段|
+|iOSPushSound|否|string|IOS的推送声音|
+|iOSBadgeCount|否|bool|IOS推送消息是否计入桌面图标未读数|
 
 
 ### **返回示例**
@@ -856,19 +844,23 @@ APP管理员更新用户信息
 {
     "errCode": 0, 
     "errMsg": "", 
-    "sendTime": 156454545565, 
-    "msgID": "454dfddfjjfg"
+    "data": {
+        "serverMsgID": "", 
+        "clientMsgID": "", 
+        "sendTime": 1645697804432
+    }
 }
   ```
 
 ###  **返回参数**
 
-| 参数名   |  类型  | 说明                                   |
-| :------- | :----: | -------------------------------------- |
-| errCode  |  int   | 0成功，非0失败                         |
-| errMsg   | string | 错误信息                               |
-| sendTime |  int   | 消息发送的具体时间，具体为纳秒的时间戳 |
-| msgID    | string | 消息的唯一ID                           |
+| 参数名      |  类型  | 说明                                           |
+| :---------- | :----: | ---------------------------------------------- |
+| errCode     |  int   | 0成功，非0失败                                 |
+| errMsg      | string | 错误信息                                       |
+| sendTime    |  int   | 消息发送的具体时间，具体为毫秒的时间戳         |
+| serverMsgID | string | 服务器生成的消息的唯一ID                       |
+| clientMsgID | string | 客户端生成的消息唯一ID，默认情况使用这个为主键 |
 
 ## 消息类型格式描述
 
