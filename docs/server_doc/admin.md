@@ -565,16 +565,14 @@ APP管理员更新用户信息
 | errMsg  | string       | 错误信息               |
 | data    | json对象数组 | 获取的用户详细信息列表 |
 
-## **获取用户在线状态**
-
 ### **简要描述**
 
- - 管理员调用获取用户在线状态接口可以获取多个用户在线状态。
+ -   以管理员身份获取用户在线状态。
 
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/manager/get_users_online_status
+ - `http://x.x.x.x:10000/user/get_users_online_status
 
 
 ### **请求方式**
@@ -586,70 +584,63 @@ APP管理员更新用户信息
 
   ```json
 {
-    "operationID": "545454", 
-    "userIDList": [
-        "17396220460","sadsdf"
-    ]
+    "operationID": "545454", 
+    "userIDList": [
+        "17396220460","sadsdf"
+    ]
 }
   ```
 
 ### **请求参数**
 
-|   参数名    | 必选 |   类型   | 说明                                                         |
-| :---------: | :--: | :------: | :----------------------------------------------------------- |
-| operationID |  是  |  string  | 操作id，用随机字符串                                         |
-|    token    |  是  |  string  | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| userIDList  |  是  | json数组 | 需要获取在线状态的用户Uid数组，单次数量不超过200             |
+|   参数名    | 必选 | 说明 |
+| :---------: | :--: | :--- |
+| operationID |  是  |      |
+| userIDList  |  是  |      |
 
 
 ### **返回示例**
 
   ```json
 {
-    "errCode": 0,
-    "errMsg": "",
-    "data": [
-        {
-            "userID": "17396220460",
-            "status": "online",
-            "detailPlatformStatus": [
-                {
-                    "platform": "OSX",
-                    "status": "online"
-                },
-                {
-                    "platform": "Web",
-                    "status": "online"
-                }
-            ]
-        },
-        {
-            "userID": "sadsdf",
-            "status": "offline"
-        }
-    ]
+    "errCode": 0,
+    "errMsg": "",
+    "data": [
+        {
+            "userID": "17396220460",
+            "status": "online",
+            "detailPlatformStatus": [
+                {
+                    "platform": "OSX",
+                    "status": "online"
+                },
+                {
+                    "platform": "Web",
+                    "status": "online"
+                }
+            ]
+        },
+        {
+            "userID": "sadsdf",
+            "status": "offline"
+        }
+    ]
 }
   ```
 
 ### **返回参数**
 
-| 参数名               | 类型         | 说明                                                         |
-| :------------------- | :----------- | ------------------------------------------------------------ |
-| errCode              | int          | 0成功，非0失败                                               |
-| errMsg               | string       | 错误信息                                                     |
-| data                 | json对象数组 | 获取的用户在线状态详细信息                                   |
-| userID               | string       | 用户ID                                                       |
-| detailPlatformStatus | json对象数组 | 包含各个平台的详细在线状态，如果用户离线则没有               |
-| status               | string       | 在线状态，目前只有offline和online两种                        |
-| platform             | string       | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
+| 参数名               | 类型     | 说明                                                         |
+| :------------------- | :------- | ------------------------------------------------------------ |
+| detailPlatformStatus | json数组 | 用户在哪几个平台在线                                         |
+| status               | string   | 在线状态，目前只有offline和online两种                        |
+| platform             | string   | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
 
-
-
-## **获取IM注册的所有用户(Uid)**
+## **获取IM注册的所有用户(userID)**
 
 ### **简要描述**
 
- - 管理员调用获取IM已经注册的所有用户的UID接口。
+ - 管理员调用获取IM已经注册的所有用户的userID接口。
 
 ### **请求URL**
 
@@ -770,6 +761,7 @@ APP管理员更新用户信息
 | data | json对象数组 | 每个用户的信息查询结果对象数组|
 | accountStatus  | string   | 用户注册状态，registered代表已经注册， unregistered代表未注册                  |
 
+# 消息相关
 
 ## **发送单聊群聊消息**
 
