@@ -1,8 +1,12 @@
-## **换取管理员IMToken**
+
+
+
+
+## **换取管理员Token**
 
 ### **简要描述**
 
-  AppServer 通过调用 IMServer（auth/user_token）获取或刷新管理员token，在进行以下所有的管理员操作的时候，必须传入管理员token进行校验。
+  AppServer 通过调用（auth/user_token）获取或刷新管理员token以取得超级权限。在调用以下所有的api时，必须获取管理员token，并设置到请求header中。如果没有特别说明，请求方式一律为POST
 
 ### **请求URL**
 
@@ -17,98 +21,103 @@
 
   ```json
 {
-    "secret": "tuoyun", 
-    "platform": 8, 
-    "userID": "d5645454517", 
-    "operationID": "dk56kio78dddserss"
+    "secret": "tuoyun",
+    "platform": 1,
+    "userID": "openIM123456",
+    "operationID": "asdfasdfsadf"
 }
   ```
 
 ### **请求参数**
 
-|   参数名    | 必选 |  类型  | 说明                                                         |
-| :---------: | :--: | :----: | :----------------------------------------------------------- |
-|   secret    |  是  | string | AppServer 请求 IMToken 用到的秘钥，最大长度 32 字符，必须保证 AppServer 和 IMServer 秘钥一致， secret 泄露有风险，最好保存在用户服务器端 |
-|  platform   |  是  |  int   | 管理员默认填8                                                |
-|   userID    |  是  | string | 管理员userID，IM启动时会根据IM服务器配置文件config/config.yaml的appManagerUid初始化管理员；此处的uid必须为配置文件的appManagerUid的其中一个 |
-| operationID |  是  | string | 操作id，(用于链路定位问题使用)，可以使用用随机字符串         |
+|   参数名    | 必选 | 说明                                                         |
+| :---------: | :--: | :----------------------------------------------------------- |
+|   secret    |  是  |                                                              |
+|  platform   |  是  | 管理员填8                                                    |
+|   userID    |  是  | 管理员userID，IM启动时会根据IM服务器配置文件config/config.yaml初始化管理员；此处的userID必须为配置文件的appManagerUid的其中一个 |
+| operationID |  是  |                                                              |
 
 ### **返回示例**
 
    ```json
- {
- "errCode": 0, 
- "errMsg": "", 
- "data": {
-     "userID": "", 
-     "token": "", 
-     "expiredTime": 0
- }
+{
+    "errCode": 0,
+    "errMsg": "",
+    "data": {
+        "userID": "openIM123456",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVSUQiOiJvcGVuSU0xMjM0NTYiLCJQbGF0Zm9ybSI6IklPUyIsImV4cCI6MTY0NjI5Mzk5NCwibmJmIjoxNjQ1Njg5MTk0LCJpYXQiOjE2NDU2ODkxOTR9.cHEgLEHyzC1bmHoPjz7chYqIanfodeLT6LmQhPDeGPA",
+        "expiredTime": 1646293994
+    }
 }
    ```
 
    ### **返回参数**
 
-| 参数名      | 类型   | 说明               |
-| :---------- | :----- | ------------------ |
-| errCode     | int    | 0成功，非0失败     |
-| errMsg      | string | 错误信息           |
-| userID      | string | 管理员的userID     |
-| token       | string | 生成的管理员token  |
-| expiredTime | int    | 过期时间戳，单位秒 |
+| 参数名      | 说明              |
+| :---------- | ----------------- |
+|             |                   |
+|             |                   |
+|             |                   |
+| token       | 生成的管理员token |
+| expiredTime | 过期时间单位秒    |
 
-## 创建群组
+## 群组
 
-### **简要描述**
+### 创建群组
 
-- APP管理员创建群组，需指定群主
+#### **简要描述**
 
-### **请求URL**
+- APP管理员创建群组
+
+#### **请求URL**
 
 - `http://x.x.x.x:10000/group/create_group`
 
-### **请求数据方式**
+#### **请求数据方式**
 
 - POST
 
-### **请求示例**
+#### **请求示例**
 
 ```
 {
+    "ownerUserID": "19828950910",
+    "groupType": 0,
     "groupName": "test group name",
+    "notification": "",
+    "introduction": "",
+    "faceURL": "",
+    "ex": "",
     "operationID": "sdadfsdfssdfasdafvcdxsdafdsfsdfaa",
-    "ex": "test ex",
-    "ownerUserID":"openIM001",
     "memberList": [
         {
-            "userID": "openIM002",
+            "userID": "18666662412",
             "roleLevel": 1
         }
-    
     ]
 }
 ```
 
-### **请求参数**
+#### **请求参数**
 
-| 参数名       | 必选 | 类型   | 说明                                                         |
-| :----------- | :--- | :----- | ------------------------------------------------------------ |
-| memberList   | 是   | 数组   | 指定初始群成员  setRole 0为普通成员 1为群主 2为管理员        |
-| groupName    | 是   | string | 群聊的名字                                                   |
-| introduction | 否   | string | 群简介                                                       |
-| notification | 否   | string | 群公告                                                       |
-| faceUrl      | 否   | string | 群头像                                                       |
-| token        | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| operationID  | 是   | string | 操作id，用随机字符串                                         |
+| 参数名      | 必选 | 说明                                            |
+| :---------- | :--- | ----------------------------------------------- |
+| memberList  | 是   | 指定初始群成员  roleLevel:1 普通   可以为空数组 |
+| ownerUserID | 是   | 群主UserID                                      |
+| operationID | 是   |                                                 |
 
 ### **返回示例**
 
 ```
- {
+{
     "errCode": 0,
     "errMsg": "",
     "data": {
-        "groupID": "05dc84b52829e82242a710ecf999c72c"
+        "creatorUserID": "openIM123456",
+        "groupID": "f69e9aae6edb2c86b3380b7b0125e579",
+        "groupName": "test group name",
+        "memberCount": 2,
+        "ownerUserID": "openIM123456"
     }
 }
 ```
@@ -120,6 +129,8 @@
 | errCode | int      | 0成功，非0失败                         |
 | errMsg  | string   | 错误信息                               |
 | data    | json对象 | 返回创建群结果 groupID为创建成功的群id |
+
+
 
 
 
@@ -141,35 +152,35 @@
 
 ```
 {
-	"groupID": "f21f9f84c14f3a978352ff339f1a800a",
-	"uidList": [
-		 "f732156059eeb5d0"
-	],
-	"reason": "reason",
-	"operationID": "1111111111111 "
+    "groupID": "f69e9aae6edb2c86b3380b7b0125e579",
+    "operationID": "341323253454352",
+    "invitedUserIDList": [
+        "18349115126"
+    ],
+    "reason": "hello"
 }
 ```
 
 ### **请求参数**
 
-| 参数名      | 必选 | 类型     | 说明                                                         |
-| :---------- | :--- | :------- | ------------------------------------------------------------ |
-| groupID     | 是   | string   | 群id                                                         |
-| uidList     | 是   | json数组 | 被邀请进群的用户uid列表                                      |
-| reason      | 是   | string   | 进群理由                                                     |
-| token       | 是   | string   | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| operationID | 是   | string   | 操作id，用随机字符串                                         |
+| 参数名            | 必选 | 类型     | 说明                                                         |
+| :---------------- | :--- | :------- | ------------------------------------------------------------ |
+| groupID           | 是   | string   | 群id                                                         |
+| invitedUserIDList | 是   | json数组 | 被邀请进群的用户uid列表                                      |
+| reason            | 是   | string   | 进群理由                                                     |
+| token             | 是   | string   | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
+| operationID       | 是   | string   | 操作id，用随机字符串                                         |
 
 ### **返回示例**
 
 ```
 {
     "errCode": 0,
-    "errMsg": "ok",
+    "errMsg": "",
     "data": [
         {
-            "uid": "f732156059eeb5d0",
-            "result": 0
+            "userID": "18349115126",
+            "result": -1
         }
     ]
 }
@@ -203,11 +214,13 @@
 
 ```
 {
-	"groupID": "56d274fad86685be3ea4ee70498eca61",
-	"uidListInfo": [{
-		"userId": "21979710c3fe454d"
-	}],
-	"operationID": "1111111111111 "
+    "groupID": "f69e9aae6edb2c86b3380b7b0125e579",
+    "operationID": "dasdavdsadsfasdf",
+     "reason":"kkk",
+	"kickedUserIDList": [
+        "18666662412"
+    ]
+   
 }
 ```
 
@@ -228,7 +241,7 @@
     "errMsg": "",
     "data": [
         {
-            "uid": "21979710c3fe454d",
+            "userID": "18666662412",
             "result": 0
         }
     ]
