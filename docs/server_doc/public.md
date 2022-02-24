@@ -9,7 +9,7 @@
 |   faceURL    |  string  | 255                | 用户头像或者群头像url，根据上下文理解                        |                                                              |
 |    gender    |   int    |                    | 用户性别                                                     | 1 表示男，2 表示女                                           |
 | phoneNumber  |  string  | 32                 | 用户手机号码，包括地区，(如香港：+852-xxxxxxxx)，            |                                                              |
-|    birth     |   int    |                    | 用户生日，Unix时间戳（秒）                                   |                                                              |
+|    birth     |  uint32  |                    | 用户生日，Unix时间戳（秒）                                   |                                                              |
 |    email     |  string  | 64                 | 邮箱地址                                                     |                                                              |
 |      ex      |  string  | 1024               | 扩展字段，用户可自行扩展，建议封装成 JSON 字符串             |                                                              |
 | operationID  |  string  |                    | 操作ID，保持唯一，建议用当前时间微秒+随机数                  |                                                              |
@@ -23,6 +23,7 @@
 |  memberList  | json数组 |                    | 成员列表                                                     |                                                              |
 |    reason    |  string  | 64                 | 原因，比如踢人等原因                                         |                                                              |
 |    token     |  string  |                    | 调用api时设置到请求header中                                  |                                                              |
+|  userIDList  | json数组 |                    | 用户的userID列表                                             |                                                              |
 
 
 
