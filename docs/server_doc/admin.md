@@ -393,18 +393,17 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-| 参数名      | 必选 | 类型   | 说明                                                         |
-| :---------- | :--- | :----- | ------------------------------------------------------------ |
-| token       | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| operationID | 是   | string | 操作id，用随机字符串                                         |
-| nickname    | 否   | string | 用户昵称                                                     |
-| faceURL     | 否   | string | 头像URL                                                      |
-| gender      | 否   | int    | 性别，0未知，1男，2女                                        |
-| phoneNumber | 否   | string | 用户手机号                                                   |
-| birth       | 否   | string | 用户生日                                                     |
-| email       | 否   | string | 用户邮箱                                                     |
-| ex          | 否   | string | 用户扩展信息                                                 |
-| userID      | 是   | string | 被更新的用户id                                               |
+| 参数名      | 类型   | 必选 | 说明                                              |
+| :---------- | :----- | :--- | ------------------------------------------------- |
+| operationID | string | 是   | 操作ID，保持唯一，建议用当前时间微秒+随机数       |
+| nickname    | string | 否   | 用户昵称或者群昵称                                |
+| faceURL     | string | 否   | 用户头像或者群头像url，根据上下文理解             |
+| gender      | int    | 否   | 用户性别 1 表示男，2 表示女                       |
+| phoneNumber | string | 否   | 用户手机号码，包括地区，(如香港：+852-xxxxxxxx)， |
+| birth       | int    | 否   | 用户生日，Unix时间戳（秒）                        |
+| email       | string | 否   | 邮箱地址                                          |
+| ex          | string | 否   | 用户扩展信息                                      |
+| userID      | string | 是   | 用户 ID，必须保证IM内唯一                         |
 
 ### **返回示例**
 
@@ -454,11 +453,10 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|      参数名      | 必选 |   类型   | 说明                                                         |
-| :--------------: | :--: | :------: | :----------------------------------------------------------- |
-|   operationID    |  是  |  string  | 操作id，用随机字符串                                         |
-|      token       |  是  |  string  | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| deleteUserIDList |  是  | json数组 | 需要删除的userID数组列表                                     |
+|      参数名      |   类型   | 必选 | 说明                                        |
+| :--------------: | :------: | :--: | :------------------------------------------ |
+|   operationID    |  string  |  是  | 操作ID，保持唯一，建议用当前时间微秒+随机数 |
+| deleteUserIDList | json数组 |  是  | 需要删除的userID数组列表                    |
 
 
 ### **返回示例**
@@ -476,11 +474,11 @@ APP管理员更新用户信息
 
 ###  **返回参数**
 
-| 参数名  | 类型     | 说明              |
-| :------ | :------- | ----------------- |
-| errMsg  | string   | 错误信息          |
-| errCode | int      | 0成功，非0失败    |
-| data    | json数组 | 删除失败的用户Uid |
+| 参数名  | 类型     | 说明                 |
+| :------ | :------- | -------------------- |
+| errMsg  | string   | 错误信息             |
+| errCode | int      | 0成功，非0失败       |
+| data    | json数组 | 删除失败的用户UserID |
 
 ## **获取用户详细信息**
 
@@ -513,11 +511,10 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|   参数名    | 必选 |   类型   | 说明                                                         |
-| :---------: | :--: | :------: | :----------------------------------------------------------- |
-| operationID |  是  |  string  | 操作id，用随机字符串                                         |
-|    token    |  是  |  string  | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| userIDList  |  是  | json数组 | 需要获取详细信息的用户Uid数组                                |
+|   参数名    |   类型   | 必选 | 说明                                        |
+| :---------: | :------: | :--: | :------------------------------------------ |
+| operationID |  string  |  是  | 操作ID，保持唯一，建议用当前时间微秒+随机数 |
+| userIDList  | json数组 |  是  | 用户的userID列表                            |
 
 
 ### **返回示例**
@@ -543,11 +540,12 @@ APP管理员更新用户信息
 
 ### **返回参数**
 
-| 参数名  | 类型         | 说明                   |
-| :------ | :----------- | ---------------------- |
-| errCode | int          | 0成功，非0失败         |
-| errMsg  | string       | 错误信息               |
-| data    | json对象数组 | 获取的用户详细信息列表 |
+| 参数名   | 类型   | 说明           |
+| :------- | :----- | -------------- |
+| errCode  | int    | 0成功，非0失败 |
+| errMsg   | string | 错误信息       |
+| faceURL  | string | 用户头像url    |
+| nickname | string | 用户昵称       |
 
 ### **简要描述**
 
@@ -577,10 +575,10 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|   参数名    | 必选 | 说明 |
-| :---------: | :--: | :--- |
-| operationID |  是  |      |
-| userIDList  |  是  |      |
+|   参数名    | 类型     | 必选 | 说明                                        |
+| :---------: | -------- | :--: | :------------------------------------------ |
+| operationID | string   |  是  | 操作ID，保持唯一，建议用当前时间微秒+随机数 |
+| userIDList  | json数组 |  是  | 用户的userID列表                            |
 
 
 ### **返回示例**
@@ -614,11 +612,13 @@ APP管理员更新用户信息
 
 ### **返回参数**
 
-| 参数名               | 类型     | 说明                                                         |
-| :------------------- | :------- | ------------------------------------------------------------ |
-| detailPlatformStatus | json数组 | 用户在哪几个平台在线                                         |
-| status               | string   | 在线状态，目前只有offline和online两种                        |
-| platform             | string   | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
+| 参数名   | 类型   | 说明                                                         |
+| :------- | :----- | ------------------------------------------------------------ |
+| errCode  | int    | 0成功，非0失败                                               |
+| errMsg   | string | 错误信息                                                     |
+| userID   | string | 用户 ID，必须保证IM内唯一                                    |
+| status   | string | 在线状态，目前只有offline和online两种                        |
+| platform | string | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
 
 ## **获取IM注册的所有用户(userID)**
 
@@ -647,10 +647,9 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|   参数名    | 必选 |  类型  | 说明                                                         |
-| :---------: | :--: | :----: | :----------------------------------------------------------- |
-| operationID |  是  | string | 操作id，用随机字符串                                         |
-|    token    |  是  | string | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
+|   参数名    |  类型  | 必选 | 说明                                        |
+| :---------: | :----: | :--: | :------------------------------------------ |
+| operationID | string |  是  | 操作ID，保持唯一，建议用当前时间微秒+随机数 |
 
 
 ### **返回示例**
@@ -702,11 +701,10 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|   参数名    | 必选 |  类型  | 说明                                                         |
+|   参数名    | 类型 |  必选  | 说明                                                         |
 | :---------: | :--: | :----: | :----------------------------------------------------------- |
-| operationID |  是  | string | 操作id，用随机字符串  |
-|    token    |  是  | string | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| checkUserIDList |  是  | json字符串数组 | 需要check的用户userID数组，单次数量不超过100 |
+| operationID |  string  | 是 | 操作ID，保持唯一，建议用当前时间微秒+随机数 |
+| checkUserIDList |  json字符串数组  | 是 | 需要check的用户userID数组，单次数量不超过100 |
 
 
 ### **返回示例**
@@ -742,7 +740,6 @@ APP管理员更新用户信息
 | :------ | :------- | ------------------------- |
 | errCode | int      | 0成功，非0失败            |
 | errMsg  | string   | 错误信息                  |
-| data | json对象数组 | 每个用户的信息查询结果对象数组|
 | accountStatus  | string   | 用户注册状态，registered代表已经注册， unregistered代表未注册                  |
 
 # 消息相关
@@ -797,27 +794,26 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|     参数名     | 必选 |  类型  | 说明                                                         |
+|     参数名     | 类型 |  必选  | 说明                                                         |
 | :------------: | :--: | :----: | :----------------------------------------------------------- |
-|  operationID   |  是  | string | 操作id，用随机字符串                                         |
-|     token      |  是  | string | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-|     sendID     |  是  | string | 发送者ID                                                     |
-|     recvID     |  否  | string | 接收者ID，单聊为用户ID，如果是群聊，则不填            |
-| groupID | 否 | string | 群聊ID，如果为单聊，则不填 |
-| senderNickname |  否  | string | 发送者昵称|
-| senderFaceURL |  否  |  string  | 发送者头像|
-|senderPlatformID|否|int|发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux|
-|   forceList    |  否  | string[] | 当聊天类型为群聊时，使用@指定强推用户列表                    |
-|    content     |  是  |  json对象  | 消息的具体内容，内部是json 对象，其他消息的详细字段请参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
-|  contentType   |  是  |   int    | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
-|  sessionType   |  是  |   int    | 发送的消息是单聊还是群聊,单聊为1，群聊为2                    |
-|isOnlineOnly|否|bool|改字段设置为true时候，发送的消息服务器不会存储，接收者在线才会收到并存储到本地，不在线该消息丢失，当消息的类型为113->typing时候，接收者本地也不会做存储|
-|offlinePushInfo|否|json对象|离线推送的具体内容，如果不填写，使用服务器默认推送标题|
-|title|否|string|推送的标题|
-|desc|否|string|推送的具体描述|
-|ex|否|string|扩展字段|
-|iOSPushSound|否|string|IOS的推送声音|
-|iOSBadgeCount|否|bool|IOS推送消息是否计入桌面图标未读数|
+|  operationID   |  string  |  是  | 操作ID，保持唯一，建议用当前时间微秒+随机数                  |
+|     sendID     |  string  | 是 | 发送者ID                                                     |
+|     recvID     |  string  | 否 | 接收者ID，单聊为用户ID，如果是群聊，则不填            |
+| groupID | string | 否 | 群聊ID，如果为单聊，则不填 |
+| senderNickname |  string  | 否 | 发送者昵称|
+| senderFaceURL |  string  |  否  | 发送者头像|
+|senderPlatformID|int|否|发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux|
+|   forceList    |  json数组  | 否 | 当聊天类型为群聊时，使用@指定强推用户userID列表              |
+|    content     |  json对象  |  是  | 消息的具体内容，内部是json 对象，其他消息的详细字段请参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
+|  contentType   |  int  |   是   | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
+|  sessionType   |  int  |   是   | 发送的消息是单聊还是群聊,单聊为1，群聊为2                    |
+|isOnlineOnly|bool|  否  |改字段设置为true时候，发送的消息服务器不会存储，接收者在线才会收到并存储到本地，不在线该消息丢失，当消息的类型为113->typing时候，接收者本地也不会做存储|
+|offlinePushInfo|json对象|否|离线推送的具体内容，如果不填写，使用服务器默认推送标题|
+|title|string|否|推送的标题|
+|desc|string|否|推送的具体描述|
+|ex|string|否|扩展字段|
+|iOSPushSound|string|否|IOS的推送声音|
+|iOSBadgeCount|bool|否|IOS推送消息是否计入桌面图标未读数|
 
 
 ### **返回示例**
@@ -904,11 +900,11 @@ APP管理员更新用户信息
 }
   ```
 
-|   参数名    | 必选 |    类型     | 说明                                               |
-| :---------: | :--: | :---------: | :------------------------------------------------- |
-|    data     |  是  | json string | 用户自定义的消息为json对象转换后的string           |
-| description |  否  | json string | 扩展的描述信息为json对象转换后的string，可以不使用 |
-|  extension  |  否  | json string | 扩展字段，暂时不使用                               |
+|   参数名    |    类型     | 必选 | 说明                                               |
+| :---------: | :---------: | :--: | :------------------------------------------------- |
+|    data     | json string |  是  | 用户自定义的消息为json对象转换后的string           |
+| description | json string |  否  | 扩展的描述信息为json对象转换后的string，可以不使用 |
+|  extension  | json string |  否  | 扩展字段，暂时不使用                               |
 
 
 
