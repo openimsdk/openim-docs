@@ -22,6 +22,7 @@
 | introduction |  string  | 255                | 群介绍                                                       |                                                              |
 |  memberList  | json数组 |                    | 成员列表                                                     |                                                              |
 |    reason    |  string  | 64                 | 原因，比如踢人等原因                                         |                                                              |
+|    token     |  string  |                    | 调用api时设置到请求header中                                  |                                                              |
 
 
 
