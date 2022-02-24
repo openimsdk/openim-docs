@@ -111,74 +111,11 @@ AppServer调用此api获取token，IMSDK在login时需传入token，调用管理
 
 ## **获取用户在线状态**
 
-### **简要描述**
+### 
 
- -   以管理员身份获取用户在线状态。
-
-### **请求URL**
-
-
- - `http://x.x.x.x:10000/user/get_users_online_status
-
-
-### **请求方式**
-
-
- - `POST`
-
-### **请求示例**
-
-  ```json
-{
-    "operationID": "545454", 
-    "userIDList": [
-        "17396220460","sadsdf"
-    ]
-}
-  ```
-
-### **请求参数**
-
-|   参数名    | 必选 | 说明 |
-| :---------: | :--: | :--- |
-| operationID |  是  |      |
-| userIDList  |  是  |      |
-
-
-### **返回示例**
-
-  ```json
-{
-    "errCode": 0,
-    "errMsg": "",
-    "data": [
-        {
-            "userID": "17396220460",
-            "status": "online",
-            "detailPlatformStatus": [
-                {
-                    "platform": "OSX",
-                    "status": "online"
-                },
-                {
-                    "platform": "Web",
-                    "status": "online"
-                }
-            ]
-        },
-        {
-            "userID": "sadsdf",
-            "status": "offline"
-        }
-    ]
-}
-  ```
-
-### **返回参数**
-
-| 参数名               | 类型     | 说明                                                         |
-| :------------------- | :------- | ------------------------------------------------------------ |
-| detailPlatformStatus | json数组 | 用户在哪几个平台在线                                         |
-| status               | string   | 在线状态，目前只有offline和online两种                        |
-| platform             | string   | 目前平台有"IOS"，"Android"，"Windows"，"OSX"，"Web"， "Linux" |
+|      |      |      |
+| :--- | :--- | ---- |
+|      |      |      |
+|      |      |      |
+|      |      |      |
 
