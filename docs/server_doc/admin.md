@@ -395,9 +395,15 @@ APP管理员更新用户信息
 
 ```
 {
-    "uid": "21979710c3fe454d", 
+    "userID": "21979710c3fe454d", 
     "operationID": "1111111222", 
-    "name": "sssssssssskkkkk"
+    "nickname": "sssssssssskkkkk", 
+    "faceURL": "", 
+    "gender": 1, 
+    "phoneNumber": "", 
+    "birth": 167762763, 
+    "email": "", 
+    "ex": ""
 }
 ```
 
@@ -407,14 +413,14 @@ APP管理员更新用户信息
 | :---------- | :--- | :----- | ------------------------------------------------------------ |
 | token       | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
 | operationID | 是   | string | 操作id，用随机字符串                                         |
-| name        | 否   | string | 用户昵称                                                     |
-| icon        | 否   | string | 头像URL                                                      |
+| nickname    | 否   | string | 用户昵称                                                     |
+| faceURL     | 否   | string | 头像URL                                                      |
 | gender      | 否   | int    | 性别，0未知，1男，2女                                        |
-| mobile      | 否   | string | 用户手机号                                                   |
+| phoneNumber | 否   | string | 用户手机号                                                   |
 | birth       | 否   | string | 用户生日                                                     |
 | email       | 否   | string | 用户邮箱                                                     |
 | ex          | 否   | string | 用户扩展信息                                                 |
-| uid         | 是   | string | 被更新的用户id                                               |
+| userID      | 是   | string | 被更新的用户id                                               |
 
 ### **返回示例**
 
@@ -454,7 +460,7 @@ APP管理员更新用户信息
   ```json
 {
     "operationID": "1111111222", 
-    "deleteUidList": [
+    "deleteUserIDList": [
         "123", 
         "343", 
         "456"
@@ -464,11 +470,11 @@ APP管理员更新用户信息
 
 ### **请求参数**
 
-|    参数名     | 必选 |   类型   | 说明                                                         |
-| :-----------: | :--: | :------: | :----------------------------------------------------------- |
-|  operationID  |  是  |  string  | 操作id，用随机字符串                                         |
-|     token     |  是  |  string  | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| deleteUidList |  是  | json数组 | 需要删除的uid数组列表                                        |
+|      参数名      | 必选 |   类型   | 说明                                                         |
+| :--------------: | :--: | :------: | :----------------------------------------------------------- |
+|   operationID    |  是  |  string  | 操作id，用随机字符串                                         |
+|      token       |  是  |  string  | 注：放置于POST请求Header中，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
+| deleteUserIDList |  是  | json数组 | 需要删除的userID数组列表                                     |
 
 
 ### **返回示例**
@@ -477,7 +483,7 @@ APP管理员更新用户信息
 {
     "errCode": 0, 
     "errMsg": "", 
-    "failedUidList": [
+    "data": [
         "122", 
         "466"
     ]
@@ -486,11 +492,11 @@ APP管理员更新用户信息
 
 ###  **返回参数**
 
-| 参数名        | 类型     | 说明              |
-| :------------ | :------- | ----------------- |
-| errCode       | int      | 0成功，非0失败    |
-| errMsg        | string   | 错误信息          |
-| failedUidList | json数组 | 删除失败的用户Uid |
+| 参数名  | 类型     | 说明              |
+| :------ | :------- | ----------------- |
+| errCode | int      | 0成功，非0失败    |
+| errMsg  | string   | 错误信息          |
+| data    | json数组 | 删除失败的用户Uid |
 
 ## **获取用户详细信息**
 
