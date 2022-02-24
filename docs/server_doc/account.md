@@ -25,7 +25,7 @@
     "nickname": "2222",
     "faceUrl": "https://oss.com.cn/head", 
     "gender": 1,
-    "phoneNum": "18666667777",
+    "phoneNumber": "18666667777",
     "birth":1640692941,
     "email": "xxxx@qq.com",
     "ex": "xxx",
@@ -35,17 +35,19 @@
 
 ## **请求参数说明**
 
-|   参数名    | 必选 | 说明 |
-| :---------: | :--: | :--- |
-|   secret    |  是  |      |
-|  platform   |  是  |      |
-|   userID    |  是  |      |
-| operationID |  是  |      |
-|             |      |      |
-|             |      |      |
-|             |      |      |
-|             |      |      |
-|             |      |      |
+|   参数名    |  类型  | 必选 | 说明               |
+| :---------: | :----: | ---- | :----------------- |
+|   secret    | string | 是   | OpenIM秘钥         |
+|  platform   |  int   | 是   | 用户注册的平台类型 |
+|   userID    | string | 是   | 用户 ID            |
+|  nickname   | string | 是   | 用户昵称           |
+|   faceURL   | string | 否   | 用户头像URL        |
+|   gender    |  int   | 否   | 用户性别           |
+| phoneNumber | string | 否   | 用户手机号码       |
+|    birth    |  int   | 否   | 用户生日           |
+|    email    | string | 否   | 邮箱地址           |
+|     ex      | string | 否   | 扩展字段           |
+| operationID | string | 是   | 操作ID             |
 
 ## **返回示例**
 
@@ -61,7 +63,15 @@
 }
   ```
 
-  ## **返回参数**说明详见
+## **返回参数**
+
+| 参数名      | 类型   | 说明                  |
+| :---------- | :----- | --------------------- |
+| errCode     | int    | 0成功，非0失败        |
+| errMsg      | string | 错误信息              |
+| userID      | string | 用户ID                |
+| token       | string | 用户token             |
+| expiredTime | int    | token过期时间戳（秒） |
 
 # **获取用户token**
 
@@ -69,16 +79,16 @@
 
 AppServer调用此接口获取token，IMSDK在login时需传入token
 
-### **请求URL**
+## **请求URL**
 
 -  ` http://x.x.x.x:10000/auth/user_token`
 
 
-### **请求方式**
+## **请求方式**
 
  -  `POST`
 
-  ### **请求示例**
+  ## **请求示例**
 
   ```json
  {
@@ -89,16 +99,16 @@ AppServer调用此接口获取token，IMSDK在login时需传入token
 }
   ```
 
-### **请求参数**
+## **请求参数**
 
-|   参数名    | 必选 | 说明 |
-| :---------: | :--: | :--- |
-|   secret    |  是  |      |
-|  platform   |  是  |      |
-|   userID    |  是  |      |
-| operationID |  是  |      |
+|   参数名    | 类型   | 必选 | 说明               |
+| :---------: | ------ | :--: | :----------------- |
+|   secret    | string |  是  | OpenIM秘钥         |
+|  platform   | int    |  是  | 用户登录的平台类型 |
+|   userID    | string |  是  | 用户ID             |
+| operationID | string |  是  | 操作ID             |
 
-### **返回示例**
+## **返回示例**
 
    ```json
 {
@@ -112,5 +122,13 @@ AppServer调用此接口获取token，IMSDK在login时需传入token
 }
    ```
 
-   ### 
+## **返回参数**
+
+| 参数名      | 类型   | 说明                  |
+| :---------- | :----- | --------------------- |
+| errCode     | int    | 0成功，非0失败        |
+| errMsg      | string | 错误信息              |
+| userID      | string | 用户ID                |
+| token       | string | 用户token             |
+| expiredTime | int    | token过期时间戳（秒） |
 

@@ -1,3 +1,27 @@
+|    参数名    |   类型   | 最大字符串长度限制 | 说明                                                         | 取值范围                                                     |
+| :----------: | :------: | ------------------ | :----------------------------------------------------------- | ------------------------------------------------------------ |
+|    secret    |  string  | 32                 | OpenIM秘钥，服务端配置文件config.yaml的secret字段，注意安全保存 | 字符串即可                                                   |
+|   platform   |   int    |                    | 用户登录或注册的平台类型                                     | iOS 1, Android 2, Windows 3, OSX 4, WEB 5, 小程序 6，linux 7 |
+|    userID    |  string  | 64                 | 用户 ID，必须保证IM内唯一                                    | 字符串即可                                                   |
+|   nickname   |  string  | 255                | 用户昵称或者群昵称                                           | 字符串即可                                                   |
+|   faceURL    |  string  | 255                | 用户头像或者群头像url，根据上下文理解                        |                                                              |
+|    gender    |   int    |                    | 用户性别                                                     | 1 表示男，2 表示女                                           |
+|   phoneNum   |  string  | 32                 | 用户手机号码，包括地区，(如香港：+852-xxxxxxxx)，            |                                                              |
+|    birth     |   int    |                    | 用户生日，Unix时间戳（秒）                                   |                                                              |
+|    email     |  string  | 64                 | 邮箱地址                                                     |                                                              |
+|      ex      |  string  | 1024               | 扩展字段，用户可自行扩展，建议封装成 JSON 字符串             |                                                              |
+| operationID  |  string  |                    | 操作ID，保持唯一，建议用当前时间微秒+随机数                  |                                                              |
+| expiredTime  |   int    |                    | 过期时间，单位（秒）                                         |                                                              |
+|  roleLevel   |   int    |                    | 群内成员类型                                                 | 1普通成员，2群主，3管理员                                    |
+|  groupType   |   int    |                    | 群类型                                                       | 目前统一填0                                                  |
+| ownerUserID  |  string  | 64                 | 群主UserID                                                   |                                                              |
+|  groupName   |  string  | 255                | 群名称                                                       |                                                              |
+| notification |  string  | 255                | 群公告                                                       |                                                              |
+| introduction |  string  | 255                | 群介绍                                                       |                                                              |
+|  memberList  | json数组 |                    | 成员列表                                                     |                                                              |
+|    reason    |  string  | 64                 | 原因，比如踢人等原因                                         |                                                              |
+|    token     |  string  |                    | 调用api时设置到请求header中                                  |                                                              |
+
 # 鉴权相关
 
 ## **换取管理员Token**
@@ -28,12 +52,12 @@
 
 ### **请求参数**
 
-|   参数名    | 必选 | 说明                                                         |
-| :---------: | :--: | :----------------------------------------------------------- |
-|   secret    |  是  |                                                              |
-|  platform   |  是  | 管理员填8                                                    |
-|   userID    |  是  | 管理员userID，IM启动时会根据IM服务器配置文件config/config.yaml初始化管理员；此处的userID必须为配置文件的appManagerUid的其中一个 |
-| operationID |  是  |                                                              |
+|   参数名    | 类型   | 必选 | 说明                                                         |
+| :---------: | ------ | :--: | :----------------------------------------------------------- |
+|   secret    | string |  是  | OpenIM秘钥                                                   |
+|  platform   | int    |  是  | 管理员填8                                                    |
+|   userID    | string |  是  | 管理员userID，此处的userID必须为配置文件config/config.yaml的appManagerUid的其中一个 |
+| operationID | string |  是  |                                                              |
 
 ### **返回示例**
 
@@ -92,7 +116,7 @@
 | :---------- | :--- | -------------- |
 | memberList  | 是   | 指定初始群成员 |
 | ownerUserID | 是   | 群主UserID     |
-| operationID | 是   |                |
+| operationID | 是   | 操作ID         |
 
 ### **返回示例**
 
@@ -112,11 +136,15 @@
 
 ### **返回参数**
 
-| 参数名  | 类型     | 说明                                                 |
-| :------ | :------- | ---------------------------------------------------- |
-| errCode | int      | 0成功，非0失败                                       |
-| errMsg  | string   | 错误信息                                             |
-| data    | json对象 | creatorUserID：创建者userID，ownerUserID：群主UserID |
+| 参数名        | 类型     | 说明           |
+| :------------ | :------- | -------------- |
+| errCode       | int      | 0成功，非0失败 |
+| errMsg        | string   | 错误信息       |
+| creatorUserID | json对象 | 创建者userID， |
+| groupID       | string   | 群ID           |
+| groupName     | string   | 群名称         |
+| memberCount   | int      | 群成员数量     |
+| ownerUserID   | string   | 群主UserID     |
 
 ## 邀请进群
 
@@ -147,13 +175,12 @@
 
 ### **请求参数**
 
-| 参数名            | 必选 | 类型     | 说明                    |
-| :---------------- | :--- | :------- | ----------------------- |
-| groupID           | 是   | string   |                         |
-| invitedUserIDList | 是   | json数组 | 被邀请进群的用户uid列表 |
-| reason            | 是   | string   |                         |
-| token             | 是   | string   | 管理员token             |
-| operationID       | 是   | string   | 操作id，用随机字符串    |
+| 参数名            | 类型     | 必选 | 说明                   |
+| :---------------- | -------- | :--- | ---------------------- |
+| groupID           | string   | 是   | 群ID                   |
+| invitedUserIDList | json数组 | 是   | 被邀请进群的userID列表 |
+| reason            | string   | 否   | 进群原因               |
+| operationID       | string   | 是   | 操作ID                 |
 
 ### **返回示例**
 
@@ -164,7 +191,7 @@
     "data": [
         {
             "userID": "18349115126",
-            "result": -1
+            "result": 0
         }
     ]
 }
@@ -172,11 +199,12 @@
 
 ### **返回参数**
 
-| 参数名  | 类型     | 说明                              |
-| :------ | :------- | --------------------------------- |
-| errCode | int      | 0成功，非0失败                    |
-| errMsg  | string   | 错误信息                          |
-| data    | json对象 | 被邀请用户的uid，result 0表示成功 |
+| 参数名  | 类型   | 说明                             |
+| :------ | :----- | -------------------------------- |
+| errCode | int    | 0成功，非0失败                   |
+| errMsg  | string | 错误信息                         |
+| userID  | string | 被邀请进群的UserID               |
+| result  | int    | 操作结果 0表示成功，其他表示失败 |
 
 
 
@@ -210,12 +238,12 @@
 
 ### **请求参数**
 
-| 参数名      | 必选 | 类型     | 说明                                                         |
-| :---------- | :--- | :------- | ------------------------------------------------------------ |
-| groupID     | 是   | string   | 群id                                                         |
-| uidListInfo | 是   | json数组 | 被踢用户id列表                                               |
-| token       | 是   | string   | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| operationID | 是   | string   | 操作id，用随机字符串                                         |
+| 参数名           | 类型     | 必选 | 说明           |
+| :--------------- | -------- | :--- | -------------- |
+| groupID          | string   | 是   | 群ID           |
+| kickedUserIDList | json数组 | 是   | 被踢UserID列表 |
+| reason           | string   | 否   | 被踢原因       |
+| operationID      | string   | 是   | 操作ID         |
 
 ### **返回示例**
 
@@ -234,11 +262,12 @@
 
 ### **返回参数**
 
-| 参数名  | 类型     | 说明                                 |
-| :------ | :------- | ------------------------------------ |
-| errCode | int      | 0成功，非0失败                       |
-| errMsg  | string   | 错误信息                             |
-| data    | json对象 | uid：被踢用户uid， result：0表示成功 |
+| 参数名  | 类型   | 说明           |
+| :------ | :----- | -------------- |
+| errCode | int    | 0成功，非0失败 |
+| errMsg  | string | 错误信息       |
+| userID  | string | 被踢UserID     |
+| result  | int    | 0成功，非0失败 |
 
 # 好友相关
 
@@ -246,7 +275,7 @@
 
 ### **简要描述**
 
-- APP管理员使用户A和其他人成为好友
+- APP管理员使某个用户（fromUserID）和其他用户（friendUserIDList）成为好友
 
 ### **请求URL**
 
@@ -271,12 +300,11 @@
 
 ### **请求参数**
 
-| 参数名           | 必选 | 类型   | 说明                                                         |
-| :--------------- | :--- | :----- | ------------------------------------------------------------ |
-| friendUserIDList | 是   | string | 要建立好友关系的好友UserID列表                               |
-| operationID      | 是   | string |                                                              |
-| fromUserID       | 是   | string |                                                              |
-| token            | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
+| 参数名           | 类型   | 必选 | 说明                       |
+| :--------------- | ------ | :--- | -------------------------- |
+| friendUserIDList | string | 是   | 要建立好友关系的UserID列表 |
+| operationID      | string | 是   | 操作ID                     |
+| fromUserID       | string | 是   | 某个UserID                 |
 
 ### **返回示例**
 
@@ -299,14 +327,12 @@
 
 ### **返回参数说明**
 
-| 参数名  | 类型   | 说明                            |
-| :------ | :----- | ------------------------------- |
-| errCode | int    | 0成功，非0失败                  |
-| errMsg  | string | 错误信息                        |
-| userID  | string | 用户userID                      |
-| result  | int    | 导入结果，0代表成功，-1代表失败 |
-
-
+| 参数名  | 类型   | 说明                   |
+| :------ | :----- | ---------------------- |
+| errCode | int    | 0成功，非0失败         |
+| errMsg  | string | 错误信息               |
+| userID  | string | 要建立好友关系的userID |
+| result  | int    | 0代表成功，-1代表失败  |
 
 # 黑名单相关
 
@@ -314,7 +340,7 @@
 
 ### **简要描述**
 
-- APP管理员包uid添加到ownerUid的黑名单中
+- APP管理员把toUserID添加到fromUserID的黑名单中，即fromUserID把toUserID拉黑
 
 ### **请求URL**
 
@@ -328,7 +354,7 @@
 
 ```
 {
-    "ToUserID": "21979710c3fe454d", 
+    "toUserID": "21979710c3fe454d", 
     "operationID": "1111111222", 
     "fromUserID": "f732156059eeb5d0"
 }
@@ -336,12 +362,11 @@
 
 ### **请求参数**
 
-| 参数名      | 必选 | 类型   | 说明                                                         |
-| :---------- | :--- | :----- | ------------------------------------------------------------ |
-| ToUserID    | 是   | string | 被拉黑的用户id                                               |
-| operationID | 是   | string | 操作id，用随机字符串                                         |
-| token       | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| fromUserID  | 是   | string | 需要拉黑别人的                                               |
+| 参数名      | 类型   | 必选 | 说明                                                |
+| :---------- | :----- | ---- | --------------------------------------------------- |
+| toUserID    | string | 是   | 被拉黑的UserID，把此用户添加到fromUserID的黑名单    |
+| operationID | string | 是   | 操作ID                                              |
+| fromUserID  | string | 是   | 要拉黑别人的UserID， 把toUserID添加到此用户的黑名单 |
 
 ### **返回示例**
 
