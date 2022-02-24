@@ -16,20 +16,22 @@
   ### **请求示例**
 
   ```json
- {
-  "secret": "tuoyun", 
-  "platform": 8, 
-  "uid": "d5645454517"
- }
+{
+    "secret": "tuoyun", 
+    "platform": 8, 
+    "userID": "d5645454517", 
+    "operationID": "dk56kio78dddserss"
+}
   ```
 
 ### **请求参数**
 
-|  参数名  | 必选 |  类型  | 说明                                                         |
-| :------: | :--: | :----: | :----------------------------------------------------------- |
-|  secret  |  是  | string | AppServer 请求 IMToken 用到的秘钥，最大长度 32 字符，必须保证 AppServer 和 IMServer 秘钥一致， secret 泄露有风险，最好保存在用户服务器端 |
-| platform |  是  |  int   | 管理员默认填8                                                |
-|   uid    |  是  | string | 管理员uid，IM启动时会根据IM服务器配置文件config/config.yaml的appManagerUid初始化管理员；此处的uid必须为配置文件的appManagerUid的其中一个 |
+|   参数名    | 必选 |  类型  | 说明                                                         |
+| :---------: | :--: | :----: | :----------------------------------------------------------- |
+|   secret    |  是  | string | AppServer 请求 IMToken 用到的秘钥，最大长度 32 字符，必须保证 AppServer 和 IMServer 秘钥一致， secret 泄露有风险，最好保存在用户服务器端 |
+|  platform   |  是  |  int   | 管理员默认填8                                                |
+|   userID    |  是  | string | 管理员userID，IM启动时会根据IM服务器配置文件config/config.yaml的appManagerUid初始化管理员；此处的uid必须为配置文件的appManagerUid的其中一个 |
+| operationID |  是  | string | 操作id，(用于链路定位问题使用)，可以使用用随机字符串         |
 
 ### **返回示例**
 
@@ -38,7 +40,7 @@
  "errCode": 0, 
  "errMsg": "", 
  "data": {
-     "uid": "", 
+     "userID": "", 
      "token": "", 
      "expiredTime": 0
  }
@@ -47,13 +49,13 @@
 
    ### **返回参数**
 
-| 参数名      | 类型   | 说明              |
-| :---------- | :----- | ----------------- |
-| errCode     | int    | 0成功，非0失败    |
-| errMsg      | string | 错误信息          |
-| uid         | string | 管理员的Uid       |
-| token       | string | 生成的管理员token |
-| expiredTime | int    | 过期时间戳        |
+| 参数名      | 类型   | 说明               |
+| :---------- | :----- | ------------------ |
+| errCode     | int    | 0成功，非0失败     |
+| errMsg      | string | 错误信息           |
+| userID      | string | 管理员的userID     |
+| token       | string | 生成的管理员token  |
+| expiredTime | int    | 过期时间戳，单位秒 |
 
 ## 创建群组
 
@@ -72,13 +74,18 @@
 ### **请求示例**
 
 ```
- {
-    "memberList":[{"uid":"21979710c3fe454d","setRole":1},{"uid":"89b8924ea455a642","setRole":2}],
-    "groupName":"groupName_on10",
-    "introduction":"简介",
-    "notification":"公告",
-    "faceUrl":"url",
-    "operationID":"1"
+{
+    "groupName": "test group name",
+    "operationID": "sdadfsdfssdfasdafvcdxsdafdsfsdfaa",
+    "ex": "test ex",
+    "ownerUserID":"openIM001",
+    "memberList": [
+        {
+            "userID": "openIM002",
+            "roleLevel": 1
+        }
+    
+    ]
 }
 ```
 
@@ -256,23 +263,23 @@
 
 ```
 {
-    "uidList": [
+    "friendUserIDList": [
         "21979710c3fe454d", 
         "3434344"
     ], 
     "operationID": "1111111222", 
-    "ownerUid": "f732156059eeb5d0"
+    "fromUserID": "f732156059eeb5d0"
 }
 ```
 
 ### **请求参数**
 
-| 参数名      | 必选 | 类型   | 说明                                                         |
-| :---------- | :--- | :----- | ------------------------------------------------------------ |
-| uidList     | 是   | string | 要建立好友关系的好友列表                                     |
-| operationID | 是   | string | 操作id，用随机字符串                                         |
-| ownerUid    | 是   | string | A用户uid                                                     |
-| token       | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
+| 参数名           | 必选 | 类型   | 说明                                                         |
+| :--------------- | :--- | :----- | ------------------------------------------------------------ |
+| friendUserIDList | 是   | string | 要建立好友关系的好友UserID列表                               |
+| operationID      | 是   | string |                                                              |
+| fromUserID       | 是   | string |                                                              |
+| token            | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
 
 ### **返回示例**
 
@@ -280,20 +287,27 @@
 {
     "errCode": 0, 
     "errMsg": "", 
-    "failedUidList": [
-        "21979710c3fe454d", 
-        "3434344"
+    "data": [
+        {
+            "userID": "12121", 
+            "result": -1
+        }, 
+        {
+            "userID": "23465", 
+            "result": 0
+        }
     ]
 }
 ```
 
 ### **返回参数说明**
 
-| 参数名        | 类型      | 说明                  |
-| :------------ | :-------- | --------------------- |
-| errCode       | int       | 0成功，非0失败        |
-| errMsg        | string    | 错误信息              |
-| failedUidList | json 数组 | 建立好友失败的uid列表 |
+| 参数名  | 类型   | 说明                            |
+| :------ | :----- | ------------------------------- |
+| errCode | int    | 0成功，非0失败                  |
+| errMsg  | string | 错误信息                        |
+| userID  | string | 用户userID                      |
+| result  | int    | 导入结果，0代表成功，-1代表失败 |
 
 
 
@@ -317,9 +331,9 @@
 
 ```
 {
-    "uid": "21979710c3fe454d", 
+    "ToUserID": "21979710c3fe454d", 
     "operationID": "1111111222", 
-    "ownerUid": "f732156059eeb5d0"
+    "fromUserID": "f732156059eeb5d0"
 }
 ```
 
@@ -330,7 +344,7 @@
 | uid         | 是   | string | 被拉黑的用户id                                               |
 | operationID | 是   | string | 操作id，用随机字符串                                         |
 | token       | 是   | string | 从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考[换取管理员IMToken]() |
-| ownerUid    |      |        | 用户id                                                       |
+| fromUserID  |      |        | 用户id                                                       |
 
 ### **返回示例**
 
