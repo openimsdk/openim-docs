@@ -1,0 +1,7 @@
+# dependencies
+docs/node_modules
+# production
+docs/_book
+
+# misc
+.DS_Store

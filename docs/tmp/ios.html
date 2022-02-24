@@ -1,0 +1,20 @@
+<section style="margin-left: -120px" class="normal markdown-section">
+  <iframe
+    src="./docs/index.html"
+    width="1000"
+    height="780"
+    frameborder="0"
+  ></iframe>
+
+  <script>
+    console.log("plugin-popup....");
+    document.onclick = function (e) {
+      e.target.tagName === "IMG" && window.open(e.target.src, e.target.src);
+    };
+  </script>
+  <style>
+    img {
+      cursor: pointer;
+    }
+  </style>
+</section>
