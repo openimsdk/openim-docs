@@ -24,6 +24,9 @@
         nameLink: "/",
         repo: "https://github.com/OpenIMSDK",
         loadSidebar: true,
+        alias: {
+          "/.*/_sidebar.md": "/_sidebar.md",
+        },
         autoHeader: true,
         subMaxLevel: 2,
         coverpage: true,
@@ -37,7 +40,9 @@
           crossChapterText: true,
         },
         plugins: [
-          EditOnGithubPlugin.create("https://github.com/OpenIMSDK/OpenIM-Docs/tree/main/docs/"),
+          EditOnGithubPlugin.create(
+            "https://github.com/OpenIMSDK/OpenIM-Docs/tree/main/docs/"
+          ),
         ],
       };
     </script>

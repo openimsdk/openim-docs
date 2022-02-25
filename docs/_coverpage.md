@@ -10,7 +10,7 @@
 <!-- <img src="./images/WechatIMG20.jpeg" alt="微信群" style="zoom:50%;" /> -->
 
 
-![logo](images/logo.png)
+![logo](images/logo.png ':id=logo')
 
 # OpenIM <small>2.0.0</small>
 
