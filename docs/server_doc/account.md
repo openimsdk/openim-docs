@@ -23,7 +23,7 @@
     "platform": 1,
     "userID": "openIM1111",
     "nickname": "2222",
-    "faceUrl": "https://oss.com.cn/head", 
+    "faceURL": "https://oss.com.cn/head", 
     "gender": 1,
     "phoneNumber": "18666667777",
     "birth":1640692941,
