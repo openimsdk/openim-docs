@@ -2,13 +2,7 @@
 
 # dev
 
-```
+```bash
 cd ../docs
-gitbook install
-gitbook serve
-```
-# build
-
-```
-gitbook build
+docsify serve
 ```
