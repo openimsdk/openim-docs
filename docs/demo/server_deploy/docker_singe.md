@@ -160,23 +160,23 @@ chmod +x script/*.sh ; docker-compose up -d
 cd script ; ./docker_check_service.sh
 ```
 
-## 注意事项
+# 注意事项
 
-### 1.系统和环境
+## 1.系统和环境
 
 目前只支持Linux系统，其他系统请修改脚本。
 
 可用内存在2G以上，请调用./env_check.sh检测。
 
-### 2.更新
+## 2.更新
 
 在git pull时，确保拉取了最新的配置，特别是对于改动了本地配置文件的开发者，需重点关注。
 
-### 3.build
+## 3.build
 
 尽量不要混合启动，自行build，然后通过docker-compose启动会存在问题。因为docker映射，导致本地二进制文件、配置文件不一致，造成混乱。
 
-### 4.OpenIM测试服务
+## 4.OpenIM测试服务
 
 IP：121.37.25.71/
 
