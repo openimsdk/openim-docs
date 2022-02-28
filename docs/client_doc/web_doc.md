@@ -491,7 +491,7 @@
   | data | string | 合并信息结构体字符串 |
 
 
-  
+
 
 ## createForwardMessage
 
@@ -1105,7 +1105,7 @@
   | data | string | [会话对象](https://doc.rentsoft.cn/client_doc/web_doc.html#%E4%BC%9A%E8%AF%9D%E5%AF%B9%E8%B1%A1)列表json字符串 |
 
 
-  
+
 
 ## deleteConversation
 
@@ -1231,7 +1231,9 @@
 
 ## setConversationRecvMessageOpt
 
-> 标记群聊会话消息已读。
+> 设置会话免打扰状态
+>
+> 设置为1时，不再接收改会话的消息。设置为2时，正常接收该会话的消息，但不计入总未读数（依然会计入该会话的未读数，但可根据会话中的recvOpt状态自行处理）。
 
 - Example:
 
