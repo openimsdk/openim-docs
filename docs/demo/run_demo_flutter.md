@@ -5,7 +5,7 @@
 ![Android](https://www.pgyer.com/app/qrcode/OpenIM)
 
 ##### 2. Replace server address (替换服务器地址，默认地址为官方服务器地址)
-![image](/Volumes/data/Workspace/doc/gitbook/images/flutter_run.gif)
+![image](../images/flutter_run.gif)
 
 ### Source code build (源代码使用)
 
