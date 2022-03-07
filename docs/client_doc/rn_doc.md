@@ -102,7 +102,7 @@
 - Example:
 
   ```js
-  openIMSDK.getLoginStatus.then(res=>{})
+  openIMSDK.getLoginStatus().then(res=>{})
   ```
 
 - Return:
@@ -1151,7 +1151,7 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 - Example:
 
   ```js
-  openIMSDK.getConversationIDBySessionType(sourceID,session,operationID).then(res=>{}).catch((errCode,err)=>{})
+  openIMSDK.getConversationIDBySessionType(sourceID,session).then(res=>{}).catch((errCode,err)=>{})
   ```
 
 - Parameters:
