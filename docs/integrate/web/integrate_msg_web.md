@@ -32,12 +32,12 @@ openIM.createTextMessage(textMsg).then(res=>{
 /**
 * 创建@消息
 *
-* @param textMsg 输入信息
+* @param text 输入信息
 * @param atUserIDList @用户id数组
 * @return 新@消息对象结构Json字符串
 */
 const options = {
-  textMsg: "I am at Msg",
+  text: "I am at Msg",
   atUserIDList: ["1f8e0d51d335301d"],
 };
 openIM.createTextAtMessage(options).then(({ data })=>{

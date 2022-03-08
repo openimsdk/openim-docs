@@ -71,5 +71,6 @@
 * [原创技术文章](artice/actice.md)
 * 常见问题
   - [docker安装](qa/docker.md)
+  - [minio部署](qa/minio.md)
   - [docker部署常见问题](qa/docker_deploy.md)
 

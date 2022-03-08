@@ -1,6 +1,6 @@
 # 登录
 
-> 初始化并登录OpenIM SDK Server，使用用户ID(userID)和token登录，userID来自于自身业务服务器，token需要业务服务器根据secret向OpenIM服务端交换获取。url为OpenIM Server部署服务器的web server websocket地址。
+> 初始化并登录OpenIM SDK Server，使用用户ID(userID)和token登录，userID来自于自身业务服务器，token需要业务服务器根据secret向OpenIM服务端交换获取。url为OpenIM Server部署服务器的web server websocket地址。<br/>**特别的：**JSSDK ws连接端口为30000端口，与其他端SDK不同，请勿混淆。
 
 ```js
 /**
