@@ -66,7 +66,7 @@ openIM.getTotalUnreadMsgCount().then(res=>{
 * 设置单聊会话已读
 *
 * @param userID 会话对象用户ID
-* @param msgIDList 传空数组时会将对应会话未读数置0
+* @param msgIDList 需要标记为已读的消息clientMsgID 传空数组时会将对应会话未读数置0
 */
 const options:MarkC2CParams = {
 	userID:"xxx",
