@@ -274,14 +274,14 @@ openIM.createCardMessage(cardDesc).then(({ data })=>{
 * 创建自定义消息
 *
 * @param data 自定义消息对象json字符串
-* @param expand 自定义消息对象扩展字段json字符串
-* @param desc 消息描述
+* @param extension 自定义消息对象扩展字段json字符串
+* @param description 消息描述
 * @return 新自定义消息对象结构Json字符串
 */
 const data:CustomMsgParams = {
 	data:"",
-  expand:"",
-  desc:""
+  extension:"",
+  description:""
 } 
 openIM.createCustomMessage(data).then(res=>{
   ...
