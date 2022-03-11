@@ -398,7 +398,7 @@ openIM.sendMessageNotOss(options).then(({ data,errCode })=>{
 ### 调用示例
 
 ```js
-openIM.on(CbEvents.ONPROGRESS,(data:WsResponse)=>{
+openIM.on(CbEvents.SENDMSGPROGRESS,(data:WsResponse)=>{
   ...
 })
 ```
