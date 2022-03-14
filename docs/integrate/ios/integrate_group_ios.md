@@ -131,12 +131,10 @@
 ## 获取群资料
 
 ```objc
-///
-/// 获取群资料
-///
-/// @param gidList 要获取信息的群组id数组
-///
-OpenIM.iMManager.groupManager.getGroupsInfo(gidList: gidList)
+        [OIMManager.manager getGroupsInfo:@[]   // 组id集合
+                                onSuccess:^(NSArray<OIMGroupInfo *> * _Nullable groupsInfo) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 ## 修改群资料
@@ -161,14 +159,13 @@ OpenIM.iMManager.groupManager.getGroupsInfo(gidList: gidList)
 - 可以获取某个群的群成员列表，该列表中包含了各个群成员的资料信息。
 
   ```objc
-  ///
-  /// 获取群成员列表
-  ///
-  /// @param groupID 群id
-  /// @param filter过滤选项 0：所有成员 1：群主 2：管理员
-  /// @param next 分页下标
-  ///
-  OpenIM.iMManager.groupManager.getGroupMemberList(groupId: groupId,filter:filter,next:next)
+        [OIMManager.manager getGroupMemberList:@""  // 组ID
+                                        filter:0    // 0不过滤 1普通成员, 2群主，3管理员
+                                        offset:0    // 偏移量，每次开始的index值
+                                         count:200  // 每次拉取的数量
+                                     onSuccess:^(NSArray<OIMGroupMemberInfo *> * _Nullable groupMembersInfo) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
   ```
 
 ## 获取群员列表
