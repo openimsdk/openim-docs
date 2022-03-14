@@ -909,8 +909,8 @@
         }];
 ```
 
-- ##### createTextMessage（文本消息）
+- ##### createTextMessage
 
 ```objc
-参与Example 更佳
+参看[Example](https://github.com/OpenIMSDK/Open-IM-SDK-iOS.git) 更佳
 ```
