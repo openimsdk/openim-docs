@@ -229,6 +229,75 @@
  */
 - (void)onRecvMessageRevoked:(NSString *)msgID;
 ```
+###### block方式
+```
+    [OIMManager.callbacker setSelfUserInfoUpdateListener:^(OIMUserInfo * _Nullable userInfo) {
+        
+    }];
+    
+    [OIMManager.callbacker setConversationListenerWithOnSyncServerStart:^{
+        
+    } onSyncServerFinish:^{
+        
+    } onSyncServerFailed:^{
+        
+    } onConversationChanged:^(NSArray<OIMConversationInfo *> * _Nullable conversations) {
+        
+    } onNewConversation:^(NSArray<OIMConversationInfo *> * _Nullable conversations) {
+        
+    } onTotalUnreadMessageCountChanged:^(NSInteger number) {
+        
+    }];
+    
+    [OIMManager.callbacker setFriendListenerWithOnBlackAdded:^(OIMBlackInfo * _Nullable blackInfo) {
+        
+    } onBlackDeleted:^(OIMBlackInfo * _Nullable blackInfo) {
+        
+    } onFriendApplicationAccepted:^(OIMFriendApplication * _Nullable friendApplication) {
+        
+    } onFriendApplicationAdded:^(OIMFriendApplication * _Nullable friendApplication) {
+        
+    } onFriendApplicationDeleted:^(OIMFriendApplication * _Nullable friendApplication) {
+        
+    } onFriendApplicationRejected:^(OIMFriendApplication * _Nullable friendApplication) {
+        
+    } onFriendInfoChanged:^(OIMFriendInfo * _Nullable friendInfo) {
+        
+    } onFriendAdded:^(OIMFriendInfo * _Nullable friendInfo) {
+        
+    } onFriendDeleted:^(OIMFriendInfo * _Nullable friendInfo) {
+        
+    }];
+    
+    [OIMManager.callbacker setGroupListenerWithOnGroupInfoChanged:^(OIMGroupInfo * _Nullable groupInfo) {
+        
+    } onJoinedGroupAdded:^(OIMGroupInfo * _Nullable groupInfo) {
+        
+    } onJoinedGroupDeleted:^(OIMGroupInfo * _Nullable groupInfo) {
+        
+    } onGroupMemberAdded:^(OIMGroupMemberInfo * _Nullable groupMemberInfo) {
+        
+    } onGroupMemberDeleted:^(OIMGroupMemberInfo * _Nullable groupMemberInfo) {
+        
+    } onGroupMemberInfoChanged:^(OIMGroupMemberInfo * _Nullable groupMemberInfo) {
+        
+    } onGroupApplicationAdded:^(OIMGroupApplicationInfo * _Nullable groupApplication) {
+        
+    } onGroupApplicationDeleted:^(OIMGroupApplicationInfo * _Nullable groupApplication) {
+        
+    } onGroupApplicationAccepted:^(OIMGroupApplicationInfo * _Nullable groupApplication) {
+        
+    } onGroupApplicationRejected:^(OIMGroupApplicationInfo * _Nullable groupApplication) {
+        
+    }];
+    
+    [OIMManager.callbacker setAdvancedMsgListenerWithOnRecvMessageRevoked:^(NSString * _Nullable item) {
+        
+    } onRecvC2CReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable msgReceiptList) {
+        
+    } onRecvNewMessage:^(OIMMessageInfo * _Nullable message) {
+    }];
+```
 
 ##### 3，登录
 
