@@ -564,7 +564,7 @@ APP管理员更新用户信息
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/user/get_users_online_status
+ - `http://x.x.x.x:10000/manager/get_users_online_status
 
 
 ### **请求方式**

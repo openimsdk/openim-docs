@@ -58,3 +58,8 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-
 chmod +x /usr/local/bin/docker-compose
 ```
 
+# 4. 安装git
+```
+ubuntu系统上执行 apt install git
+```
+

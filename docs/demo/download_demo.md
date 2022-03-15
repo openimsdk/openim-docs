@@ -37,5 +37,14 @@
         height="200px"
       />
     </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Native iOS</h2>
+      <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/79cQqBYd" target="_blank">点击此处下载</a></p>
+      <img
+        src="images/ios_native.png"
+        width="200px"
+        height="200px"
+      />
+    </div>
   </div>
 </section>
