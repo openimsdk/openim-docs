@@ -50,16 +50,16 @@ App不仅可以基于该回调来实现消息同步，而且可以进行发消�
 | contentType    | int  | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档    |
 | createTime | int | 生成时间戳 |
 | content | string | 消息内容 |
-| OperationID | string | 本次操作ID |
+| operationID | string | 本次操作ID |
 
 - 响应
  
 |    参数名       |   类型    | 说明                                 | 
 | :----------:    | :------: | :------------------------------------| 
-|  ActionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
-|  ErrCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
-|  ErrMsg         |  string |           错误信息               |
-| OperationID     | string      |     本次操作ID       |
+|  actionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
+|  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
 | content         | string | 替换后的内容 |
 
 响应的content即要替换的全新内容
@@ -81,17 +81,17 @@ ActionCode和ErrCode都为0 才会正常过滤消息
 | contentType    | int  | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档    |
 | createTime | int | 生成时间戳 |
 | content | string | 消息内容 |
-| OperationID | string | 本次操作ID |
-| RecvID | string | 接收者ID |
+| operationID | string | 本次操作ID |
+| recvID | string | 接收者ID |
 
 - 响应
  
 |    参数名       |   类型    | 说明                                 | 
 | :----------:    | :------: | :------------------------------------| 
-|  ActionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
-|  ErrCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
-|  ErrMsg         |  string |           错误信息               |
-| OperationID     | string      |     本次操作ID       |
+|  actionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
+|  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
 
 ActionCode和ErrCode都为0 才会正常接受回调响应
 
@@ -111,16 +111,16 @@ ActionCode和ErrCode都为0 才会正常接受回调响应
 | contentType    | int  | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档    |
 | createTime | int | 生成时间戳 |
 | content | string | 消息内容 |
-| OperationID | string | 本次操作ID |
-| RecvID | string | 接收者ID |
+| operationID | string | 本次操作ID |
+| recvID | string | 接收者ID |
 
 - 响应
  
 |    参数名       |   类型    | 说明                                 | 
 | :----------:    | :------: | :------------------------------------| 
-|  ActionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
-|  ErrCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
-|  ErrMsg         |  string |           错误信息               |
-| OperationID     | string      |     本次操作ID       |
+|  actionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
+|  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
 
 ActionCode和ErrCode不影响本次操作
