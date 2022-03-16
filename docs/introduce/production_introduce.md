@@ -58,7 +58,7 @@ Open-IM是由前微信技术专家打造的**开源**的即时通讯组件。Ope
 
 **(6) 全平台支持**
 
-支持Andorid、iOS原生开发，支持Flutter、uni-app跨端开发，支持小程序、React等所有主流web前端技术框架， PC支持Electron，Flutter、iOS、uni-app已有成熟demo可以体验。
+支持Android、iOS原生开发，支持Flutter、uni-app跨端开发，支持小程序、React等所有主流web前端技术框架， PC支持Electron，Flutter、iOS、uni-app已有成熟demo可以体验。
 
 开发者可以使用Open-IM替代市场上各种IM云服务，除了降低成本，还赋予开发者更多的灵活性和自主性。我们通过开源的方式，邀请全球技术极客来参与Open-IM建设，使每位开发者都能免费使用最优秀的IM组件，让每个app都具备即时通讯能力。
 
