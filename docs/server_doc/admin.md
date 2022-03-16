@@ -327,7 +327,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/friend/add_blacklist`
+- `http://x.x.x.x:10000/friend/add_black`
 
 ### **请求方式**
 
