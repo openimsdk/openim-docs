@@ -2438,7 +2438,7 @@ im.setGroupListener()
 - Example:
 
 ```js
-im.setGroupListener()
+im.setAdvancedMsgListener()
 ```
 
 - Monitor:
