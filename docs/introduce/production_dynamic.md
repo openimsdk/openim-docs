@@ -6,5 +6,5 @@
 | SDK      | 增加用户私有oss消息发送创建接口，图片、文件、等数据上传由用户自己处理 | 9月23日  |          |
 | SDK      | 增加web SDK                                                  | 9月17日  |          |
 | 服务端   | 优化源码及docker部署脚本                                     | 9月15日  |          |
-| 文档     | 增加uni-app Flutter Andorid文档                              | 9月16日  |          |
+| 文档     | 增加uni-app Flutter Android文档                              | 9月16日  |          |
 

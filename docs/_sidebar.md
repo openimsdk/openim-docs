@@ -64,7 +64,7 @@
 * 客户端API
   * [Flutter](client_doc/flutter_doc.md)
   * [uniapp](client_doc/uni_doc.md)
-  * [Andriod](client_doc/android.md)
+  * [Android](client_doc/android.md)
   * [iOS](client_doc/ios.md)
   * [Web&小程序](client_doc/web_doc.md)
   * [ReactNative](client_doc/rn_doc.md)
