@@ -2217,8 +2217,8 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 | onConnectSuccess  | -                          | 连接成功      |
 | onConnecting      | -                          | 连接中        |
 | onKickedOffline   | -                          | 被踢下线      |
-| nSelfInfoUpdated  | 用户个人信息对象json字符串 | 修改个人信息  |
-| nUserTokenExpired | -                          | 账号token过期 |
+| onSelfInfoUpdated  | 用户个人信息对象json字符串 | 修改个人信息  |
+| onUserTokenExpired | -                          | 账号token过期 |
 
 
 

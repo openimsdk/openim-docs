@@ -12,6 +12,7 @@
     * [docker部署](demo/server_deploy/docker_singe.md)
     * [源码部署](demo/server_deploy/code_singe.md)
     * [集群部署](demo/server_deploy/docker_cluster.md)
+    * [待完成](demo/server_deploy/in_development.md)
   * [一分钟跑通Demo(Fultter)](demo/run_demo_flutter.md)
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
@@ -64,7 +65,7 @@
 * 客户端API
   * [Flutter](client_doc/flutter_doc.md)
   * [uniapp](client_doc/uni_doc.md)
-  * [Andriod](client_doc/android.md)
+  * [Android](client_doc/android.md)
   * [iOS](client_doc/ios.md)
   * [Web&小程序](client_doc/web_doc.md)
   * [ReactNative](client_doc/rn_doc.md)
