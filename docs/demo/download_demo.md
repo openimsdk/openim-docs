@@ -11,7 +11,7 @@
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>Flutter iOS</h2>
-      <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/tzu4bGLS" target="_blank">点击此处下载</a></p>
+      <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/o956rTGx" target="_blank">点击此处下载</a></p>
       <img
         src="images/ios_qr.png"
         width="200px"
