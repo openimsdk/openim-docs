@@ -13,7 +13,7 @@
       <h2>Flutter iOS</h2>
       <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/o956rTGx" target="_blank">点击此处下载</a></p>
       <img
-        src="images/ios_qr.png"
+        src="images/ios_flutter.png"
         width="200px"
         height="200px"
       />
