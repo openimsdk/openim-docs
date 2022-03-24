@@ -25,7 +25,7 @@
 - 拉取项目
 
   ```
-  git clone https://github.com/OpenIMSDK/Open-IM-PC-Web-Demo.git
+  git clone https://github.com/OpenIMSDK/OpenMetaOffice-Electron.git
   ```
 
 - 安装依赖
@@ -52,10 +52,6 @@
         export const IMURL = "ws://121.37.25.71:30000"
         //	获取cos临时密钥及调用管理员API地址
         export const ADMINURL = "http://121.37.25.71:10000"
-        //	cos bucket
-        export const COSBUCKET = "echat-1302656840"
-        //	cos	region
-        export const COSREGION = "ap-chengdu"
         //	cos 缩略图格式配置
         export const PICMESSAGETHUMOPTION = "?imageView2/1/w/200/h/200/rq/80"
         //	默认语言
