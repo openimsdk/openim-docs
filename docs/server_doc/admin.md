@@ -327,7 +327,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/friend/add_blacklist`
+- `http://x.x.x.x:10000/friend/add_black`
 
 ### **请求方式**
 
@@ -849,6 +849,111 @@ APP管理员更新用户信息
 | sendTime    |  int   | 消息发送的具体时间，具体为毫秒的时间戳         |
 | serverMsgID | string | 服务器生成的消息的唯一ID                       |
 | clientMsgID | string | 客户端生成的消息唯一ID，默认情况使用这个为主键 |
+
+## 管理员撤销单聊消息
+
+### **简要描述**
+
+ - 管理员通过后台接口撤销单聊消息，sessionType为1， contentType为111， content里revokeMsgClientID字段为客户端消息id。
+
+### **请求URL**
+
+
+ - `http://x.x.x.x:10000/manager/send_msg`
+
+
+### **请求方式**
+
+
+ - `POST`
+
+### **请求示例**
+    {
+      "operationID": "revoke op", 
+      "sendID": "17396220460", 
+      "recvID": "13944444444",
+      "senderPlatformID": 2, 
+      "content": {
+          "revokeMsgClientID": "8aadc098d05bab86a142727fd8a2ce9d"
+      },
+      "contentType": 111, 
+      "sessionType": 1, 
+      "isOnlineOnly": false, 
+      "offlinePushInfo": {
+          "title": "admin revoke your message", 
+          "desc": "", 
+          "ex": "", 
+          "iOSPushSound": "default", 
+          "iOSBadgeCount": false
+      }
+    }
+
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+        "serverMsgID": "", 
+        "clientMsgID": "", 
+        "sendTime": 1645697804432
+    }
+}
+  ```    
+
+## 管理员撤销群聊消息
+
+### **简要描述**
+
+ - 管理员通过后台接口撤销单聊消息，sessionType为2， contentType为111， content里revokeMsgClientID字段为客户端消息id。
+
+### **请求URL**
+
+
+ - `http://x.x.x.x:10000/manager/send_msg`
+
+
+### **请求方式**
+
+
+ - `POST`
+
+### **请求示例**
+    {
+      "operationID": "revoke op", 
+      "sendID": "17396220460", 
+      "groupID": "413dcd143622d1a91a8afd4987cff651",
+      "senderPlatformID": 2, 
+      "content": {
+          "revokeMsgClientID": "8aadc098d05bab86a142727fd8a2ce9d"
+      },
+      "contentType": 111, 
+      "sessionType": 2, 
+      "isOnlineOnly": false, 
+      "offlinePushInfo": {
+          "title": "admin revoke your message", 
+          "desc": "", 
+          "ex": "", 
+          "iOSPushSound": "default", 
+          "iOSBadgeCount": false
+      }
+    }
+
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+        "serverMsgID": "", 
+        "clientMsgID": "", 
+        "sendTime": 1645697804432
+    }
+}
+  ```    
+
 
 ## 消息类型格式描述
 
