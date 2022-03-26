@@ -23,14 +23,14 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 | electron版pc（含windwos、mac，以及pc版web） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发   |
 | h5（含h5、小程序）                          | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发   |
 | 后台管理                                    | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发   |
-| 音视频通话sdk、基于SFU的服务端              | 服务端闭源                                                   | 3万/套，100%开源，可以基于此二次开发   |
+| 音视频通话sdk、基于SFU的服务端              | 服务端部分闭源                                                   | 3万/套，100%开源，可以基于此二次开发   |
 
 商业版本是OpenIM技术团队在100%开源的OpenIM服务端和IMSDK基础上，开发带有UI、功能完整的IM产品。可以直接部署运营，也可以在此基础上二次开发。商业版本必须要授权，否则发起诉讼，向侵权者索赔。
 商业授权授权限是1年，只限于本公司使用（或二次分发一次），授权期内可以免费升级。 过了授权期依然可以使用以前的代码，但不能享受免费升级服务。
 一次性购买满3万赠送管理后台授权。
 
 ## 2. VIP技术服务
-| 内容                                                         | 费用：5万元/年 |
+| 内容                                                         | 费用：8000元/月 |
 | ------------------------------------------------------------ | -------------- |
 | 5X8小时vip专属服务，包括：                                   |                |
 | （1）一对一技术咨询，微信 电话等各种方式；                   |                |
@@ -38,7 +38,7 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 | （3）服务端架构及部署答疑；                                  |                |
 | （4）IM新需求优先排期；                                      |                |
 | （5）bug优先修复；                                           |                |
-| （6）系统维护和故障响应 |                |
+| （6）系统维护和故障响应； |                |
 
 
 (1) 以中文方式提供的远程指导服务；(2) 服务时间为工作日的9:30-12:00 12:00-19:30。
