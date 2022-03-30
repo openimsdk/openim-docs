@@ -44,11 +44,11 @@
 
 mongodb数据情况
 
-![mongodb](C:\Users\Administrator\Desktop\OpenIM\官网相关\技术文章\OpenIM测试报告\mongodb.png)
+![mongodb](..\images\mongodb.png)
 
 redis数据情况
 
-![redis](C:\Users\Administrator\Desktop\OpenIM\官网相关\技术文章\OpenIM测试报告\redis.png)
+![redis](..\images\redis.png)
 
 磁盘状态
 
@@ -172,7 +172,7 @@ func main() {
 
 此表格是某IM云平台的价格，如果按照10万月活，存储三年消息来算，大概每年需要支付15万。而采用OpenIM只需要采购云主机，每年成本约0.8万。
 
-![image-20220307154800035](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220307154800035.png)
+![image-20220307154800035](..\images\cloud1.png)
 
-![云2](C:\Users\Administrator\Desktop\OpenIM\官网相关\技术文章\OpenIM测试报告\云2.png)
+![云2](..\images\cloud2.png)
 
