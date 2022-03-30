@@ -246,7 +246,7 @@
 
   ```js
   const options = {
-    textMsg: "I am at Msg",
+    text: "I am at Msg",
     atUserIDList: ["1f8e0d51d335301d"],
   };
   openIM.createTextAtMessage(options).then(({ data })=>{
@@ -260,7 +260,7 @@
 
   | Name         | Type     | Required | Description  |
   | ------------ | -------- | -------- | ------------ |
-  | textMsg      | string   | true     | 消息文字内容 |
+  | text      | string   | true     | 消息文字内容 |
   | atUserIDList | string[] | true     | @用户id数组  |
 
 - Returns:
@@ -491,7 +491,7 @@
   | data | string | 合并信息结构体字符串 |
 
 
-  
+
 
 ## createForwardMessage
 
@@ -596,8 +596,8 @@
   ```js
   const options:CustomMsgParams = {
   	data:"",
-    expand:"",
-    desc:""
+    extension:"",
+    description:""
   } 
   openIM.createCustomMessage(options).then(({ data })=>{
     ...
@@ -611,8 +611,8 @@
   | Name   | Type   | Required | Description                  |
   | ------ | ------ | -------- | ---------------------------- |
   | data   | string | true     | 自定义信息结构json字符串     |
-  | expand | string | true     | 自定义信息扩展字段json字符串 |
-  | desc   | string | true     | 自定义消息描述               |
+  | extension | string | true     | 自定义信息扩展字段json字符串 |
+  | description   | string | true     | 自定义消息描述               |
 
 - Return:
 
@@ -775,6 +775,8 @@
 ## markC2CMessageAsRead
 
 > 实时消息已读回执，在 C2C 单聊场景下，当接收方通过 markC2CMessageAsRead接口将来自某人的消息标记为已读时，消息的发送方将会收到“已读回执”，表示“xxx 已经读过我的消息了”。
+>
+> **特别的：**当msgIDList为一个空数组[]时，该API作用同v1.x版本markSingleMessageHasRead（现已移除），即标记单聊会话为已读，置零该会话未读数。
 
 - Example:
 
@@ -1105,7 +1107,7 @@
   | data | string | [会话对象](https://doc.rentsoft.cn/client_doc/web_doc.html#%E4%BC%9A%E8%AF%9D%E5%AF%B9%E8%B1%A1)列表json字符串 |
 
 
-  
+
 
 ## deleteConversation
 
@@ -1231,7 +1233,9 @@
 
 ## setConversationRecvMessageOpt
 
-> 标记群聊会话消息已读。
+> 设置会话免打扰状态
+>
+> 设置为1时，不再接收改会话的消息。设置为2时，正常接收该会话的消息，但不计入总未读数（依然会计入该会话的未读数，但可根据会话中的recvOpt状态自行处理）。
 
 - Example:
 

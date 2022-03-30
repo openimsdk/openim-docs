@@ -1,15 +1,31 @@
+> **注意：** JSSDK需要连接的端口号为30000端口，除非服务端部署时自行修改了端口，否则无论在线测试还是开发测试都只需要将替换IP即可，无需修改端口号。
+# 在线测试
+
+- 测试地址 https://open-im-online.rentsoft.cn
+
+- 测试方式：
+
+  - 双击**在线化办公**打开配置选项
+
+    ![web](../images/web_demo_01.png)
+
+  - 修改配置中ip为自己已部署OpenIM Server的服务器IP，确认修改
+  
+    ![web](../images/web_demo_02.png)
+  
+  - 注册登录
+
+
 # 环境要求
 
 - node 14.17.5+
-
-
 
 # 开发测试
 
 - 拉取项目
 
   ```
-  git clone https://github.com/OpenIMSDK/Open-IM-PC-Web-Demo.git
+  git clone https://github.com/OpenIMSDK/OpenMetaOffice-Electron.git
   ```
 
 - 安装依赖
@@ -36,10 +52,6 @@
         export const IMURL = "ws://121.37.25.71:30000"
         //	获取cos临时密钥及调用管理员API地址
         export const ADMINURL = "http://121.37.25.71:10000"
-        //	cos bucket
-        export const COSBUCKET = "echat-1302656840"
-        //	cos	region
-        export const COSREGION = "ap-chengdu"
         //	cos 缩略图格式配置
         export const PICMESSAGETHUMOPTION = "?imageView2/1/w/200/h/200/rq/80"
         //	默认语言
@@ -59,6 +71,8 @@
         export const sdkWsPort = "7788"
     
      
+    
+    
   
 - 运行调试
 

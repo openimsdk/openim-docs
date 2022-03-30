@@ -32,12 +32,12 @@ openIM.createTextMessage(textMsg).then(res=>{
 /**
 * 创建@消息
 *
-* @param textMsg 输入信息
+* @param text 输入信息
 * @param atUserIDList @用户id数组
 * @return 新@消息对象结构Json字符串
 */
 const options = {
-  textMsg: "I am at Msg",
+  text: "I am at Msg",
   atUserIDList: ["1f8e0d51d335301d"],
 };
 openIM.createTextAtMessage(options).then(({ data })=>{
@@ -274,14 +274,14 @@ openIM.createCardMessage(cardDesc).then(({ data })=>{
 * 创建自定义消息
 *
 * @param data 自定义消息对象json字符串
-* @param expand 自定义消息对象扩展字段json字符串
-* @param desc 消息描述
+* @param extension 自定义消息对象扩展字段json字符串
+* @param description 消息描述
 * @return 新自定义消息对象结构Json字符串
 */
 const data:CustomMsgParams = {
 	data:"",
-  expand:"",
-  desc:""
+  extension:"",
+  description:""
 } 
 openIM.createCustomMessage(data).then(res=>{
   ...
@@ -398,7 +398,7 @@ openIM.sendMessageNotOss(options).then(({ data,errCode })=>{
 ### 调用示例
 
 ```js
-openIM.on(CbEvents.ONPROGRESS,(data:WsResponse)=>{
+openIM.on(CbEvents.SENDMSGPROGRESS,(data:WsResponse)=>{
   ...
 })
 ```

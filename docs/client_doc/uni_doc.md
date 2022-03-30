@@ -1,2656 +1,2472 @@
+# 引入SDK
+
+```js
+const im = uni.requireNativePlugin('Tuoyun-OpenIMSDK')
+```
+
+# 通用回调
+
+### CallBack
+
+|  Name   |  Type  |        Description        |
+| :-----: | :----: | :-----------------------: |
+|  data   | string |           返回值内容           |
+| errMsg  | string | 错误信息(成功时返回  "",失败时返回错误信息) |
+| errCode |  int   |  错误码(成功时返回  0,失败时返回错误码)   |
+
+# 几大通用结构说明
+
+### PublicUserInfo
+
+```
+PublicUserInfo:用户公开信息，主要是基本信息，不包括手机等其它隐私字段 
+ {
+        "userID": "openIM2222",
+        "nickname": "2222",
+        "faceURL": "https://oss.com.cn/head",
+        "gender": 1
+  }
+```
+
+Parameters:
+
+|   Name   |  Type  |    Description    |
+| :------: | :----: | :---------------: |
+|  userID  | string |       用户id        |
+| nickname | string |       用户昵称        |
+| faceURL  | string |       用户头像        |
+|  gender  | number | 用户性别 0:未知 1:女 2:男 |
+
+### FriendInfo
+
+```
+FriendInfo:好友相关信息，比较全，所有信息都包括
+ {
+        "ownerUserID": "openIM1111",
+        "userID": "openIM2222",
+        "remark": "",
+        "createTime": 1644466099,
+        "addSource": 0,
+        "operatorUserID": "openIM2222",
+        "nickname": "2222",
+        "faceURL": "https://oss.com.cn/head",
+        "gender": 1,
+        "phoneNumber": "",
+        "birth": 0,
+        "email": "xxxx@qq.com",
+        "ex": "xxx"
+  }
+```
+
+Parameters:
+
+|      Name      |  Type  |    Description    |
+| :------------: | :----: | :---------------: |
+|  ownerUserID   | string |       群主ID        |
+|     userID     | string |       用户id        |
+|     remark     | string |        备注         |
+|   createTime   | number |       创建时间        |
+|   addSource    | number |       添加来源        |
+| operatorUserID | number |       操作者ID       |
+|    nickname    | string |       用户昵称        |
+|    faceURL     | string |       用户头像        |
+|     gender     | number | 用户性别 0:未知 1:女 2:男 |
+|  phoneNumber   | string |       用户手机号       |
+|     birth      | string |       用户生日        |
+|     email      | string |      用户邮箱地址       |
+|       ex       | string | 用户信息扩展字段对象Json字符串 |
+
+### UserInfo
+
+```
+UserInfo 个人信息，所有信息都包括
+{
+"userID":"user001",
+"nickname":"openIM",
+"faceURL":"127.0.0.1/xx",
+"gender":1,
+"phoneNumber":""
+"birth":222222
+"email":""
+"createTime":222222
+"ex":
+}
+```
+
+Parameters:
+
+|    Name     |  Type  |    Description    |
+| :---------: | :----: | :---------------: |
+|   userID    | string |       用户ID        |
+|  nickname   | string |       用户昵称        |
+|   faceURL   | string |       用户头像        |
+|   gender    | number | 用户性别 0:未知 1:女 2:男 |
+| phoneNumber | string |       用户手机号       |
+|    birth    | string |       用户生日        |
+|    email    | string |      用户邮箱地址       |
+| createTime  | number |       创建时间        |
+|     ex      | string | 用户信息扩展字段对象Json字符串 |
+
+### FriendApplication
+
+```
+FriendApplication：好友申请信息，谁申请添加谁为好友，以及对申请的处理结果
+{
+	"fromUserID": "user002",
+	"fromNickname": "my friend",
+	"fromFaceURL": "xx",
+	"fromGender": 1,
+	"toUserID": "user002",
+	"toNickname": "hh",
+	"toFaceURL": "xx",
+	"toGender": 1,
+	"handleResult": 1,
+	"reqMsg": "hi",
+	"createTime": 166665545,
+	"handlerUserID": "",
+	"handleMsg": "",
+	"handleTime": 1133131333,
+	"ex": ""
+}
+```
+
+Parameters:
+
+|     Name      |  Type  |    Description     |
+| :-----------: | :----: | :----------------: |
+|  fromUserID   | string |      申请者用户ID       |
+| fromNickname  | string |       申请者昵称        |
+|  fromFaceURL  | string |       申请者头像        |
+|  fromGender   | number | 申请者性别 0:未知 1:女 2:男 |
+|   toUserID    | string |       接收者ID        |
+|  toNickname   | string |       接收者昵称        |
+|   toFaceURL   | string |       接收者头像        |
+|   toGender    | number |       接收者性别        |
+| handleResult  | number |        处理状态        |
+|    reqMsg     | string |        申请信息        |
+|  createTime   | number |        创建时间        |
+| handlerUserID | string |       处理者ID        |
+|   handleMsg   | string |        回复信息        |
+|  handleTime   | number |        处理时间        |
+|      ex       | string |        扩展字段        |
+
+### BlackInfo
+
+```
+BlackInfo：黑名单信息，黑名单用户基本信息，注意黑名单是双向关系。
+ {
+        "ownerUserID": "openIM1111",
+        "userID": "openIM2222",
+        "nickname": "2222",
+        "faceURL": "https://oss.com.cn/head",
+        "gender": 1,
+        "createTime": 0,
+        "addSource": 0,
+        "operatorUserID": "",
+        "ex": ""
+  }
+```
+
+Parameters:
+
+|      Name      |  Type  |    DEscription     |
+| :------------: | :----: | :----------------: |
+|  ownerUserID   | string |        群主ID        |
+|     userID     | string |        用户ID        |
+|    nickname    | string |        用户名称        |
+|    faceURL     | string |        用户头像        |
+|     gender     | number | 用户性别  0:未知 1:女 2:男 |
+|   createTime   | number |      移入黑名单时间       |
+|   addSource    | number |        添加来源        |
+| operatorUserID | number |       操作者ID        |
+|       ex       | string |        扩展字段        |
+
+### FullUserInfo
+
+```
+FullUserInfo ： 整合了PublicUserInfo， FriendInfo和BlackInfo 
+getuserinfo时，
+如果是好友，publicInfo和friendInfo会设置，
+如果是黑名单，publicinfo和blackInfo会设置
+如果即时好友，也是黑名单，则publicInfo， friendInfo，blackInfo都会设置
+
+getfriend时
+如果是黑名单，则friendInfo和blackInfo会设置， 但publicInfo不设置
+
+getblack时，
+如果是好友，则blackInfo和friendInfo会设置，但publicInfo不设置
+
+
+{
+    "publicInfo": {
+        "userID": "openIM2222",
+        "nickname": "2222",
+        "faceURL": "https://oss.com.cn/head",
+        "gender": 1
+    },
+    "friendInfo": {
+        "ownerUserID": "openIM1111",
+        "userID": "openIM2222",
+        "remark": "",
+        "createTime": 1644466099,
+        "addSource": 0,
+        "operatorUserID": "openIM2222",
+        "nickname": "2222",
+        "faceURL": "https://oss.com.cn/head",
+        "gender": 1,
+        "phoneNumber": "",
+        "birth": 0,
+        "email": "xxxx@qq.com",
+        "ex": "xxx"
+    },
+    "blackInfo": {
+        "ownerUserID": "openIM1111",
+        "userID": "openIM2222",
+        "nickname": "2222",
+        "faceURL": "https://oss.com.cn/head",
+        "gender": 1,
+        "createTime": 0,
+        "addSource": 0,
+        "operatorUserID": "",
+        "ex": ""
+    }
+}
+```
+
+Parameters:
+
+|      Name      |  Type  |    Description     |
+| :------------: | :----: | :----------------: |
+|  ownerUserID   | string |        群主ID        |
+|     userID     | string |        用户ID        |
+|    nickname    | string |        用户名称        |
+|    faceURL     | string |        用户头像        |
+|     gender     | number | 用户性别  0:未知 1:女 2:男 |
+|  phoneNumber   | string |       用户手机号        |
+|     birth      | string |       用户出生日期       |
+|     email      | string |       用户邮箱号        |
+|   createTime   | number |       成为好友时间       |
+|   addSource    | number |        添加来源        |
+| operatorUserID | number |       操作者ID        |
+|     remark     | string |        好友备注        |
+|       ex       | string |      用户信息扩展字段      |
+
+### GroupInfo
+
+```
+GroupInfo: 群组信息
+{
+	"groupID": "111111222222",
+	"groupName": "test group",
+	"notification": "hello",
+	"introduction": "this is test group chat",
+	"faceURL": "xx",
+	"ownerUserID": "user001",
+	"createTime": 0,
+	"memberCount": 2,
+	"status": 0,
+	"creatorUserID": "user001",
+	"groupType": 0,
+	"ex": ""
+}
+```
+
+Parameters:
+
+|     Name      |  Type  | Description |
+| :-----------: | :----: | :---------: |
+|    groupID    | string |    群组ID     |
+|   groupName   | string |    群组名称     |
+| notification  | string |     群公告     |
+| introduction  | string |     群介绍     |
+|    faceURL    | string |     群头像     |
+|  ownerUserID  | string |    群主ID     |
+|  createTime   | number |   群组创建时间    |
+|  memberCount  | number |    群成员总数    |
+|    status     | number |     群状态     |
+| creatorUserID | string |    创建者ID    |
+|   groupType   | number |     群类型     |
+|      ex       | string |    扩展字段     |
+
+### GroupMemberInfo
+
+```
+GroupMemberInfo:群成员信息
+{
+	"groupID": "1112221222333",
+	"userID": "user002",
+	"nickname": "open",
+	"faceURL": "xx",
+	"roleLevel": 1,
+	"joinTime": 0,
+	"joinSource": 0,
+	"operatorUserID": "user001",
+	"ex": ""
+}
+```
+
+Parameters:
+
+|      Name      |  Type  |    Description     |
+| :------------: | :----: | :----------------: |
+|    groupID     | string |        群组ID        |
+|     userID     | string |       群成员ID        |
+|    nickname    | string |       群成员昵称        |
+|    faceURL     | string |       群成员头像        |
+|   roleLevel    | string | 群成员等级 1普通 2群主 3管理员 |
+|    joinTime    | number |        加入时间        |
+|   joinSource   | number |        加入方式        |
+| operatorUserID | number |       操作者ID        |
+|       ex       | string |        扩展字段        |
+
+### GroupApplicationInfo
+
+```
+GroupApplicationInfo:申请进群信息
+{
+	"groupID": "111111222222",
+	"groupName": "test group",
+	"notification": "hello",
+	"introduction": "this is test group chat",
+	"groupFaceURL": "xx",
+	"createTime": "user001",
+	"status": 0,
+	"creatorUserID": "user001",
+	"groupType": 0,
+	"ownerUserID": "user001",
+	"memberCount": 1,
+	"userID": "user001",
+	"nickname": "sk",
+	"userFaceURL": "xx",
+	"gender": 1,
+	"handleResult": 1,
+	"reqMsg": "come in",
+	"handledMsg": "ok",
+	"reqTime": 0,
+	"handleUserID": "user001",
+	"handledTime": 0,
+	"ex": ""
+}
+```
+
+Parameters:
+
+|     Name      |  Type  | Description |
+| :-----------: | :----: | :---------: |
+|    groupID    | string |     群ID     |
+|   groupName   | string |     群名      |
+| notification  | string |     群公告     |
+| introduction  | string |     群介绍     |
+| groupFaceURL  | string |     群头像     |
+|  createTime   | number |    创建时间     |
+|    status     | number |     群状态     |
+| creatorUserID | string |    创建者ID    |
+|   groupType   | number |     群类型     |
+|  ownerUserID  | string |    群主ID     |
+|  memberCount  | number |    群成员数     |
+|    userID     | string |    申请者ID    |
+|   nickname    | string |    申请者昵称    |
+|  userFaceURL  | string |    申请者头像    |
+|    gender     | number |    申请者性别    |
+| handleResult  | number |    处理状态     |
+|    reqMsg     | string |   入群申请信息    |
+|  handledMsg   | string |    处理原因     |
+|    reqTime    | number |    申请时间     |
+| handleUserID  | string |    处理者ID    |
+|  handledTime  | number |    处理时间     |
+|      ex       | string |    扩展字段     |
+
+### ConversationInfo
+
+```
+ConversationInfo:会话信息
+{
+    "conversationID": "group_8609c4fa2f49cc449ae905d63da56840", 
+    "conversationType": 2, 
+    "userID": "", 
+    "groupID": "8609c4fa2f49cc449ae905d63da56840", 
+    "showName": "", 
+    "faceURL": "", 
+    "recvMsgOpt": 0, 
+    "unreadCount": 1, 
+    "groupAtType": 0, 
+    "latestMsg": "", 
+    "latestMsgSendTime": 1644387061568, 
+    "draftText": "", 
+    "draftTextTime": 0, 
+    "isPinned": false, 
+    "attachedInfo":"",
+    "ex": ""
+}
+```
+
+Parameters:
+
+|       Name        |  Type  |               Description                |
+| :---------------: | :----: | :--------------------------------------: |
+|  conversationID   | string |                   会话ID                   |
+| conversationType  | number |              会话类型 1:单聊 2:群聊              |
+|      userID       | string |                 会话对象用户ID                 |
+|      groupID      | string |                  会话群聊ID                  |
+|     showName      | string |              会话对象(用户或群聊)名称               |
+|      faceURL      | string |                用户头像或群聊头像                 |
+|    recvMsgOpt     | number | 接收消息选项：<br>0:在线正常接收消息，离线时进行推送<br>1:不会接收到消息<br>2:在线正常接收消息，离线不会有推送 |
+|    unreadCount    | number |                  未读消息数量                  |
+|    groupAtType    |  int   |                  群聊@类型                   |
+|     latestMsg     | string | 最后一条消息 [消息对象](https://doc.rentsoft.cn/#/)json字符串 |
+| latestMsgSendTime | number |              最后一条消息发送时间(ns)              |
+|     draftText     | string |                   会话草稿                   |
+|   draftTextTime   | number |                 会话草稿设置时间                 |
+|     isPinned      | number |                   是否置顶                   |
+|   attachedInfo    | string |                   预留字段                   |
+|        ex         | string |                   扩展字段                   |
+
+### MessageInfo
+
+```
+MessageInfo:聊天记录信息
+{
+    "clientMsgID": "09501ab4ce6c6045e6de684512496cad", 
+    "serverMsgID": "2022-01-24 14:18:04-openIM100-6906824559772831383", 
+    "createTime": 1643005091612, 
+    "sendTime": 1643005091612, 
+    "sessionType": 1, 
+    "sendID": "openIM100", 
+    "recvID": "openIM101", 
+    "msgFrom": 100, 
+    "contentType": 101, 
+    "platformID": 1, 
+    "senderNickname": "sksksksksk", 
+    "senderFaceUrl": "", 
+    "groupID": "", 
+    "content": "mmmmmmmmtest:Gordon->skopenIM100:openIM101:", 
+    "seq": 171880, 
+    "isRead": false, 
+    "status": 2, 
+    "offlinePush": {
+        "title": "232", 
+        "desc": "er", 
+        "ex": "", 
+        "iOSPushSound": "", 
+        "iOSBadgeCount": true
+    }, 
+    "attachedInfo": "", 
+    "ex": "", 
+    "pictureElem": {
+        "sourcePath": "", 
+        "sourcePicture": {
+            "uuid": "", 
+            "type": "", 
+            "size": 0, 
+            "width": 0, 
+            "height": 0, 
+            "url": ""
+        }, 
+        "bigPicture": {
+            "uuid": "", 
+            "type": "", 
+            "size": 0, 
+            "width": 0, 
+            "height": 0, 
+            "url": ""
+        }, 
+        "snapshotPicture": {
+            "uuid": "", 
+            "type": "", 
+            "size": 0, 
+            "width": 0, 
+            "height": 0, 
+            "url": ""
+        }
+    }, 
+    "soundElem": {
+        "uuid": "", 
+        "soundPath": "", 
+        "sourceUrl": "", 
+        "dataSize": 0, 
+        "duration": 0
+    }, 
+    "videoElem": {
+        "videoPath": "", 
+        "videoUUID": "", 
+        "videoUrl": "", 
+        "videoType": "", 
+        "videoSize": 0, 
+        "duration": 0, 
+        "snapshotPath": "", 
+        "snapshotUUID": "", 
+        "snapshotSize": 0, 
+        "snapshotUrl": "", 
+        "snapshotWidth": 0, 
+        "snapshotHeight": 0
+    }, 
+    "fileElem": {
+        "filePath": "", 
+        "uuid": "", 
+        "sourceUrl": "", 
+        "fileName": "", 
+        "fileSize": 0
+    }, 
+    "mergeElem": {
+        "title": "", 
+        "abstractList": null, 
+        "multiMessage": null
+    }, 
+    "atElem": {
+        "text": "", 
+        "atUserList": null, 
+        "isAtSelf": false
+    }, 
+    "locationElem": {
+        "description": "", 
+        "longitude": 0, 
+        "latitude": 0
+    }, 
+    "customElem": {
+        "data": "", 
+        "description": "", 
+        "extension": ""
+    }, 
+    "quoteElem": {
+        "text": "", 
+        "quoteMessage": null
+    }, 
+    "NotificationElem": {
+        "detail": "", 
+        "defaultTips": ""
+    }
+}
+```
+
+#### Message--Parameters
+
+|       Name       |       Type       |               Description                |
+| :--------------: | :--------------: | :--------------------------------------: |
+|   clientMsgID    |      string      |                  消息唯一ID                  |
+|   serverMsgID    |      string      |              消息服务器ID，暂时不使用               |
+|    createTime    |      number      |                  消息创建时间                  |
+|     sendTime     |      number      |                  消息发送时间                  |
+|   sessionType    |      number      |              会话类型 1:单聊 2:群聊              |
+|      sendID      |      string      |                  发送者ID                   |
+|      recvID      |      string      |                  接收者ID                   |
+|     msgFrom      |      number      |      标识消息是用户级别还是系统级别 100:用户 200:系统       |
+|   contentType    |      number      | 消息类型：<br>101:文本消息<br>102:图片消息<br>103:语音消息<br>104:视频消息<br>105:文件消息<br>106:@消息<br>107:合并消息<br>108:转发消息<br>109:位置消息<br>110:自定义消息<br>111:撤回消息回执<br>112:C2C已读回执<br>113:正在输入状态 |
+|    platformID    |      number      | 平台类型 1:ios 2:android 3:windows 4:osx 5:web 6:mini 7:linux |
+|  senderNickname  |      string      |                  发送者昵称                   |
+|  senderFaceUrl   |      string      |                  发送者头像                   |
+|     groupID      |      string      |                   群聊ID                   |
+|     content      |      string      |                   消息内容                   |
+|       seq        |      number      |                 消息唯一序列号                  |
+|      isRead      |       bool       |                   是否已读                   |
+|      status      |      number      |   消息状态 1:发送中 2:发送成功 3:发送失败 4:已删除 5:已撤回   |
+|   offlinePush    |   offlinePush    |                  离线推送配置                  |
+|   attachedInfo   |      string      |                   预留字段                   |
+|        ex        |      string      |                   扩展字段                   |
+|   pictureElem    |   PictureElem    |                  图片信息结构                  |
+|    soundElem     |    SoundElem     |                  语音信息结构                  |
+|    videoElem     |    VideoElem     |                  视频信息结构                  |
+|     fileElem     |     FileElem     |                  文件信息结构                  |
+|    mergeElem     |    MergeElem     |                  合并信息结构                  |
+|      atElem      |      AtElem      |                  @信息结构                   |
+|   locationElem   |   LocationElem   |                  位置信息结构                  |
+|    customElem    |    CustomElem    |                 自定义信息结构                  |
+|    quoteElem     |    QuoteElem     |                  引用消息结构                  |
+| notificationElem | NotificationElem |                  通知消息结构                  |
+
+#### offlinePush--Parameters
+
+|     Name      |  Type  | Description |
+| :-----------: | :----: | :---------: |
+|     title     | string |     标题      |
+|     desc      | string |    描述信息     |
+|      ex       | string |    扩展字段     |
+| iOSPushSound  | string |  iOS的推送声音   |
+| iOSBadgeCount |  bool  | 是否计入iOS的未读数 |
+
+#### pictureElem--Parameters
+
+|      Name       |  Type   | Description |
+| :-------------: | :-----: | :---------: |
+|   sourcePath    | string  |   本地资源地址    |
+|  sourcePicture  | Picture |   本地图片详情    |
+|   bigPicture    | Picture |    大图详情     |
+| snapshotPicture | Picture |    缩略图详情    |
+
+#### Picture--Parameters
+
+|  Name  |  Type  | Description |
+| :----: | :----: | :---------: |
+|  uuid  | string |    唯一ID     |
+|  type  | string |    图片类型     |
+|  size  | number |    图片大小     |
+| width  | number |    图片宽度     |
+| height | number |    图片高度     |
+|  url   | String |   图片oss地址   |
+
+#### soundElem--Parameters
+
+|   Name    |  Type  | Description |
+| :-------: | :----: | :---------: |
+|   uuid    | string |    唯一ID     |
+| soundPath | string |   本地资源地址    |
+| sourceUrl | string |    oss地址    |
+| dataSize  | number |    音频大小     |
+| duration  | number |    音频时长     |
+
+#### videoElem--Parameters
+
+|      Name      |  Type  | Description |
+| :------------: | :----: | :---------: |
+|   videoPath    | string |  视频本地资源地址   |
+|   videoUUID    | string |   视频唯一ID    |
+|    videoUrl    | string |   视频oss地址   |
+|   videoType    | string |    视频类型     |
+|   videoSize    | number |    视频大小     |
+|    duration    | number |    视频时长     |
+|  snapshotPath  | string |  视频快照本地地址   |
+|  snapshotUUID  | string |  视频快照唯一ID   |
+|  snapshotSize  | number |   视频快照大小    |
+|  snapshotUrl   | string |  视频快照oss地址  |
+| snapshotWidth  | number |   视频快照宽度    |
+| snapshotHeight | number |   视频快照高度    |
+
+#### fileElem--Parameters
+
+|   Name    |  Type  | Description |
+| :-------: | :----: | :---------: |
+| filePath  | string |  文件本地资源地址   |
+|   uuid    | string |    唯一ID     |
+| sourceUrl | string |    oss地址    |
+| fileName  | string |    文件名称     |
+| fileSize  | number |    文件大小     |
+
+#### mergeElem--Parameters
+
+|     Name     |    Type     | Description |
+| :----------: | :---------: | :---------: |
+|    title     |   string    |   合并消息标题    |
+| abstractList | array\|null |    摘要列表     |
+| multiMessage | array\|null |   合并消息列表    |
+
+#### atElem--Parameters
+
+|    Name    |    Type     | Description |
+| :--------: | :---------: | :---------: |
+|    text    |   string    |    文本消息     |
+| atUserList | array\|null |   @用户ID列表   |
+|  isAtSelf  |    bool     |    是否@自己    |
+
+#### locationElem--Parameters
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| description | String |     描述      |
+|  longitude  | number |     经度      |
+|  latitude   | number |     纬度      |
+
+#### customElem--Parameters
+
+|    Name     |  Type  |  Description   |
+| :---------: | :----: | :------------: |
+|    data     | string |  自定义消息json字符串  |
+|  extension  | string | 自定义消息扩展json字符串 |
+| description | string |       描述       |
+
+#### quoteElem--Parameters
+
+|     Name     |     Type     | Description |
+| :----------: | :----------: | :---------: |
+| quoteMessage | string\|null |    引用消息     |
+
+#### NotificationElem--Parameters
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+|   detail    | string |   通知详细信息    |
+| defaultTips | string |   通知默认提示    |
+
 # 初始化与登录
 
 ## initSDK
 
 初始化OpenIM SDK,设置SDK网络连接地址以及本地数据存放目录等。
 
-- Example:
+* Example:
 
-  ```js
-   const config = {
-       platform: 1,	//平台类型
-       ipApi: "http://1.14.194.38:10000",	//api域名地址
-       ipWs: "ws://1.14.194.38:17778",	//websocket地址
-       /**
-       * ps:上述配置适合于通过ip访问  若通过域名且配置了https证书请使用如下配置方式
-       * ipApi: "https://open-im.rentsoft.cn",
-       * ipWs: "wss://open-im.rentsoft.cn/wss",
-       */
-       dbDir,	//SDK数据存放目录
-   }
-   //返回值为布尔值告知是否初始化成功
-   this.flag = this.$openSdk.initSDK(config);
-  ```
+```js
+const flag = im.initSDK(operationID,config) //返回值为布尔值告知是否初始化成功
 
-- Parameters:
+config是json字符串，格式为
+{
+"platform":1, //平台类型
+"api_addr":"http://127.0.0.1:10000", //api域名地址
+"ws_addr":"ws://127.0.0.1:17778", //websocket地址
+"data_dir":"./", //SDK数据存放目录
+"log_level":6, 
+"object_storage":""
+}
+```
 
+* Parameters:
 
-| Name     | Type   | Description                                                  |
-| -------- | ------ | ------------------------------------------------------------ |
-| platform | int    | 平台类型 1:ios 2:android 3:windows 4:osx 5:web&mini 7:linux 8:管理员 |
-| ipApi    | string | api域名地址                                                  |
-| ipWs     | string | websocket地址                                                |
-| dbDir    | String | SDK数据存放目录（绝对路径）                                  |
+|      Name      |  Type  |               Description                |
+| :------------: | :----: | :--------------------------------------: |
+|    platform    |  int   | 平台类型 1:ios 2:android 3:windows 4:osx 5:web&mini 7:linux 8:管理员 |
+|    api_addr    | string |                 api域名地址                  |
+|  ipWws_addrs   | string |               websocket地址                |
+|    data_dir    | String |             SDK数据存放目录（绝对路径）              |
+|   log_level    |  int   |                                          |
+| object_storage | string |                                          |
 
-- Returns:
+* Monitor:
 
-
-| Type | Description        |
-| ---- | ------------------ |
-| bool | 返回是否初始化成功 |
-
-- Monitor:
-
-
-| Event              | Parameters                                                   | Description   |
-| ------------------ | ------------------------------------------------------------ | ------------- |
-| onConnectFailed    | err:错误信息<br/>errCode:错误码                              | 连接失败      |
-| onConnectSuccess   | msg:onConnectSuccess                                         | 连接成功      |
-| onConnecting       | msg:onConnecting                                             | 连接中        |
-| onKickedOffline    | msg:onKickedOffline                                          | 被踢下线      |
-| onSelfInfoUpdated  | msg:[用户信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 | 修改个人信息  |
-| onUserTokenExpired | msg:onUserTokenExpired                                       | 账号token过期 |
-
-
-
+|        Name        |                   Type                   | Description |
+| :----------------: | :--------------------------------------: | :---------: |
+|  onConnectFailed   |         err:错误信息<br/>errCode:错误码         |    连接失败     |
+|  onConnectSuccess  |           msg:onConnectSuccess           |    连接成功     |
+|    onConnecting    |             msg:onConnecting             |     连接中     |
+|  onKickedOffline   |           msg:onKickedOffline            |    被踢下线     |
+| onSelfInfoUpdated  | msg:[用户信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 |   修改个人信息    |
+| onUserTokenExpired |          msg:onUserTokenExpired          |  账号token过期  |
 
 ## login
 
-使用用户ID(uid)和token登录，uid来自于自身业务服务器，token需要业务服务器根据secret向OpenIM服务端交换获取。
+* Example:
 
-- Example:
+```js
+im.login(operationID,userID,token,data => {
+	...
+})
+```
 
-  ```js
-  this.$openSdk.login(uid,token,data=>{
-      ...
-  })
-  ```
+* Parameters:
 
-- Parameters:
-
-
-| Name  | Type   | Description |
-| ----- | ------ | ----------- |
-| uid   | string | 用户ID      |
-| token | string | 用户token   |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 登录成功     |
-| err     | string | 登录失败描述 |
-| errCode | int    | 错误码       |
-
-  
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   userID    |  string  |    用户ID     |
+|    token    |  string  |   用户token   |
+|  callback   | callback |    通用回调     |
 
 ## logout
 
-登出OpenIM，通常在切换账号的时候调用，清楚登录态以及内存中的所有数据。
+* Example:
 
-- Example:
+```js
+im.logout(operationID,data => {
+	...
+})
+```
 
-  ```js
-  this.$openSdk.logout(data=>{
-      ...
-  })
-  ```
+* Parameters:
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 登出成功     |
-| err     | string | 登出失败描述 |
-| errCode | int    | 错误码       |
-
-  
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
 ## getLoginStatus
 
 获取当前用户登录状态。
 
-- Example:
+* Example:
 
-  ```js
-  this.$openSdk.getLoginStatus(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description                                   |
-| ------- | ------ | --------------------------------------------- |
-| msg     | int    | 101:登录成功 102:登陆中 103:登录失败 201:登出 |
-| err     | string | 获取失败描述                                  |
-| errCode | int    | 错误码                                        |
-
-  
-
+```js
+const res = im.getLoginStatus()
+// 返回值为 101:登录成功 102:登陆中 103:登录失败 201:登出
+```
 
 ## getLoginUid
 
 获取当前登录用户ID。
 
-- Example:
+* Example:
 
-  ```js
-  this.$openSdk.getLoginUid(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
+```js
+const res = im.getLoginUid()
+// 返回值 用户ID
+```
 
 
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 用户ID       |
-| err     | string | 获取失败描述 |
-| errCode | int    | 错误码       |
-
-  
 
 # 用户资料
 
-## getUsersInfo
+## GetUsersInfo
 
-根据用户ID获取用户资料，可批量获取。
+获取某些用户的公开资料
 
-- Example:
+* Example:
 
-  ```js
-  this.$openSdk.getUsersInfo(uidList,data=>{
-      ...
-  })
-  ```
+```js
+im.getUsersInfo(operationID,userIDList,data => {
+	...
+})
+```
 
-- Parameters:
+* Parameters:
 
+|    Name     | Description |   Type   |
+| :---------: | :---------: | :------: |
+| operationID |    UUID     |  string  |
+| userIDList  |  string[]   |  用户ID数组  |
+|  callback   |    通用回调     | callback |
 
-| Name    | Type     | Description |
-| ------- | -------- | ----------- |
-| uidList | string[] | 用户ID数组  |
+## SetSelfInfo
 
-- CallBack:
+设置登录用户的相关资料
 
+* Example:
 
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [用户信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)列表Json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
+```js
+im.setSelfInfo(operationID,userInfo,data => {
+	...
+})
+```
 
-  
+* Parameters:
 
-## setSelfInfo
+|    Name     |   Type   |    Description    |
+| :---------: | :------: | :---------------: |
+| operationID |  string  |       UUID        |
+|  userInfo   | userInfo | 用户个人信息(在通用结构中有解释) |
+|  callback   | callback |       通用回调        |
 
-根据用户ID获取用户资料，可批量获取。
+## GetSelfUserInfo
 
-- Example:
+设置登录用户相关资料
 
-  ```js
-  this.$openSdk.setSelfInfo(info,data=>{
-      ...
-  })
-  ```
+* Example:
 
-- Parameters:
+```js
+im.getSelfUserInfo(operationID,data => {
+	...
+})
+```
 
+* Parameters:
 
-| Name | Type                                                         | Description                                                  |
-| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| info | [UserInfo](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1) | [用户信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1) |
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
-- CallBack:
+# 好友及黑名单
 
+## GetDesignatedFriendsInfo
 
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [用户信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)列表Json字符串(可只传要修改的字段) |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
+获取指定好友列表的相关信息
 
-  
+* Example:
 
-# 消息收发
+```js
+im.getDesignatedFriendsInfo(operationID,userIDList,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调FullUserInfo列表
+```
 
-## createTextMessage
+* Parameters:
 
-创建一条文字消息。
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+| userIDList  | string[] |   好友ID列表    |
+|  callback   | callback |    通用回调     |
 
-- Example:
+## GetFriendList
 
-  ```js
-  const newTextMsg = this.$openSdk.createTextMessage(text,data=>{
-      ...
-  })
-  ```
+获取所有好友的相关信息
 
-- Parameters:
+* Example:
 
+```js
+im.getFriendList(operationID,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调FullUserInfo列表
+```
 
-| Name | Type   | Description  |
-| ---- | ------ | ------------ |
-| text | string | 消息文字内容 |
+* Parameters:
 
-- Returns:
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
+## CheckFriend
 
-| Name       | Type   | Description          |
-| ---------- | ------ | -------------------- |
-| newTextMsg | string | 文字信息结构体字符串 |
+检查是否好友关系，即是否在登录用户的好友列表中。注意：好友是双向关系
 
-## createTextAtMessage
+* Example:
 
-创建一条@文字消息。
+```js
+im.checkFriend(operationID,userIDList,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调此结构的列表，result为1表示好友（并且不是黑名单）
+{
+"userID":"user001", // 用户ID
+"result":1
+}
+```
 
-- Example:
+* Parameters:
 
-  ```js
-  const newAtTextMsg = this.$openSdk.createTextAtMessage(text，atList,data=>{
-      ...
-  })
-  ```
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+| userIDList  | string[] |   好友ID列表    |
+|  callback   | callback |    通用回调     |
 
-- Parameters:
+## AddFriend
 
+添加好友申请
 
-| Name   | Type   | Description           |
-| ------ | ------ | --------------------- |
-| text   | string | 消息文字内容          |
-| atList | string | @用户id数组json字符串 |
+* Example:
 
-- Returns:
+```js
+im.addFriend(operationID,userIDReqMsg,data => {
+	...
+})
+// userIDReqMsg为
+{
+"toUserID":"user002", // 用户ID
+"reqMsg":"hello" // 验证消息
+}
+```
 
+* Parameters:
 
-| Name         | Type   | Description           |
-| ------------ | ------ | --------------------- |
-| newAtTextMsg | string | @文字信息结构体字符串 |
+|     Name     |   Type   | Description |
+| :----------: | :------: | :---------: |
+| operationID  |  string  |    UUID     |
+| userIDReqMsg |  string  |   申请验证信息    |
+|   callback   | callback |    通用回调     |
 
-  
+## SetFriendRemark
 
-## createImageMessage
+设置好友备注
 
-根据相对路径创建一条图片消息。
+* Example:
 
-- Example:
+```js
+im.setFriendRemark(operationID,userIDRemark,data => {
+	...
+})
+// userIDRemark为
+{
+	"toUserID": "user002", // 用户ID
+	"remark": "my friend" // 备注
+}
+```
 
-  ```js
-  const newImageMsg = this.$openSdk.createImageMessage(imagePath,data=>{
-      ...
-  })
-  ```
+* Parameters:
 
-- Parameters:
+|     Name     |   Type   | Description |
+| :----------: | :------: | :---------: |
+| operationID  |  string  |    UUID     |
+| userIDRemark |  string  |    好友备注     |
+|   callback   | callback |    通用回调     |
 
+## DeleteFriend
 
-| Name      | Type   | Description        |
-| --------- | ------ | ------------------ |
-| imagePath | string | 图片地址(相对路径) |
+删除好友，好友是双向关系，此函数仅仅删除自己的好友
 
-- Returns:
+* Example:
 
+```js
+im.deleteFriend(operationID,friendUserID,data => {
+	...
+})
+// friendUserID为好友UserID
+```
 
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newImageMsg | string | 图片信息结构体字符串 |
+* Parameters:
 
-  
+|     Name     |   Type   | Description |
+| :----------: | :------: | :---------: |
+| operationID  |  string  |    UUID     |
+| friendUserID |  string  |    好友ID     |
+|   callback   | callback |    通用回调     |
 
-# createImageMessageFromFullPath
+## GetRecvFriendApplicationList
 
-根据绝对路径创建一条图片消息。
+获取收到的好友申请，即哪些人申请加我为好友
 
-- Example:
+* Example:
 
-  ```js
-  const newImageMsg = this.$openSdk.createImageMessageFromFullPath(imagePath,data=>{
-      ...
-  })
-  ```
+```js
+im.getRecvFriendApplicationList(operationID,data => {
+	...
+})
+```
 
-- Parameters:
+* Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
-| Name      | Type   | Description        |
-| --------- | ------ | ------------------ |
-| imagePath | string | 图片地址(绝对路径) |
+## GetSendFriendApplicationList
 
-- Returns:
+获取我发出去的好友申请，即我主动申请添加哪些人为好友
 
+* Example:
 
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newImageMsg | string | 图片信息结构体字符串 |
+```js
+im.getSendFriendApplicationList(operationID,data => {
+	...
+})
+```
 
+* Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
-## createImageMessageByURL
+## AcceptFriendApplication
 
-根据自定义文件url创建一条图片消息，用户可将图片上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送。
+同意某人的好友申请
 
-- Example:
+* Example:
 
-  ```js
-  const sourceInfo = {	//原图片信息
-    uuid:"",
-    type:"png",
-    size:12465,
-    width:1080,
-    height:720,
-    url:"http://www.ptbird.cn/usr/uploads/2019/07/2213642051.png"
-  }
-  const bigPicInfo = sourceInfo					//大图信息
-  const snapshotPicInfo = sourceInfo		//搜略图信息
-  const newImageMsg = this.$openSdk.createImageMessageByURL(sourceInfo,bigPicInfo,snapshotPicInfo,data=>{
-      ...
-  })
-  ```
+```js
+im.acceptFriendApplication(operationID,userIDHandleMsg,data => {
+	...
+})
+// userIDHandleMsg为
+{
+	"toUserID": "user001", // 申请者ID
+	"handleMsg": "ok" // 回复消息
+}
+```
 
-- Parameters:
+* Parameters:
 
+|      Name       |   Type   | Description |
+| :-------------: | :------: | :---------: |
+|   operationID   |  string  |    UUID     |
+| userIDHandleMsg |  string  |    处理消息     |
+|    callback     | callback |    通用回调     |
 
-| Name   | Type   | Description |
-| ------ | ------ | ----------- |
-| uuid   | string | 图片唯一id  |
-| type   | string | 图片类型    |
-| size   | number | 图片大小    |
-| width  | number | 图片宽度    |
-| height | number | 图片高度    |
-| url    | string | 图片地址    |
+## RefuseFriendApplication
 
-- Returns:
+拒绝某人的好友申请
 
+* Example:
 
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newImageMsg | string | 图片信息结构体字符串 |
+```js
+im.refuseFriendApplication(operationID,userIDHandleMsg,data => {
+	...
+})
+// userIDHandleMsg为
+{
+	"toUserID": "user001", // 申请者ID
+	"handleMsg": "ok" // 回复消息
+}
+```
 
+* Parameters:
 
+|      Name       |   Type   | Description |
+| :-------------: | :------: | :---------: |
+|   operationID   |  string  |    UUID     |
+| userIDHandleMsg |  string  |    回复消息     |
+|    callback     | callback |    通用回调     |
 
-## createSoundMessage
+## AddBlack
 
-根据相对路径创建一条语音消息。
+添加黑名单
 
-- Example:
+* Example:
 
-  ```js
-  const newSoundMsg = this.$openSdk.createSoundMessage(soundPath,duration,data=>{
-      ...
-  })
-  ```
+```js
+im.addBlack(operationID,blackUserID,(data)=>{
+	...
+})
+```
 
-- Parameters:
+* Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+| blackUserID |  string  |    用户ID     |
+|  callback   | callback |    通用回调     |
 
-| Name      | Type   | Description            |
-| --------- | ------ | ---------------------- |
-| soundPath | string | 音频文件地址(相对路径) |
-| duration  | int    | 语音时长               |
+## GetBlackList
 
-- Returns:
+获取黑名单资料列表
 
+* Example:
 
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newSoundMsg | string | 语音信息结构体字符串 |
+```js
+im.getBlackList(operationID,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调FullUserInfo列表
+```
 
-  
+* Parameters:
 
-## createSoundMessageFromFullPath
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
-根据绝对路径创建一条语音消息。
+## RemoveBlack
 
-- Example:
+移除黑名单
 
-  ```js
-  const newSoundMsg = this.$openSdk.createSoundMessageFromFullPath(soundPath,duration,data=>{
-      ...
-  })
-  ```
+* Example:
 
-- Parameters:
+```js
+im.removeBlack(operationID,removeUserID,data => {
+	...
+})
+// removeUserID 被移除的黑名单UserID
+```
 
+* Parameters:
 
-| Name      | Type   | Description            |
-| --------- | ------ | ---------------------- |
-| soundPath | string | 音频文件地址(绝对路径) |
-| duration  | int    | 语音时长               |
-
-- Returns:
-
-
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newSoundMsg | string | 语音信息结构体字符串 |
-
-  
-
-## createSoundMessageByURL
-
-根据自定义文件url创建一条语音消息，用户可将语音文件上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送。
-
-- Example:
-
-  ```js
-  const soundInfo = {
-    uuid:"xx",
-    soundPath:"xx",
-    sourceUrl:"http://xxx/mic.mp3",
-    dataSize:1234,
-    duration:42
-  }
-  const newSoundMsg = this.$openSdk.createSoundMessageByURL(soundInfo,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name      | Type   | Description  |
-| --------- | ------ | ------------ |
-| uuid      | string | 唯一id       |
-| soundPath | string | 留空字符即可 |
-| sourceUrl | string | 音频地址     |
-| dataSize  | number | 音频文件大小 |
-| duration  | number | 音频时长     |
-
-- Returns:
-
-
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newSoundMsg | string | 语音信息结构体字符串 |
-
-
-
-## createVideoMessage
-
-根据相对路径创建一条视频消息。
-
-- Example:
-
-  ```js
-  const newVideoMsg = this.$openSdk.createVideoMessage(videoPath,videoType,duration,snapshotPath,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name         | Type   | Description            |
-| ------------ | ------ | ---------------------- |
-| videoPath    | string | 视频文件地址(相对路径) |
-| videoType    | string | 视频类型(MP4,AVI..)    |
-| duration     | int    | 视频时长               |
-| snapshotPath | string | 视频快照地址(相对路径) |
-
-- Returns:
-
-
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newVideoMsg | string | 视频信息结构体字符串 |
-
-  
-
-## createVideoMessageFromFullPath
-
-根据绝对路径创建一条视频消息。
-
-- Example:
-
-  ```js
-  const newVideoMsg = this.$openSdk.createVideoMessageFromFullPath(videoPath,videoType,duration,snapshotPath,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name         | Type   | Description            |
-| ------------ | ------ | ---------------------- |
-| videoPath    | string | 视频文件地址(绝对路径) |
-| videoType    | string | 视频类型(MP4,AVI..)    |
-| duration     | int    | 视频时长               |
-| snapshotPath | string | 视频快照地址(绝对路径) |
-
-- Returns:
-
-
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newVideoMsg | string | 视频信息结构体字符串 |
-
-  
-
-## createVideoMessageByURL
-
-根据自定义文件url创建一条视频消息，用户可将视频文件上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送。
-
-- Example:
-
-  ```js
-  const videoInfo = {
-    videoPath: "xxx",
-    duration: 12,
-    videoType: "mp4",
-    snapshotPath: "xxx",
-    videoUUID:"xx",
-    videoUrl:"xx",
-    videoSize:1234,
-    snapshotUUID:"stringspn",
-    snapshotSize:123,
-    snapshotUrl:"xxx",
-    snapshotWidth:124,
-    snapshotHeight:125
-  }
-  const newVideoMsg = this.$openSdk.createVideoMessageByURL(videoInfo,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name           | Type   | Description         |
-| -------------- | ------ | ------------------- |
-| videoPath      | string | 留为空字符串即可    |
-| videoType      | string | 视频类型(MP4,AVI..) |
-| duration       | number | 视频时长            |
-| snapshotPath   | string | 留为空字符串即可    |
-| videoUUID      | string | 视频文件唯一id      |
-| videoUrl       | string | 视频文件地址        |
-| videoSize      | number | 视频文件大小        |
-| snapshotUUID   | string | 视频快照唯一id      |
-| snapshotSize   | number | 视频快照大小        |
-| snapshotUrl    | string | 视频快照地址        |
-| snapshotWidth  | number | 视频快照宽度        |
-| snapshotHeight | number | 视频快照高度        |
-
-- Returns:
-
-
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newVideoMsg | string | 语音信息结构体字符串 |
-
-
-
-## createFileMessage
-
-根据相对路径创建一条文件消息。
-
-- Example:
-
-  ```js
-  const newFileMsg = this.$openSdk.createFileMessage(filePath,fileName,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name     | Type   | Description        |
-| -------- | ------ | ------------------ |
-| filePath | string | 文件地址(相对路径) |
-| fileName | string | 文件名称           |
-
-- Returns:
-
-
-| Name       | Type   | Description          |
-| ---------- | ------ | -------------------- |
-| newFileMsg | string | 文件信息结构体字符串 |
-
-
-
-## createFileMessageByURL
-
-根据自定义文件url创建一条文件消息，用户可将文件上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送。
-
-- Example:
-
-  ```js
-  const fileInfo = {
-    filePath: "",
-    fileName: "test",
-    uuid:"xxsadsa",
-    sourceUrl:"wwwm",
-    fileSize:1234
-  }
-  const newFileMsg = this.$openSdk.createFileMessageByURL(fileInfo,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name      | Type   | Description      |
-| --------- | ------ | ---------------- |
-| filePath  | string | 留为空字符串即可 |
-| fileName  | string | 文件名称         |
-| uuid      | string | 文件唯一id       |
-| sourceUrl | string | 文件地址         |
-| fileSize  | number | 文件大小         |
-
-- Returns:
-
-
-| Name       | Type   | Description          |
-| ---------- | ------ | -------------------- |
-| newFileMsg | string | 文件信息结构体字符串 |
-
-  
-
-## createMergerMessage
-
-创建一条合并消息。
-
-- Example:
-
-  ```js
-  const newMergerMsg = this.$openSdk.createMergerMessage(messageList,title,summaryList,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name        | Type     | Description                                                  |
-| ----------- | -------- | ------------------------------------------------------------ |
-| messageList | string[] | [消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串列表 |
-| title       | string   | 合并消息标题                                                 |
-| summaryList | string[] | 合并消息的摘要列表                                           |
-
-- Returns:
-
-
-| Name         | Type   | Description          |
-| ------------ | ------ | -------------------- |
-| newMergerMsg | string | 合并信息结构体字符串 |
-
-  
-
-## createForwardMessage
-
-创建一条转发消息。
-
-- Example:
-
-  ```js
-  const newForwardMsg = this.$openSdk.createForwardMessage(message,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name    | Type   | Description          |
-| ------- | ------ | -------------------- |
-| message | string | 消息结构体json字符串 |
-
-- Returns:
-
-
-| Name          | Type   | Description          |
-| ------------- | ------ | -------------------- |
-| newForwardMsg | string | 转发信息结构体字符串 |
-
-
-​    
-
-## createLocationMessage
-
-创建一条地理位置消息。
-
-- Example:
-
-  ```js
-  const newLocationMsg = this.$openSdk.createLocationMessage(desc,latitude,longitude,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name      | Type   | Description |
-| --------- | ------ | ----------- |
-| desc      | string | 描述信息    |
-| latitude  | double | 纬度        |
-| longitude | double | 经度        |
-
-- Returns:
-
-
-| Name           | Type   | Description          |
-| -------------- | ------ | -------------------- |
-| newLocationMsg | string | 地理信息结构体字符串 |
-
-
-​    
-
-## createCustomMessage
-
-创建一条自定义消息。
-
-- Example:
-
-  ```js
-  const newCustomMsg = this.$openSdk.createCustomMessage(data,expand,desc,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name   | Type   | Description        |
-| ------ | ------ | ------------------ |
-| data   | object | 自定义信息         |
-| expand | object | 自定义信息扩展字段 |
-| desc   | string | 自定义消息描述     |
-
-- Returns:
-
-
-| Name         | Type   | Description            |
-| ------------ | ------ | ---------------------- |
-| newCustomMsg | string | 自定义信息结构体字符串 |
-
-
-​    
-
-## createQuoteMessage
-
-创建一条引用消息。
-
-- Example:
-
-  ```js
-  const newQuoteMsg = this.$openSdk.createQuoteMessage(text,message,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| text    | string | 消息内容                                                     |
-| message | string | 引用[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 |
-
-- Returns:
-
-
-| Name        | Type   | Description          |
-| ----------- | ------ | -------------------- |
-| newQuoteMsg | string | 引用消息结构体字符串 |
-
-
-
-
-## sendMessage
-
-OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群聊消息”，在发送单聊消息时设置groupID为空，同理发送群聊消息时设置userID为空即可。
-
-- Example:
-
-  ```js
-  this.$openSdk.sendMessage(message,receiver,groupID,onlineUserOnly,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name           | Type   | Description          |
-| -------------- | ------ | -------------------- |
-| message        | string | 消息结构体json字符串 |
-| receiver       | string | 接收者ID（单聊）     |
-| groupID        | string | 接收群组ID（群聊）   |
-| onlineUserOnly | bool   | 是否仅在线用户接收   |
-
-- Monitor:
-
-
-| Event           | Parameters                                                   | Description  |
-| --------------- | ------------------------------------------------------------ | ------------ |
-| sendMsgError    | err:错误信息<br>errCode:错误码<br>errMsg:发送失败的[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 | 消息发送失败 |
-| sendMsgProgress | percent:发送进度<br>progressMsg:正在发送的[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 | 消息发送进度 |
-| sendMsgSuccess  | msg:成功信息<br>sucMsg:发送成功的[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 | 消息发送成功 |
-
-  
-
-## getHistoryMessageList
-
-分页拉取单聊或群聊的历史消息。
-
-- Example:
-
-  ```js
-  const options = {
-    groupID:"",
-    startMsg:"msg",
-    count:12,
-    userID:"userID"
-  }
-  this.$openSdk.getHistoryMessageList(options,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name     | Type   | Description                      |
-| -------- | ------ | -------------------------------- |
-| groupID  | string | 群聊ID，拉取群聊时传入，否则为“” |
-| startMsg | string | 上一次拉取的最后一条消息结构体   |
-| count    | int    | 每次拉取的条数                   |
-| userID   | string | 用户ID，拉取单聊时传入，否则为“” |
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | 历史[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)数组json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## revokeMessage
-
-撤回某条消息。
-
-- Example:
-
-  ```js
-  this.$openSdk.revokeMessage(msg,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description                  |
-| ---- | ------ | ---------------------------- |
-| msg  | string | 要撤回的消息结构体json字符串 |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 撤回成功     |
-| err     | string | 撤回失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## markC2CMessageAsRead
-
-实时消息已读回执，在 C2C 单聊场景下，当接收方通过 markC2CMessageAsRead接口将来自某人的消息标记为已读时，消息的发送方将会收到“已读回执”，表示“xxx 已经读过我的消息了”。
-
-- Example:
-
-  ```js
-  this.$openSdk.markC2CMessageAsRead(uid,clientMsgIDList,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name            | Type   | Description             |
-| --------------- | ------ | ----------------------- |
-| uid             | string | 接收ID                  |
-| clientMsgIDList | string | 已读消息clientMsgID数组 |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 标记成功     |
-| err     | string | 标记失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## typingStatusUpdate
-
-更新正在输入状态。
-
-- Example:
-
-  ```js
-  this.$openSdk.typingStatusUpdate(uid,typing,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name   | Type   | Description    |
-| ------ | ------ | -------------- |
-| uid    | string | 接收者ID       |
-| typing | string | 自定义输入描述 |
-
-  
-
-## deleteMessageFromLocalStorage
-
-删除本地消息。
-
-- Example:
-
-  ```js
-  this.$openSdk.deleteMessageFromLocalStorage(msg,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description          |
-| ---- | ------ | -------------------- |
-| msg  | string | 消息结构体json字符串 |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 删除成功     |
-| err     | string | 删除失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## insertSingleMessageToLocalStorage
-
-插入一条消息到本地。
-
-- Example:
-
-  ```js
-  this.$openSdk.insertSingleMessageToLocalStorage(msg,recevier,sender,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name     | Type   | Description          |
-| -------- | ------ | -------------------- |
-| msg      | string | 消息结构体json字符串 |
-| recevier | string | 接收者ID             |
-| sender   | string | 发送者ID             |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 插入成功     |
-| err     | string | 插入失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## findMessages
-
-根据消息ID查找本地消息。
-
-- Example:
-
-  ```js
-  this.$openSdk.findMessages(clientMsgIDList,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name            | Type   | Description         |
-| --------------- | ------ | ------------------- |
-| clientMsgIDList | string | 消息clientMsgID数组 |
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)数组json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## addAdvancedMsgListener
-
-设置消息监听器。
-
-- Example:
-
-  ```js
-  this.$openSdk.addAdvancedMsgListener(data=>{
-      ...
-  })
-  ```
-
-- Monitor:
-
-
-| Event                | Parameters                                                   | Description          |
-| -------------------- | ------------------------------------------------------------ | -------------------- |
-| onRecvNewMessage     | msg:新[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 | 接收到新消息         |
-| onRecvMessageRevoked | msg:被撤回消息的clientMsgID                                  | 其他用户撤回信息回执 |
-| onRecvC2CReadReceipt | msg:[已读回执信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E5%B7%B2%E8%AF%BB%E5%9B%9E%E6%89%A7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 | 消息已读回执         |
-
-
-
-# 会话
-
-## getAllConversationList
-
-获取所有会话列表。
-
-- Example:
-
-  ```js
-  this.$openSdk.getAllConversationList(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [会话对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E4%BC%9A%E8%AF%9D%E5%AF%B9%E8%B1%A1)列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## getOneConversation
-
-根据用户ID或群聊ID和session类型获取单个会话。
-
-- Example:
-
-  ```js
-  this.$openSdk.getOneConversation(sourceID,session,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name     | Type   | Description     |
-| -------- | ------ | --------------- |
-| sourceID | string | 用户ID或群聊ID  |
-| session  | int    | 单聊为1 群聊为2 |
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [会话对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E4%BC%9A%E8%AF%9D%E5%AF%B9%E8%B1%A1)json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## getMultipleConversation
-
-根据会话ID获取多个会话。
-
-- Example:
-
-  ```js
-  this.$openSdk.getMultipleConversation(conversationIDs,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name            | Type     | Description |
-| --------------- | -------- | ----------- |
-| conversationIDs | string[] | 会话ID数组  |
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [会话对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E4%BC%9A%E8%AF%9D%E5%AF%B9%E8%B1%A1)列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## deleteConversation
-
-根据会话ID删除指定会话。
-
-- Example:
-
-  ```js
-  this.$openSdk.deleteConversation(conversationID,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name           | Type   | Description |
-| -------------- | ------ | ----------- |
-| conversationID | string | 会话ID      |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 删除成功     |
-| err     | string | 删除失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## setConversationDraft
-
-设置会话草稿信息。
-
-- Example:
-
-  ```js
-  this.$openSdk.setConversationDraft(conversationID,draft,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name           | Type   | Description |
-| -------------- | ------ | ----------- |
-| conversationID | string | 会话ID      |
-| draft          | string | 草稿信息    |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 设置成功     |
-| err     | string | 设置失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## pinConversation
-
-置顶会话。
-
-- Example:
-
-  ```js
-  this.$openSdk.pinConversation(conversationID,isPinned,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name           | Type   | Description |
-| -------------- | ------ | ----------- |
-| conversationID | string | 会话ID      |
-| isPinned       | bool   | 是否置顶    |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 置顶成功     |
-| err     | string | 置顶失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## markSingleMessageHasRead
-
-标记单聊会话消息为已读。
-
-- Example:
-
-  ```js
-  this.$openSdk.markSingleMessageHasRead(uid,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 用户ID      |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 标记成功     |
-| err     | string | 标记失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## markGroupMessageHasRead
-
-标记群聊会话消息已读。
-
-- Example:
-
-  ```js
-  this.$openSdk.markGroupMessageHasRead(groupID,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name    | Type   | Description |
-| ------- | ------ | ----------- |
-| groupID | string | 群组ID      |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 标记成功     |
-| err     | string | 标记失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## getTotalUnreadMsgCount
-
-获取消息总未读。
-
-- Example:
-
-  ```js
-  this.$openSdk.getTotalUnreadMsgCount(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 消息总未读数 |
-| err     | string | 获取失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## setConversationListener
-
-设置会话监听器。
-
-- Example:
-
-  ```js
-  this.$openSdk.setConversationListener(data=>{
-      ...
-  })
-  ```
-
-- Monitor:
-
-
-| Event                            | Description      |
-| -------------------------------- | ---------------- |
-| onConversationChanged            | 会话列表发生改变 |
-| onNewConversation                | 有新会话产生     |
-| onSyncServerFailed               | -                |
-| onSyncServerFinish               | -                |
-| onSyncServerStart                | -                |
-| onTotalUnreadMessageCountChanged | 消息未读总数改变 |
-
-  
-
-# 好友
-
-## getFriendList
-
-获取好友列表。
-
-- Example:
-
-  ```js
-  this.$openSdk.getFriendList(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [好友信息](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E5%A5%BD%E5%8F%8B%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)对象列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## getFriendsInfo
-
-获取好友信息。
-
-- Example:
-
-  ```js
-  this.$openSdk.getFriendsInfo(uidList,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name    | Type  | Description |
-| ------- | ----- | ----------- |
-| uidList | array | 好友ID数组  |
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [好友信息](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E5%A5%BD%E5%8F%8B%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)对象列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## setFriendInfo
-
-设置好友备注信息。
-
-- Example:
-
-  ```js
-  const info = {
-  	uid:"",
-    comment:""
-  }
-  this.$openSdk.setFriendInfo(info,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name    | Type   | Description |
-| ------- | ------ | ----------- |
-| uid     | string | 用户ID      |
-| comment | string | 备注        |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 设置成功     |
-| err     | string | 设置失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## checkFriend
-
-检查与用户间是否有好友关系。
-
-- Example:
-
-  ```js
-  this.$openSdk.checkFriend(uidList,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name    | Type  | Description |
-| ------- | ----- | ----------- |
-| uidList | Array | 用户ID数组  |
-
-- CallBack:
-
-
-| Name    | Type   | Description                |
-| ------- | ------ | -------------------------- |
-| msg     | string | 好友关系对象列表json字符串 |
-| err     | string | 获取失败描述               |
-| errCode | int    | 错误码                     |
-
-  
-
-## deleteFromFriendList
-
-从好友列表中删除用户。
-
-- Example:
-
-  ```js
-  this.$openSdk.deleteFromFriendList(uid,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 用户ID      |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 删除成功     |
-| err     | string | 删除失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## addFriend
-
-发起添加好友申请。
-
-- Example:
-
-  ```js
-  const reqParams = {
-  	uid:"",
-    reqMessage:""
-  }
-  this.$openSdk.addFriend(reqParams,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name       | Type   | Description  |
-| ---------- | ------ | ------------ |
-| uid        | string | 用户ID       |
-| reqMessage | string | 申请验证信息 |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 发送请求成功 |
-| err     | string | 发送失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## getFriendApplicationList
-
-获取好友请求列表。
-
-- Example:
-
-  ```js
-  this.$openSdk.getFriendApplicationList(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description            |
-| ------- | ------ | ---------------------- |
-| msg     | string | 好友请求对象json字符串 |
-| err     | string | 获取失败描述           |
-| errCode | int    | 错误码                 |
-
-  
-
-## acceptFriendApplication
-
-接受好友请求。
-
-- Example:
-
-  ```js
-  this.$openSdk.acceptFriendApplication(uid,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 申请者ID    |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 接受成功     |
-| err     | string | 接受失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## refuseFriendApplication
-
-拒绝好友请求。
-
-- Example:
-
-  ```js
-  this.$openSdk.refuseFriendApplication(uid,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 申请者ID    |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 拒绝成功     |
-| err     | string | 拒绝失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## addToBlackList
-
-将用户添加到黑名单。
-
-- Example:
-
-  ```js
-  this.$openSdk.addToBlackList(uid,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 用户ID      |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 添加成功     |
-| err     | string | 添加失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## deleteFromBlackList
-
-从黑名单移除用户。
-
-- Example:
-
-  ```js
-  this.$openSdk.deleteFromBlackList(uid,data=>{
-      ...
-  })
-  ```
-
-- Parameters:
-
-
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| uid  | string | 用户ID      |
-
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 移除成功     |
-| err     | string | 移除失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## getBlackList
-
-获取黑名单列表。
-
-- Example:
-
-  ```js
-  this.$openSdk.getBlackList(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | 被拉入黑名单的[用户信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## setFriendListener
-
-设置好友监听器。
-
-- Example:
-
-  ```js
-  this.$openSdk.setFriendListener(data=>{
-      ...
-  })
-  ```
-
-- Monitor:
-
-
-| Event                          | Description              |
-| ------------------------------ | ------------------------ |
-| onBlackListAdd                 | 添加用户到黑名单         |
-| onBlackListDeleted             | 从黑名单中移除了某个用户 |
-| onFriendApplicationListAccept  | 发出的好友请求被接受     |
-| onFriendApplicationListAdded   | 好友请求列表增加         |
-| onFriendApplicationListDeleted | 好友请求列表减少         |
-| onFriendApplicationListReject  | 发出的好友请求被拒绝     |
-| onFriendInfoChanged            | 好友信息更新             |
-| onFriendListAdded              | 好友列表增加             |
-| onFriendListDeleted            | 好友列表减少             |
-
-  
+|     Name     |   Type   | Description |
+| :----------: | :------: | :---------: |
+| operationID  |  string  |    UUID     |
+| removeUserID |  string  |   黑名单用户ID   |
+|   callback   | callback |    通用回调     |
 
 # 群组
 
-## createGroup
+## CreateGroup
 
-创建一个群聊，并指定群信息以及群成员。
+创建群聊
+
+* Example:
+
+```js
+im.createGroup(operationID,groupBaseInfo,memberList,data => {
+	...
+})
+// groupBaseInfo为
+{
+	"groupName": "test group", //群名称
+	"groupType": 0 //群类型
+	"notification": "" //群公告
+	"introduction":"" //群介绍
+	"faceURL":"" //群头像
+	"ex":"" //扩展字段
+}
+memberList为此结构的列表
+{
+	"userID": "user001", //用户ID
+	"roleLevel": 1 //设置角色 1:普通成员 3:管理员
+}
+```
+
+* Parameters:
+
+|     Name      |   Type   | Description |
+| :-----------: | :------: | :---------: |
+|  operationID  |  string  |    UUID     |
+| groupBaseInfo |  string  |     群信息     |
+|  memberList   | string[] |     群成员     |
+|   callback    | callback |    通用回调     |
+
+## JoinGroup
+
+申请加入某群
+
+* Example:
+
+```js
+im.joinGroup(operationID,groupID,reqMsg,data => {
+	...
+})
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|   reqMsg    |  string  |   请求验证信息    |
+|  callback   | callback |    通用回调     |
+
+## QuitGroup
+
+退出某群
+
+* Example:
+
+```js
+im.quitGroup(operationID,groupID,data => {
+	...
+})
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|  callback   | callback |    通用回调     |
+
+## GetJoinedGroupList
+
+获取已加入的群列表
+
+* Example:
+
+```js
+im.getJoinedGroupList(operationID,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调GroupInfo列表
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
+
+## GetGroupsInfo
+
+获取指定群信息
+
+* Example:
+
+```js
+im.getGroupsInfo(operationID,groupIDList,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调GroupInfo列表
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+| groupIDList | string[] |    群ID列表    |
+|  callback   | callback |    通用回调     |
+
+
+
+## SetGroupInfo
+
+设置群信息（群名称，群通知，群公告，群头像，以及扩展字段），管理员和群主可以操作
+
+* Example:
+
+```js
+im.setGroupInfo(operationID,groupID,groupInfo,data => {
+	...
+})
+//groupInfo为
+{
+	"groupName": "test group", //	群ID
+	"notification": "hello", //群公告
+	"introduction": "this is test group chat", //群介绍
+	"faceURL": "xx", //群头像
+	"ex": "" //群信息扩展字段
+}
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|  groupInfo  |  string  |    群基本信息    |
+|  callback   | callback |    通用回调     |
+
+## GetGroupMemberList
+
+获取群成员列表
+
+* Example:
+
+```js
+im.getGroupMemberList(operationID,groupID,filter,offset,count,data => {
+	...
+})
+// 回调:成功时，OnSuccess回调GroupMemberInfo列表
+```
+
+* Parameters:
+
+|    Name     |   Type   |      Description       |
+| :---------: | :------: | :--------------------: |
+| operationID |  string  |          UUID          |
+|   groupID   |  string  |          群聊ID          |
+|   filter    |  number  | 过滤标识 0:所有成员 1:群主 2:管理员 |
+|   offset    |  number  |          起始偏移          |
+|    count    |  number  |          成员个数          |
+|  callback   | callback |          通用回调          |
+
+## GetGroupMembersInfo
+
+获取指定群成员列表
+
+* Example:
+
+```js
+im.getGroupMembersInfo(operationID,groupID,userIDList,data => {
+	...
+})
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+| userIDList  | string[] |   用户ID列表    |
+|  callback   | callback |    通用回调     |
+
+## KickGroupMember
+
+把某人踢出群(可批量)
+
+* Example:
+
+```js
+im.kickGroupMember(operationID,groupID,reason,userIDList,data => {
+	...
+})
+//回调:成功时，OnSuccess回调此结构的列表
+{
+"userID":"user001",
+"result":1
+}
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|   reason    |  string  |    踢人原因     |
+| userIDList  | string[] |   用户ID列表    |
+|  callback   | callback |    通用回调     |
+
+## TransferGroupOwner
+
+转让群主，只有群主能操作
+
+* Example:
+
+```js
+im.transferGroupOwner(operationID,groupID,newOwnerUserID,data => {
+	...
+})
+```
+
+* Parameters:
+
+|      Name      |   Type   | Description |
+| :------------: | :------: | :---------: |
+|  operationID   |  string  |    UUID     |
+|    groupID     |  string  |    群聊ID     |
+| newOwnerUserID |  string  |   新群主用户ID   |
+|    callback    | callback |    通用回调     |
+
+## InviteUserToGroup
+
+邀请某些人进群，群里所有成员可以操作(可批量)
+
+* Example:
+
+```js
+im.inviteUserToGroup(operationID,groupID,reason,userIDList,data => {
+	...
+})
+//回调:成功时，OnSuccess回调此结构的列表
+{
+"userID":"user001",
+"result":1
+}
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|   reason    |  string  |    进群原因     |
+| userIDList  | string[] |   用户ID列表    |
+|  callback   | callback |    通用回调     |
+
+## GetRecvGroupApplicationList
+
+作为群主或者管理员，获取收到的群成员申请进群列表
+
+* Example:
+
+```js
+im.getRecvGroupApplicationList(operationID,data => {
+	...
+})
+//回调:成功时，OnSuccess回调GroupApplicationInfo的列表
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
+
+## AcceptGroupApplication
+
+管理员或者群主同意某人进入某群
+
+* Example:
+
+```js
+im.acceptGroupApplication(operationID,groupID,fromUserID,handleMsg,data => {
+	...
+})
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+| fromUserID  |  string  |    申请者ID    |
+|  handleMsg  |  string  |    处理的消息    |
+|  callback   | callback |    通用回调     |
+
+## RefuseGroupApplication
+
+管理员或者群主拒绝某人进入某群
+
+* Example:
+
+```js
+im.refuseGroupApplication(operationID,groupID,fromUserID,handleMsg,data => {
+	...
+})
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+| fromUserID  |  string  |    申请者ID    |
+|  handleMsg  |  string  |    处理的消息    |
+|  callback   | callback |    通用回调     |
+
+# 会话
+
+## GetAllConversationList
+
+获取会话列表
+
+* Example:
+
+```js
+im.getAllConversationList(operationID,data => {
+	...
+})
+//回调:成功时，OnSuccess回调ConversationInfo的列表
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
+
+## GetConversationListSplit
+
+分页获取会话列表
+
+* Example:
+
+```js
+im.getConversationListSplit(operationID,offset,count,data => {
+	...
+})
+//回调:成功时，OnSuccess回调ConversationInfo的列表
+```
+
+* Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   offset    |  number  |    起始偏移量    |
+|    count    |  number  |   拉取会话的数量   |
+|  callback   | callback |    通用回调     |
+
+## GetOneConversation
+
+获取一个会话，如果不存在会自动创建
+
+* Example:
+
+```js
+im.getOneConversation(operationID,sourceID,sessionType,data => {
+	...
+})
+//回调:成功时，OnSuccess回调ConversationInfo
+```
+
+* Parameters:
+
+|    Name     |   Type   |   Description   |
+| :---------: | :------: | :-------------: |
+| operationID |  string  |      UUID       |
+|  sourceID   |  string  | 单聊为用户ID，群聊为群ID  |
+| sessionType |  number  | 会话的类型，单聊为1，群聊为2 |
+|  callback   | callback |      通用回调       |
+
+## GetConversationIDBySessionType
+
+获取会话ID
+
+* Example:
+
+```js
+const val = im.getConversationIDBySessionType(operationID,sessionType)
+//返回值：会话ID
+```
+
+* Parameters:
+
+|    Name     |  Type  |   Description   |
+| :---------: | :----: | :-------------: |
+| operationID | string |      UUID       |
+| sessionType | number | 会话的类型，单聊为1，群聊为2 |
+
+## GetMultipleConversation
+
+获取多个会话列表
+
+* Example:
+
+```js
+im.getMultipleConversation(operationID,conversationIDList,data => {
+	...
+})
+//回调:成功时，OnSuccess回调ConversationInfo的列表
+```
+
+* Parameters:
+
+|        Name        |   Type   | Description |
+| :----------------: | :------: | :---------: |
+|    operationID     |  string  |    UUID     |
+| conversationIDList | string[] |   会话ID的列表   |
+|      callback      | callback |    通用回调     |
+
+## DeleteConversation
+
+删除一个会话
+
+* Example:
+
+```js
+im.deleteConversation(operationID,conversationID,data => {
+	...
+})
+```
+
+* Parameters:
+
+|      Name      |   Type   | Description |
+| :------------: | :------: | :---------: |
+|  operationID   |  string  |    UUID     |
+| conversationID |  string  |    会话ID     |
+|    callback    | callback |    通用回调     |
+
+## SetConversationDraft
+
+设置会话的草稿
+
+* Example:
+
+```js
+im.setConversationDraft(operationID,conversationID,draftText,data => {
+	...
+})
+```
+
+* Parameters:
+
+|      Name      |   Type   |   Description    |
+| :------------: | :------: | :--------------: |
+|  operationID   |  string  |       UUID       |
+| conversationID |  string  |       会话ID       |
+|   draftText    |  string  | 草稿文本，如果为""则为删除草稿 |
+|    callback    | callback |       通用回调       |
+
+## PinConversation
+
+置顶会话
+
+* Example:
+
+```js
+im.pinConversation(operationID,conversationID,isPinned,data => {
+	...
+})
+```
+
+* Parameters:
+
+|      Name      |   Type   |         Description         |
+| :------------: | :------: | :-------------------------: |
+|  operationID   |  string  |            UUID             |
+| conversationID |  string  |            会话ID             |
+|    isPinned    |   bool   | 为true时，代表置顶会话，为false时代表取消置顶 |
+|    callback    | callback |            通用回调             |
+
+## GetTotalUnreadMsgCount
+
+获取总的消息未读数
 
 - Example:
 
-  ```js
-  const gInfo = {
-  	groupName:"",
-    introduction:"",
-    notification:"",
-    faceUrl:""
-  }
-  const memberList = [
-    {
-      uid:"",
-      setRole:0
-    }
-  ]
-  this.$openSdk.createGroup(gInfo,memberList,data=>{
-      ...
-  })
-  ```
+```js
+im.getTotalUnreadMsgCount(operationID,data => {
+	...
+})
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
-| Name         | Type   | Description                  |
-| ------------ | ------ | ---------------------------- |
-| groupName    | string | 群名称                       |
-| introduction | string | 群介绍                       |
-| notification | string | 群公告                       |
-| faceUrl      | string | 群头像                       |
-| uid          | string | 用户ID                       |
-| setRole      | int    | 设置角色 0:普通成员 2:管理员 |
+# 消息
 
-- CallBack:
+## CreateTextMessage
 
+创建一条文字消息
 
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 群聊ID       |
-| err     | string | 创建失败描述 |
-| errCode | int    | 错误码       |
+* Example:
 
-  
+```js
+const meg = im.createTextMessage(operationID,textMsg)
+//返回文字信息结构体字符串
+```
 
-## getGroupsInfo
+* Parameters:
 
-批量获取群组信息。
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|   textMsg   | string |   消息文字内容    |
+
+## CreateTextAtMessage
+
+创建一条@文字消息
+
+* Example:
+
+```js
+const meg = im.createTextAtMessage(OperationID, textMsg, atUserIDList)
+//返回@文字信息结构体字符串
+```
+
+* Parameters:
+
+|     Name     |   Type   | Description |
+| :----------: | :------: | :---------: |
+| operationID  |  string  |    UUID     |
+|   textMsg    |  string  |   消息文字内容    |
+| atUserIDList | string[] |   @用户id数组   |
+
+## CreateImageMessage
+
+根据已上传文件的URL及文件信息创建一条图片消息,**注意:通过该API创建的消息需要通过sendMessageNotOss方法发送**
+
+* Example:
+
+```js
+const res = im.createImageMessage(OperationID,imagePath)
+//返回图片信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  imagePath  | string | 图片地址(相对路径)  |
+
+## CreateImageMessageFromFullPath
+
+* Example:
+
+```js
+const res = im.createImageMessageFromFullPath(OperationID,imagePath)
+//返回图片信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  imagePath  | string | 图片地址(绝对路径)  |
+
+## CreateImageMessageByURL
+
+根据自定义文件url创建一条图片消息，用户可将图片上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送
+
+* Example:
+
+```js
+const res = im.createImageMessageByURL(OperationID,sourceInfo,bigPicInfo,snapshotPicInfo)
+//返回图片信息结构体字符串
+const sourceInfo = {	//原图片信息
+  uuid:"", //图片唯一id
+  type:"png", //图片类型
+  size:12465, //图片大小
+  width:1080, //图片宽度
+  height:720, //图片高度
+  url:"http://www.ptbird.cn/usr/uploads/2019/07/2213642051.png" //图片地址
+}
+const bigPicInfo = sourceInfo					//大图信息
+const snapshotPicInfo = sourceInfo		//搜略图信息
+```
+
+* Parameters:
+
+|      Name       |  Type  | Description |
+| :-------------: | :----: | :---------: |
+|   operationID   | string |    UUID     |
+|   sourceInfo    | string |    原图片信息    |
+|   bigPicInfo    | string |    大图信息     |
+| snapshotPicInfo | string |    搜略图信息    |
+
+## CreateSoundMessage
+
+根据相对路径创建一条语音消息
+
+* Example:
+
+```js
+const res = im.createSoundMessage(OperationID, soundPath, duration)
+//返回语音信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description  |
+| :---------: | :----: | :----------: |
+| operationID | string |     UUID     |
+|  soundPath  | string | 音频文件地址(相对路径) |
+|  duration   | number |     语音时长     |
+
+## CreateSoundMessageFromFullPath
+
+根据绝对路径创建一条语音消息
+
+* Example:
+
+```js
+const res = createSoundMessageFromFullPath(OperationID, soundPath, duration)
+//返回语音信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description  |
+| :---------: | :----: | :----------: |
+| operationID | string |     UUID     |
+|  soundPath  | string | 音频文件地址(绝对路径) |
+|  duration   | number |     语音时长     |
+
+## CreateSoundMessageByURL
+
+根据自定义文件url创建一条语音消息，用户可将语音文件上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送
+
+* Example:
+
+```js
+const res = im.createSoundMessageByURL(OperationID,soundInfo)
+//返回语音信息结构体字符串
+const soundInfo = {
+  uuid:"xx", //唯一id
+  soundPath:"xx", //留空字符即可
+  sourceUrl:"http://xxx/mic.mp3", //音频地址
+  dataSize:1234, //音频文件大小
+  duration:42 //音频时长
+}
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  soundInfo  | string |    语音信息     |
+
+## CreateVideoMessage
+
+根据相对路径创建一条视频消息
+
+* Example:
+
+```js
+const res = im.createVideoMessage(OperationID, videoPath, videoType, duration, snapshotPath)
+//返回视频信息结构体字符串
+```
+
+* Parameters:
+
+|     Name     |  Type  |   Description   |
+| :----------: | :----: | :-------------: |
+| operationID  | string |      UUID       |
+|  videoPath   | string |  视频文件地址(相对路径)   |
+|  videoType   | string | 视频类型(MP4,AVI..) |
+|   duration   |  int   |      视频时长       |
+| snapshotPath | string |  视频快照地址(相对路径)   |
+
+## CreateVideoMessageFromFullPath
+
+根据绝对路径创建一条视频消息
+
+* Example:
+
+```js
+const res = im.createVideoMessageFromFullPath(OperationID, videoPath, videoType, duration, snapshotPath)
+//返回视频信息结构体字符串
+```
+
+* Parameters:
+
+|     Name     |  Type  |   Description   |
+| :----------: | :----: | :-------------: |
+| operationID  | string |      UUID       |
+|  videoPath   | string |  视频文件地址(绝对路径)   |
+|  videoType   | string | 视频类型(MP4,AVI..) |
+|   duration   |  int   |      视频时长       |
+| snapshotPath | string |  视频快照地址(绝对路径)   |
+
+## CreateVideoMessageByURL
+
+根据自定义文件url创建一条视频消息，用户可将视频文件上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送
+
+* Example:
+
+```js
+const res = im.createVideoMessageByURL(OperationID, videoInfo)
+//返回视频消息结构体字符串
+const videoInfo = {
+  videoPath: "xxx", //留为空字符串即可
+  duration: 12, //视频时长
+  videoType: "mp4", //视频类型(MP4,AVI..)
+  snapshotPath: "xxx", //留为空字符串即可
+  videoUUID:"xx", //视频文件唯一id
+  videoUrl:"xx", //视频文件地址
+  videoSize:1234, //视频文件大小
+  snapshotUUID:"stringspn", //视频快照唯一id
+  snapshotSize:123, //视频快照大小
+  snapshotUrl:"xxx", //视频快照地址
+  snapshotWidth:124, //视频快照宽度
+  snapshotHeight:125 //视频快照高度
+}
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  videoInfo  | string |    视频信息     |
+
+## CreateFileMessage
+
+根据相对路径创建一条文件消息
+
+* Example:
+
+```js
+const res = im.createFileMessage(OperationID,filePath, fileName)
+//返回文件信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  filePath   | string | 文件地址(相对路径)  |
+|  fileName   | string |    文件名称     |
+
+## CreateFileMessageFromFullPath
+
+根据绝对路径创建一条文件消息
+
+* Example:
+
+```js
+const res = im.createFileMessageFromFullPath(OperationID,filePath, fileName)
+//返回文件信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  filePath   | string | 文件地址(绝对路径)  |
+|  fileName   | string |    文件名称     |
+
+## CreateFileMessageByURL
+
+根据自定义文件url创建一条文件消息，用户可将文件上传到任意云空间后，将对应下载地址及文件信息传入即可，但通过该API创建的信息需要调用`sendMessageNotOss`进行发送
+
+* Example:
+
+```js
+const res = im.createFileMessageByURL(OperationID,fileInfo)
+//返回文件信息结构体字符串
+const fileInfo = {
+  filePath: "", //留为空字符串即可
+  fileName: "test", //文件名称
+  uuid:"xxsadsa", //文件唯一id
+  sourceUrl:"wwwm", //文件地址
+  fileSize:1234 //文件大小
+}
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  fileInfo   | string |    文件信息     |
+
+## CreateMergerMessage
+
+创建一条合并消息
+
+* Example:
+
+```js
+const res = im.createMergerMessage(operationID,msgListStr,title,summaryList)
+//返回合并信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |   Type   |               Description                |
+| :---------: | :------: | :--------------------------------------: |
+| operationID |  string  |                   UUID                   |
+| messageList | string[] | [消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串列表 |
+|    title    |  string  |                  合并消息标题                  |
+| summaryList | string[] |                合并消息的摘要列表                 |
+
+## CreateForwardMessage
+
+创建一条转发消息
+
+* Example:
+
+```js
+const res = im.createForwardMessage(operationID,message)
+//返回转发信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description  |
+| :---------: | :----: | :----------: |
+| operationID | string |     UUID     |
+|   message   | string | 消息结构体json字符串 |
+
+## CreateLocationMessage
+
+创建一条地理位置消息
+
+* Example:
+
+```js
+const res = im.createLocationMessage(OperationID,desc,latitude,longitude)
+//返回地理信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|    desc     | string |    描述信息     |
+|  latitude   | double |     纬度      |
+|  longitude  | double |     经度      |
+
+## CreateCustomMessage
+
+创建一条自定义消息
+
+* Example:
+
+```js
+const res = im.createCustomMessage(operationID,data,expand,desc)
+//返回自定义信息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|    data     | object |    自定义信息    |
+|   expand    | object |  自定义信息扩展字段  |
+|    desc     | string |   自定义消息描述   |
+
+## CreateQuoteMessage
+
+创建一条引用消息
+
+* Example:
+
+```js
+const res = im.createQuoteMessage(OperationID,text,message)
+//返回引用消息结构体字符串
+```
+
+* Parameters:
+
+|    Name     |  Type  |               Description                |
+| :---------: | :----: | :--------------------------------------: |
+| operationID | string |                   UUID                   |
+|    text     | string |                   消息内容                   |
+|   message   | string | 引用[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 |
+
+## CreateCardMessage
+
+创建一条名片位置消息
 
 - Example:
 
-  ```js
-  this.$openSdk.getGroupsInfo(GroupIDList,data=>{
-      ...
-  })
-  ```
+```js
+const res = im.createCardMessage(operationID,cardDesc)
+//返回名片消息结构体字符串
+```
 
 - Parameters:
 
+|    Name     |  Type  | Description |
+| :---------: | :----: | :---------: |
+| operationID | string |    UUID     |
+|  cardDesc   | string |    true     |
 
-| Name        | Type  | Description |
-| ----------- | ----- | ----------- |
-| GroupIDList | array | 群组ID列表  |
+## SendMessage
 
-- CallBack:
+发送消息
 
+* Example:
 
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [群信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%BE%A4%E7%BB%84%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
+```js
+im.sendMessage(operationID,message,recvID,groupID,offlinePushInfo)
+//使用监听
+//发送成功时为发送的消息对象json字符串
 
-  
+```
 
-## setGroupInfo
+* Parameters:
 
-设置、更新群聊信息。
+|      Name       |    Type     | Description  |
+| :-------------: | :---------: | :----------: |
+|   operationID   |   string    |     UUID     |
+|     message     |   string    | 消息结构体json字符串 |
+|     recvID      |   string    |  接收者ID（单聊）   |
+|     groupID     |   string    |  接收群组ID（群聊）  |
+| offlinePushInfo | OfflinePush |    离线推送配置    |
+
+## SendMessageNotOss
+
+发送消息不通过sdk内置OSS上传多媒体文件
 
 - Example:
 
-  ```js
-  const gInfo = {
-  	groupName:"",
-    introduction:"",
-    notification:"",
-    faceUrl:""
-  }
-  this.$openSdk.setGroupInfo(gInfo,data=>{
-      ...
-  })
-  ```
+```js
+im.sendMessageNotOss(operationID,message,recvID,groupID,offlinePushInfo)
+//使用监听
+//发送成功时为发送的消息对象json字符串
+
+```
 
 - Parameters:
 
+|      Name       |    Type     | Description  |
+| :-------------: | :---------: | :----------: |
+|   operationID   |   string    |     UUID     |
+|     message     |   string    | 消息结构体json字符串 |
+|     recvID      |   string    |  接收者ID（单聊）   |
+|     groupID     |   string    |  接收群组ID（群聊）  |
+| offlinePushInfo | OfflinePush |    离线推送配置    |
 
-| Name         | Type   | Description |
-| ------------ | ------ | ----------- |
-| groupName    | string | 群名称      |
-| introduction | string | 群介绍      |
-| notification | string | 群公告      |
-| faceUrl      | string | 群头像      |
+## GetHistoryMessageList
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 设置成功     |
-| err     | string | 设置失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## getJoinedGroupList
-
-获取已加入的群列表。
+获取历史记录
 
 - Example:
 
-  ```js
-  this.$openSdk.getJoinedGroupList(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description                                                  |
-| ------- | ------ | ------------------------------------------------------------ |
-| msg     | string | [群信息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E7%BE%A4%E7%BB%84%E4%BF%A1%E6%81%AF%E5%AF%B9%E8%B1%A1)列表json字符串 |
-| err     | string | 获取失败描述                                                 |
-| errCode | int    | 错误码                                                       |
-
-  
-
-## getGroupMemberList
-
-获取群成员列表。
-
-- Example:
-
-  ```js
-  this.$openSdk.getGroupMemberList(groupID,filter,next,data=>{
-      ...
-  })
-  ```
+```js
+im.getHistoryMessageList(operationID,getMessageOptions,data => {
+	...
+})
+getMessageOptions:参数为json转换后的string，结构体如下：
+{
+    "userID": "", //拉取单个用户之间的聊天消息
+    "groupID": "", //拉取群的聊天消息
+    "startClientMsgID": "",// 起始的消息clientMsgID，第一次拉取为""
+    "count": 20//拉取消息的数量
+}
+```
 
 - Parameters:
 
+|       Name        |   Type   | Description |
+| :---------------: | :------: | :---------: |
+|    operationID    |  string  |    UUID     |
+| getMessageOptions |  string  |   获取消息参数    |
+|     callback      | callback |    通用回调     |
 
-| Name    | Type   | Description                         |
-| ------- | ------ | ----------------------------------- |
-| groupID | string | 群聊ID                              |
-| filter  | int    | 过滤标识 0:所有成员 1:群主 2:管理员 |
-| next    | int    | 分页下标  从0开始                   |
+## RevokeMessage
 
-- CallBack:
-
-
-| Name    | Type   | Description                  |
-| ------- | ------ | ---------------------------- |
-| msg     | string | 群成员信息对象列表json字符串 |
-| err     | string | 获取失败描述                 |
-| errCode | int    | 错误码                       |
-
-  
-
-## getGroupMembersInfo
-
-批量获取群成员信息。
+撤回一条消息
 
 - Example:
 
-  ```js
-  this.$openSdk.getGroupMembersInfo(groupID,uidList,data=>{
-      ...
-  })
-  ```
+```js
+im.revokeMessage(operationID,message,data => {
+	...
+})
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   message   |  string  | MessageInfo |
+|  callback   | callback |    通用回调     |
 
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| groupID | string | 群聊ID       |
-| uidList | array  | 群成员ID数组 |
+## TypingStatusUpdate
 
-- CallBack:
-
-
-| Name    | Type   | Description                  |
-| ------- | ------ | ---------------------------- |
-| msg     | string | 群成员信息对象列表json字符串 |
-| err     | string | 获取失败描述                 |
-| errCode | int    | 错误码                       |
-
-  
-
-## joinGroup
-
-申请加入群聊。
+单聊正在输入消息
 
 - Example:
 
-  ```js
-  this.$openSdk.joinGroup(groupID,reqMsg,data=>{
-      ...
-  })
-  ```
+```js
+im.typingStatusUpdate(operationID,recvID,msgTip,data => {
+	...
+})
+```
 
 - Parameters:
 
+|    Name     |   Type   |       Description        |
+| :---------: | :------: | :----------------------: |
+| operationID |  string  |           UUID           |
+|   recvID    |  string  |          接收者ID           |
+|   msgTip    |  string  | 自定义的提示信息为json序列化后的string |
+|  callback   | callback |           通用回调           |
 
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| groupID | string | 群聊ID       |
-| reqMsg  | string | 请求验证信息 |
+## MarkC2CMessageAsRead
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 发送申请成功 |
-| err     | string | 申请失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## getGroupApplicationList
-
-获取加入群聊申请列表。
+标记单聊消息已读
 
 - Example:
 
-  ```js
-  this.$openSdk.getGroupApplicationList(data=>{
-      ...
-  })
-  ```
-
-- CallBack:
-
-
-| Name    | Type   | Description                |
-| ------- | ------ | -------------------------- |
-| msg     | string | 入群申请对象列表json字符串 |
-| err     | string | 获取失败描述               |
-| errCode | int    | 错误码                     |
-
-  
-
-## acceptGroupApplication
-
-同意入群请求。
-
-- Example:
-
-  ```js
-  this.$openSdk.acceptGroupApplication(application,reason,data=>{
-      ...
-  })
-  ```
+```js
+im.markC2CMessageAsRead(operationID,userID,msgIDList,data => {
+	...
+})
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   userID    |  string  |    用户ID     |
+|  msgIDList  | string[] |   消息ID的列表   |
+|  callback   | callback |    通用回调     |
 
-| Name        | Type   | Description            |
-| ----------- | ------ | ---------------------- |
-| application | string | 入群申请对象json字符串 |
-| reason      | string | 同意原因               |
+## DeleteMessageFromLocalStorage
 
-- CallBack:
-
-
-| Name    | Type   | Description      |
-| ------- | ------ | ---------------- |
-| msg     | string | 同意入群成功     |
-| err     | string | 同意入群失败描述 |
-| errCode | int    | 错误码           |
-
-  
-
-## refuseGroupApplication
-
-拒绝入群请求。
+本地删除一条消息，卸载APP后会重新获取到
 
 - Example:
 
-  ```js
-  this.$openSdk.refuseGroupApplication(application,reason,data=>{
-      ...
-  })
-  ```
+```js
+im.deleteMessageFromLocalStorage(operationID,message,data => {
+    ...
+})
+```
 
 - Parameters:
 
+|    Name     |    Type     | Description |
+| :---------: | :---------: | :---------: |
+| operationID |   string    |    UUID     |
+|   message   | MessageInfo |     消息      |
+|  callback   |  callback   |    通用回调     |
 
-| Name        | Type   | Description            |
-| ----------- | ------ | ---------------------- |
-| application | string | 入群申请对象json字符串 |
-| reason      | string | 拒绝入群原因           |
+## ClearC2CHistoryMessage
 
-- CallBack:
-
-
-| Name    | Type   | Description      |
-| ------- | ------ | ---------------- |
-| msg     | string | 拒绝入群成功     |
-| err     | string | 拒绝入群失败描述 |
-| errCode | int    | 错误码           |
-
-  
-
-## inviteUserToGroup
-
-邀请用户加入群组(可批量)。
+清空单聊的历史记录
 
 - Example:
 
-  ```js
-  this.$openSdk.inviteUserToGroup(groupID,reqMsg,uidList,data=>{
-      ...
-  })
-  ```
+```js
+im.clearC2CHistoryMessage(operationID,userID,data => {
+    ...
+})
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   userID    |  string  |    用户ID     |
+|  callback   | callback |    通用回调     |
 
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| groupID | string | 群聊ID       |
-| reqMsg  | string | 请求验证信息 |
-| uidList | array  | 邀请用户列表 |
+## ClearGroupHistoryMessage
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 邀请成功     |
-| err     | string | 邀请失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## kickGroupMember
-
-踢出群聊(可批量)。
+本地删除一条消息，卸载APP后会重新获取到
 
 - Example:
 
-  ```js
-  this.$openSdk.kickGroupMember(groupID,reqMsg,uidList,data=>{
-      ...
-  })
-  ```
+```js
+im.clearGroupHistoryMessage(operationID,groupID,data => {
+    ...
+})
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |     群ID     |
+|  callback   | callback |    通用回调     |
 
-| Name    | Type   | Description    |
-| ------- | ------ | -------------- |
-| groupID | string | 群聊ID         |
-| reqMsg  | string | 踢出原因       |
-| uidList | array  | 踢出用户ID数组 |
+## InsertSingleMessageToLocalStorage
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 踢出成功     |
-| err     | string | 踢出失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## quitGroup
-
-退出群聊。
+插入一条群聊消息到本地
 
 - Example:
 
-  ```js
-  this.$openSdk.quitGroup(groupID,data=>{
-      ...
-  })
-  ```
+```js
+im.insertSingleMessageToLocalStorage(operationID,message,recvID,sendID,data => {
+    ...
+})
+//回调:成功时，OnSuccess回调插入的MessageInfo
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description  |
+| :---------: | :------: | :----------: |
+| operationID |  string  |     UUID     |
+|   message   |  string  | 消息结构体json字符串 |
+|   recvID    |  string  |    接收者ID     |
+|   sendID    |  string  |    发送者ID     |
+|  callback   | callback |     通用回调     |
 
-| Name    | Type   | Description |
-| ------- | ------ | ----------- |
-| groupID | string | 群聊ID      |
+## InsertGroupMessageToLocalStorage
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 退出成功     |
-| err     | string | 退出失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## transferGroupOwner
-
-转让群主。
+插入一条群聊消息到本地
 
 - Example:
 
-  ```js
-  this.$openSdk.transferGroupOwner(groupID,uid,data=>{
-      ...
-  })
-  ```
+```js
+im.insertGroupMessageToLocalStorage(operationID,message,groupID,sendID,data => {
+    ...
+})
+//回调:成功时，OnSuccess回调插入的MessageInfo
+```
 
 - Parameters:
 
+|    Name     |   Type   | Description  |
+| :---------: | :------: | :----------: |
+| operationID |  string  |     UUID     |
+|   message   |  string  | 消息结构体json字符串 |
+|   groupID   |  string  |     群ID      |
+|   sendID    |  string  |    发送者ID     |
+|  callback   | callback |     通用回调     |
 
-| Name    | Type   | Description |
-| ------- | ------ | ----------- |
-| groupID | string | 群聊ID      |
-| uid     | string | 用户ID      |
+## SearchLocalMessages
 
-- CallBack:
-
-
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| msg     | string | 转让成功     |
-| err     | string | 转让失败描述 |
-| errCode | int    | 错误码       |
-
-  
-
-## setGroupListener
-
-设置群组监听器。
+搜索本地消息
 
 - Example:
 
-  ```js
-  this.$openSdk.setGroupListener(data=>{
-      ...
-  })
-  ```
+```js
+im.searchLocalMessages(operationID,searchParam,data => {
+    ...
+})
+//searchParam:参数为json转换后的string，结构体如下：
+{
+    "sourceID": "18090680773", //源ID,单聊为用户ID，群聊为群ID
+    "sessionType": 1,  //会话类型，单聊为1，群聊为2，如果为0，则代表搜索全部
+    "keywordList": [
+        "78"    //搜索关键词列表，目前仅支持一个关键词搜索
+    ], 
+    "keywordListMatchType": 0,  //关键词匹配模式，1代表与，2代表或，暂时未用
+    "senderUserIDList": [],  //指定消息发送的uid列表，暂时未用
+    "messageTypeList": [],  //消息类型列表，暂时未用
+    "searchTimePosition": 0,  //搜索的起始时间点。默认为0即代表从现在开始搜索。UTC 时间戳，单位：秒
+    "searchTimePeriod": 864000,  //从起始时间点开始的过去时间范围，单位秒。默认为0即代表不限制时间范围，传24x60x60代表过去一天。
+    "pageIndex": 0,  //分页使用的偏移，暂时未用
+    "count": 0 //每页数量，暂时未用
+}
+
+//回调:成功时，OnSuccess回调结构：
+{
+    "totalCount": 9, //获取到的总的消息数量
+    "searchResultItems": [
+        {
+            "conversationID": "single_18090680773",//会话ID 
+            "messageCount": 9, //这个会话下的消息数量
+            "messageList": [ ] //MessageInfo的列表
+        }
+    ]
+}
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+| searchParam |  string  |    搜索参数     |
+|  callback   | callback |    通用回调     |
+
+# 监听
+
+## SetUserListener
+
+设置用户信息监听
+
+- Example:
+
+```js
+im.setUserListener()
+```
 
 - Monitor:
 
+|       Event       | Description |
+| :---------------: | :---------: |
+| onSelfInfoUpdated |   修改个人信息    |
 
-| Event                    | Description          |
-| ------------------------ | -------------------- |
-| onApplicationProcessed   | 入群申请被处理       |
-| onGroupCreated           | 群组创建             |
-| onGroupInfoChanged       | 群组信息改变         |
-| onMemberEnter            | 有新成员加入群组     |
-| onMemberInvited          | 邀请新成员加入了群组 |
-| onMemberKicked           | 有群成员被踢出       |
-| onMemberLeave            | 有群成员退群         |
-| onReceiveJoinApplication | 收到入群申请         |
-
-
-
-
-
-# 数据对象结构
-
-## 用户信息对象
-
-- interface
-
-  ```typescript
-  export interface UserInfo {
-      uid:    string;
-      name:   string;
-      icon:   string;
-      gender: number;
-      mobile: string;
-      birth:  string;
-      email:  string;
-      ex:     string;
-  }
-  ```
-
-  
-
-| Name   | Type   | Description                    |
-| ------ | ------ | ------------------------------ |
-| uid    | string | 用户id                         |
-| name   | string | 用户昵称                       |
-| icon   | string | 用户头像                       |
-| gender | int    | 用户性别 0:                    |
-| mobile | string | 用户手机号                     |
-| birth  | string | 用户生日                       |
-| email  | string | 用户邮箱地址                   |
-| ex     | string | 用户信息扩展字段对象Json字符串 |
-
-
-
-## 消息对象
-
-- interface
-
-  ```typescript
-  export interface Message {
-      clientMsgID:    string;
-      serverMsgID:    string;
-      createTime:     number;
-      sendTime:       number;
-      sessionType:    number;
-      sendID:         string;
-      recvID:         string;
-      msgFrom:        number;
-      contentType:    number;
-      platformID:     number;
-      forceList:      string|null;
-      senderNickName: string;
-      senderFaceUrl:  string;
-      groupID:        string;
-      content:        string;
-      seq:            number;
-      isRead:         boolean;
-      status:         number;
-      remark:         string;
-      pictureElem:    PictureElem;
-      soundElem:      SoundElem;
-      videoElem:      VideoElem;
-      fileElem:       FileElem;
-      mergeElem:      MergeElem;
-      atElem:         AtElem;
-      locationElem:   LocationElem;
-      customElem:     CustomElem;
-      quoteElem:      QuoteElem;
-  }
-  
-  export interface AtElem {
-      text:       string;
-      atUserList: array|null;
-      isAtSelf:   boolean;
-  }
-  
-  export interface CustomElem {
-      data:        string;
-      description: string;
-      extension:   string;
-  }
-  
-  export interface FileElem {
-      filePath:  string;
-      uuid:      string;
-      sourceUrl: string;
-      fileName:  string;
-      fileSize:  number;
-  }
-  
-  export interface LocationElem {
-      description: string;
-      longitude:   number;
-      latitude:    number;
-  }
-  
-  export interface MergeElem {
-      title:        string;
-      abstractList: any[]|null;
-      multiMessage: any[]|null;
-  }
-  
-  export interface PictureElem {
-      sourcePath:      string;
-      sourcePicture:   Picture;
-      bigPicture:      Picture;
-      snapshotPicture: Picture;
-  }
-  
-  export interface Picture {
-      uuid:   string;
-      type:   string;
-      size:   number;
-      width:  number;
-      height: number;
-      url:    string;
-  }
-  
-  export interface QuoteElem {
-      quoteMessage: any[];
-  }
-  
-  export interface SoundElem {
-      uuid:      string;
-      soundPath: string;
-      sourceUrl: string;
-      dataSize:  number;
-      duration:  number;
-  }
-  
-  export interface VideoElem {
-      videoPath:      string;
-      videoUUID:      string;
-      videoUrl:       string;
-      videoType:      string;
-      videoSize:      number;
-      duration:       number;
-      snapshotPath:   string;
-      snapshotUUID:   string;
-      snapshotSize:   number;
-      snapshotUrl:    string;
-      snapshotWidth:  number;
-      snapshotHeight: number;
-  }
-  
-  ```
-
-
-
-### Message
-
-| Name           | Type         | Description |
-| -------------- | ------------ | ----------- |
-| clientMsgID    | string       | 消息唯一ID |
-| serverMsgID    | string       | 消息服务器ID，暂时不使用 |
-| createTime     | number       | 消息创建时间 |
-| sendTime       | number       | 消息发送时间 |
-| sessionType    | number       | 会话类型  1:单聊 2:群聊 |
-| sendID         | string       | 发送者ID |
-| recvID         | string       | 接收者ID |
-| msgFrom        | number       | 标识消息是用户级别还是系统级别  100:用户 200:系统 |
-| contentType    | number       | 消息类型：<br/>101:文本消息<br/>102:图片消息<br/>103:语音消息<br/>104:视频消息<br/>105:文件消息<br/>106:@消息<br/>107:合并消息<br/>108:转发消息<br/>109:位置消息<br/>110:自定义消息<br/>111:撤回消息回执<br/>112:C2C已读回执<br/>113:正在输入状态 |
-| platformID     | number       | 平台类型 1:ios 2:android 3:windows 4:osx 5:web 6:mini 7:linux |
-| forceList      | array&#124;null  | 强制推送列表(被@的用户) |
-| senderNickName | string       | 发送者昵称 |
-| senderFaceUrl  | string       | 发送者头像 |
-| groupID        | string       | 群聊ID |
-| content        | string       | 消息内容 |
-| seq            | number       | 消息唯一序列号 |
-| isRead         | bool         | 是否已读 |
-| status         | number       | 消息状态 1:发送中 2:发送成功 3:发送失败 4:已删除 5:已撤回 |
-| remark         | string       | 消息备注 |
-| pictureElem    | PictureElem  | 图片信息 |
-| soundElem      | SoundElem    | 语音信息 |
-| videoElem      | VideoElem    | 视频信息 |
-| fileElem       | FileElem     | 文件信息 |
-| mergeElem      | MergeElem    | 合并信息 |
-| atElem         | AtElem       | @信息 |
-| locationElem   | LocationElem | 位置信息 |
-| customElem     | CustomElem   | 自定义信息 |
-| quoteElem      | QuoteElem    | 引用消息 |
-
-
-
-### PictureElem
-
-| Name            | Type    | Description  |
-| --------------- | ------- | ------------ |
-| sourcePath      | string  | 本地资源地址 |
-| sourcePicture   | Picture | 本地图片详情 |
-| bigPicture      | Picture | 大图详情     |
-| snapshotPicture | Picture | 缩略图详情   |
-
-
-
-### Picture
-
-| Name   | Type   | Description |
-| ------ | ------ | ----------- |
-| uuid   | string | 唯一ID      |
-| type   | string | 图片类型    |
-| size   | number | 图片大小    |
-| width  | number | 图片宽度    |
-| height | number | 图片高度    |
-| url    | String | 图片oss地址 |
-
-
-
-### SoundElem
-
-| Name      | Type   | Description  |
-| --------- | ------ | ------------ |
-| uuid      | string | 唯一ID       |
-| soundPath | string | 本地资源地址 |
-| sourceUrl | string | oss地址      |
-| dataSize  | number | 音频大小     |
-| duration  | number | 音频时长     |
-
-
-
-### VideoElem
-
-| Name           | Type   | Description      |
-| -------------- | ------ | ---------------- |
-| videoPath      | string | 视频本地资源地址 |
-| videoUUID      | string | 视频唯一ID       |
-| videoUrl       | string | 视频oss地址      |
-| videoType      | string | 视频类型         |
-| videoSize      | number | 视频大小         |
-| duration       | number | 视频时长         |
-| snapshotPath   | string | 视频快照本地地址 |
-| snapshotUUID   | string | 视频快照唯一ID   |
-| snapshotSize   | number | 视频快照大小     |
-| snapshotUrl    | string | 视频快照oss地址  |
-| snapshotWidth  | number | 视频快照宽度     |
-| snapshotHeight | number | 视频快照高度     |
-
-
-
-### FileElem
-
-| Name      | Type   | Description      |
-| --------- | ------ | ---------------- |
-| filePath  | string | 文件本地资源地址 |
-| uuid      | string | 唯一ID           |
-| sourceUrl | string | oss地址          |
-| fileName  | string | 文件名称         |
-| fileSize  | number | 文件大小         |
-
-
-
-### MergeElem
-
-| Name         | Type        | Description |
-| ------------ | ----------- | ----------- |
-| title        | string      | 合并消息标题 |
-| abstractList | array&#124;null | 摘要列表 |
-| multiMessage | array&#124;null | 合并消息列表 |
-
-
-
-### AtElem
-
-| Name       | Type        | Description |
-| ---------- | ----------- | ----------- |
-| text       | string      | 文本消息 |
-| atUserList | array&#124;null | @用户ID列表 |
-| isAtSelf   | bool        | 是否@自己 |
-
-
-
-### LocationElem
-
-| Name        | Type   | Description |
-| ----------- | ------ | ----------- |
-| description | String | 描述        |
-| longitude   | number | 经度        |
-| latitude    | number | 纬度        |
-
-
-
-### CustomElem
-
-| Name        | Type   | Description              |
-| ----------- | ------ | ------------------------ |
-| data        | string | 自定义消息json字符串     |
-| extension   | string | 自定义消息扩展json字符串 |
-| description | string | 描述                     |
-
-
-
-### QuoteElem
-
-| Name         | Type        | Description |
-| ------------ | ----------- | ----------- |
-| quoteMessage | string&#124;null | 引用消息 |
-
-
-
-## 会话对象
-
-- interface
-
-  ```typescript
-  export interface Conversation {
-      conversationID:    string;
-      conversationType:  number;
-      userID:            string;
-      groupID:           string;
-      showName:          string;
-      faceUrl:           string;
-      recvMsgOpt:        number;
-      unreadCount:       number;
-      latestMsg:         string;
-      latestMsgSendTime: number;
-      draftText:         string;
-      draftTimestamp:    number;
-      isPinned:          number;
-  }
-  
-  ```
-
-
-
-| Name              | Type   | Description                                                  |
-| ----------------- | ------ | ------------------------------------------------------------ |
-| conversationID    | string | 会话ID                                                       |
-| conversationType  | number | 会话类型  1:单聊 2:群聊                                      |
-| userID            | string | 会话对象用户ID                                               |
-| groupID           | string | 会话群聊ID                                                   |
-| showName          | string | 会话对象(用户或群聊)名称                                     |
-| faceUrl           | string | 用户头像或群聊头像                                           |
-| recvMsgOpt        | number | 接收消息选项：<br>1:在线正常接收消息，离线时进行推送<br>2:不会接收到消息<br>3:在线正常接收消息，离线不会有推送 |
-| unreadCount       | number | 未读消息数量                                                 |
-| latestMsg         | string | 最后一条消息 [消息对象]()json字符串                          |
-| latestMsgSendTime | number | 最后一条消息发送时间(ns)                                     |
-| draftText         | string | 会话草稿                                                     |
-| draftTimestamp    | number | 会话草稿设置时间                                             |
-| isPinned          | number | 是否置顶                                                     |
-
-
-
-
-
-## 好友信息对象
-
-- interface
-
-  ```typescript
-  export interface FriendInfo {
-      uid:           string;
-      name:          string;
-      icon:          string;
-      gender:        number;
-      mobile:        string;
-      birth:         string;
-      email:         string;
-      ex:            string;
-      comment:       string;
-      isInBlackList: number;
-  }
-  ```
-
-  
-
-| Name          | Type   | Description      |
-| ------------- | ------ | ---------------- |
-| uid           | string | 用户ID           |
-| name          | string | 用户名称         |
-| icon          | string | 用户头像         |
-| gender        | number | 用户性别         |
-| mobile        | string | 用户手机号       |
-| birth         | string | 用户出生日期     |
-| email         | string | 用户邮箱号       |
-| ex            | string | 用户信息扩展字段 |
-| comment       | string | 好友备注         |
-| isInBlackList | number | 是否在黑名单内   |
-
-
-
-## 群组信息对象
-
-- interface
-
-  ```typescript
-  export interface GroupInfo {
-      groupID:      string;
-      groupName:    string;
-      notification: string;
-      introduction: string;
-      faceUrl:      string;
-      ex:           string;
-      ownerId:      string;
-      createTime:   number;
-      memberCount:  number;
-  }
-  ```
-
-  
-
-| Name         | Type   | Description    |
-| ------------ | ------ | -------------- |
-| groupID      | string | 群组ID         |
-| groupName    | string | 群组名称       |
-| notification | string | 群公告         |
-| introduction | string | 群介绍         |
-| faceUrl      | string | 群头像         |
-| ex           | string | 群信息扩展字段 |
-| ownerId      | string | 群主ID         |
-| createTime   | number | 群组创建时间   |
-| memberCount  | number | 群成员总数     |
-
-
-
-## 已读回执信息对象
-
-- interface
-
-  ```typescript
-  export interface Welcome {
-      contentType: number;
-      msgFrom:     number;
-      msgIDList:   string[];
-      readTime:    number;
-      sessionType: number;
-  }
-  ```
-
-
-
-| Name        | Type     | Description                                                  |
-| ----------- | -------- | ------------------------------------------------------------ |
-| contentType | number   | 消息类型：<br>101:文本消息<br>102:图片消息<br>103:语音消息<br>104:视频消息<br>105:文件消息<br>106:@消息<br>107:合并消息<br/>108:转发消息<br/>109:位置消息<br/>110:自定义消息<br/>111:撤回消息回执<br/>112:C2C已读回执<br/>113:正在输入状态 |
-| msgFrom     | number   | 标识消息是用户级别还是系统级别  100:用户 200:系统            |
-| msgIDList   | string[] | 已读消息clientMsgID数组                                      |
-| readTime    | number   | 已读时间                                                     |
-| sessionType | number   | 会话类型  1:单聊 2:群聊                                      |
+## SetFriendListener
+
+好友信息以及好友列表发生改变时
+
+- Example:
+
+```js
+im.setFriendListener()
+```
+
+- Monitor:
+
+|            Event            | Description  |
+| :-------------------------: | :----------: |
+|        OnBlackAdded         |   添加用户到黑名单   |
+|       OnBlackDeleted        | 从黑名单中移除了某个用户 |
+| OnFriendApplicationAccepted |   好友请求被接受    |
+| OnFriendApplicationRejected |   好友请求被拒绝    |
+|  OnFriendApplicationAdded   |   好友请求列表增加   |
+| OnFriendApplicationDeleted  |   好友请求列表减少   |
+|     OnFriendInfoChanged     |    好友信息更新    |
+|        OnFriendAdded        |    好友列表增加    |
+|       OnFriendDeleted       |    好友列表减少    |
+
+## SetGroupListener
+
+群组信息改变或群成员状态改变时回调
+
+- Example:
+
+```js
+im.setGroupListener()
+```
+
+- Monitor:
+
+| Event                      | Description |
+| -------------------------- | ----------- |
+| OnGroupApplicationAccepted | 入群申请被同意     |
+| OnGroupApplicationRejected | 入群申请被拒绝     |
+| OnGroupApplicationAdded    | 入群申请有新增     |
+| OnGroupApplicationDeleted  | 入群申请被删除     |
+| OnGroupInfoChanged         | 群组信息改变      |
+| OnGroupMemberInfoChanged   | 群成员信息改变     |
+| OnGroupMemberAdded         | 有新成员加入群组    |
+| OnGroupMemberDeleted       | 有群成员退出群组    |
+| OnJoinedGroupAdded         | 加入的群增加      |
+| OnJoinedGroupDeleted       | 加入的群减少      |
+
+## SetAdvancedMsgListener
+
+收到新消息时会触发对应监听，开发者可在回调中进行处理
+
+- Example:
+
+```js
+im.setAdvancedMsgListener()
+```
+
+- Monitor:
+
+  | Event                | Description |
+  | -------------------- | ----------- |
+  | OnRecvNewMessage     | 接收到新消息      |
+  | OnRecvMessageRevoked | 其他用户撤回信息回执  |
+  | OnRecvC2CReadReceipt | 消息已读回执      |
+
+## SetConversationListener
+
+会话列表变化时触发监听
+
+- Example:
+
+```js
+im.setConversationListener()
+```
+
+- Monitor:
+
+  | Event                            | Description |
+  | -------------------------------- | ----------- |
+  | OnConversationChanged            | 会话列表发生改变    |
+  | OnNewConversation                | 有新会话产生      |
+  | OnSyncServerFailed               | -           |
+  | OnSyncServerFinish               | -           |
+  | OnSyncServerStart                | -           |
+  | OnTotalUnreadMessageCountChanged | 消息未读总数改变    |
 

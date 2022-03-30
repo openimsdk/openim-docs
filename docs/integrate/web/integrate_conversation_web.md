@@ -66,7 +66,7 @@ openIM.getTotalUnreadMsgCount().then(res=>{
 * 设置单聊会话已读
 *
 * @param userID 会话对象用户ID
-* @param msgIDList 目的为会话未读数置0时传空数组
+* @param msgIDList 需要标记为已读的消息clientMsgID 传空数组时会将对应会话未读数置0
 */
 const options:MarkC2CParams = {
 	userID:"xxx",
@@ -125,6 +125,8 @@ openIM.pinConversation(data).then(res=>{
 # 设置会话免打扰状态
 
 > 会话免打扰分为三种状态：正常接收和推送消息；仅接收，但不推送消息；不接收，也不推送消息。
+>
+> 设置为1时，不再接收改会话的消息。设置为2时，正常接收该会话的消息，但不计入总未读数（依然会计入该会话的未读数，但可根据会话中的recvOpt状态自行处理）。
 
 ```js
 /**
