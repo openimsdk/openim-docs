@@ -12,6 +12,7 @@
 
 ```
 git clone https://github.com/OpenIMSDK/Open-IM-Server.git --recursive
+(注：如果项目中cmd/Open-IM-SDK-Core这个子模块无法正常拉取，文件夹为空，可前往https://github.com/OpenIMSDK/Open-IM-SDK-Core，获取最新tag，放置于cmd/下，编译即可)
 ```
 
 #### 2.修改config.yaml，配置五大组件的连接参数
