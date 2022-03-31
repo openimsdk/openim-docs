@@ -984,20 +984,62 @@ APP管理员更新用户信息
         "notificationFaceURL": "http://www.head1.com", 
         "notificationType": 1, 
         "text": "大家好，今天是...", 
+        "externalUrl":"",
         "mixType": 0, 
-        "image": {
-            "sourceURL": "", 
-            "snapshotURL": ""
+        "pictureElem": {
+            "sourcePath": "", 
+            "sourcePicture": {
+                "uuid": "", 
+                "type": "", 
+                "size": 0, 
+                "width": 0, 
+                "height": 0, 
+                "url": ""
+            }, 
+            "bigPicture": {
+                "uuid": "", 
+                "type": "", 
+                "size": 0, 
+                "width": 0, 
+                "height": 0, 
+                "url": ""
+            }, 
+            "snapshotPicture": {
+                "uuid": "", 
+                "type": "", 
+                "size": 0, 
+                "width": 0, 
+                "height": 0, 
+                "url": ""
+            }
         }, 
-        "video": {
-            "sourceURL": "", 
-            "snapshotURL": "", 
+        "soundElem": {
+            "uuid": "", 
+            "soundPath": "", 
+            "sourceUrl": "", 
+            "dataSize": 0, 
             "duration": 0
         }, 
-        "file": {
-            "sourceURL": "", 
+        "videoElem": {
+            "videoPath": "", 
+            "videoUUID": "", 
+            "videoUrl": "", 
+            "videoType": "", 
+            "videoSize": 0, 
+            "duration": 0, 
+            "snapshotPath": "", 
+            "snapshotUUID": "", 
+            "snapshotSize": 0, 
+            "snapshotUrl": "", 
+            "snapshotWidth": 0, 
+            "snapshotHeight": 0
+        }, 
+        "fileElem": {
+            "filePath": "", 
+            "uuid": "", 
+            "sourceUrl": "", 
             "fileName": "", 
-            "fileSize": 1024
+            "fileSize": 0
         }, 
         "ex": ""
     }, 
@@ -1022,22 +1064,29 @@ APP管理员更新用户信息
 | recvID              | string | 是     | 接收者userID                                                 |
 | senderPlatformID    | int    | 否    | 发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux |
 | senderFaceURL       | string | 否    | 发送者头像，用于客户端通知会话产生                           |
-| senderNickname      | string | 否    | 发送者昵称，用于客户端通知会话产生 
+| senderNickname      | string | 否    | 发送者昵称，用于客户端通知会话产生 |
 |    content          |  object|  是  | 消息的具体内容，内部是json 对象|
 | notificationName    | string | 是     | 通知标题                                                     |
 | notificationFaceURL | string | 是     | 通知头像                                                     |
 | notificationType    | int    | 是     | 通知类型，如：1代表入职通知，2代表离职通知                   |
-| text                | string | 是     | 通知正文                                                     |
-| url                 | string | 否    | 通知点击后需要跳转到的地址链接(不填则无需跳转)               |
+| text                | string | 是     | 通知正文e                                                    |
+| externalUrl       | string | 否    | 通知点击后需要跳转到的地址链接(不填则无需跳转)               |
 | mixType             | int    | 是     | 通知混合类型<br>0：纯文字通知<br>1：文字+图片通知<br>2：文字+视频通知<br>3：文字+文件通知 |
-| image               | object | 否    | 图片信息对象                                                 |
-| video               | object | 否    | 视频信息对象                                                 |
-| file                | object | 否    | 文件信息对象                                                 |
-| sourceURL           | string | 否    | 文件资源url                                                  |
-| snapshotURL         | string | 否    | 图片缩略图/视频快照                                          |
-| duration            | string | 否    | 视频时长                                                     |
-| fileName            | string | 否    | 文件名称                                                     |
-| fileSize            | int    | 否    | 文件大小                                                     |
+| pictureElem | object | 否 | 图片元素对象 |
+| sourcePicture | object | 否 | 原图 |
+| bigPicture | object | 否 | 大图 |
+| snapshotPicture | object | 否 | 缩略图 |
+| soundElem | object | 否 | 声音元素对象 |
+| videoElem | object | 否 | 视频元素对象 |
+| fileElem | object | 否 | 文件元素对象 |
+| uuid | string | 否 | 对象唯一ID用于缓存使用 |
+| type/videoType/                               | string | 否   | 图片类型/视频类型                                            |
+| size/dataSize/videoSize/snapshotSize/fileSize | int    | 否   | 多媒体文件大小，单位字节                                     |
+| width/snapshotWidth                           | int    | 否   | 图片/视频缩略图宽度                                          |
+| height/snapshotHeight                         | int    | 否   | 图片/视频缩略图高度                                          |
+| url/sourceUrl/videoUrl                        | string | 否   | 图片/文件/视频的URL                                          |
+| sourcePath/soundPath/videoPath/filePath       | string | 否   | 文件路径，可不填写                                           |
+| fileName                                      | string | 否   | 文件名字                                                     |
 | ex                  | string | 否    | 扩展字段                                                     |
 | contentType         | int    | 是     | 消息类型固定为1400                                           |
 | sessionType         | int    | 是     | 通知会话类型固定为4                                          |
