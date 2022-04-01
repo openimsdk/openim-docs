@@ -1071,7 +1071,7 @@ APP管理员更新用户信息
 | notificationType    | int    | 是     | 通知类型，如：1代表入职通知，2代表离职通知                   |
 | text                | string | 是     | 通知正文e                                                    |
 | externalUrl       | string | 否    | 通知点击后需要跳转到的地址链接(不填则无需跳转)               |
-| mixType             | int    | 是     | 通知混合类型<br>0：纯文字通知<br>1：文字+图片通知<br>2：文字+视频通知<br>3：文字+文件通知 |
+| mixType             | int    | 是   | 通知混合类型<br/>0：纯文字通知<br/>1：文字+图片通知<br/>2：文字+视频通知<br/>3：文字+文件通知<br/>4:   文字+语音通知<br/>5:   文字+语音+图片通知<br/> |
 | pictureElem | object | 否 | 图片元素对象 |
 | sourcePicture | object | 否 | 原图 |
 | bigPicture | object | 否 | 大图 |
