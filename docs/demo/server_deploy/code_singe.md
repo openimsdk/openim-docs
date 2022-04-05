@@ -87,7 +87,7 @@ kafka:
 
 每种RPC数量默认为1，如果需要调整RPC数量，修改config.yaml中的配置项rpcport对应的port信息，port个数代表对应rpc服务的进程数。比如openImUserPort: [ 10100,10101 ]表示本机会启动两个open_im_user，port分别为10100,10101
 
-#### 3.构建
+#### 4.构建
 
 ```
 cd Open-IM-server/script
@@ -95,13 +95,13 @@ chmod +x *.sh
 ./build_all_service.sh
 ```
 
-#### 4.启动
+#### 5.启动
 
 ```
 ./start_all.sh
 ```
 
-#### 5.检查
+#### 6.检查
 
 ```
 ./check_all.sh
