@@ -8,7 +8,7 @@ OpenIM.iMManager.initSDK(
     apiAddr: "", // SDK的API接口地址。如：http://xxx:10000
     wsAddr: "",  // SDK的web socket地址。如： ws://xxx:17778
     dataDir: "", // 数据存储路径。如：var apath =(await getApplicationDocumentsDirectory()).path
-    objectStorage: 'cos', // 图片服务器默认'cos'
+    objectStorage: 'cos', // 图片服务器默认'cos'， minio填写'minio'
     logLevel: 6, // 日志等级，默认值6
     listener: OnConnectListener(
       onConnectSuccess: () {
