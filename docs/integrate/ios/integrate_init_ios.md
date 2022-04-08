@@ -36,6 +36,16 @@
 
 ```
 
+# 切换到前台
+
+```objc
+    [OIMManager.manager wakeUpWithOnSuccess:^(NSString * _Nullable data) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
+```
+
 # SDK监听回调
 ```objc
 /// IMSDK 主核心回调

@@ -35,6 +35,16 @@
     NSLog(@"初始化成功与否：%d", initSuccess);
 ```
 
+##### 切换到前台
+
+```objc
+    [OIMManager.manager wakeUpWithOnSuccess:^(NSString * _Nullable data) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
+```
+
 ##### 2，设置监听器：两种方式，protocol方式如下，addListner以后，移除之前会一直收到回掉；block方式，参照OIMCallbacker+Closure.h。
 
 ```
@@ -526,6 +536,18 @@
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
 ```
+
+- ##### （设置私聊会话，可做阅后即焚）
+
+```objc
+        [OIMManager.manager setOneConversationPrivateChat:@""
+                                            isPrivate:YES
+                                            onSuccess:^(NSString * _Nullable data) {
+        
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 
 - ##### addFriend（发起好友申请）
 
