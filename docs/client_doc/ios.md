@@ -7,9 +7,9 @@
  * @param platform 平台
  * @param apiAddr    SDK的api地。如http:xxx:10000
  * @param wsAddr     SDK的web socket地址。如： ws:xxx:17778
- * @param dataDir    数据存储路径
+ * @param dataDir    数据存储路径，默认documents下
  * @param logLevel   默认6
- * @param oss        默认cos
+ * @param oss        默认cos,可用minio
  */
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths.firstObject stringByAppendingString:@"/"];
@@ -220,7 +220,12 @@
 - (void)onRecvNewMessage:(OIMMessageInfo *)msg;
 
 /*
- *  收到消息已读回执（仅单聊有效）
+ *  群聊消息已读回执
+ */
+- (void)onRecvGroupReadReceipt:(NSArray<OIMReceiptInfo *> *)groupMsgReceiptList;
+
+/*
+ *  单聊消息已读回执
  */
 - (void)onRecvC2CReadReceipt:(NSArray<OIMReceiptInfo *> *)receiptList;
 
@@ -228,6 +233,49 @@
  *  收到消息撤回
  */
 - (void)onRecvMessageRevoked:(NSString *)msgID;
+
+
+/// 音视频监听器
+@protocol OIMSignalingListener <NSObject>
+@optional
+
+/*
+ *  被邀请者收到：音视频通话邀请
+ */
+- (void)onReceiveNewInvitation:(OIMSignalingInfo *)invitaion;
+
+/*
+ *  邀请者收到：被邀请者同意音视频通话
+ */
+- (void)onInviteeAccepted:(OIMSignalingInfo *)invitaion;
+
+/*
+ *  邀请者收到：被邀请者拒绝音视频通话
+ */
+- (void)onInviteeRejected:(OIMSignalingInfo *)invitaion;
+
+/*
+ *  被邀请者收到：邀请者取消音视频通话
+ */
+- (void)onInvitationCancelled:(OIMSignalingInfo *)invitaion;
+
+/*
+ *  邀请者收到：被邀请者超时未接通
+ */
+- (void)onInvitationTimeout:(OIMSignalingInfo *)invitaion;
+
+/*
+ *  被邀请者（其他端）收到：比如被邀请者在手机拒接，在pc上会收到此回调
+ */
+- (void)onInviteeRejectedByOtherDevice:(OIMSignalingInfo *)invitaion;
+
+/*
+ *  被邀请者（其他端）收到：比如被邀请者在手机拒接，在pc上会收到此回调
+ */
+- (void)onInviteeAcceptedByOtherDevice:(OIMSignalingInfo *)invitaion;
+
+@end
+
 ```
 ###### block方式
 ```
@@ -624,7 +672,6 @@
                                     onSuccess:^(NSArray<OIMSimpleResultInfo *> * _Nullable results) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
-}
 ```
 
 - ##### kickGroupMember（移除组成员）
@@ -748,7 +795,7 @@
 - ##### transferGroupOwner（群转让）
 
 ```objc 
-        [OIMManager.manager transferGroupOwner:@""  // 组ID
+        [OIMManager.manager transferGroupOwner:@""  // 群ID
                                       newOwner:@""  // 新 owner userID
                                      onSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
@@ -772,6 +819,36 @@
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
 ```
+
+- ##### (解散群)
+
+```objc
+        [OIMManager.manager dismissGroup:@""  // 群ID
+                               onSuccess:^(NSString * _Nullable data) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+- ##### (群禁言)
+
+```objc
+        [OIMManager.manager changeGroupMemberMute:@""  //群ID
+                                           userID:@""  //userID
+                                     mutedSeconds:1
+                                        onSuccess:^(NSString * _Nullable data) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager changeGroupMute:@"" 
+                                     isMute:YES
+                                  onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 
 - ##### acceptGroupApplication（接受入群申请）
 
@@ -847,11 +924,19 @@
         }];
 ```
 
-- ##### deleteMessageFromLocalStorage（删除单条消息）
+- #####（删除消息）
 
 ```objc
         [OIMManager.manager deleteMessageFromLocalStorage:nil   // 消息体
                                                 onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager deleteAllMsgFromLocalAndSvrWithOnSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager deleteAllMsgFromLocalWithOnSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
 ```
@@ -898,6 +983,11 @@
                                          onSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
+
+        [OIMManager.manager clearC2CHistoryMessageFromLocalAndSvr:@""  // userID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 - ##### clearGroupHistoryMessage（清空群聊天记录）
@@ -907,6 +997,139 @@
                                            onSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
+
+        [OIMManager.manager clearGroupHistoryMessageFromLocalAndSvr:@""    // 群ID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+- ##### searchLocalMessages（搜索本地消息）
+
+```objc
+        OIMSearchParam *t = [OIMSearchParam new];
+        t.sourceID = "";
+        t.sessionType = 1;
+        t.keywordList = @[];
+        
+        [OIMManager.manager searchLocalMessages:t
+                                      onSuccess:^(OIMSearchResultInfo * _Nullable result) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+- ##### (音视频信令消息)
+
+```objc
+        
+/*
+ * 邀请个人加入音视频
+ *
+ * @param invitation
+ * 邀请个人加入：
+    {
+        "inviteeUserIDList": ["userID"],  //只有一个元素
+        "roomID": "roomID",
+        "timeout": 1000,
+        "mediaType": "video",
+        "sessionType": x,
+    }
+ * 邀请群里某些人加入音视频
+    {
+        "inviteeUserIDList": ["useID1", "userID2"],
+        "groupID": "groupID",
+        "roomID": "roomID",
+        "timeout": 1000,
+        "mediaType": "video",
+        "sessionType": x
+    }
+ * @param offlinePushInfo 离线push消息
+ */
+- (void)signalingInvite:(OIMInvitationInfo *)invitation
+        offlinePushInfo:(OIMOfflinePushInfo * _Nullable)offlinePushInfo
+              onSuccess:(nullable OIMSignalingResultCallback)onSuccess
+              onFailure:(nullable OIMFailureCallback)onFailure;
+
+
+- (void)signalingInviteInGroup:(OIMInvitationInfo *)invitation
+                     onSuccess:(nullable OIMSignalingResultCallback)onSuccess
+                     onFailure:(nullable OIMFailureCallback)onFailure;
+```
+
+```objc
+/*
+ *  同意某人音视频邀请
+ *  opUserID 操作人的ID
+ *  invitation
+    {
+         "inviterUserID": "userID",
+         "inviteeUserIDList": [
+             "userID"
+         ],
+         "groupID": "groupID",
+         "roomID": "roomID",
+         "timeout": 1000,
+         "mediaType": "video",
+         "sessionType": x
+     }
+ */
+- (void)signalingAccept:(OIMSignalingInfo *)invitation
+              onSuccess:(nullable OIMSignalingResultCallback)onSuccess
+              onFailure:(nullable OIMFailureCallback)onFailure;
+```
+
+```objc
+
+/*
+ *  拒绝某人音视频邀请
+ *  opUserID 操作人的ID
+ *  invitation
+    {
+         "inviterUserID": "userID",
+         "inviteeUserIDList": [
+             "userID"
+         ],
+         "groupID": "groupID",
+         "roomID": "roomID",
+         "timeout": 1000,
+         "mediaType": "video",
+         "sessionType": x
+     }
+ */
+- (void)signalingReject:(OIMSignalingInfo *)invitation
+              onSuccess:(nullable OIMSuccessCallback)onSuccess
+              onFailure:(nullable OIMFailureCallback)onFailure;
+```
+
+```objc
+
+/*
+ *  取消某人音视频邀请
+ *  opUserID 操作人的ID
+ *  invitation
+    {
+         "inviterUserID": "userID",
+         "inviteeUserIDList": [
+             "userID"
+         ],
+         "groupID": "groupID",
+         "roomID": "roomID",
+         "timeout": 1000,
+         "mediaType": "video",
+         "sessionType": x
+     }
+ */
+- (void)signalingCancel:(OIMSignalingInfo *)invitation
+              onSuccess:(nullable OIMSuccessCallback)onSuccess
+              onFailure:(nullable OIMFailureCallback)onFailure;
+```
+
+
+```objc
+- (void)signalingHungUp:(OIMSignalingInfo *)invitation
+              onSuccess:(nullable OIMSuccessCallback)onSuccess
+              onFailure:(nullable OIMFailureCallback)onFailure;
 ```
 
 - ##### createTextMessage

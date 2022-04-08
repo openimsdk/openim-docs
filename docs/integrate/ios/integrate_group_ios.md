@@ -126,6 +126,16 @@
         }];
 ```
 
+## 解散群
+
+```objc
+        [OIMManager.manager dismissGroup:@""  // 群ID
+                               onSuccess:^(NSString * _Nullable data) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 # 群资料
 
 ## 获取群资料
@@ -148,6 +158,25 @@
         [OIMManager.manager setGroupInfo:@""
                                groupInfo:t
                                onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+## 群禁言
+
+```objc
+        [OIMManager.manager changeGroupMemberMute:@""  //群ID
+                                           userID:@""  //userID
+                                     mutedSeconds:1
+                                        onSuccess:^(NSString * _Nullable data) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager changeGroupMute:@"" 
+                                     isMute:YES
+                                  onSuccess:^(NSString * _Nullable data) {
+            
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
 ```
