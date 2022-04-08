@@ -900,7 +900,7 @@ APP管理员更新用户信息
         "sendTime": 1645697804432
     }
 }
-  ```    
+  ```
 
 ## 管理员撤销群聊消息
 
@@ -952,8 +952,175 @@ APP管理员更新用户信息
         "sendTime": 1645697804432
     }
 }
-  ```    
+  ```
+## 管理员发送通知类型消息
 
+### **简要描述**
+
+ - 管理员通过后台接口发送通知类型消息
+
+### **请求URL**
+
+
+ - `http://x.x.x.x:10000/manager/send_msg`
+
+
+### **请求方式**
+
+
+ - `POST`
+
+### **请求示例**
+```json
+   {
+    "operationID": "Oa notification operationID111", 
+    "sendID": "openIM123456", 
+    "recvID": "18712345678", 
+    "senderPlatformID": 2, 
+    "senderFaceURL": "http://www.head.com", 
+    "senderNickname": "系统通知2", 
+    "content": {
+        "notificationName": "公文管理", 
+        "notificationFaceURL": "http://www.head1.com", 
+        "notificationType": 1, 
+        "text": "大家好，今天是...", 
+        "externalUrl":"",
+        "mixType": 0, 
+        "pictureElem": {
+            "sourcePath": "", 
+            "sourcePicture": {
+                "uuid": "", 
+                "type": "", 
+                "size": 0, 
+                "width": 0, 
+                "height": 0, 
+                "url": ""
+            }, 
+            "bigPicture": {
+                "uuid": "", 
+                "type": "", 
+                "size": 0, 
+                "width": 0, 
+                "height": 0, 
+                "url": ""
+            }, 
+            "snapshotPicture": {
+                "uuid": "", 
+                "type": "", 
+                "size": 0, 
+                "width": 0, 
+                "height": 0, 
+                "url": ""
+            }
+        }, 
+        "soundElem": {
+            "uuid": "", 
+            "soundPath": "", 
+            "sourceUrl": "", 
+            "dataSize": 0, 
+            "duration": 0
+        }, 
+        "videoElem": {
+            "videoPath": "", 
+            "videoUUID": "", 
+            "videoUrl": "", 
+            "videoType": "", 
+            "videoSize": 0, 
+            "duration": 0, 
+            "snapshotPath": "", 
+            "snapshotUUID": "", 
+            "snapshotSize": 0, 
+            "snapshotUrl": "", 
+            "snapshotWidth": 0, 
+            "snapshotHeight": 0
+        }, 
+        "fileElem": {
+            "filePath": "", 
+            "uuid": "", 
+            "sourceUrl": "", 
+            "fileName": "", 
+            "fileSize": 0
+        }, 
+        "ex": ""
+    }, 
+    "contentType": 1400, 
+    "sessionType": 4, 
+    "isOnlineOnly": false, 
+    "offlinePushInfo": {
+        "title": "admin revoke your message", 
+        "desc": "", 
+        "ex": "", 
+        "iOSPushSound": "default", 
+        "iOSBadgeCount": false
+    }
+}
+```
+### **请求参数**
+
+|     参数名     | 类型 |  必选  | 说明                                                         |
+| ------------------- | ------ | -------- | ------------------------------------------------------------ |
+| operationID         | string | 是     | 操作ID，保持唯一，建议用当前时间微秒+随机数，用于后台链路追踪问题使用 |
+| sendID              | string | 是     | 管理员ID，为后台config文件中配置的管理员ID中一个，默认openIM123456 |
+| recvID              | string | 是     | 接收者userID                                                 |
+| senderPlatformID    | int    | 否    | 发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux |
+| senderFaceURL       | string | 否    | 发送者头像，用于客户端通知会话产生                           |
+| senderNickname      | string | 否    | 发送者昵称，用于客户端通知会话产生 |
+|    content          |  object|  是  | 消息的具体内容，内部是json 对象|
+| notificationName    | string | 是     | 通知标题                                                     |
+| notificationFaceURL | string | 是     | 通知头像                                                     |
+| notificationType    | int    | 是     | 通知类型，如：1代表入职通知，2代表离职通知                   |
+| text                | string | 是     | 通知正文e                                                    |
+| externalUrl       | string | 否    | 通知点击后需要跳转到的地址链接(不填则无需跳转)               |
+| mixType             | int    | 是   | 通知混合类型<br/>0：纯文字通知<br/>1：文字+图片通知<br/>2：文字+视频通知<br/>3：文字+文件通知<br/>4:   文字+语音通知<br/>5:   文字+语音+图片通知<br/> |
+| pictureElem | object | 否 | 图片元素对象 |
+| sourcePicture | object | 否 | 原图 |
+| bigPicture | object | 否 | 大图 |
+| snapshotPicture | object | 否 | 缩略图 |
+| soundElem | object | 否 | 声音元素对象 |
+| videoElem | object | 否 | 视频元素对象 |
+| fileElem | object | 否 | 文件元素对象 |
+| uuid | string | 否 | 对象唯一ID用于缓存使用 |
+| type/videoType/                               | string | 否   | 图片类型/视频类型                                            |
+| size/dataSize/videoSize/snapshotSize/fileSize | int    | 否   | 多媒体文件大小，单位字节                                     |
+| width/snapshotWidth                           | int    | 否   | 图片/视频缩略图宽度                                          |
+| height/snapshotHeight                         | int    | 否   | 图片/视频缩略图高度                                          |
+| url/sourceUrl/videoUrl                        | string | 否   | 图片/文件/视频的URL                                          |
+| sourcePath/soundPath/videoPath/filePath       | string | 否   | 文件路径，可不填写                                           |
+| fileName                                      | string | 否   | 文件名字                                                     |
+| ex                  | string | 否    | 扩展字段                                                     |
+| contentType         | int    | 是     | 消息类型固定为1400                                           |
+| sessionType         | int    | 是     | 通知会话类型固定为4                                          |
+| isOnlineOnly        | bool   | 否    | 改字段设置为true时候，发送的消息服务器不会存储，接收者在线才会收到，不在线该消息丢失。 |
+| offlinePushInfo     | object | 否    | 离线推送的具体内容，如果不填写，使用服务器默认推送标题       |
+| title               | string | 否    | 推送的标题                                                   |
+| desc                | string | 否    | 推送的具体描述                                               |
+| ex                  | string | 否    | 扩展字段                                                     |
+| iOSPushSound        | string | 否    | IOS的推送声音                                                |
+| iOSBadgeCount       | bool   | 否    | IOS推送消息是否计入桌面图标未读数                            |
+
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+        "serverMsgID": "", 
+        "clientMsgID": "", 
+        "sendTime": 1645697804432
+    }
+}
+  ```
+
+  ###  **返回参数**
+
+| 参数名      |  类型  | 说明                                           |
+| :---------- | :----: | ---------------------------------------------- |
+| errCode     |  int   | 0成功，非0失败                                 |
+| errMsg      | string | 错误信息                                       |
+| sendTime    |  int   | 消息发送的具体时间，具体为毫秒的时间戳         |
+| serverMsgID | string | 服务器生成的消息的唯一ID                       |
+| clientMsgID | string | 客户端生成的消息唯一ID，默认情况使用这个为主键 |
 
 ## 消息类型格式描述
 
