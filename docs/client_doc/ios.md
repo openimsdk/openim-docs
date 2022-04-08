@@ -9,7 +9,7 @@
  * @param wsAddr     SDK的web socket地址。如： ws:xxx:17778
  * @param dataDir    数据存储路径，默认documents下
  * @param logLevel   默认6
- * @param oss        默认cos,可用minio
+ * @param oss        默认cos，minio填写'minio'
  */
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths.firstObject stringByAppendingString:@"/"];
