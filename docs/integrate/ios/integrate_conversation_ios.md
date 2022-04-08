@@ -46,6 +46,19 @@
         }];
 ```
 
+## 设置私聊会话
+
+- 可做阅后即焚。
+
+```objc
+        [OIMManager.manager setOneConversationPrivateChat:@""
+                                            isPrivate:YES
+                                            onSuccess:^(NSString * _Nullable data) {
+        
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 # 设置会话置顶
 
 - 会话置顶指的是把特定的好友或者群会话固定在会话列表的最前面，用于主动设置或者取消会话置顶。

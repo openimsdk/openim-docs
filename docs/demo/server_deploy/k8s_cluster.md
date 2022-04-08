@@ -1,5 +1,7 @@
 # k8s部署（实验性）
     支持 arm64 以及 x86架构 机器
+## 安装视频
+![video.html](//player.bilibili.com/player.html?aid=810473986&bvid=BV1j34y1x7jc&cid=568263466&page=1 ':include :type=iframe')
 
 ## 安装组件
 
@@ -125,14 +127,14 @@ spec:
 ## 测试
 > 服务运行情况
 
-![k9s.png](http://public.msypy.xyz/k8syamls/openim/latest/examples/k9s.png)
+![k9s.png](https://public.msypy.xyz/k8syamls/openim/latest/examples/k9s.png)
 
 > 在线测试地址 http://121.37.25.71:23232/login
 
-![config.png](http://public.msypy.xyz/k8syamls/openim/latest/examples/config.png)
+![config.png](https://public.msypy.xyz/k8syamls/openim/latest/examples/config.png)
 
 > 聊天测试
-![chat.png](http://public.msypy.xyz/k8syamls/openim/latest/examples/chat.png)
+![chat.png](https://public.msypy.xyz/k8syamls/openim/latest/examples/chat.png)
 
 ## TODO
 - [ ] 日志采集

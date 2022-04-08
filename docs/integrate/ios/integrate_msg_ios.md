@@ -228,16 +228,69 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
 
 ## 删除本地历史消息
 
-可删除本地数据库存储的消息记录，但不会删除服务端记录。
+可删除本地数据库存储的消息记录，及删除服务端记录。
 
-### 删除单条消息
+### 删除消息
 
 ```objc
         [OIMManager.manager deleteMessageFromLocalStorage:nil   // 消息体
                                                 onSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
+
+        [OIMManager.manager deleteAllMsgFromLocalAndSvrWithOnSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager deleteAllMsgFromLocalWithOnSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
+
+### 清空c2c消息
+
+```objc
+        [OIMManager.manager clearC2CHistoryMessage:@""  // userID
+                                         onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager clearC2CHistoryMessageFromLocalAndSvr:@""  // userID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+### 清空群聊消息
+
+```objc
+        [OIMManager.manager clearGroupHistoryMessage:@""    // 群ID
+                                           onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager clearGroupHistoryMessageFromLocalAndSvr:@""    // 群ID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+## 搜索本地消息
+
+```objc
+        OIMSearchParam *t = [OIMSearchParam new];
+        t.sourceID = "";
+        t.sessionType = 1;
+        t.keywordList = @[];
+        
+        [OIMManager.manager searchLocalMessages:t
+                                      onSuccess:^(OIMSearchResultInfo * _Nullable result) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+
 
 # 消息接收
 
@@ -254,9 +307,15 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
 - (void)onRecvNewMessage:(OIMMessageInfo *)msg;
 
 /*
- *  收到消息已读回执（仅单聊有效）
+ *  群聊消息已读回执
+ */
+- (void)onRecvGroupReadReceipt:(NSArray<OIMReceiptInfo *> *)groupMsgReceiptList;
+
+/*
+ *  单聊消息已读回执
  */
 - (void)onRecvC2CReadReceipt:(NSArray<OIMReceiptInfo *> *)receiptList;
+
 
 /*
  *  收到消息撤回
