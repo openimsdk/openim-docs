@@ -3,7 +3,7 @@
 
 ### **简要描述**
 
-  AppServer 通过调用（auth/user_token）获取或刷新管理员token以取得超级权限。在调用以下所有的api时，必须获取管理员token，并设置到请求header中。如果没有特别说明，请求方式一律为POST
+  AppServer 通过调用（auth/user_token）获取或刷新管理员token以取得超级权限。在调用以下所有的api时，必须获取管理员token，并设置到请求header中（key为token）。如果没有特别说明，请求方式一律为POST
 
 ### **请求URL**
 
