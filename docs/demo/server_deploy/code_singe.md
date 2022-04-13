@@ -16,11 +16,13 @@ wget -c https://dl.google.com/go/go1.17.linux-amd64.tar.gz -O - | sudo tar -xz -
 >**设置环境变量：**
 >
 >export PATH=$PATH:/usr/local/go/bin
+> 
 >source /etc/profile
 >
 >**开启go代理：**
 >
 >go env -w GO111MODULE=on
+> 
 >go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 
 
