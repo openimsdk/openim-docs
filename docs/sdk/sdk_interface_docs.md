@@ -1463,7 +1463,44 @@ SignalingCancel(callback open_im_sdk_callback.Base, operationID string, signalCa
 OnSuccess{}
 ```
 
+### 工作圈接口
+```
+GetWorkMomentsUnReadCount(callback open_im_sdk_callback.Base, operationID string)
+说明: 获取工作圈未读数
+回调：成功时，OnSuccess回调
+{"unread_count":0}
+```
 
+```
+GetWorkMomentsNotification(callback open_im_sdk_callback.Base, operationID string, offset, count int)
+说明: 获取工作圈新消息, 调用此方法会将未读数直接清0
+请求: offset, count 翻页
+回调: 成功时, OnSuccess回调
+ [{"notificationMsgType":0, 工作圈消息类型
+    "comment":
+                {"userID":"17726378428", 回复的用户
+               "userName":"ke", 回复的用户名
+                "faceURL":"ic_avatar_03", 回复的用户头像
+                "replyUserID":"", 被回复的用户ID
+                "replyUserName":"", 回复的用户名字
+                "contentID":"02cdd83e85fe51959d0363c38433fd7d", 回复ID
+                "content":"comment22292", 回复内容
+                "createTime":1650613178   回复时间
+                },  回复json
+                "workMomentID":"f35cad007970fcd25c6f12ff25df1209", 工作圈id
+                "userID":"17726378428", 工作圈所属用户
+                "userName":"", 工作圈所属用户名字
+                "faceURL":"", 工作圈用户faceurl
+                "workMomentContent":"test"  工作圈内容
+}
+]
+```
+
+```
+ClearWorkMomentsNotification(callback open_im_sdk_callback.Base, operationID string)
+说明：调用此方法清空工作圈通知 非同步
+回调: 成功时, OnSuccess回调""
+```
 
 ## demo相关接口
 
