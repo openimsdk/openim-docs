@@ -146,6 +146,14 @@ type OnAdvancedMsgListener interface {
 }
 ```
 
+### 朋友圈监听
+```
+收到新消息
+type OnWorkMomentsListener interface {
+	OnRecvNewNotification()
+}
+
+```
 
 
 # 初始化
@@ -1476,7 +1484,7 @@ GetWorkMomentsNotification(callback open_im_sdk_callback.Base, operationID strin
 说明: 获取工作圈新消息, 调用此方法会将未读数直接清0
 请求: offset, count 翻页
 回调: 成功时, OnSuccess回调
- [{"notificationMsgType":0, 工作圈消息类型
+ [{"notificationMsgType":0, 工作圈消息类型    0为普通评论 1为被喜欢 2为AT提醒看的朋友圈
     "comment":
                 {"userID":"17726378428", 回复的用户
                "userName":"ke", 回复的用户名
