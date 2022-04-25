@@ -48,16 +48,137 @@ cd script ; ./docker_check_service.sh
 
 如图所示，表示正常启动。
 
-## 5.端口开放
+## 5.IM开放端口
 
-| 端口  | 说明                                | 操作                                |
-| ----- | ----------------------------------- | ----------------------------------- |
-| 17778 | ws消息端口，比如消息发送，推送等    | 端口放行或nginx反向代理，关闭防火墙 |
-| 10000 | api端口，比如用户、好友、群组等接口 | 端口放行或nginx反向代理，关闭防火墙 |
-| 30000 | 针对jssdk的专用端口                 | 端口放行或nginx反向代理，关闭防火墙 |
-| 42233 | demo使用的用户注册登录端口          | 端口放行或nginx反向代理，关闭防火墙 |
+| IM端口    | 说明                                    | 操作                                |
+| --------- | --------------------------------------- | ----------------------------------- |
+| TCP:10001 | ws协议，消息端口，比如消息发送，推送等  | 端口放行或nginx反向代理，关闭防火墙 |
+| TCP:10002 | api端口，比如用户、好友、群组等接口     | 端口放行或nginx反向代理，关闭防火墙 |
+| TCP:10003 | ws协议，针对jssdk的专用端口。           | 端口放行或nginx反向代理，关闭防火墙 |
+| TCP:10004 | demo使用的用户注册登录端口。            | 端口放行或nginx反向代理，关闭防火墙 |
+| TCP:10005 | 选择minio存储时需要开通                 | 端口放行或nginx反向代理，关闭防火墙 |
+| TCP:10006 | 管理后台api端口，需要管理后台服务时开通 | 端口放行或nginx反向代理，关闭防火墙 |
 
-## 6.配置修改
+注：如果使用nginx做反向代理，则只需要开放443端口即可。
+
+
+
+## 6.nginx配置
+
+注意修改域名、https证书，以及ip
+
+```
+server {
+        listen 443;
+        server_name open-im-test.rentsoft.cn;
+
+        ssl on;
+        ssl_certificate /etc/nginx/conf.d/ssl/open-im-test.rentsoft.cn.crt;
+        ssl_certificate_key /etc/nginx/conf.d/ssl/open-im-test.rentsoft.cn.key;
+
+        ssl_session_timeout 5m;
+
+	gzip on;
+	gzip_min_length 1k;
+	gzip_buffers 4 16k;
+	gzip_comp_level 2;
+	gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+	gzip_vary off;
+	gzip_disable "MSIE [1-6]\.";
+
+        location / {
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-Ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header X-NginX-Proxy true;
+                root /data/test/Pc-Web-Demo/build/;
+                index index.html;
+                try_files $uri $uri/ /index.html;
+        }
+	location /demo {
+				proxy_http_version 1.1;
+				proxy_set_header Upgrade $http_upgrade;    
+				proxy_set_header Connection "Upgrade";    
+				proxy_set_header X-real-ip $remote_addr;
+				proxy_set_header X-Forwarded-For $remote_addr;
+				proxy_pass http://43.128.5.63:10004;
+
+	}
+	location /jssdk_gateway {
+				proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "Upgrade";
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10003;
+	}
+	location /msg_gateway {
+				proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "Upgrade";
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10001;
+	}
+	location /rtc {
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "Upgrade";
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:7880;
+        }
+	location /user {
+                proxy_http_version 1.1;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10002;
+
+        }
+		
+	location /group {
+                proxy_http_version 1.1;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10002;
+
+        }
+	location /manager {
+                proxy_http_version 1.1;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10002;
+
+        }
+	 location /third {
+                proxy_http_version 1.1;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10002;
+
+        }
+	location /cms {
+                proxy_http_version 1.1;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_pass http://43.128.5.63:10006;
+
+        }
+}
+
+server {
+        listen 80;
+        server_name open-im-test.rentsoft.cn;
+        rewrite ^(.*)$ https://${server_name}$1 permanent;
+}
+
+```
+
+
+
+
+
+## 7.配置修改
 
 系统默认的第三方服务使用了OpenIM的账号（包括对象存储cos，推送jpush，阿里云短信验证码，qq邮箱验证码），请在config/config.yaml中自行修改。
 
@@ -112,7 +233,7 @@ jpns: #极光推送 在极光后台申请后，修改以下四项，必须修改
     pushIntent: "intent:#Intent;component=io.openim.app.enterprisechat/io.openim.app.enterprisechat.MainActivity;end"
 ```
 
-## 7.重启服务
+## 8.重启服务
 
 ```
 docker-compose down; docker-compose up -d
