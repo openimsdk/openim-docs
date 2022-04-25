@@ -188,21 +188,23 @@ server {
 #是否启动demo，如果自身没有账号体系，设置为true
 demoswitch: true
 demo:
-  openImDemoPort: [ 42233 ] #demo对外服务端口，默认即可，需要开放此端口或做nginx转发
+  #demo对外服务端口，默认即可，需要开放此端口或做nginx转发
+  openImDemoPort: [ 10004 ]
   alismsverify: #阿里云短信配置，在阿里云申请成功后修改以下四项，必须修改
-    accessKeyId: LTAI5tJPkn4HuuePdiLdGqe71
-    accessKeySecret: 4n9OJ7ZCVN1U6KeHDAtOyNeVZcjOuV1
-    signName: OpenIM Corporation
-    verificationCodeTemplateCode: SMS_2268101641
+    accessKeyId: LTAI5tJPkn4HuuePdiLdGqe7
+    accessKeySecret: 4n9OJ7ZCVN1U6KeHDAtOyNeVZcjOuV
+    signName: 托云信息技术
+    verificationCodeTemplateCode: SMS_226810164
   superCode: 666666 #超级验证码，建议修改掉，收不到短信验证码时可以用此替代
   #  second
   codeTTL: 300
   mail: #仅支持qq邮箱，具体操作参考 https://service.mail.qq.com/cgi-bin/help?subtype=1&id=28&no=1001256 必须修改
     title: "openIM"
-    senderMail: "1765567899@qq.com"
-    senderAuthorizationCode: "1gxyausfoevlzbfag"
+    senderMail: "765567899@qq.com"
+    senderAuthorizationCode: "gxyausfoevlzbfag"
     smtpAddr: "smtp.qq.com"
     smtpPort: 25   #需开放此端口 出口方向
+
 ```
 
 #### 对象存储配置
@@ -215,12 +217,14 @@ redential: #腾讯cos，发送图片、视频、文件时需要，请自行申�
     bucket: echat-1302656840
     secretID: AKIDGNYVChzIQinu7QEgtNp0hnNgqcV8vZTC
     secretKey: kz15vW83qM6dBUWIq681eBZA0c0vlIbe
-  minio: #MinIO 发送图片、视频、文件时需要，请自行申请后替换，必须修改。 客户端初始化时相应改动
+  minio: #MinIO 发送图片、视频、文件时需要，请自行申请后替换，必须修改。 客户端初始化InitSDK，中 object_storage参数为minio
     bucket: openim
     location: us-east-1
-    endpoint: http://127.0.0.1:9000
-    accessKeyID: minioadmin
-    secretAccessKey: minioadmin
+    endpoint: http://127.0.0.1:10005 #minio外网ip 这个ip是给客户端访问的
+    endpointInner: http://127.0.0.1:10005 #minio内网地址 如果im server 可以通过内网访问到 minio就可以填写
+    endpointInnerEnable: true #是否启用minio内网地址 启用可以让桶初始化，IM server连接minio走内网地址访问
+    accessKeyID: user12345
+    secretAccessKey: key12345
 ```
 
 #### 离线推送配置
