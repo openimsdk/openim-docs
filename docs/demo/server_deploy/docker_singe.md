@@ -164,6 +164,12 @@ server {
                 proxy_pass http://43.128.5.63:10006;
 
         }
+    location ~^/storage {
+                 proxy_buffering off;
+                 proxy_set_header Host $http_host;
+                 rewrite ^/storage/(.*)$ /$1 break;
+                 proxy_pass http://43.128.5.63:10005;
+           }
 }
 
 server {
