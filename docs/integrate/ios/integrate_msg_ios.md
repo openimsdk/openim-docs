@@ -279,9 +279,8 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
 
 ```objc
         OIMSearchParam *t = [OIMSearchParam new];
-        t.sourceID = "";
-        t.sessionType = 1;
         t.keywordList = @[];
+        t.conversationID = @"";
         
         [OIMManager.manager searchLocalMessages:t
                                       onSuccess:^(OIMSearchResultInfo * _Nullable result) {
@@ -290,7 +289,18 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         }];
 ```
 
+## 搜索历史消息
+```objc
+        OIMGetMessageOptions *options = [OIMGetMessageOptions new];
+        options.userID = @"";
+        options.groupID = @"";
+        options.conversationID = @"";
 
+        [OIMManager.manager getHistoryMessageListReverse:options
+                                                onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
 
 # 消息接收
 
