@@ -83,6 +83,15 @@
 
 ```
 
+- 删除本地所有会话。
+
+```objc
+        [OIMManager.manager deleteAllConversationFromLocalWithOnSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 # 会话监听回调
 
 ## 调用示例
