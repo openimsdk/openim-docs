@@ -3,7 +3,7 @@
 
 ### **简要描述**
 
-  AppServer 通过调用（auth/user_token）获取或刷新管理员token以取得超级权限。在调用以下所有的api时，必须获取管理员token，并设置到请求header中。如果没有特别说明，请求方式一律为POST
+  AppServer 通过调用（auth/user_token）获取或刷新管理员token以取得超级权限。在调用以下所有的api时，必须获取管理员token，并设置到请求header中（key为token）。如果没有特别说明，请求方式一律为POST
 
 ### **请求URL**
 
@@ -1064,7 +1064,7 @@ APP管理员更新用户信息
 | recvID              | string | 是     | 接收者userID                                                 |
 | senderPlatformID    | int    | 否    | 发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux |
 | senderFaceURL       | string | 否    | 发送者头像，用于客户端通知会话产生                           |
-| senderNickname      | string | 否    | 发送者昵称，用于客户端通知会话产生 |
+| senderNickname      | string | 是    | 发送者昵称，用于客户端通知会话产生 |
 |    content          |  object|  是  | 消息的具体内容，内部是json 对象|
 | notificationName    | string | 是     | 通知标题                                                     |
 | notificationFaceURL | string | 是     | 通知头像                                                     |

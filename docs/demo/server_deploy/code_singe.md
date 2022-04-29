@@ -16,18 +16,21 @@ wget -c https://dl.google.com/go/go1.17.linux-amd64.tar.gz -O - | sudo tar -xz -
 >**设置环境变量：**
 >
 >export PATH=$PATH:/usr/local/go/bin
+> 
 >source /etc/profile
 >
 >**开启go代理：**
 >
 >go env -w GO111MODULE=on
+> 
 >go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 
 
 #### 2.克隆项目
 
 ```
-git clone https://github.com/OpenIMSDK/Open-IM-Server.git --recursive
+git clone https://github.com/OpenIMSDK/Open-IM-Server.git 
+
 使用此命令拉取项目后，进入cmd/Open-IM-SDK-Core,使用git checkout main将Open-IM-SDK-Core子仓库切换到main分支下，然后进入cmd/Open-IM-SDK-Core/internal/sdk_advanced_function，同样使用git checkout main将sdk_advanced_function子仓库切换到main分支下
 
 (注：如果项目中cmd/Open-IM-SDK-Core这个子模块无法正常拉取，文件夹为空，可前往https://github.com/OpenIMSDK/Open-IM-SDK-Core，获取最新tag，(Open-IM-SDK-Core项目下的internal/sdk_advanced_function如果为空，前往https://github.com/OpenIMSDK/sdk_advanced_function.git提取main分支下代码放置其中)放置于cmd/下，编译即可)

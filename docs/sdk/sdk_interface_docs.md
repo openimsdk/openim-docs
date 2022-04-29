@@ -146,6 +146,14 @@ type OnAdvancedMsgListener interface {
 }
 ```
 
+### 朋友圈监听
+```
+收到新消息
+type OnWorkMomentsListener interface {
+	OnRecvNewNotification()
+}
+
+```
 
 
 # 初始化
@@ -1463,7 +1471,37 @@ SignalingCancel(callback open_im_sdk_callback.Base, operationID string, signalCa
 OnSuccess{}
 ```
 
+### 工作圈接口
+```
+GetWorkMomentsUnReadCount(callback open_im_sdk_callback.Base, operationID string)
+说明: 获取工作圈未读数
+回调：成功时，OnSuccess回调
+{"unreadCount":0}
+```
 
+```
+GetWorkMomentsNotification(callback open_im_sdk_callback.Base, operationID string, offset, count int)
+说明: 获取工作圈新消息, 调用此方法会将未读数直接清0
+请求: offset, count 翻页
+回调: 成功时, OnSuccess回调
+ [{"notificationMsgType":1,
+"replyUserName":"",
+"replyUserID":"",
+"content":"","contentID":"",
+"workMomentID":"f35cad007970fcd25c6f12ff25df1209",
+"userID":"17726378428",
+"userName":"ke",
+"faceURL":"ic_avatar_03",
+"workMomentContent":"test",
+"createTime":1650796416}
+]
+```
+
+```
+ClearWorkMomentsNotification(callback open_im_sdk_callback.Base, operationID string)
+说明：调用此方法清空工作圈通知 非同步
+回调: 成功时, OnSuccess回调""
+```
 
 ## demo相关接口
 

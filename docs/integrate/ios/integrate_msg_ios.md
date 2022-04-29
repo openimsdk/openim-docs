@@ -226,7 +226,7 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         }];
 ```
 
-## 删除本地历史消息
+## 删除历史消息
 
 可删除本地数据库存储的消息记录，及删除服务端记录。
 
@@ -245,6 +245,8 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         [OIMManager.manager deleteAllMsgFromLocalWithOnSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
+        
+        
 ```
 
 ### 清空c2c消息
@@ -279,9 +281,8 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
 
 ```objc
         OIMSearchParam *t = [OIMSearchParam new];
-        t.sourceID = "";
-        t.sessionType = 1;
         t.keywordList = @[];
+        t.conversationID = @"";
         
         [OIMManager.manager searchLocalMessages:t
                                       onSuccess:^(OIMSearchResultInfo * _Nullable result) {
@@ -290,7 +291,18 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         }];
 ```
 
+## 搜索历史消息
+```objc
+        OIMGetMessageOptions *options = [OIMGetMessageOptions new];
+        options.userID = @"";
+        options.groupID = @"";
+        options.conversationID = @"";
 
+        [OIMManager.manager getHistoryMessageListReverse:options
+                                                onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
 
 # 消息接收
 
