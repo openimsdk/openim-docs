@@ -226,7 +226,7 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         }];
 ```
 
-## 删除本地历史消息
+## 删除历史消息
 
 可删除本地数据库存储的消息记录，及删除服务端记录。
 
@@ -245,6 +245,8 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         [OIMManager.manager deleteAllMsgFromLocalWithOnSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
+        
+        
 ```
 
 ### 清空c2c消息
