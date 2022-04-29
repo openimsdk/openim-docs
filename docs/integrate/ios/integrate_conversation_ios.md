@@ -73,14 +73,21 @@
 
 # 删除会话
 
-- 调用 [deleteConversation] 接口可以删除某个会话，删除会话时默认删除本地历史消息。
+可以删除某个会话，删除会话时默认删除本地历史消息。
 
 ```objc
+         // 删除本地数据库和远端的会话
         [OIMManager.manager deleteConversation:@"" // 会话id
                                      onSuccess:^(NSString * _Nullable data) {
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
+```
 
+```objc
+         // 仅删除本地数据库的会话
+        [OIMManager.manager deleteAllConversationFromLocalWithOnSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 # 会话监听回调
