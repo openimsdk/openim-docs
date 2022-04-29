@@ -1,3 +1,6 @@
+
+[![Version](https://img.shields.io/cocoapods/v/OpenIMSDK.svg?style=flat)](https://cocoapods.org/pods/OpenIMSDK)
+
 # 导入工程(iOS)
 
 - 点击前往[iOS SDK](https://github.com/OpenIMSDK/Open-IM-SDK-iOS)查看详情；
