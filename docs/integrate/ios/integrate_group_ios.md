@@ -210,7 +210,18 @@
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
   ```
+## 搜索群
 
+```objc
+OIMSearchGroupParam *param = [OIMSearchGroupParam new];
+        param.isSearchGroupName = YES;
+        param.keywordList = @[@"test"];
+        
+        [OIMManager.manager searchGroups:param
+                               onSuccess:^(NSArray<OIMGroupInfo *> * _Nullable groupsInfo) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
 # 群组监听回调
 
 ## 调用示例
