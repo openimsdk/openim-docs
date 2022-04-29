@@ -715,8 +715,8 @@ config是json字符串，格式为
 |    api_addr    | string |                 api域名地址                  |
 |  ipWws_addrs   | string |               websocket地址                |
 |    data_dir    | String |             SDK数据存放目录（绝对路径）              |
-|   log_level    |  int   |                                          |
-| object_storage | string |                                          |
+|   log_level    |  int   |                   日志等级                   |
+| object_storage | string |                   选择存储                   |
 
 * Monitor:
 
@@ -1845,7 +1845,7 @@ im.setOneConversationPrivateChat(operationID,conversationID,isPrivate,data => {
 
 ## SetOneConversationRecvMessageOpt
 
-
+设置一个会话免打扰状态
 
 - Example:
 
@@ -1857,16 +1857,16 @@ im.setOneConversationRecvMessageOpt(operationID,conversationID,status,data => {
 
 - Parameters:
 
-|      Name      |   Type   | Description |
-| :------------: | :------: | :---------: |
-|  operationID   |  string  |    UUID     |
-| conversationID |  string  |    会话ID     |
-|     status     |  number  |             |
-|    callback    | callback |    通用回调     |
+|      Name      |   Type   |         Description         |
+| :------------: | :------: | :-------------------------: |
+|  operationID   |  string  |            UUID             |
+| conversationID |  string  |            会话ID             |
+|     status     |  number  | 是否开启免打扰 0不开启 1不接受信息 2接收但不提醒 |
+|    callback    | callback |            通用回调             |
 
 ## SetConversationRecvMessageOpt
 
-设置会话免打扰状态
+设置多个会话免打扰状态
 
 设置为1时，不再接收改会话的消息。设置为2时，正常接收该会话的消息，但不计入总未读数（依然会计入该会话的未读数，但可根据会话中的recvOpt状态自行处理）。
 
@@ -1889,7 +1889,7 @@ im.setConversationRecvMessageOpt(operationID,conversationIDList,status,data => {
 
 ## GetConversationRecvMessageOpt
 
-
+获取会话免打扰状态
 
 - Example:
 
@@ -1945,7 +1945,7 @@ const meg = im.createTextAtMessage(OperationID, textMsg, atUserIDList)
 |  operationID   |  string  |    UUID     |
 |    textMsg     |  string  |   消息文字内容    |
 |  atUserIDList  | string[] |   @用户id数组   |
-| atUserInfoList |   obj    |             |
+| atUserInfoList |   obj    |   @用户信息数组   |
 
 ## CreateImageMessage
 
