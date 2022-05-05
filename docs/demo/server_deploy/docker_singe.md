@@ -6,7 +6,7 @@
 
 ## 安装docker
 
-要求docker版本1.13以上，docker-compose版本1.22以上
+要求docker版本20.10.14以上，docker-compose版本1.24.1以上
 
 ## 一键部署
 
