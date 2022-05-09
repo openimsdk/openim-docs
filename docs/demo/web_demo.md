@@ -10,9 +10,9 @@
     ![web](../images/web_demo_01.png)
 
   - 修改配置中ip为自己已部署OpenIM Server的服务器IP，确认修改
-  
+
     ![web](../images/web_demo_02.png)
-  
+
   - 注册登录
 
 
@@ -43,37 +43,37 @@
     > 项目默认配置地址为OpenIM测试服务器地址，若您已部署OpenIM-Server在自己的服务器上，需要修改为对应地址，否则可跳过此步骤。
     >
     > 项目默认使用腾讯云COS服务，可根据需求自行更改文件存储服务。
-    
+
         //	注册服务地址
-        export const AXIOSURL = "http://121.37.25.71:42233"
+        export const AXIOSURL = "http://121.37.25.71:10004"
         //	axios请求超时时间
         export const AXIOSTIMEOUT = 60000
         //	OpenIM-Server JS SDK port
-        export const IMURL = "ws://121.37.25.71:30000"
+        export const IMURL = "ws://121.37.25.71:10003"
         //	获取cos临时密钥及调用管理员API地址
-        export const ADMINURL = "http://121.37.25.71:10000"
+        export const ADMINURL = "http://121.37.25.71:10002"
         //	cos 缩略图格式配置
         export const PICMESSAGETHUMOPTION = "?imageView2/1/w/200/h/200/rq/80"
         //	默认语言
         export const LANGUAGE = "zh-cn"
-    
+
   - Electron
-  
+
     > 配置文件位置为：**electron/config/index.ts**
     >
     > **注意**：上方提到的配置文件也需要修改。
-    
+
         // OpenIM-Server SDK API port
-        export const openIMApiAddress = "http://121.37.25.71:10000"
+        export const openIMApiAddress = "http://121.37.25.71:10002"
         // OpenIM-Server SDK ws port
-        export const openIMWsAddress = "ws://121.37.25.71:17778"
+        export const openIMWsAddress = "ws://121.37.25.71:10001"
         // 客户端本地占用端口
         export const sdkWsPort = "7788"
-    
+
      
-    
-    
-  
+
+    ​
+
 - 运行调试
 
   - Web
@@ -83,11 +83,11 @@
       ```
       npm run start:renderer
       ```
-  
+
   - Electron
-  
+
      > SDK本地需要占用一个端口（默认7788）
-    
+
       ```
       npm run start:main
       ```
@@ -110,4 +110,3 @@
     npm run build:main
     ```
 
-    

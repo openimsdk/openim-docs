@@ -4,23 +4,19 @@
 
 ```objc
   /* 初始化
- * @param platform 平台
- * @param apiAddr    SDK的api地。如http:xxx:10000
- * @param wsAddr     SDK的web socket地址。如： ws:xxx:17778
- * @param dataDir    数据存储路径，默认documents
- * @param logLevel   默认6
- * @param oss        默认cos，minio填写'minio'
+ * @param apiAddr       SDK的api地。如http://xxx:10002
+ * @param wsAddr        SDK的web socket地址。如： ws://xxx:10001
+ * @param dataDir       数据存储路径，默认/Documents
+ * @param logLevel      默认6
+ * @param objectStorage 默认cos，minio填写'minio'
  */
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths.firstObject stringByAppendingString:@"/"];
-    
-    BOOL initSuccess = [OIMManager.manager initSDK:iOS
-                                           apiAdrr:@"xxxx:10000"
-                                            wsAddr:@"xxxx:17778"
-                                           dataDir:path
-                                          logLevel:6
-                                     objectStorage:nil
-                                      onConnecting:^{
+  BOOL initSuccess = [OIMManager.manager initSDKWithApiAdrr:API_ADDRESS
+                                                       wsAddr:WS_ADDRESS
+                                                      dataDir:nil
+                                                     logLevel:6
+                                                objectStorage:nil
+                                                 onConnecting:^{
+        
         NSLog(@"\nconnecting");
     } onConnectFailure:^(NSInteger code, NSString * _Nullable msg) {
         NSLog(@"\n connect failure");

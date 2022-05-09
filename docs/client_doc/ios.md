@@ -3,24 +3,20 @@
 ##### 1，初始化
 
 ```objc
-/* 初始化
- * @param platform 平台
- * @param apiAddr    SDK的api地。如http:xxx:10000
- * @param wsAddr     SDK的web socket地址。如： ws:xxx:17778
- * @param dataDir    数据存储路径，默认documents下
- * @param logLevel   默认6
- * @param oss        默认cos，minio填写'minio'
+  /* 初始化
+ * @param apiAddr       SDK的api地。如http://xxx:10002
+ * @param wsAddr        SDK的web socket地址。如： ws://xxx:10001
+ * @param dataDir       数据存储路径，默认/Documents
+ * @param logLevel      默认6
+ * @param objectStorage 默认cos，minio填写'minio'
  */
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths.firstObject stringByAppendingString:@"/"];
-    
-    BOOL initSuccess = [OIMManager.manager initSDK:iOS
-                                           apiAdrr:@"xxxx:10000"
-                                            wsAddr:@"xxxx:17778"
-                                           dataDir:path
-                                          logLevel:6
-                                     objectStorage:nil
-                                      onConnecting:^{
+  BOOL initSuccess = [OIMManager.manager initSDKWithApiAdrr:API_ADDRESS
+                                                       wsAddr:WS_ADDRESS
+                                                      dataDir:nil
+                                                     logLevel:6
+                                                objectStorage:nil
+                                                 onConnecting:^{
+        
         NSLog(@"\nconnecting");
     } onConnectFailure:^(NSInteger code, NSString * _Nullable msg) {
         NSLog(@"\n connect failure");
@@ -33,6 +29,7 @@
     }];
     
     NSLog(@"初始化成功与否：%d", initSuccess);
+
 ```
 
 ##### 切换到前台
@@ -544,6 +541,15 @@
                                             isPrivate:YES
                                             onSuccess:^(NSString * _Nullable data) {
         
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
+- ##### （删除本地所有会话）
+
+```objc
+        [OIMManager.manager deleteAllConversationFromLocalWithOnSuccess:^(NSString * _Nullable data) {
+            
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
         }];
 ```

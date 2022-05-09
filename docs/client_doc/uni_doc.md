@@ -715,8 +715,8 @@ config是json字符串，格式为
 |    api_addr    | string |                 api域名地址                  |
 |  ipWws_addrs   | string |               websocket地址                |
 |    data_dir    | String |             SDK数据存放目录（绝对路径）              |
-|   log_level    |  int   |                                          |
-| object_storage | string |                                          |
+|   log_level    |  int   |                   日志等级                   |
+| object_storage | string |                   选择存储                   |
 
 * Monitor:
 
@@ -776,7 +776,7 @@ const res = im.getLoginStatus()
 // 返回值为 101:登录成功 102:登陆中 103:登录失败 201:登出
 ```
 
-## getLoginUid
+## getLoginUser
 
 获取当前登录用户ID。
 
@@ -940,7 +940,7 @@ im.addFriend(operationID,userIDReqMsg,data => {
 |     Name     |   Type   | Description |
 | :----------: | :------: | :---------: |
 | operationID  |  string  |    UUID     |
-| userIDReqMsg |  string  |   申请验证信息    |
+| userIDReqMsg |   obj    |   申请验证信息    |
 |   callback   | callback |    通用回调     |
 
 ## SetFriendRemark
@@ -965,7 +965,7 @@ im.setFriendRemark(operationID,userIDRemark,data => {
 |     Name     |   Type   | Description |
 | :----------: | :------: | :---------: |
 | operationID  |  string  |    UUID     |
-| userIDRemark |  string  |    好友备注     |
+| userIDRemark |   obj    |    好友备注     |
 |   callback   | callback |    通用回调     |
 
 ## DeleteFriend
@@ -1049,7 +1049,7 @@ im.acceptFriendApplication(operationID,userIDHandleMsg,data => {
 |      Name       |   Type   | Description |
 | :-------------: | :------: | :---------: |
 |   operationID   |  string  |    UUID     |
-| userIDHandleMsg |  string  |    处理消息     |
+| userIDHandleMsg |   obj    |    处理消息     |
 |    callback     | callback |    通用回调     |
 
 ## RefuseFriendApplication
@@ -1074,7 +1074,7 @@ im.refuseFriendApplication(operationID,userIDHandleMsg,data => {
 |      Name       |   Type   | Description |
 | :-------------: | :------: | :---------: |
 |   operationID   |  string  |    UUID     |
-| userIDHandleMsg |  string  |    回复消息     |
+| userIDHandleMsg |   obj    |    回复消息     |
 |    callback     | callback |    通用回调     |
 
 ## AddBlack
@@ -1171,7 +1171,7 @@ memberList为此结构的列表
 |     Name      |   Type   | Description |
 | :-----------: | :------: | :---------: |
 |  operationID  |  string  |    UUID     |
-| groupBaseInfo |  string  |     群信息     |
+| groupBaseInfo |   obj    |     群信息     |
 |  memberList   | string[] |     群成员     |
 |   callback    | callback |    通用回调     |
 
@@ -1285,7 +1285,7 @@ im.setGroupInfo(operationID,groupID,groupInfo,data => {
 | :---------: | :------: | :---------: |
 | operationID |  string  |    UUID     |
 |   groupID   |  string  |    群聊ID     |
-|  groupInfo  |  string  |    群基本信息    |
+|  groupInfo  |   obj    |    群基本信息    |
 |  callback   | callback |    通用回调     |
 
 ## GetGroupMemberList
@@ -1381,6 +1381,91 @@ im.transferGroupOwner(operationID,groupID,newOwnerUserID,data => {
 | newOwnerUserID |  string  |   新群主用户ID   |
 |    callback    | callback |    通用回调     |
 
+## DismissGroup
+
+解散某群
+
+- Example:
+
+```js
+im.dismissGroup(operationID,groupID,data => {
+	...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|  callback   | callback |    通用回调     |
+
+## ChangeGroupMute
+
+禁言或取消禁言某群
+
+- Example:
+
+```js
+im.changeGroupMute(operationID,groupID,isMute,data => {
+	...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
+|   isMute    |   bool   |    是否禁言     |
+|  callback   | callback |    通用回调     |
+
+## ChangeGroupMemberMute
+
+禁言或取消禁言某群成员
+
+- Example:
+
+```js
+im.changeGroupMemberMute(operationID,groupID,userID,mutedSeconds,data => {
+	...
+})
+```
+
+- Parameters:
+
+|     Name     |   Type   |     Description     |
+| :----------: | :------: | :-----------------: |
+| operationID  |  string  |        UUID         |
+|   groupID    |  string  |        群聊ID         |
+|    userID    |  string  |        群成员ID        |
+| mutedSeconds |  number  | mutedSeconds为0时取消禁言 |
+|   callback   | callback |        通用回调         |
+
+## SetGroupMemberNickname
+
+设置群成员昵称
+
+- Example:
+
+```js
+im.setGroupMemberNickname(operationID,groupID,userID,groupMemberNickname,data => {
+	...
+})
+```
+
+- Parameters:
+
+|        Name         |   Type   | Description |
+| :-----------------: | :------: | :---------: |
+|     operationID     |  string  |    UUID     |
+|       groupID       |  string  |    群聊ID     |
+|       userID        |  string  |    群成员ID    |
+| groupMemberNickname |  string  |    群成员昵称    |
+|      callback       | callback |    通用回调     |
+
 ## InviteUserToGroup
 
 邀请某些人进群，群里所有成员可以操作(可批量)
@@ -1422,6 +1507,26 @@ im.getRecvGroupApplicationList(operationID,data => {
 ```
 
 * Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
+
+## GetSendGroupApplicationList
+
+作为群主或者管理员，获取发送的群成员申请进群列表
+
+- Example:
+
+```js
+im.getSendGroupApplicationList(operationID,data => {
+	...
+})
+//回调:成功时，OnSuccess回调GroupApplicationInfo的列表
+```
+
+- Parameters:
 
 |    Name     |   Type   | Description |
 | :---------: | :------: | :---------: |
@@ -1523,7 +1628,7 @@ im.getConversationListSplit(operationID,offset,count,data => {
 * Example:
 
 ```js
-im.getOneConversation(operationID,sourceID,sessionType,data => {
+im.getOneConversation(operationID,sessionType,sourceID,data => {
 	...
 })
 //回调:成功时，OnSuccess回调ConversationInfo
@@ -1534,8 +1639,8 @@ im.getOneConversation(operationID,sourceID,sessionType,data => {
 |    Name     |   Type   |   Description   |
 | :---------: | :------: | :-------------: |
 | operationID |  string  |      UUID       |
-|  sourceID   |  string  | 单聊为用户ID，群聊为群ID  |
 | sessionType |  number  | 会话的类型，单聊为1，群聊为2 |
+|  sourceID   |  string  | 单聊为用户ID，群聊为群ID  |
 |  callback   | callback |      通用回调       |
 
 ## GetConversationIDBySessionType
@@ -1579,7 +1684,7 @@ im.getMultipleConversation(operationID,conversationIDList,data => {
 
 ## DeleteConversation
 
-删除一个会话
+删除本地的一个会话，卸载APP后会重新获取到
 
 * Example:
 
@@ -1596,6 +1701,45 @@ im.deleteConversation(operationID,conversationID,data => {
 |  operationID   |  string  |    UUID     |
 | conversationID |  string  |    会话ID     |
 |    callback    | callback |    通用回调     |
+
+## DeleteConversationFromLocalAndSvr
+
+删除本地和远端的一个会话，卸载APP后不会重新获取到
+
+- Example:
+
+```js
+im.deleteConversationFromLocalAndSvr(operationID,conversationID,data => {
+	...
+})
+```
+
+- Parameters:
+
+|      Name      |   Type   | Description |
+| :------------: | :------: | :---------: |
+|  operationID   |  string  |    UUID     |
+| conversationID |  string  |    会话ID     |
+|    callback    | callback |    通用回调     |
+
+## DeleteAllConversationFromLocal
+
+删除本地的所有会话，卸载APP后会重新获取到
+
+- Example:
+
+```js
+im.deleteAllConversationFromLocal(operationID,conversationID,data => {
+	...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
 
 ## SetConversationDraft
 
@@ -1658,6 +1802,111 @@ im.getTotalUnreadMsgCount(operationID,data => {
 | operationID |  string  |    UUID     |
 |  callback   | callback |    通用回调     |
 
+## MarkGroupMessageHasRead
+
+标记群聊会话消息已读
+
+- Example:
+
+```js
+im.markGroupMessageHasRead(operationID,data => {
+	...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群组ID     |
+|  callback   | callback |    通用回调     |
+
+## SetOneConversationPrivateChat
+
+设置阅后即焚
+
+- Example:
+
+```js
+im.setOneConversationPrivateChat(operationID,conversationID,isPrivate,data => {
+	...
+})
+```
+
+- Parameters:
+
+|      Name      |   Type   |    Description    |
+| :------------: | :------: | :---------------: |
+|  operationID   |  string  |       UUID        |
+| conversationID |  string  |       会话ID        |
+|   isPrivate    |   bool   | true为开启, false为关闭 |
+|    callback    | callback |       通用回调        |
+
+## SetOneConversationRecvMessageOpt
+
+设置一个会话免打扰状态
+
+- Example:
+
+```js
+im.setOneConversationRecvMessageOpt(operationID,conversationID,status,data => {
+	...
+})
+```
+
+- Parameters:
+
+|      Name      |   Type   |         Description         |
+| :------------: | :------: | :-------------------------: |
+|  operationID   |  string  |            UUID             |
+| conversationID |  string  |            会话ID             |
+|     status     |  number  | 是否开启免打扰 0不开启 1不接受信息 2接收但不提醒 |
+|    callback    | callback |            通用回调             |
+
+## SetConversationRecvMessageOpt
+
+设置多个会话免打扰状态
+
+设置为1时，不再接收改会话的消息。设置为2时，正常接收该会话的消息，但不计入总未读数（依然会计入该会话的未读数，但可根据会话中的recvOpt状态自行处理）。
+
+- Example:
+
+```js
+im.setConversationRecvMessageOpt(operationID,conversationIDList,status,data => {
+	...
+})
+```
+
+- Parameters:
+
+|        Name        |   Type   |         Description         |
+| :----------------: | :------: | :-------------------------: |
+|    operationID     |  string  |            UUID             |
+| conversationIDList | string[] |           会话ID数组            |
+|       status       |   bool   | 是否开启免打扰 0不开启 1不接受信息 2接收但不提醒 |
+|      callback      | callback |            通用回调             |
+
+## GetConversationRecvMessageOpt
+
+获取会话免打扰状态
+
+- Example:
+
+```js
+im.getConversationRecvMessageOpt(operationID,conversationIDList,status,data => {
+	...
+})
+```
+
+- Parameters:
+
+|        Name        |   Type   | Description |
+| :----------------: | :------: | :---------: |
+|    operationID     |  string  |    UUID     |
+| conversationIDList | string[] |   会话ID数组    |
+|      callback      | callback |    通用回调     |
+
 # 消息
 
 ## CreateTextMessage
@@ -1691,11 +1940,12 @@ const meg = im.createTextAtMessage(OperationID, textMsg, atUserIDList)
 
 * Parameters:
 
-|     Name     |   Type   | Description |
-| :----------: | :------: | :---------: |
-| operationID  |  string  |    UUID     |
-|   textMsg    |  string  |   消息文字内容    |
-| atUserIDList | string[] |   @用户id数组   |
+|      Name      |   Type   | Description |
+| :------------: | :------: | :---------: |
+|  operationID   |  string  |    UUID     |
+|    textMsg     |  string  |   消息文字内容    |
+|  atUserIDList  | string[] |   @用户id数组   |
+| atUserInfoList |   obj    |   @用户信息数组   |
 
 ## CreateImageMessage
 
@@ -1757,9 +2007,9 @@ const snapshotPicInfo = sourceInfo		//搜略图信息
 |      Name       |  Type  | Description |
 | :-------------: | :----: | :---------: |
 |   operationID   | string |    UUID     |
-|   sourceInfo    | string |    原图片信息    |
-|   bigPicInfo    | string |    大图信息     |
-| snapshotPicInfo | string |    搜略图信息    |
+|   sourceInfo    |  obj   |    原图片信息    |
+|   bigPicInfo    |  obj   |    大图信息     |
+| snapshotPicInfo |  obj   |    搜略图信息    |
 
 ## CreateSoundMessage
 
@@ -1822,7 +2072,7 @@ const soundInfo = {
 |    Name     |  Type  | Description |
 | :---------: | :----: | :---------: |
 | operationID | string |    UUID     |
-|  soundInfo  | string |    语音信息     |
+|  soundInfo  |  obj   |    语音信息     |
 
 ## CreateVideoMessage
 
@@ -1842,7 +2092,7 @@ const res = im.createVideoMessage(OperationID, videoPath, videoType, duration, s
 | operationID  | string |      UUID       |
 |  videoPath   | string |  视频文件地址(相对路径)   |
 |  videoType   | string | 视频类型(MP4,AVI..) |
-|   duration   |  int   |      视频时长       |
+|   duration   | number |      视频时长       |
 | snapshotPath | string |  视频快照地址(相对路径)   |
 
 ## CreateVideoMessageFromFullPath
@@ -1863,7 +2113,7 @@ const res = im.createVideoMessageFromFullPath(OperationID, videoPath, videoType,
 | operationID  | string |      UUID       |
 |  videoPath   | string |  视频文件地址(绝对路径)   |
 |  videoType   | string | 视频类型(MP4,AVI..) |
-|   duration   |  int   |      视频时长       |
+|   duration   | number |      视频时长       |
 | snapshotPath | string |  视频快照地址(绝对路径)   |
 
 ## CreateVideoMessageByURL
@@ -1896,7 +2146,7 @@ const videoInfo = {
 |    Name     |  Type  | Description |
 | :---------: | :----: | :---------: |
 | operationID | string |    UUID     |
-|  videoInfo  | string |    视频信息     |
+|  videoInfo  |  obj   |    视频信息     |
 
 ## CreateFileMessage
 
@@ -1959,7 +2209,7 @@ const fileInfo = {
 |    Name     |  Type  | Description |
 | :---------: | :----: | :---------: |
 | operationID | string |    UUID     |
-|  fileInfo   | string |    文件信息     |
+|  fileInfo   |  obj   |    文件信息     |
 
 ## CreateMergerMessage
 
@@ -2035,8 +2285,8 @@ const res = im.createCustomMessage(operationID,data,expand,desc)
 |    Name     |  Type  | Description |
 | :---------: | :----: | :---------: |
 | operationID | string |    UUID     |
-|    data     | object |    自定义信息    |
-|   expand    | object |  自定义信息扩展字段  |
+|    data     |  obj   |    自定义信息    |
+|   expand    |  obj   |  自定义信息扩展字段  |
 |    desc     | string |   自定义消息描述   |
 
 ## CreateQuoteMessage
@@ -2056,7 +2306,7 @@ const res = im.createQuoteMessage(OperationID,text,message)
 | :---------: | :----: | :--------------------------------------: |
 | operationID | string |                   UUID                   |
 |    text     | string |                   消息内容                   |
-|   message   | string | 引用[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 |
+|   message   |  obj   | 引用[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)json字符串 |
 
 ## CreateCardMessage
 
@@ -2071,10 +2321,10 @@ const res = im.createCardMessage(operationID,cardDesc)
 
 - Parameters:
 
-|    Name     |  Type  | Description |
-| :---------: | :----: | :---------: |
-| operationID | string |    UUID     |
-|  cardDesc   | string |    true     |
+|    Name     |  Type  |   Description    |
+| :---------: | :----: | :--------------: |
+| operationID | string |       UUID       |
+|   msgObj    |  obj   | 自定义名片信息对象json字符串 |
 
 ## SendMessage
 
@@ -2146,7 +2396,7 @@ getMessageOptions:参数为json转换后的string，结构体如下：
 |       Name        |   Type   | Description |
 | :---------------: | :------: | :---------: |
 |    operationID    |  string  |    UUID     |
-| getMessageOptions |  string  |   获取消息参数    |
+| getMessageOptions |   obj    |   获取消息参数    |
 |     callback      | callback |    通用回调     |
 
 ## RevokeMessage
@@ -2163,11 +2413,11 @@ im.revokeMessage(operationID,message,data => {
 
 - Parameters:
 
-|    Name     |   Type   | Description |
-| :---------: | :------: | :---------: |
-| operationID |  string  |    UUID     |
-|   message   |  string  | MessageInfo |
-|  callback   | callback |    通用回调     |
+|    Name     |    Type     |   Description    |
+| :---------: | :---------: | :--------------: |
+| operationID |   string    |       UUID       |
+|   message   | MessageInfo | 要撤回的消息结构体json字符串 |
+|  callback   |  callback   |       通用回调       |
 
 ## TypingStatusUpdate
 
@@ -2183,12 +2433,12 @@ im.typingStatusUpdate(operationID,recvID,msgTip,data => {
 
 - Parameters:
 
-|    Name     |   Type   |       Description        |
-| :---------: | :------: | :----------------------: |
-| operationID |  string  |           UUID           |
-|   recvID    |  string  |          接收者ID           |
-|   msgTip    |  string  | 自定义的提示信息为json序列化后的string |
-|  callback   | callback |           通用回调           |
+|    Name     |   Type   |        Description         |
+| :---------: | :------: | :------------------------: |
+| operationID |  string  |            UUID            |
+|   recvID    |  string  |           接收者ID            |
+|   msgTip    |  string  | 自定义的提示信息(为json序列化后的string) |
+|  callback   | callback |            通用回调            |
 
 ## MarkC2CMessageAsRead
 
@@ -2208,6 +2458,27 @@ im.markC2CMessageAsRead(operationID,userID,msgIDList,data => {
 | :---------: | :------: | :---------: |
 | operationID |  string  |    UUID     |
 |   userID    |  string  |    用户ID     |
+|  msgIDList  | string[] |   消息ID的列表   |
+|  callback   | callback |    通用回调     |
+
+## MarkGroupMessageAsRead
+
+标记群聊消息已读
+
+- Example:
+
+```js
+im.MarkGroupMessageAsRead(operationID,groupID,msgIDList,data => {
+	...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |    群聊ID     |
 |  msgIDList  | string[] |   消息ID的列表   |
 |  callback   | callback |    通用回调     |
 
@@ -2231,9 +2502,67 @@ im.deleteMessageFromLocalStorage(operationID,message,data => {
 |   message   | MessageInfo |     消息      |
 |  callback   |  callback   |    通用回调     |
 
+## DeleteMessageFromLocalAndSvr
+
+本地和远程删除一条消息, 卸载APP后都不会重新获取到
+
+- Example:
+
+```js
+im.deleteMessageFromLocalAndSvr(operationID,message,data => {
+    ...
+})
+```
+
+- Parameters:
+
+|    Name     |    Type     | Description |
+| :---------: | :---------: | :---------: |
+| operationID |   string    |    UUID     |
+|   message   | MessageInfo |     消息      |
+|  callback   |  callback   |    通用回调     |
+
+## DeleteAllMsgFromLocal
+
+本地删除所有消息，卸载APP后会重新获取到
+
+- Example:
+
+```js
+im.deleteAllMsgFromLocal(operationID,data => {
+    ...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
+
+## DeleteAllMsgFromLocalAndSvr
+
+本地和远程删除所有消息, 卸载APP后都不会重新获取到
+
+- Example:
+
+```js
+im.deleteMessageFromLocalAndSvr(operationID,data => {
+    ...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|  callback   | callback |    通用回调     |
+
 ## ClearC2CHistoryMessage
 
-清空单聊的历史记录
+清空本地单聊的历史记录，卸载APP后会重新获取到
 
 - Example:
 
@@ -2253,12 +2582,52 @@ im.clearC2CHistoryMessage(operationID,userID,data => {
 
 ## ClearGroupHistoryMessage
 
-本地删除一条消息，卸载APP后会重新获取到
+本地删除一条群聊消息，卸载APP后会重新获取到
 
 - Example:
 
 ```js
 im.clearGroupHistoryMessage(operationID,groupID,data => {
+    ...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   groupID   |  string  |     群ID     |
+|  callback   | callback |    通用回调     |
+
+## ClearC2CHistoryMessageFromLocalAndSvr
+
+清空本地和远端单聊的所有的历史记录，卸载APP后不会重新获取到
+
+- Example:
+
+```js
+im.clearC2CHistoryMessageFromLocalAndSvr(operationID,userID,data => {
+    ...
+})
+```
+
+- Parameters:
+
+|    Name     |   Type   | Description |
+| :---------: | :------: | :---------: |
+| operationID |  string  |    UUID     |
+|   userID    |  string  |    用户ID     |
+|  callback   | callback |    通用回调     |
+
+## ClearGroupHistoryMessageFromLocalAndSvr
+
+清空本地和远端群聊的所有的历史记录，卸载APP后不会重新获取到
+
+- Example:
+
+```js
+im.clearC2CHistoryMessageFromLocalAndSvr(operationID,userID,data => {
     ...
 })
 ```
@@ -2361,7 +2730,7 @@ im.searchLocalMessages(operationID,searchParam,data => {
 |    Name     |   Type   | Description |
 | :---------: | :------: | :---------: |
 | operationID |  string  |    UUID     |
-| searchParam |  string  |    搜索参数     |
+| searchParam |   obj    |    搜索参数     |
 |  callback   | callback |    通用回调     |
 
 # 监听
