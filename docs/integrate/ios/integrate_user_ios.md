@@ -138,6 +138,21 @@
         }];
 ```
 
+## 搜索用户
+
+本地搜索用户，可能是好友，可能是陌生人。
+
+```objc
+        OIMSearchUserParam *t = [OIMSearchUserParam new];
+        t.keywordList = @[@""];
+        t.isSearchUserID = YES;
+        
+        [OIMManager.manager searchUsers:t
+                              onSuccess:^(NSArray<OIMSearchUserInfo *> * _Nullable usersInfo) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 ## 好友监听回调
 
 ### 调用示例
