@@ -164,12 +164,6 @@ server {
                 proxy_pass http://43.128.5.63:10006;
 
         }
-    location ~^/storage {
-                 proxy_buffering off;
-                 proxy_set_header Host $http_host;
-                 rewrite ^/storage/(.*)$ /$1 break;
-                 proxy_pass http://43.128.5.63:10005;
-           }
 }
 
 server {
@@ -177,6 +171,37 @@ server {
         server_name open-im-test.rentsoft.cn;
         rewrite ^(.*)$ https://${server_name}$1 permanent;
 }
+
+// minio nginx
+server {
+        listen 443;
+        server_name storage.rentsoft.cn;
+
+        ssl on;
+        ssl_certificate /etc/nginx/conf.d/ssl/storage.rentsoft.cn_nginx/storage.rentsoft.cn_bundle.crt;
+        ssl_certificate_key /etc/nginx/conf.d/ssl/storage.rentsoft.cn_nginx/storage.rentsoft.cn.key;
+
+        ssl_session_timeout 5m;
+
+        gzip on;
+        gzip_min_length 1k;
+        gzip_buffers 4 16k;
+        gzip_comp_level 2;
+        gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+        gzip_vary off;
+        gzip_disable "MSIE [1-6]\.";
+
+    location / {
+        proxy_pass http://127.0.0.1:10005;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_http_version 1.1;
+    }
+
+}
+
 
 ```
 
