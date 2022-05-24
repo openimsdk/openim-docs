@@ -16,8 +16,8 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 ## 1. IM商业版本授权
 | 项目                             | 开源协议                                                                                     | 商业化授权费用                  |
 |--------------------------------|------------------------------------------------------------------------------------------|--------------------------|
-| 公司、单位组织架构服务端                   | 服务端闭源                                                                                    | 1万/套，可以基于此二次开发           |
-| 朋友圈服务端                         | 服务端闭源                                                                                    | 1万/套，可以基于此二次开发           |
+| 公司、单位组织架构                   | 服务端闭源                                                                                    | 1万/套，可以基于此二次开发           |
+| 朋友圈                         | 服务端闭源                                                                                    | 1万/套，可以基于此二次开发           |
 | iOS原生                          | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
 | Android原生                      | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
 | Flutter跨端（含iOS、Android）        | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
