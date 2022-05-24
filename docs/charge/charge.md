@@ -26,7 +26,7 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 | h5（含h5、小程序）                    | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
 | 后台管理                           | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
 | 音视频通话sdk、基于SFU的服务端             | 服务端闭源                                                                                    | 3万/套，客户端100%开源，可以基于此二次开发 |
-| 过期数据删除工具                   | 闭源                                                                                    | 5000元/年           |
+| 历史消息定时删除工具                   | 闭源                                                                                    | 5000元/年           |
 | 消息存储支持国密算法                   | 闭源                                                                                    | 1万/年           |
 
 商业版本是OpenIM技术团队在100%开源的OpenIM服务端和IMSDK基础上，开发带有UI功能完整的IM产品。可以直接部署运营，也可以在此基础上二次开发。商业版本必须要授权，否则发起诉讼，向侵权者索赔。
