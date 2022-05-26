@@ -11,7 +11,7 @@
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/auth/user_register`
+ - `http://x.x.x.x:10002/auth/user_register`
 
 
 ### **请求方式**
@@ -83,7 +83,7 @@
 
 ### **请求URL**
 
--  ` http://x.x.x.x:10000/auth/user_token`
+-  ` http://x.x.x.x:10002/auth/user_token`
 
 
 ### **请求方式**
@@ -140,7 +140,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/group/create_group`
+- `http://x.x.x.x:10002/group/create_group`
 
 ### **请求数据方式**
 
@@ -201,7 +201,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/group/invite_user_to_group`
+- `http://x.x.x.x:10002/group/invite_user_to_group`
 
 ### **请求方式**
 
@@ -263,7 +263,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/group/kick_group`
+- `http://x.x.x.x:10002/group/kick_group`
 
 ### **请求方式**
 
@@ -323,7 +323,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/friend/import_friend`
+- `http://x.x.x.x:10002/friend/import_friend`
 
 ### **请求方式**
 
@@ -374,7 +374,7 @@
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/friend/add_blacklist`
+- `http://x.x.x.x:10002/friend/add_blacklist`
 
 ### **请求方式**
 
@@ -421,7 +421,7 @@ APP管理员更新用户信息
 
 ### **请求URL**
 
-- `http://x.x.x.x:10000/user/update_user_info`
+- `http://x.x.x.x:10002/user/update_user_info`
 
 ### **请求方式**
 
@@ -477,7 +477,7 @@ APP管理员更新用户信息
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/manager/delete_user`
+ - `http://x.x.x.x:10002/manager/delete_user`
 
 
 ### **请求方式**
@@ -537,7 +537,7 @@ APP管理员更新用户信息
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/user/get_user_info`
+ - `http://x.x.x.x:10002/user/get_user_info`
 
 
 ### **请求方式**
@@ -623,7 +623,7 @@ APP管理员更新用户信息
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/manager/get_all_users_uid`
+ - `http://x.x.x.x:10002/manager/get_all_users_uid`
 
 
 ### **请求方式**
@@ -677,7 +677,7 @@ APP管理员更新用户信息
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/manager/send_msg`
+ - `http://x.x.x.x:10002/manager/send_msg`
 
 
 ### **请求方式**
