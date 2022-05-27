@@ -9,8 +9,9 @@ App不仅可以基于该回调来实现消息同步，而且可以进行发消�
 #### 回调分类
 从功能角度来看，回调可以分为：
 - 发送消息前后回调
-- 添加好友前后回调(开发中)
-- 邀请进群前后回调(开发中)
+- 文字类型消息过滤回调
+- 用户上下线通知回调
+- 
 
 从处理角度来看，回调可以分为以下两大类：
 - 发送事件发生之前回调：回调的主要目的在于让 App 后台可以干预该事件的处理逻辑，即时通信 IM 会根据回调返回码确定后续处理流程。
@@ -28,7 +29,7 @@ App不仅可以基于该回调来实现消息同步，而且可以进行发消�
 - callbackUrl：APP接口URL, 回调URL
 - enable：true代表该回调开启， false代表该回调关闭
 - callbackTimeOut：回调超时时间
-- callbackFailedContinue：回调超时或者因网络原因造成的失败后是否继续执行流程
+- callbackFailedContinue：回调超时或者因网络原因造成的失败后是否继续执行流程, 部分回调类型没有这个参数
 
 #### 回调协议
 第三方回调基于 HTTP/HTTPS 协议, openIM使用POST请求的方式来向App后台发起回调请求,具体的回调内容则会包含在 HTTP 请求包体中。
@@ -63,7 +64,8 @@ App不仅可以基于该回调来实现消息同步，而且可以进行发消�
 | content         | string | 替换后的内容 |
 
 响应的content即要替换的全新内容
-ActionCode和ErrCode都为0 才会正常过滤消息
+ActionCode和ErrCode都为0以及content不为空才会正常过滤消息
+errCode会返回到客户端
 
 ##### 发单聊消息之前回调
 - 请求
@@ -94,6 +96,8 @@ ActionCode和ErrCode都为0 才会正常过滤消息
 | operationID     | string      |     本次操作ID       |
 
 ActionCode和ErrCode都为0 才会正常接受回调响应
+errCode会返回到客户端
+
 
 ##### 发单聊消息之后回调
 - 请求
@@ -124,3 +128,75 @@ ActionCode和ErrCode都为0 才会正常接受回调响应
 | operationID     | string      |     本次操作ID       |
 
 ActionCode和ErrCode不影响本次操作
+
+##### 用户上线之后回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+|    UserID       |  string  | 发送者ID                                     | 
+| callbackCommand |  string  | 回调指令                                      |
+| operationID |  string  | 本次操作ID                                      |
+| PlatformID |  string  | 平台ID                                      |
+| Platform |  string  | 平台                                      |
+| token |  string  | 使用token                                      |
+
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
+|  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+
+ActionCode和ErrCode不影响本次操作
+
+##### 用户离线之后回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+|    UserID       |  string  | 发送者ID                                     | 
+| callbackCommand |  string  | 回调指令                                      |
+| perationID |  string  | 本次操作ID                                      |
+| PlatformID |  string  | 平台ID                                      |
+| Platform |  string  | 平台                                      |
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许本次消息发送  1为阻止本次消息发送|
+|  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+
+ActionCode和ErrCode不影响本次操作
+
+##### 用户接受离线消息回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+|    UserID       |  string  | 发送者ID                                     | 
+| callbackCommand |  string  | 回调指令                                      |
+| operationID |  string  | 本次操作ID                                      |
+| PlatformID |  string  | 平台ID                                      |
+| Platform |  string  | 平台                                      |
+|    Title       |  string  | 推送标题                                     | 
+| Desc |  string  | 推送描述                                      |
+| Ex |  string  | 扩展字段                                      |
+| IOSPushSound |  string  | ios推送声音                                      |
+| IOSBadgeCount |  string  |       推送消息是否计入桌面图标未读数                              |
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许离线发送  1为阻止离线消息发送|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+
