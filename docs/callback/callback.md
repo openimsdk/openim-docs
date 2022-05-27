@@ -150,6 +150,7 @@ ActionCode和ErrCode不影响本次操作
 |  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
 |  errMsg         |  string |           错误信息               |
 | operationID     | string      |     本次操作ID       |
+| seq | int | 序号 毫秒时间戳|
 
 ActionCode和ErrCode不影响本次操作
 
@@ -163,6 +164,8 @@ ActionCode和ErrCode不影响本次操作
 | perationID |  string  | 本次操作ID                                      |
 | PlatformID |  string  | 平台ID                                      |
 | Platform |  string  | 平台                                      |
+| seq | int | 序号 毫秒时间戳|
+
 
 - 响应
  
@@ -183,13 +186,19 @@ ActionCode和ErrCode不影响本次操作
 |    UserID       |  string  | 发送者ID                                     | 
 | callbackCommand |  string  | 回调指令                                      |
 | operationID |  string  | 本次操作ID                                      |
-| PlatformID |  string  | 平台ID                                      |
-| Platform |  string  | 平台                                      |
+| platformID |  string  | 平台ID                                      |
+| platform |  string  | 平台                                      |
 |    Title       |  string  | 推送标题                                     | 
-| Desc |  string  | 推送描述                                      |
-| Ex |  string  | 扩展字段                                      |
-| IOSPushSound |  string  | ios推送声音                                      |
-| IOSBadgeCount |  string  |       推送消息是否计入桌面图标未读数                              |
+| desc |  string  | 推送描述                                      |
+| ex |  string  | 扩展字段                                      |
+| iOSPushSound |  string  | ios推送声音                                      |
+| iOSBadgeCount |  string  |       推送消息是否计入桌面图标未读数                              |
+| sendID |  string  |       发送id                              |
+| groupID |  string  |       群id                              |
+| contentType |  string  |       类型                              |
+| sessionType |  string  |       消息单聊群聊类型                             |
+| atUserIDList |  []string  |             atUserIDList                        |
+| content | string | 内容 |
 
 - 响应
  
