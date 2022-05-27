@@ -7,7 +7,7 @@
 
 ### **请求URL**
 
--  ` http://x.x.x.x:10000/auth/user_token`
+-  ` http://x.x.x.x:10002/auth/user_token`
 
 
 ### **请求方式**

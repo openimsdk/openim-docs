@@ -7,7 +7,7 @@
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/auth/user_register`
+ - `http://x.x.x.x:10002/auth/user_register`
 
 
 ### **请求方式**
