@@ -1137,6 +1137,7 @@ APP管理员更新用户信息
 
  - `POST`
 ### **请求示例**
+```
 {
   "operationID": "revoke op1", 
   "sendID": "openIMAdmin", 
@@ -1156,6 +1157,7 @@ APP管理员更新用户信息
       "iOSBadgeCount": false
   }
 }
+```
 ### **返回示例**
 
   ```json
