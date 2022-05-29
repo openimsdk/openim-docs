@@ -953,6 +953,9 @@ APP管理员更新用户信息
     }
 }
   ```
+
+
+
 ## 管理员发送通知类型消息
 
 ### **简要描述**
@@ -1121,6 +1124,63 @@ APP管理员更新用户信息
 | sendTime    |  int   | 消息发送的具体时间，具体为毫秒的时间戳         |
 | serverMsgID | string | 服务器生成的消息的唯一ID                       |
 | clientMsgID | string | 客户端生成的消息唯一ID，默认情况使用这个为主键 |
+
+## 管理员批量发送通知
+### **简要描述**
+
+ - 管理员通过后台接口批量发送通知类型消息
+
+### **请求URL**
+ - `http://x.x.x.x:10000/manager/batch_send_msg`
+
+### **请求方式**
+
+ - `POST`
+### **请求示例**
+```
+{
+  "operationID": "revoke op1", 
+  "sendID": "openIMAdmin", 
+  "recvIDList": ["17711111111","17726378428"],
+  "senderPlatformID": 2, 
+  "content": {
+     "text": "nihao"
+  },
+  "contentType": 101, 
+  "sessionType": 1, 
+  "isOnlineOnly": false, 
+  "offlinePushInfo": {
+      "title": "admin revoke your message", 
+      "desc": "", 
+      "ex": "", 
+      "iOSPushSound": "default", 
+      "iOSBadgeCount": false
+  }
+}
+```
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+       "resultList": [
+                   {
+                       "serverMsgID": "35aeef2e8525b48b34969af7ec518be7",
+                       "clientMsgID": "cc7a2617d1b07f8c1bd5c265f5b2618a",
+                       "sendTime": 1653636382846
+                   },
+                   {
+                       "serverMsgID": "52c8b16d9c2158a474959de47b983bff",
+                       "clientMsgID": "4c27dcfdcbfed8ee871a1b0e08e4dce0",
+                       "sendTime": 1653636382850
+                   }
+               ],
+        "FailedIDList": []
+    }
+}
+```
 
 ## 消息类型格式描述
 
