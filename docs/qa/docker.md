@@ -1,6 +1,7 @@
 ## 1.golang环境安装
 ```bash
-wget -c https://dl.google.com/go/go1.17.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+wget -c https://dl.google.com/go/go1.17.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local | ln -s /usr/local/go/bin/go  /usr/bin/go
+
 ```
 # 2. docker
 ## 安装

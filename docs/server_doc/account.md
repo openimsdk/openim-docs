@@ -7,7 +7,7 @@
 ### **请求URL**
 
 
- - `http://x.x.x.x:10000/auth/user_register`
+ - `http://x.x.x.x:10002/auth/user_register`
 
 
 ### **请求方式**
@@ -81,7 +81,7 @@ AppServer调用此接口获取token，IMSDK在login时需传入token
 
 ### **请求URL**
 
--  ` http://x.x.x.x:10000/auth/user_token`
+-  ` http://x.x.x.x:10002/auth/user_token`
 
 
 ### **请求方式**

@@ -15,6 +15,51 @@
 - 9000 端口即minio API的端口，9090端口为minio web管理端的端口，docker容器内环境变量MINIO_ROOT_USER为web管理端的登录账户，环境变量MINIO_ROOT_PASSWORD为登录密码。
 - --console-address 即docker内部web管理系统端口，可不做修改。
 
+- docker集群部署
+四台机器
+``` 
+
+    # 192.168.1.1
+    docker run -d -p 10010:9000 -p 10011:9090 --name minio_cluster \
+         -e "MINIO_ROOT_USER={{YOUR_ACCESS_KEY}}" \
+         -e "MINIO_ROOT_PASSWORD={{YOUR_SECRET_KEY}}" \
+         -v /mnt/data:/data \
+         -v /mnt/config:/root/.minio \
+         minio/minio server \
+         http://192.168.1.1/data \
+         http://192.168.1.2/data \
+         http://192.168.1.3/data \
+         http://192.168.1.4/data \
+         --console-address ':9090'
+
+    
+    docker run -d -p 10010:9000 -p 10011:9090 --name minio_cluster1 \
+             -e "MINIO_ROOT_USER={{YOUR_ACCESS_KEY}}" \
+             -e "MINIO_ROOT_PASSWORD={{YOUR_SECRET_KEY}}" \
+             -v /mnt/data1:/data \
+             -v /mnt/config1:/root/.minio \
+             minio/minio server \
+             http://127.0.0.1/data1 \
+             http://192.168.1.2/data2 \
+             http://192.168.1.3/data3 \
+             http://192.168.1.4/data4 \
+             --console-address ':9090'
+
+    docker run -d -p 10020:9000 -p 10021:9090 --name minio_cluster2 \
+                 -e "MINIO_ROOT_USER={{YOUR_ACCESS_KEY}}" \
+                 -e "MINIO_ROOT_PASSWORD={{YOUR_SECRET_KEY}}" \
+                 -v /mnt/data:/data \
+                 -v /mnt/config:/root/.minio \
+                 minio/minio server \
+                 http://192.168.1.1/data \
+                 http://192.168.1.2/data \
+                 http://192.168.1.3/data \
+                 http://192.168.1.4/data \
+                 --console-address ':9090'
+
+    
+
+```
 
 ##### 2.查看minio启动状况
 - 执行docker ps命令
