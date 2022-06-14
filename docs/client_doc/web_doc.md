@@ -285,7 +285,7 @@
   }
   const options:AdvancedMsgParams = {
     messageEntityList:[entity],
-    textStr:""
+    text:""
   }
   
   openIM.createAdvancedTextMessage(options).then(({ data })=>{
@@ -299,7 +299,7 @@
 
   | Name        | Type     | Required | Description        |
   | ----------- | -------- | -------- | ------------------ |
-  | textStr | string | true     | 消息文字内容 |
+  | text | string | true     | 消息文字内容 |
   | messageEntityList | MessageEntity[] | false     | 自定义@内容列表 |
   | MessageEntity->type | string | true | 自定义@类型 |
   | MessageEntity->offset | number | true | 自定义内容起始位置 |
