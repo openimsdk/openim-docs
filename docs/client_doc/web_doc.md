@@ -281,7 +281,7 @@
     offset: 0;
     length:3;
     url: "";
-    userInfo: PublicUserItem;
+    info: "";
   }
   const options:AdvancedMsgParams = {
     messageEntityList:[entity],
@@ -305,7 +305,7 @@
   | MessageEntity->offset | number | true | 自定义内容起始位置 |
   | MessageEntity->length | number | true | 自定义内容长度 |
   | MessageEntity->url | string | false | 自定义内容url |
-  | MessageEntity->userInfo | PublicUserItem | false | 自定义相关用户信息 |
+  | MessageEntity->info | string | false | 自定义信息json字符串 |
 
 - Returns:
 
