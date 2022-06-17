@@ -269,7 +269,49 @@
   | ---- | ------ | --------------------- |
   | Data | string | @文字信息结构体字符串 |
 
+  ## createAdvancedTextMessage
   
+  > 创建一条高级文本消息（具体更强的@能力，支持用户@自定义）。
+
+- Example:
+
+  ```js
+  const entity:MessageEntity = {
+    type: "@";
+    offset: 0;
+    length:3;
+    url: "";
+    info: "";
+  }
+  const options:AdvancedMsgParams = {
+    messageEntityList:[entity],
+    text:""
+  }
+  
+  openIM.createAdvancedTextMessage(options).then(({ data })=>{
+    ...
+  }).catch(err=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name        | Type     | Required | Description        |
+  | ----------- | -------- | -------- | ------------------ |
+  | text | string | true     | 消息文字内容 |
+  | messageEntityList | MessageEntity[] | false     | 自定义@内容列表 |
+  | MessageEntity->type | string | true | 自定义@类型 |
+  | MessageEntity->offset | number | true | 自定义内容起始位置 |
+  | MessageEntity->length | number | true | 自定义内容长度 |
+  | MessageEntity->url | string | false | 自定义内容url |
+  | MessageEntity->info | string | false | 自定义信息json字符串 |
+
+- Returns:
+
+  | Name | Type   | Description          |
+  | ---- | ------ | -------------------- |
+  | data | string | 高级文本消息结构体字符串 |
 
 ## createImageMessage
 
