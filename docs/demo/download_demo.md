@@ -20,13 +20,13 @@
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>Electron PC</h2>
-      <p style="text-align: center;">扫码或<a href="https://pan.baidu.com/s/16MW36rKVFtDCBewMOdD0pA" target="_blank">点击此处下载</a></p>
+      <p style="text-align: center;">扫码或<a href="https://pan.baidu.com/s/1yDE7NlHsYQfgL6J3VtsmcA" target="_blank">点击此处下载</a></p>
       <img
         src="images/pc_qr.png"
         width="200px"
         height="200px"
       />
-      <b>提取码：jd15</b>
+      <b>提取码：tthq</b>
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>PC Web</h2>

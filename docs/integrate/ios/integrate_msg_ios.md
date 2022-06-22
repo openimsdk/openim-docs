@@ -226,6 +226,20 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         }];
 ```
 
+## 获取聊天记录，反向的列表
+
+```objc
+        OIMGetMessageOptions *options = [OIMGetMessageOptions new];
+        options.userID = @"";
+        options.groupID = @"";
+        options.conversationID = @"";
+
+        [OIMManager.manager getHistoryMessageListReverse:options
+                                                onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+```
+
 ## 删除历史消息
 
 可删除本地数据库存储的消息记录，及删除服务端记录。
@@ -291,18 +305,7 @@ OIMMessageInfo *message =  [OIMMessageInfo createQuoteMessage:text message:quote
         }];
 ```
 
-## 搜索历史消息
-```objc
-        OIMGetMessageOptions *options = [OIMGetMessageOptions new];
-        options.userID = @"";
-        options.groupID = @"";
-        options.conversationID = @"";
 
-        [OIMManager.manager getHistoryMessageListReverse:options
-                                                onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
-        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
-        }];
-```
 
 # 消息接收
 
