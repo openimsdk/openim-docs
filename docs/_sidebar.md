@@ -14,7 +14,7 @@
     * [集群部署](demo/server_deploy/docker_cluster.md)
     * [k8s部署](demo/server_deploy/k8s_cluster.md)
     * [待完成](demo/server_deploy/in_development.md)
-  * [一分钟跑通Demo(Fultter)](demo/run_demo_flutter.md)
+  * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
 * [收费服务](charge/charge.md)
