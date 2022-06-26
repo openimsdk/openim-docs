@@ -117,4 +117,4 @@
   
 * [第三方回调说明](v2/description/callback.md)
   
-* [字段及含有说明](v2/description/fields.md)
+* [字段含义说明](v2/description/fields.md)
