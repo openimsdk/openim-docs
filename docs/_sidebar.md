@@ -83,4 +83,38 @@
   - [docker及golang安装](qa/docker.md)
   - [minio部署](qa/minio.md)
   - [docker部署常见问题](qa/docker_deploy.md)
+  
+*  以下是新文档模板-待补充
+* [体验OpenIM](v2/demo/download_demo.md)
+* 服务端部署
+  * [docker部署](v2/server_deploy/docker_singe.md)
+  * 源码部署
+    * [单机部署](v2/server_deploy/code_singe.md)
+    * [集群部署](v2/server_deploy/code_singe_cluster.md)
+  * [k8s部署](v2/server_deploy/k8s_cluster.md)
+  * [配置文件说明](v2/server_deploy/config.md)
+  * [生产环境必读](v2/server_deploy/online_readme.md)
+* 快速验证
+  * [app](v2/validation/app.md)
+  * [pc web](v2/validation/pc-web.md)
 
+* 客户端SDK集成模板(每一端都按照这个来)
+  * [项目环境](v2/sdk_integrate/development.md)
+  * [初始化及登录](v2/sdk_integrate/init_login.md)
+  * [群组](v2/sdk_integrate/group.md)
+  * [好友](v2/sdk_integrate/friend.md)
+  * [用户](v2/sdk_integrate/user.md)
+  * [消息及会话](v2/sdk_integrate/user.md)
+  * [常用结构体](v2/sdk_integrate/struct.md)
+
+* 服务端集成模板（全部用swagger展示）
+  * [账号管理](v2/api_integrate/account.md)
+  * [资料管理](v2/api_integrate/user.md)
+  * [消息推送](v2/api_integrate/msg.md)
+  * [关系链管理](v2/api_integrate/relationship.md)
+  * [群组管理](v2/api_integrate/group.md)
+  * [运营管理](v2/api_integrate/operation.md)
+  
+* [第三方回调说明](v2/description/callback.md)
+  
+* [字段及含有说明](v2/description/fields.md)
