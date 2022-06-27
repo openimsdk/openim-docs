@@ -108,12 +108,16 @@
   * [常用结构体](v2/sdk_integrate/struct.md)
 
 * 服务端集成模板（全部用swagger展示）
-  * [账号管理](v2/api_integrate/account.md)
-  * [资料管理](v2/api_integrate/user.md)
-  * [消息推送](v2/api_integrate/msg.md)
-  * [关系链管理](v2/api_integrate/relationship.md)
+  * [用户管理](v2/api_integrate/user.md)
+  * [关系链管理](v2/api_integrate/friend.md)
   * [群组管理](v2/api_integrate/group.md)
-  * [运营管理](v2/api_integrate/operation.md)
+  * [大群管理](v2/api_integrate/super_group.md)
+  * [账号鉴权管理](v2/api_integrate/auth.md)
+  * [第三方管理](v2/api_integrate/third.md)
+  * [消息管理](v2/api_integrate/msg.md)
+  * [会话管理](v2/api_integrate/conversation.md)
+  * [标签及工作圈管理](v2/api_integrate/office.md)
+  * [组织管理](v2/api_integrate/organization.md)
   
 * [第三方回调说明](v2/description/callback.md)
   
