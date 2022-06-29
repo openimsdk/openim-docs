@@ -4,6 +4,7 @@
   * [主要功能](introduce/mian_function.md)
   * [产品动态](introduce/production_dynamic.md)
 * 版本发布
+  - [版本管理](version/description.md)
   - [历史版本](version/history_version.md)
   - [版本计划](version/plan.md)
 * 跑通Demo
@@ -84,7 +85,7 @@
   - [minio部署](qa/minio.md)
   - [docker部署常见问题](qa/docker_deploy.md)
   
-*  以下是新文档模板-待补充
+* 以下是新文档模板-待补充
 * [体验OpenIM](v2/demo/download_demo.md)
 * 服务端部署
   * [docker部署](v2/server_deploy/docker_singe.md)
