@@ -1,6 +1,4 @@
-### Demo下载
-
-####  直接下载app
+#### 直接下载app
 
 ![Android](https://www.pgyer.com/app/qrcode/OpenIM)
 
