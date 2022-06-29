@@ -1,7 +1,7 @@
 <!-- * [OpenIM的使命](README.md) -->
 * OpenIM介绍
   * [产品简介](introduce/production_introduce.md)
-  * [主要功能](introduce/mian_function.md)
+  * [主要功能](introduce/main_function.md)
   * [产品动态](introduce/production_dynamic.md)
 * 版本发布
   - [版本管理](version/description.md)
@@ -9,8 +9,6 @@
   - [版本计划](version/plan.md)
 * 跑通Demo
   * [体验Demo](demo/download_demo.md)
- 
-  
 * 以下是新文档模板-待补充
 * [体验OpenIM](v2/demo/download_demo.md)
 * 服务端部署
@@ -25,15 +23,6 @@
 * 快速验证
   * [app](v2/validation/app.md)
   * [pc web](v2/validation/pc-web.md)
-
-* 客户端SDK集成模板(每一端都按照这个来)
-  * [项目环境](v2/sdk_integrate/development.md)
-  * [初始化及登录](v2/sdk_integrate/init_login.md)
-  * [群组](v2/sdk_integrate/group.md)
-  * [好友](v2/sdk_integrate/friend.md)
-  * [用户](v2/sdk_integrate/user.md)
-  * [消息及会话](v2/sdk_integrate/user.md)
-  * [常用结构体](v2/sdk_integrate/struct.md)
 * 集成Flutter SDK
   * [Demo下载](flutter_v2/sdk_integrate/development.md)
   * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
