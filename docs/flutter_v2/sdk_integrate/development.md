@@ -4,7 +4,7 @@
 
 可选择替换服务器地址为自己搭建的服务器地址，默认地址为官方服务器地址
 
-![image](images/flutter_service_config.gif)
+![image](../../images/flutter_service_config.gif)
 
 
 
