@@ -1,6 +1,6 @@
 # OpenIM关于各端SDK版本号的说明
 
-OpenIM版本管理较为复杂，涉及到服务端版本，以及多端SDK版本。由于OpenIM的SDK底层使用golang实现，所以aar/framework和go core SDK(Open-IM-SDK-Core https://github.com/OpenIMSDK/Open-IM-SDK-Core)版本保持一致。而插件层会修复自身bug从而带来版本号的变化，所以插件也有自身的版本号。服务端和客户端SDK只需要大版本（版本号第一位数字）保持一致即可。
+OpenIM版本管理较为复杂，涉及到服务端版本，以及多端SDK版本。由于OpenIM的SDK底层使用golang实现，所以aar/framework和go core SDK(Open-IM-SDK-Core https://github.com/OpenIMSDK/Open-IM-SDK-Core) 版本保持一致。而插件层会修复自身bug从而带来版本号的变化，所以插件也有自身的版本号。服务端和客户端SDK只需要大版本（版本号第一位数字）保持一致即可。
 
 用例子说明版本号管理
 
