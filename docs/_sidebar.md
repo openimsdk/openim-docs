@@ -1,5 +1,5 @@
 <!-- * [OpenIM的使命](README.md) -->
-OpenIM介绍
+* **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
   * [主要功能](introduce/main_function.md)
   * [产品动态](introduce/production_dynamic.md)
