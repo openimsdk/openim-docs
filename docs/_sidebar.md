@@ -34,9 +34,7 @@
   * [用户](v2/sdk_integrate/user.md)
   * [消息及会话](v2/sdk_integrate/user.md)
   * [常用结构体](v2/sdk_integrate/struct.md)
-
-
-* Flutter版SDK集成
+* 集成Flutter SDK
   * [Demo下载](flutter_v2/sdk_integrate/development.md)
   * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
   * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
@@ -63,7 +61,7 @@
   * [组织管理](v2/api_integrate/organization.md)
   * [第三方回调说明](v2/description/callback.md)
   * [字段含义说明](v2/description/fields.md)
-* * 服务端部署
+* 服务端部署
 * [docker部署](demo/server_deploy/docker_singe.md)
 * [源码部署](demo/server_deploy/code_singe.md)
 * [集群部署](demo/server_deploy/docker_cluster.md)
