@@ -3,106 +3,106 @@
   * [产品简介](introduce/production_introduce.md)
   * [主要功能](introduce/main_function.md)
   * [产品动态](introduce/production_dynamic.md)
-  * 版本发布
-    - [版本管理](version/description.md)
-    - [历史版本](version/history_version.md)
-    - [版本计划](version/plan.md)
-  * 跑通Demo
-    * [体验Demo](demo/download_demo.md)
-  * 以下是新文档模板-待补充
+* **版本发布**
+  - [版本管理](version/description.md)
+  - [历史版本](version/history_version.md)
+  - [版本计划](version/plan.md)
+* **跑通Demo**
+  * [体验Demo](demo/download_demo.md)
+* **以下是新文档模板-待补充**
   * [体验OpenIM](v2/demo/download_demo.md)
-  * 服务端部署
-    * [docker部署](v2/server_deploy/docker_singe.md)
-    * 源码部署
-      * [单机部署](v2/server_deploy/code_singe.md)
-      * [集群部署](v2/server_deploy/code_singe_cluster.md)
-    * [k8s部署](v2/server_deploy/k8s_cluster.md)
-    * [配置文件说明](v2/server_deploy/config.md)
-    * 生产环境必读
-      * [nginx配置示例](v2/server_deploy/nginx_config.md)
-  * 快速验证
-    * [app](v2/validation/app.md)
-    * [pc web](v2/validation/pc-web.md)
-  * 集成Flutter SDK
-    * [Demo下载](flutter_v2/sdk_integrate/development.md)
-    * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
-    * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
-    * [群组](flutter_v2/sdk_integrate/group.md)
-    * [好友](flutter_v2/sdk_integrate/friend.md)
-    * [用户](flutter_v2/sdk_integrate/user.md)
-    * [消息](flutter_v2/sdk_integrate/message.md)
-    * [会话](flutter_v2/sdk_integrate/conversation.md)
-    * [信令](flutter_v2/sdk_integrate/signaling.md)
-    * [组织架构](flutter_v2/sdk_integrate/organization.md)
-    * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
-    * [常用结构体](flutter_v2/sdk_integrate/struct.md)
-  * 集成iOS SDK
-    * [Demo下载](ios_v2/sdk_integrate/development.md)
-    * [SDK使用步骤](ios_v2/sdk_integrate/sdk_use.md)
-    * [初始化及登录](ios_v2/sdk_integrate/init_login.md)
-    * [群组](ios_v2/sdk_integrate/group.md)
-    * [好友](ios_v2/sdk_integrate/friend.md)
-    * [用户](ios_v2/sdk_integrate/user.md)
-    * [消息](ios_v2/sdk_integrate/message.md)
-    * [会话](ios_v2/sdk_integrate/conversation.md)
-    * [信令](ios_v2/sdk_integrate/signaling.md)
-    * [组织架构](ios_v2/sdk_integrate/organization.md)
-    * [工作圈/朋友圈](ios_v2/sdk_integrate/moments.md)
-    * [常用结构体](ios_v2/sdk_integrate/struct.md)
-  * 集成Android SDK
-    * [Demo下载](android_v2/sdk_integrate/development.md)
-    * [SDK使用步骤](android_v2/sdk_integrate/sdk_use.md)
-    * [初始化及登录](android_v2/sdk_integrate/init_login.md)
-    * [群组](android_v2/sdk_integrate/group.md)
-    * [好友](android_v2/sdk_integrate/friend.md)
-    * [用户](android_v2/sdk_integrate/user.md)
-    * [消息](android_v2/sdk_integrate/message.md)
-    * [会话](android_v2/sdk_integrate/conversation.md)
-    * [信令](android_v2/sdk_integrate/signaling.md)
-    * [组织架构](android_v2/sdk_integrate/organization.md)
-    * [工作圈/朋友圈](android_v2/sdk_integrate/moments.md)
-    * [常用结构体](android_v2/sdk_integrate/struct.md)
-  * 集成Uniapp SDK
-    * [Demo下载](uniapp_v2/sdk_integrate/development.md)
-    * [SDK使用步骤](uniapp_v2/sdk_integrate/sdk_use.md)
-    * [初始化及登录](uniapp_v2/sdk_integrate/init_login.md)
-    * [群组](uniapp_v2/sdk_integrate/group.md)
-    * [好友](uniapp_v2/sdk_integrate/friend.md)
-    * [用户](uniapp_v2/sdk_integrate/user.md)
-    * [消息](uniapp_v2/sdk_integrate/message.md)
-    * [会话](uniapp_v2/sdk_integrate/conversation.md)
-    * [信令](uniapp_v2/sdk_integrate/signaling.md)
-    * [组织架构](uniapp_v2/sdk_integrate/organization.md)
-    * [工作圈/朋友圈](uniapp_v2/sdk_integrate/moments.md)
-    * [常用结构体](uniapp_v2/sdk_integrate/struct.md)
-  * 集成JS SDK
-    * [Demo下载](js_v2/sdk_integrate/development.md)
-    * [SDK使用步骤](js_v2/sdk_integrate/sdk_use.md)
-    * [初始化及登录](js_v2/sdk_integrate/init_login.md)
-    * [群组](js_v2/sdk_integrate/group.md)
-    * [好友](js_v2/sdk_integrate/friend.md)
-    * [用户](js_v2/sdk_integrate/user.md)
-    * [消息](js_v2/sdk_integrate/message.md)
-    * [会话](js_v2/sdk_integrate/conversation.md)
-    * [信令](js_v2/sdk_integrate/signaling.md)
-    * [组织架构](js_v2/sdk_integrate/organization.md)
-    * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
-    * [常用结构体](js_v2/sdk_integrate/struct.md)
-  * 服务端集成模板（全部用swagger展示）
-    * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
-    * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
-    * [群组管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
-    * [大群管理](v2/api_integrate/super_group.md)
-    * [账号鉴权管理](http://43.128.5.63:10002/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
-    * [第三方管理](http://43.128.5.63:10002/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
-    * [消息管理](http://43.128.5.63:10002/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
-    * [会话管理](v2/api_integrate/conversation.md)
-    * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
-    * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
-    * [组织管理](v2/api_integrate/organization.md)
-    * [第三方回调说明](v2/description/callback.md)
-    * [字段含义说明](v2/description/fields.md)
-  * 服务端部署
+* **服务端部署**
+  * [docker部署](v2/server_deploy/docker_singe.md)
+* **源码部署**
+  * [单机部署](v2/server_deploy/code_singe.md)
+  * [集群部署](v2/server_deploy/code_singe_cluster.md)
+  * [k8s部署](v2/server_deploy/k8s_cluster.md)
+  * [配置文件说明](v2/server_deploy/config.md)
+* **生产环境必读**
+  * [nginx配置示例](v2/server_deploy/nginx_config.md)
+* **快速验证**
+  * [app](v2/validation/app.md)
+  * [pc web](v2/validation/pc-web.md)
+* **集成Flutter SDK**
+  * [Demo下载](flutter_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
+  * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
+  * [群组](flutter_v2/sdk_integrate/group.md)
+  * [好友](flutter_v2/sdk_integrate/friend.md)
+  * [用户](flutter_v2/sdk_integrate/user.md)
+  * [消息](flutter_v2/sdk_integrate/message.md)
+  * [会话](flutter_v2/sdk_integrate/conversation.md)
+  * [信令](flutter_v2/sdk_integrate/signaling.md)
+  * [组织架构](flutter_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
+  * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+* **集成iOS SDK**
+  * [Demo下载](ios_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](ios_v2/sdk_integrate/sdk_use.md)
+  * [初始化及登录](ios_v2/sdk_integrate/init_login.md)
+  * [群组](ios_v2/sdk_integrate/group.md)
+  * [好友](ios_v2/sdk_integrate/friend.md)
+  * [用户](ios_v2/sdk_integrate/user.md)
+  * [消息](ios_v2/sdk_integrate/message.md)
+  * [会话](ios_v2/sdk_integrate/conversation.md)
+  * [信令](ios_v2/sdk_integrate/signaling.md)
+  * [组织架构](ios_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](ios_v2/sdk_integrate/moments.md)
+  * [常用结构体](ios_v2/sdk_integrate/struct.md)
+* **集成Android SDK**
+  * [Demo下载](android_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](android_v2/sdk_integrate/sdk_use.md)
+  * [初始化及登录](android_v2/sdk_integrate/init_login.md)
+  * [群组](android_v2/sdk_integrate/group.md)
+  * [好友](android_v2/sdk_integrate/friend.md)
+  * [用户](android_v2/sdk_integrate/user.md)
+  * [消息](android_v2/sdk_integrate/message.md)
+  * [会话](android_v2/sdk_integrate/conversation.md)
+  * [信令](android_v2/sdk_integrate/signaling.md)
+  * [组织架构](android_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](android_v2/sdk_integrate/moments.md)
+  * [常用结构体](android_v2/sdk_integrate/struct.md)
+* **集成Uniapp SDK**
+  * [Demo下载](uniapp_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](uniapp_v2/sdk_integrate/sdk_use.md)
+  * [初始化及登录](uniapp_v2/sdk_integrate/init_login.md)
+  * [群组](uniapp_v2/sdk_integrate/group.md)
+  * [好友](uniapp_v2/sdk_integrate/friend.md)
+  * [用户](uniapp_v2/sdk_integrate/user.md)
+  * [消息](uniapp_v2/sdk_integrate/message.md)
+  * [会话](uniapp_v2/sdk_integrate/conversation.md)
+  * [信令](uniapp_v2/sdk_integrate/signaling.md)
+  * [组织架构](uniapp_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](uniapp_v2/sdk_integrate/moments.md)
+  * [常用结构体](uniapp_v2/sdk_integrate/struct.md)
+* **集成JS SDK**
+  * [Demo下载](js_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](js_v2/sdk_integrate/sdk_use.md)
+  * [初始化及登录](js_v2/sdk_integrate/init_login.md)
+  * [群组](js_v2/sdk_integrate/group.md)
+  * [好友](js_v2/sdk_integrate/friend.md)
+  * [用户](js_v2/sdk_integrate/user.md)
+  * [消息](js_v2/sdk_integrate/message.md)
+  * [会话](js_v2/sdk_integrate/conversation.md)
+  * [信令](js_v2/sdk_integrate/signaling.md)
+  * [组织架构](js_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
+  * [常用结构体](js_v2/sdk_integrate/struct.md)
+* **服务端集成模板（全部用swagger展示）**
+  * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
+  * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
+  * [群组管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
+  * [大群管理](v2/api_integrate/super_group.md)
+  * [账号鉴权管理](http://43.128.5.63:10002/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
+  * [第三方管理](http://43.128.5.63:10002/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
+  * [消息管理](http://43.128.5.63:10002/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
+  * [会话管理](v2/api_integrate/conversation.md)
+  * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
+  * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
+  * [组织管理](v2/api_integrate/organization.md)
+  * [第三方回调说明](v2/description/callback.md)
+  * [字段含义说明](v2/description/fields.md)
+* **服务端部署
   * [docker部署](demo/server_deploy/docker_singe.md)
   * [源码部署](demo/server_deploy/code_singe.md)
   * [集群部署](demo/server_deploy/docker_cluster.md)
@@ -112,68 +112,68 @@
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
   * [收费服务](charge/charge.md)
-  * 架构介绍
-    * [服务端架构](framework/server_framework.md)
-    * [客户端架构](framework/client_framework.md)
-    * [APP与OpenIM的关系](framework/relationship.md)
-  * SDK集成
-    * SDK下载
-      * [SDK下载(flutter)](integrate/flutter/integrate_download_flutter.md)
-      * [SDK下载(ios)](integrate/ios/integrate_download_ios.md)
-      <!-- * [SDK下载(uniapp)](integrate/uni/integrate_download_uni.md) -->
-      * [SDK下载(web&小程序)](integrate/web/integrate_download_web.md)
-    * 导入工程
-      * [导入工程(flutter)](integrate/flutter/integrate_import_flutter.md)
-      * [导入工程(ios)](integrate/ios/integrate_import_ios.md)
-      <!-- * [导入工程(uniapp)](integrate/uni/integrate_import_uni.md) -->
-      * [导入工程(web&小程序)](integrate/web/integrate_import_web.md)
-    * 初始化
-      * [初始化(flutter)](integrate/flutter/integrate_init_flutter.md)
-      * [初始化(ios)](integrate/ios/integrate_init_ios.md)
-      <!-- * [初始化(uniapp)](integrate/uni/integrate_init_uni.md) -->
-      * [初始化(web&小程序)](integrate/web/integrate_init_web.md)
-    * 登陆
-      * [登陆(flutter)](integrate/flutter/integrate_login_flutter.md)
-      * [登陆(ios)](integrate/ios/integrate_login_ios.md)
-      <!-- * [登陆(uniapp)](integrate/uni/integrate_login_uni.md) -->
-      * [登陆(web&小程序)](integrate/web/integrate_login_web.md)
-    * 会话
-      * [会话(flutter)](integrate/flutter/integrate_conversation_flutter.md)
-      * [会话(ios)](integrate/ios/integrate_conversation_ios.md)
-      <!-- * [会话(uniapp)](integrate/uni/integrate_conversation_uni.md) -->
-      * [会话(web&小程序)](integrate/web/integrate_conversation_web.md)
-    * 消息收发
-      * [消息收发(flutter)](integrate/flutter/integrate_msg_flutter.md)
-      * [消息收发(ios)](integrate/ios/integrate_msg_ios.md)
-      <!-- * [消息收发(uniapp)](integrate/uni/integrate_msg_uni.md) -->
-      * [消息收发(web&小程序)](integrate/web/integrate_msg_web.md)
-    * 群组管理
-      * [群组管理(flutter)](integrate/flutter/integrate_group_flutter.md)
-      * [群组管理(ios)](integrate/ios/integrate_group_ios.md)
-      <!-- * [群组管理(uniapp)](integrate/uni/integrate_group_uni.md) -->
-      * [群组管理(web&小程序)](integrate/web/integrate_group_web.md)
-    * 用户资料与好友关系链
-      * [用户资料与好友关系链(flutter)](integrate/flutter/integrate_user_flutter.md)
-      * [用户资料与好友关系链(ios)](integrate/ios/integrate_user_ios.md)
-      <!-- * [用户资料与好友关系链(uniapp)](integrate/uni/integrate_user_uni.md) -->
-      * [用户资料与好友关系链(web&小程序)](integrate/web/integrate_user_web.md)
-  * 客户端API
-    * [Flutter](client_doc/flutter_doc.md)
-    * [uniapp](client_doc/uni_doc.md)
-    * [Android](client_doc/android.md)
-    * [iOS](client_doc/ios.md)
-    * [Web&小程序](client_doc/web_doc.md)
-    * [ReactNative](client_doc/rn_doc.md)
-  * 服务端API
-    * [账号体系](server_doc/account.md)
-    * [后台管理](server_doc/admin.md)
-    * [公共字段](server_doc/public.md)
-  * 测试报告
-    - [消息可达性](test_report/accuracy.md)
+* **架构介绍**
+  * [服务端架构](framework/server_framework.md)
+  * [客户端架构](framework/client_framework.md)
+  * [APP与OpenIM的关系](framework/relationship.md)
+* SDK集成
+  * SDK下载
+    * [SDK下载(flutter)](integrate/flutter/integrate_download_flutter.md)
+    * [SDK下载(ios)](integrate/ios/integrate_download_ios.md)
+    <!-- * [SDK下载(uniapp)](integrate/uni/integrate_download_uni.md) -->
+    * [SDK下载(web&小程序)](integrate/web/integrate_download_web.md)
+  * 导入工程
+    * [导入工程(flutter)](integrate/flutter/integrate_import_flutter.md)
+    * [导入工程(ios)](integrate/ios/integrate_import_ios.md)
+    <!-- * [导入工程(uniapp)](integrate/uni/integrate_import_uni.md) -->
+    * [导入工程(web&小程序)](integrate/web/integrate_import_web.md)
+  * 初始化
+    * [初始化(flutter)](integrate/flutter/integrate_init_flutter.md)
+    * [初始化(ios)](integrate/ios/integrate_init_ios.md)
+    <!-- * [初始化(uniapp)](integrate/uni/integrate_init_uni.md) -->
+    * [初始化(web&小程序)](integrate/web/integrate_init_web.md)
+  * 登陆
+    * [登陆(flutter)](integrate/flutter/integrate_login_flutter.md)
+    * [登陆(ios)](integrate/ios/integrate_login_ios.md)
+    <!-- * [登陆(uniapp)](integrate/uni/integrate_login_uni.md) -->
+    * [登陆(web&小程序)](integrate/web/integrate_login_web.md)
+  * 会话
+    * [会话(flutter)](integrate/flutter/integrate_conversation_flutter.md)
+    * [会话(ios)](integrate/ios/integrate_conversation_ios.md)
+    <!-- * [会话(uniapp)](integrate/uni/integrate_conversation_uni.md) -->
+    * [会话(web&小程序)](integrate/web/integrate_conversation_web.md)
+  * 消息收发
+    * [消息收发(flutter)](integrate/flutter/integrate_msg_flutter.md)
+    * [消息收发(ios)](integrate/ios/integrate_msg_ios.md)
+    <!-- * [消息收发(uniapp)](integrate/uni/integrate_msg_uni.md) -->
+    * [消息收发(web&小程序)](integrate/web/integrate_msg_web.md)
+  * 群组管理
+    * [群组管理(flutter)](integrate/flutter/integrate_group_flutter.md)
+    * [群组管理(ios)](integrate/ios/integrate_group_ios.md)
+    <!-- * [群组管理(uniapp)](integrate/uni/integrate_group_uni.md) -->
+    * [群组管理(web&小程序)](integrate/web/integrate_group_web.md)
+  * 用户资料与好友关系链
+    * [用户资料与好友关系链(flutter)](integrate/flutter/integrate_user_flutter.md)
+    * [用户资料与好友关系链(ios)](integrate/ios/integrate_user_ios.md)
+    <!-- * [用户资料与好友关系链(uniapp)](integrate/uni/integrate_user_uni.md) -->
+    * [用户资料与好友关系链(web&小程序)](integrate/web/integrate_user_web.md)
+* 客户端API
+  * [Flutter](client_doc/flutter_doc.md)
+  * [uniapp](client_doc/uni_doc.md)
+  * [Android](client_doc/android.md)
+  * [iOS](client_doc/ios.md)
+  * [Web&小程序](client_doc/web_doc.md)
+  * [ReactNative](client_doc/rn_doc.md)
+* 服务端API
+  * [账号体系](server_doc/account.md)
+  * [后台管理](server_doc/admin.md)
+  * [公共字段](server_doc/public.md)
+* **测试报告**
+  * [消息可达性](test_report/accuracy.md)
   * [管理后台](admin/admin.md)
   * [实时音视频](rtc/rtc.md)
   * [原创技术文章](artice/actice.md)
-  * 常见问题
-    - [docker及golang安装](qa/docker.md)
-    - [minio部署](qa/docker.md)
-    - [docker部署常见问题](qa/docker_deploy.md)
+* **常见问题**
+  - [docker及golang安装](qa/docker.md)
+  - [minio部署](qa/docker.md)
+  - [docker部署常见问题](qa/docker_deploy.md)
