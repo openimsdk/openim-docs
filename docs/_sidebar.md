@@ -7,7 +7,7 @@
   - [版本管理](version/description.md)
   - [历史版本](version/history_version.md)
   - [版本计划](version/plan.md)
-* [体验Demo](demo/download_demo.md)
+* [**体验Demo**](demo/download_demo.md)
 * **以下是新文档模板-待补充**
   * [体验OpenIM](v2/demo/download_demo.md)
 * **服务端部署**
