@@ -6,6 +6,8 @@
 
 ![image](https://github.com/OpenIMSDK/Open-IM-Flutter-Demo/blob/master/gif/QQ20211216-141624.gif)
 
+
+
 #### 下载源代码
 
 1. git clone https://github.com/OpenIMSDK/Open-IM-Flutter-Demo.git
@@ -13,11 +15,15 @@
 3. 运行flutter pub get
 4. 运行flutter run
 
+
+
 #### 依赖说明
 
 demo里使用的ui库链接：[flutter_openim_widget ](https://github.com/hrxiang/flutter_openim_widget.git)
 
 demo使用的im库链接：[flutter_openim_sdk ](https://github.com/OpenIMSDK/Open-IM-SDK-Flutter.git)
+
+
 
 #### 编译常见问题
 
