@@ -814,8 +814,8 @@ APP管理员更新用户信息
 | senderFaceURL |  string  |  否  | 发送者头像|
 |senderPlatformID|int|否|发送者平台号，模拟用户发送时填写， 1->IOS,2->Android,3->Windows,4->OSX,5->Web,5->MiniWeb,7->Linux|
 |   forceList    |  json数组  | 否 | 当聊天类型为群聊时，使用@指定强推用户userID列表              |
-|    content     |  json对象  |  是  | 消息的具体内容，内部是json 对象，其他消息的详细字段请参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
-|  contentType   |  int  |   是   | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/server_doc/server_doc.html#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%A0%BC%E5%BC%8F%E6%8F%8F%E8%BF%B0)格式描述文档 |
+|    content     |  json对象  |  是  | 消息的具体内容，内部是json 对象，其他消息的详细字段请参考[消息类型](https://doc.rentsoft.cn/#/server_doc/admin?id=%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b%e6%a0%bc%e5%bc%8f%e6%8f%8f%e8%bf%b0)格式描述文档 |
+|  contentType   |  int  |   是   | 消息类型，101表示文本，102表示图片..详细参考[消息类型](https://doc.rentsoft.cn/#/server_doc/admin?id=%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b%e6%a0%bc%e5%bc%8f%e6%8f%8f%e8%bf%b0)格式描述文档 |
 |  sessionType   |  int  |   是   | 发送的消息是单聊还是群聊,单聊为1，群聊为2                    |
 |isOnlineOnly|bool|  否  |改字段设置为true时候，发送的消息服务器不会存储，接收者在线才会收到并存储到本地，不在线该消息丢失，当消息的类型为113->typing时候，接收者本地也不会做存储|
 |offlinePushInfo|json对象|否|离线推送的具体内容，如果不填写，使用服务器默认推送标题|

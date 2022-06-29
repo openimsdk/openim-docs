@@ -82,7 +82,7 @@
 * [原创技术文章](artice/actice.md)
 * 常见问题
   - [docker及golang安装](qa/docker.md)
-  - [minio部署](qa/minio.md)
+  - [minio部署](qa/docker.md)
   - [docker部署常见问题](qa/docker_deploy.md)
   
 * 以下是新文档模板-待补充
@@ -94,7 +94,8 @@
     * [集群部署](v2/server_deploy/code_singe_cluster.md)
   * [k8s部署](v2/server_deploy/k8s_cluster.md)
   * [配置文件说明](v2/server_deploy/config.md)
-  * [生产环境必读](v2/server_deploy/online_readme.md)
+  * 生产环境必读
+    * [nginx配置示例](v2/server_deploy/nginx_config.md)
 * 快速验证
   * [app](v2/validation/app.md)
   * [pc web](v2/validation/pc-web.md)
@@ -110,14 +111,18 @@
 
 
 * Flutter SDK集成
-  * [项目环境](flutter_v2/sdk_integrate/development.md)
+  * [Demo下载](flutter_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
   * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
   * [群组](flutter_v2/sdk_integrate/group.md)
   * [好友](flutter_v2/sdk_integrate/friend.md)
   * [用户](flutter_v2/sdk_integrate/user.md)
-  * [消息及会话](flutter_v2/sdk_integrate/user.md)
+  * [消息](flutter_v2/sdk_integrate/message.md)
+  * [会话](flutter_v2/sdk_integrate/conversation.md)
+  * [信令](flutter_v2/sdk_integrate/signaling.md)
+  * [组织架构](flutter_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
   * [常用结构体](flutter_v2/sdk_integrate/struct.md)
-  
 * 服务端集成模板（全部用swagger展示）
   * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
   * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
@@ -131,6 +136,7 @@
   * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
   * [组织管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3)
   
+
+
 * [第三方回调说明](v2/description/callback.md)
-  
 * [字段含义说明](v2/description/fields.md)
