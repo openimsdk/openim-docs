@@ -82,7 +82,7 @@
 * [原创技术文章](artice/actice.md)
 * 常见问题
   - [docker及golang安装](qa/docker.md)
-  - [minio部署](qa/minio.md)
+  - [minio部署](qa/docker.md)
   - [docker部署常见问题](qa/docker_deploy.md)
   
 * 以下是新文档模板-待补充
@@ -94,7 +94,8 @@
     * [集群部署](v2/server_deploy/code_singe_cluster.md)
   * [k8s部署](v2/server_deploy/k8s_cluster.md)
   * [配置文件说明](v2/server_deploy/config.md)
-  * [生产环境必读](v2/server_deploy/online_readme.md)
+  * 生产环境必读
+    * [nginx配置示例](v2/server_deploy/nginx_config.md)
 * 快速验证
   * [app](v2/validation/app.md)
   * [pc web](v2/validation/pc-web.md)
