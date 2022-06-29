@@ -110,14 +110,18 @@
 
 
 * Flutter SDK集成
-  * [项目环境](flutter_v2/sdk_integrate/development.md)
+  * [Demo下载](flutter_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
   * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
   * [群组](flutter_v2/sdk_integrate/group.md)
   * [好友](flutter_v2/sdk_integrate/friend.md)
   * [用户](flutter_v2/sdk_integrate/user.md)
-  * [消息及会话](flutter_v2/sdk_integrate/user.md)
+  * [消息](flutter_v2/sdk_integrate/message.md)
+  * [会话](flutter_v2/sdk_integrate/conversation.md)
+  * [信令](flutter_v2/sdk_integrate/signaling.md)
+  * [组织架构](flutter_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
   * [常用结构体](flutter_v2/sdk_integrate/struct.md)
-  
 * 服务端集成模板（全部用swagger展示）
   * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
   * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
@@ -130,7 +134,5 @@
   * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
   * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
   * [组织管理](v2/api_integrate/organization.md)
-  
 * [第三方回调说明](v2/description/callback.md)
-  
 * [字段含义说明](v2/description/fields.md)

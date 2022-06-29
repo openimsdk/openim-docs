@@ -1,12 +1,49 @@
-# 用户相关接口
+#### UserManager（用户信息管理）
 
-包含查询用户资料、修改个人资料以及把某人加入黑名单（从黑名单移除）。注意，黑名单与好友无关，对于好友、非好友都可以拉黑。
+| 方法            | 描述                     |
+| --------------- | ------------------------ |
+| setUserListener | 当前登录用户信息变更监听 |
+| getUsersInfo    | 根据userID获取用户资料   |
+| getSelfUserInfo | 获取当前登录用户资料     |
+| setSelfInfo     | 修改当前登录用户资料     |
 
-| SDK               | 描述                   |
-| :---------------- | :--------------------- |
-| [GetUsersInfo]    | 获取用户资料           |
-| [SetSelfInfo]     | 登录用户修改个人资料   |
-| [GetSelfUserInfo] | 登录用户获取个人资料   |
-| [AddBlack]        | 把某人拉黑             |
-| [GetBlackList]    | 添加某用户到黑名单中   |
-| [RemoveBlack]     | 把某用户从黑名单中移除 |
+
+
+#### getUsersInfo（根据用户ID批量获取用户信息）
+
+```
+OpenIM.iMManager.userManager.getUsersInfo(
+      uidList: [], // 用户ID集合
+   ).then((userInfoList) {
+      // 用户信息列表
+  });
+```
+
+
+
+#### getSelfUserInfo（获取当前登录用户的资料）
+
+```
+ OpenIM.iMManager.userManager.getSelfUserInfo().then((userInfo){
+      // 返回当前登录用户的资料
+  });
+```
+
+
+
+#### setSelfInfo（修改当前用登录户资料）
+
+会触发当用户的onSelfInfoUpdated回调，以及好友的onFriendInfoChanged、onConversationChanged回调。
+
+```
+  OpenIM.iMManager.userManager.setSelfInfo(
+      nickname: '',  // 昵称
+      faceURL: '',  // 头像
+      gender: 0,  // 性别: 男1，女0
+      phoneNumber: '', // 手机号
+      email: '', //邮箱
+      birth: 0,  //生日
+      ex: '',  // 其他信息
+    );
+```
+

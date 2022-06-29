@@ -1,36 +1,91 @@
-## 初始化及登录
+### IMManager（初始化管理）
 
-初始化并登录成功回调，是正常使用OpenIM 服务的前提
+| 方法             | 描述                                          |
+| ---------------- | --------------------------------------------- |
+| initSDK          | 初始化SDK                                     |
+| unInitSDK        | 反初始化SDK                                   |
+| login            | 登录                                          |
+| logout           | 登出                                          |
+| getLoginStatus   | 获取登录状态                                  |
+| getLoginUserID   | 登录者用户ID                                  |
+| getLoginUserInfo | 登录者用户资料                                |
+| wakeUp           | 唤醒socket通信（当app从后台回到前台恢复通信） |
+| uploadImage      | 上传图片到服务器                              |
 
-| SDK              | 描述                                                         |
-| :--------------- | :----------------------------------------------------------- |
-| [Login]          | 登录，如果登录成功，必须退出登录才能再次执行登录操作         |
-| [Logout]         | 退出登录                                                     |
-| [GetLoginStatus] | 获取登录状态， 101：登录成功，   102：登陆中，   103：登录失败，  201：退出登录 |
-| [GetLoginUser]   | 获取当前登录用户UserID，此时用户登录状态未知                 |
-| [initSDK]        | 初始化 SDK，整个生命周期执行一次，登录相关监听介绍如下：     |
+#### initSDK（初始化SDK）
 
-OpenIM和调用方利用监听回调机制，和调用方信息互通，把登录状态通过异步回调方式即时传递给调用方，确保信息及时传达而不阻塞其主线程。
+```
+OpenIM.iMManager.initSDK(
+    platform: 0, // 平台，参照IMPlatform类,
+    apiAddr: "", // SDK的API接口地址。如：http://xxx:10000
+    wsAddr: "",  // SDK的web socket地址。如： ws://xxx:17778
+    dataDir: "", // 数据存储路径。如：var apath =(await getApplicationDocumentsDirectory()).path
+    objectStorage: 'cos', // 图片服务器默认'cos'
+    logLevel: 6, // 日志等级，默认值6
+    listener: OnConnectListener(
+      onConnectSuccess: () {
+        // 已经成功连接到服务器
+      },
+      onConnecting: () {
+        // 正在连接到服务器，适合在 UI 上展示“正在连接”状态。
+      },
+      onConnectFailed: (code, errorMsg) {
+        // 连接服务器失败，可以提示用户当前网络连接不可用
+      },
+      onUserSigExpired: () {
+        // 登录票据已经过期，请使用新签发的 UserSig 进行登录。
+      },
+      onKickedOffline: () {
+        // 当前用户被踢下线，此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？”
+      },
+    ),
+  ).then((value){
+      if(value == true){
+        // 初始化成功
+      }
+  });
+```
 
-## 监听说明
 
-| 登录相关监听         | 回调描述                                                     |
-| :------------------- | :----------------------------------------------------------- |
-| [OnConnecting]       | 连接中，在连接后台时（包括重连）回调                         |
-| [OnConnectSuccess]   | 连接成功                                                     |
-| [OnConnectFailed]    | 连接失败，如果因网络连接失败会重连，其他情况不重连           |
-| [OnKickedOffline]    | 被踢下线，可能由于多端登录策略所致，或后台管理员强制其退出登录 |
-| [OnUserTokenExpired] | 检测token过期回调                                            |
 
-## 调用流程
+#### login（登录）
 
-OpenIM调用流程分为如下几步：
+```
+OpenIM.iMManager.login(
+      uid: "", // uid来自于自身业务服务器
+      token: "", // token需要业务服务器根据secret向OpenIM服务端交换获取
+    ).then((userInfo) {
+      // 返回当前登录用户的资料
+    });
+```
 
-（1）初始化：在整个生命周期执行一次
 
-（2）设置监听：包括群组监听，好友监听，用户监听，消息及会话监听，这些监听会在其他章节中描述
 
-（3）登录：登录回调成功后再执行其他操作，否则可能出现资源加载未完成的错误
+#### logout（ 登出）
 
-（4）收发消息等操作；
+```
+ OpenIM.iMManager.logout().then((_){
+      // 退出成功
+ });
+```
+
+
+
+#### getLoginUserInfo（获取当前登录用户的资料）
+
+```
+OpenIM.iMManager.getLoginUserInfo().then((userInfo){
+     // 当前登录用户的信息
+ });
+```
+
+
+
+#### getLoginUserID（获取当前登录用户的ID）
+
+```
+ OpenIM.iMManager.getLoginUserID().then((userID){
+     // 当前登录用户的ID
+  });
+```
 
