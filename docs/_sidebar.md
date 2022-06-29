@@ -108,6 +108,16 @@
   * [消息及会话](v2/sdk_integrate/user.md)
   * [常用结构体](v2/sdk_integrate/struct.md)
 
+
+* Flutter SDK集成
+  * [项目环境](flutter_v2/sdk_integrate/development.md)
+  * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
+  * [群组](flutter_v2/sdk_integrate/group.md)
+  * [好友](flutter_v2/sdk_integrate/friend.md)
+  * [用户](flutter_v2/sdk_integrate/user.md)
+  * [消息及会话](flutter_v2/sdk_integrate/user.md)
+  * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+  
 * 服务端集成模板（全部用swagger展示）
   * [用户管理](v2/api_integrate/user.md)
   * [关系链管理](v2/api_integrate/friend.md)
