@@ -9,15 +9,69 @@
   - [版本计划](version/plan.md)
 * 跑通Demo
   * [体验Demo](demo/download_demo.md)
-  * 服务端部署
-    * [docker部署](demo/server_deploy/docker_singe.md)
-    * [源码部署](demo/server_deploy/code_singe.md)
-    * [集群部署](demo/server_deploy/docker_cluster.md)
-    * [k8s部署](demo/server_deploy/k8s_cluster.md)
-    * [待完成](demo/server_deploy/in_development.md)
-  * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
-  * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
-  * [一分钟跑通Demo(Web)](demo/web_demo.md)
+ 
+  
+* 以下是新文档模板-待补充
+* [体验OpenIM](v2/demo/download_demo.md)
+* 服务端部署
+  * [docker部署](v2/server_deploy/docker_singe.md)
+  * 源码部署
+    * [单机部署](v2/server_deploy/code_singe.md)
+    * [集群部署](v2/server_deploy/code_singe_cluster.md)
+  * [k8s部署](v2/server_deploy/k8s_cluster.md)
+  * [配置文件说明](v2/server_deploy/config.md)
+  * 生产环境必读
+    * [nginx配置示例](v2/server_deploy/nginx_config.md)
+* 快速验证
+  * [app](v2/validation/app.md)
+  * [pc web](v2/validation/pc-web.md)
+
+* 客户端SDK集成模板(每一端都按照这个来)
+  * [项目环境](v2/sdk_integrate/development.md)
+  * [初始化及登录](v2/sdk_integrate/init_login.md)
+  * [群组](v2/sdk_integrate/group.md)
+  * [好友](v2/sdk_integrate/friend.md)
+  * [用户](v2/sdk_integrate/user.md)
+  * [消息及会话](v2/sdk_integrate/user.md)
+  * [常用结构体](v2/sdk_integrate/struct.md)
+
+
+* Flutter版SDK集成
+  * [Demo下载](flutter_v2/sdk_integrate/development.md)
+  * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
+  * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
+  * [群组](flutter_v2/sdk_integrate/group.md)
+  * [好友](flutter_v2/sdk_integrate/friend.md)
+  * [用户](flutter_v2/sdk_integrate/user.md)
+  * [消息](flutter_v2/sdk_integrate/message.md)
+  * [会话](flutter_v2/sdk_integrate/conversation.md)
+  * [信令](flutter_v2/sdk_integrate/signaling.md)
+  * [组织架构](flutter_v2/sdk_integrate/organization.md)
+  * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
+  * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+  * 服务端集成模板（全部用swagger展示）
+    * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
+    * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
+    * [群组管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
+    * [大群管理](v2/api_integrate/super_group.md)
+    * [账号鉴权管理](http://43.128.5.63:10002/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
+    * [第三方管理](http://43.128.5.63:10002/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
+    * [消息管理](http://43.128.5.63:10002/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
+    * [会话管理](v2/api_integrate/conversation.md)
+    * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
+    * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
+    * [组织管理](v2/api_integrate/organization.md)
+  * [第三方回调说明](v2/description/callback.md)
+  * [字段含义说明](v2/description/fields.md)
+*  * 服务端部署
+* [docker部署](demo/server_deploy/docker_singe.md)
+* [源码部署](demo/server_deploy/code_singe.md)
+* [集群部署](demo/server_deploy/docker_cluster.md)
+* [k8s部署](demo/server_deploy/k8s_cluster.md)
+* [待完成](demo/server_deploy/in_development.md)
+* [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
+* [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
+* [一分钟跑通Demo(Web)](demo/web_demo.md)
 * [收费服务](charge/charge.md)
 * 架构介绍
   * [服务端架构](framework/server_framework.md)
@@ -84,56 +138,3 @@
   - [docker及golang安装](qa/docker.md)
   - [minio部署](qa/docker.md)
   - [docker部署常见问题](qa/docker_deploy.md)
-  
-* 以下是新文档模板-待补充
-* [体验OpenIM](v2/demo/download_demo.md)
-* 服务端部署
-  * [docker部署](v2/server_deploy/docker_singe.md)
-  * 源码部署
-    * [单机部署](v2/server_deploy/code_singe.md)
-    * [集群部署](v2/server_deploy/code_singe_cluster.md)
-  * [k8s部署](v2/server_deploy/k8s_cluster.md)
-  * [配置文件说明](v2/server_deploy/config.md)
-  * 生产环境必读
-    * [nginx配置示例](v2/server_deploy/nginx_config.md)
-* 快速验证
-  * [app](v2/validation/app.md)
-  * [pc web](v2/validation/pc-web.md)
-
-* 客户端SDK集成模板(每一端都按照这个来)
-  * [项目环境](v2/sdk_integrate/development.md)
-  * [初始化及登录](v2/sdk_integrate/init_login.md)
-  * [群组](v2/sdk_integrate/group.md)
-  * [好友](v2/sdk_integrate/friend.md)
-  * [用户](v2/sdk_integrate/user.md)
-  * [消息及会话](v2/sdk_integrate/user.md)
-  * [常用结构体](v2/sdk_integrate/struct.md)
-
-
-* Flutter SDK集成
-  * [Demo下载](flutter_v2/sdk_integrate/development.md)
-  * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
-  * [初始化及登录](flutter_v2/sdk_integrate/init_login.md)
-  * [群组](flutter_v2/sdk_integrate/group.md)
-  * [好友](flutter_v2/sdk_integrate/friend.md)
-  * [用户](flutter_v2/sdk_integrate/user.md)
-  * [消息](flutter_v2/sdk_integrate/message.md)
-  * [会话](flutter_v2/sdk_integrate/conversation.md)
-  * [信令](flutter_v2/sdk_integrate/signaling.md)
-  * [组织架构](flutter_v2/sdk_integrate/organization.md)
-  * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
-  * [常用结构体](flutter_v2/sdk_integrate/struct.md)
-* 服务端集成模板（全部用swagger展示）
-  * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
-  * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
-  * [群组管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
-  * [大群管理](v2/api_integrate/super_group.md)
-  * [账号鉴权管理](http://43.128.5.63:10002/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
-  * [第三方管理](http://43.128.5.63:10002/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
-  * [消息管理](http://43.128.5.63:10002/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
-  * [会话管理](v2/api_integrate/conversation.md)
-  * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
-  * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
-  * [组织管理](v2/api_integrate/organization.md)
-* [第三方回调说明](v2/description/callback.md)
-* [字段含义说明](v2/description/fields.md)
