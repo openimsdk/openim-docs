@@ -95,7 +95,7 @@
   * [k8s部署](v2/server_deploy/k8s_cluster.md)
   * [配置文件说明](v2/server_deploy/config.md)
   * 生产环境必读
-  * [nginx配置示例](v2/server_deploy/nginx_config.md)
+    * [nginx配置示例](v2/server_deploy/nginx_config.md)
 * 快速验证
   * [app](v2/validation/app.md)
   * [pc web](v2/validation/pc-web.md)
