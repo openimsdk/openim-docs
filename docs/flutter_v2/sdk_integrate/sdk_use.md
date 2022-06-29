@@ -2,7 +2,7 @@
 
        flutter_openim_sdk: latest
 
-SDK版本号参考：https://pub.flutter-io.cn/packages?q=flutter_openim_sdk
+SDK版本号参考：https://pub.flutter-io.cn/packages/flutter_openim_sdk
 
 #### 2，导入包
 
