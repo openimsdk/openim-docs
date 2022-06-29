@@ -88,7 +88,7 @@
   * [组织架构](js_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
   * [常用结构体](js_v2/sdk_integrate/struct.md)
-* **服务端集成模板（全部用swagger展示）**
+* **服务端api**
   * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
   * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
   * [群组管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
@@ -102,7 +102,20 @@
   * [组织管理](v2/api_integrate/organization.md)
   * [第三方回调说明](v2/description/callback.md)
   * [字段含义说明](v2/description/fields.md)
-* **服务端部署
+* **架构介绍**
+  * [服务端架构](framework/server_framework.md)
+  * [客户端架构](framework/client_framework.md)
+  * [APP与OpenIM的关系](framework/relationship.md)
+* **测试报告**
+  * [消息可达性](test_report/accuracy.md)
+* [管理后台](admin/admin.md)
+* [实时音视频](rtc/rtc.md)
+* [原创技术文章](artice/actice.md)
+* **常见问题**
+  * [docker及golang安装](qa/docker.md)
+  * [minio部署](qa/docker.md)
+  * [docker部署常见问题](qa/docker_deploy.md)
+* 服务端部署(逐步废弃)
   * [docker部署](demo/server_deploy/docker_singe.md)
   * [源码部署](demo/server_deploy/code_singe.md)
   * [集群部署](demo/server_deploy/docker_cluster.md)
@@ -112,11 +125,7 @@
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
   * [收费服务](charge/charge.md)
-* **架构介绍**
-  * [服务端架构](framework/server_framework.md)
-  * [客户端架构](framework/client_framework.md)
-  * [APP与OpenIM的关系](framework/relationship.md)
-* SDK集成
+* SDK集成(逐步废弃)
   * SDK下载
     * [SDK下载(flutter)](integrate/flutter/integrate_download_flutter.md)
     * [SDK下载(ios)](integrate/ios/integrate_download_ios.md)
@@ -157,23 +166,14 @@
     * [用户资料与好友关系链(ios)](integrate/ios/integrate_user_ios.md)
     <!-- * [用户资料与好友关系链(uniapp)](integrate/uni/integrate_user_uni.md) -->
     * [用户资料与好友关系链(web&小程序)](integrate/web/integrate_user_web.md)
-* 客户端API
+* 客户端API(逐步废弃)
   * [Flutter](client_doc/flutter_doc.md)
   * [uniapp](client_doc/uni_doc.md)
   * [Android](client_doc/android.md)
   * [iOS](client_doc/ios.md)
   * [Web&小程序](client_doc/web_doc.md)
   * [ReactNative](client_doc/rn_doc.md)
-* 服务端API
+* 服务端API(逐步废弃)
   * [账号体系](server_doc/account.md)
   * [后台管理](server_doc/admin.md)
   * [公共字段](server_doc/public.md)
-* **测试报告**
-  * [消息可达性](test_report/accuracy.md)
-  * [管理后台](admin/admin.md)
-  * [实时音视频](rtc/rtc.md)
-  * [原创技术文章](artice/actice.md)
-* **常见问题**
-  - [docker及golang安装](qa/docker.md)
-  - [minio部署](qa/docker.md)
-  - [docker部署常见问题](qa/docker_deploy.md)
