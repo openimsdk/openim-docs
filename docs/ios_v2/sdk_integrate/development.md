@@ -1,88 +1,99 @@
-#### 直接下载app
+### Demo内容
+Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天、关系链、群组等功能，基于 UI 组件您可以快速搭建起自己的业务逻辑。
 
-![Android](https://www.pgyer.com/app/qrcode/OpenIM)
+### 直接testflight下载app体验
 
-可选择替换服务器地址为自己搭建的服务器地址，默认地址为官方服务器地址
+<img src="../../images/ios_native.png" alt="image" style="width: 200px; " />
 
-![image](../../images/flutter_service_config.gif)
+### 源代码体验
 
+1. 开发环境要求
+    Xcode 10 及以上
+    
+    iOS 11 及以上（后续提高iOS13及以上）
 
+2. git clone：
+    ```ruby
+    https://github.com/OpenIMSDK/Open-IM-iOS-Demo.git
+    ```
 
-#### 下载源代码
+3. 终端执行以下命令，安装依赖库。
 
-1. git clone https://github.com/OpenIMSDK/Open-IM-Flutter-Demo.git
-2. 可选择修改 [config.dart](https://github.com/OpenIMSDK/Open-IM-Flutter-Demo/blob/master/lib/src/common/config.dart)文件里的服务器地址为自己搭建的服务器地址
-3. 运行flutter pub get
-4. 运行flutter run
+    ```ruby
+    //iOS
+    cd Open-IM-iOS-Demo/Example
+    pod install
+    ```
+4. 如果安装失败，执行以下命令更新本地的 CocoaPods 仓库列表。
+    ```ruby
+    pod repo update
+    ```
+5. 编译运行：
 
+    进入Open-IM-iOS-Demo/Example 文件夹，打开OpenIMSDKUIKit.xcworkspace编译运行。
+    
+6. 体验自己的服务器
+ 
+    如果自己搭建了OpenIM Server，可修改 [AppDelegate.swift](https://github.com/OpenIMSDK/Open-IM-iOS-Demo/blob/main/Example/OpenIMSDKUIKit/AppDelegate.swift)文件里的服务器地址为自己搭建的服务器地址
+    
+### Demo主要实现步骤介绍
 
+常用的聊天软件都是由会话列表、聊天窗口、好友列表、音视频通话等几个基本的界面组成，参考下面步骤，您仅需几行代码即可在项目中快速搭建这些 UI 界面。
+音视频通话，目前原生暂未支持，后续会增加。
+    
+步骤一：初始化SDK，设置ip：
+1. 举例
+    ```ruby
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // 自己业务服务器的地址，demo中负责业务服务器的登录操作
+        DemoPlugin.shared.setup(baseUrl: "http://xxxx:10004/")
+        // IM服务器的地址，OpenIM SDK使用
+        IMController.shared.setup(apiAdrr: "http://xxxx:10002",
+                                  wsAddr: "ws://xxxx:10001")
+    }
+    ```
 
-#### 依赖说明
+步骤二：登录
+1. 登录自己的业务服务器，获取userID 和 token；
+2. 使用1.获取userID 和 token 登录OpenIM服务器；
+3. 举例：
+    ```ruby
+    // 1: 登录自己的业务服务器，获取userID 和 token；
+    LoginAPI.init(req: .init(phoneNumber: "", pwd: "")).send()
+        .subscribe(onNext: { (api: LoginAPI) in
+            guard let resp = api.response else { return }
 
-demo里使用的ui库链接：[flutter_openim_widget ](https://github.com/hrxiang/flutter_openim_widget.git)
+            // 2: 登录OpenIM服务器；
+            self?.loginIM(uid: resp.data.userID, token: resp.data.token, completion: { [weak controller] in
+                controller?.dismiss(animated: true)
+            })
+        }, onError: { err in
 
-demo使用的im库链接：[flutter_openim_sdk ](https://github.com/OpenIMSDK/Open-IM-SDK-Flutter.git)
+        }).disposed(by: sself._disposeBag)
+    ```
+        
+    ```ruby
+    func loginIM(uid: String, token: String, completion: (() -> Void)?) {
+        IMController.shared.login(uid: uid, token: token) { [weak self] (resp: String?) in
 
+            print("login onSuccess \(String(describing: resp))")
+            completion?()
+        } onFail: { (code: Int, msg: String?) in
+            print("login onFail: code \(code), reason \(String(describing: msg))")
+        }
+    }
+    ```
+    
+步骤三：构建会话列表、聊天窗口、通讯录界面、设置：
+1. 举例
+    ```ruby
+    // 会话列表
+    let chat = ChatListViewController()
+    // 聊天窗口
+    let message = MessageListViewController()
+    // 通讯录
+    let contactVC = ContactsViewController()
+    // 设置
+    let mineNav = MineViewController()        
+    ```
 
-
-#### 编译常见问题
-
-##### 1，demo对应的flutter版本是？
-
-答：stable分支3.0.1
-
-##### 2，支持哪些平台？
-
-答：因为sdk的原因demo目前只能运行在android跟ios设备上
-
-##### 3，android安装包debug可以运行但release启动白屏？
-
-答：flutter的release包默认是开启了混淆，可以使用命令：flutter build release --no -shrink，如果此命令无效可如下操作
-
-在android/build.gradle配置的release配置加入以下配置
-
-```
-release {
-    minifyEnabled false
-    useProguard false
-    shrinkResources false
-}
-```
-
-##### 4，代码必须混淆怎么办？
-
-答：在混淆规则里加入以下规则
-
-```
--keep class io.openim.**{*;}
--keep class open_im_sdk.**{*;}
--keep class open_im_sdk_callback.**{*;}
-```
-
-##### 5，android安装包不能安装在模拟器上？
-
-答：因为Demo去掉了某些cpu架构，如果你想运行在模拟器上请按以下方式：
-
-在android/build.gradle配置加入
-
-```
-ndk {
-    abiFilters "arm64-v8a", "armeabi-v7a", "armeabi", "x86", "x86_64"
-}
-```
-
-##### 6，ios构建release包报错
-
-答：请将cup架构设置为arm64，然后依次如下操作
-
-- flutter clean
-- flutter pub get
-- cd ios
-- pod install
-- 连接真机后运行Archive
-
-![ios cpu](https://user-images.githubusercontent.com/7018230/155913400-6231329a-aee9-4082-8d24-a25baad55261.png)
-
-##### 7，ios运行的最低版本号？
-
-答：13.0

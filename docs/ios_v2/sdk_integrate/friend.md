@@ -3,7 +3,8 @@
 | 方法                         | 描述                                               |
 | ---------------------------- | -------------------------------------------------- |
 | setFriendshipListener        | 好友关系监听                                       |
-| getFriendsInfo               | 查询好友信息                                       |
+| addFriendshipListener        | 好友关系监听                                       |
+| getUsersInfo                 | 查询好友信息                                       |
 | addFriend                    | 发送一个好友请求，需要对方调用同意申请才能成为好友 |
 | getRecvFriendApplicationList | 获取别人加我为好友的申请                           |
 | getSendFriendApplicationList | 获取我发出的好友申请                               |
@@ -16,18 +17,19 @@
 | deleteFriend                 | 删除好友                                           |
 | acceptFriendApplication      | 接受好友请求                                       |
 | refuseFriendApplication      | 拒绝好友请求                                       |
-| searchFriends                | 查好友                                             |
+| searchUsers                  | 查好友                                             |
 
 
 
-#### getFriendsInfo（根据userID查询好友资料）
+#### getUsersInfo（根据userID查询好友资料）
 
 ```
- OpenIM.iMManager.friendshipManager.getFriendsInfo(
-      uidList: [], // userId列表
-    ).then((list) {
-      // List<UserInfo>
- });
+        [OIMManager.manager getUsersInfo:@[] // userID
+                               onSuccess:^(NSArray<OIMUserInfo *> * _Nullable userInfos) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -39,14 +41,13 @@
 被添加者收到OnFriendApplicationAdded 
 
 ```
- OpenIM.iMManager.friendshipManager.addFriend(
-      uid: "", // 用户id
-      reason: '', // 发起好友申请的描述信息
- ).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+        [OIMManager.manager addFriend:@"" // user id
+                           reqMessage:@"添加一个好友呗"
+                            onSuccess:^(NSString * _Nullable data) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -54,11 +55,12 @@
 #### checkFriend（检查是否是好友）
 
 ```
-OpenIM.iMManager.friendshipManager.checkFriend(
-      uidList: [], // userID 列表
-  ).then((list) {
-      // List<FriendshipInfo>
- });
+        [OIMManager.manager checkFriend:@[] // user id
+                              onSuccess:^(NSArray<OIMSimpleResultInfo *> * _Nullable results) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -68,13 +70,12 @@ OpenIM.iMManager.friendshipManager.checkFriend(
 操作者收到OnFriendDeleted
 
 ```
-OpenIM.iMManager.friendshipManager.deleteFriend(
-    uid: '', // userID
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager deleteFriend:@"" // user id
+                                  onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -84,26 +85,27 @@ OpenIM.iMManager.friendshipManager.deleteFriend(
 操作者收到OnFriendInfoChanged
 
 ```
- OpenIM.iMManager.friendshipManager.setFriendRemark(
-      uid: '', // 好友userID
-      remark: '', // 备注名
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager setFriendRemark:@"" // user id
+                                     remark:@"玲子"
+                                  onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
 
 #### getFriendList（好友列表）
 
-返回的数据里包含已拉入黑名单的好友，可以根据isBlacklist字段筛选。
+返回的数据里包含已拉入黑名单的好友。
 
 ```
-OpenIM.iMManager.friendshipManager.getFriendList().then((list){
-      //  List<UserInfo> 好友信息列表
-});
+        [OIMManager.manager getFriendListWithOnSuccess:^(NSArray<OIMFullUserInfo *> * _Nullable userInfos) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -111,9 +113,11 @@ OpenIM.iMManager.friendshipManager.getFriendList().then((list){
 #### getRecvFriendApplicationList（收到的好友申请）
 
 ```
- OpenIM.iMManager.friendshipManager.getRecvFriendApplicationList().then((list) {
-      // List<FriendApplicationInfo> 申请列表
- });
+        [OIMManager.manager getFriendApplicationListWithOnSuccess:^(NSArray<OIMFriendApplication *> * _Nullable friendApplications) {
+        
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+        }];
 ```
 
 
@@ -121,9 +125,11 @@ OpenIM.iMManager.friendshipManager.getFriendList().then((list){
 #### getSendFriendApplicationList（发出的好友申请）
 
 ```
-OpenIM.iMManager.friendshipManager.getSendFriendApplicationList().then((list){
-      // List<FriendApplicationInfo> 申请列表
- });
+        [OIMManager.manager getSendFriendApplicationListWithOnSuccess:^(NSArray<OIMFriendApplication *> * _Nullable friendApplications) {
+        
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -133,13 +139,12 @@ OpenIM.iMManager.friendshipManager.getSendFriendApplicationList().then((list){
 操作者收到OnBlackAdded
 
 ```
- OpenIM.iMManager.friendshipManager.addBlacklist(
-      uid: "", // 好友userID
- ).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+        [OIMManager.manager addToBlackList:@"" // user id
+                                 onSuccess:^(NSString * _Nullable data) {
+        
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -147,9 +152,11 @@ OpenIM.iMManager.friendshipManager.getSendFriendApplicationList().then((list){
 #### getBlacklist（黑名单）
 
 ```
-OpenIM.iMManager.friendshipManager.getBlacklist().then((list){
-      // List<UserInfo>
-   });
+        [OIMManager.manager getBlackListWithOnSuccess:^(NSArray<OIMFullUserInfo *> * _Nullable userInfos) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -159,13 +166,12 @@ OpenIM.iMManager.friendshipManager.getBlacklist().then((list){
 操作者收到OnBlackDeleted
 
 ```
-OpenIM.iMManager.friendshipManager.removeBlacklist(
-      uid: "", // userID
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager removeFromBlackList:@"" // user id
+                                      onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -177,14 +183,13 @@ OpenIM.iMManager.friendshipManager.removeBlacklist(
 申请者收到OnFriendApplicationAccepted、OnFriendAdded
 
 ```
-OpenIM.iMManager.friendshipManager.acceptFriendApplication(
-      uid: "", // userID
-      handleMsg: '', // 备注信息
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager acceptFriendApplication:@"" // user id
+                                          handleMsg:@"ok"
+                                          onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -196,24 +201,29 @@ OpenIM.iMManager.friendshipManager.acceptFriendApplication(
 申请者收到OnFriendApplicationRejected 
 
 ```
- OpenIM.iMManager.friendshipManager.refuseFriendApplication(
-      uid: "", // userID
-      handleMsg: '', // 备注信息
- ).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+        [OIMManager.manager refuseFriendApplication:@"" // user id 
+                                          handleMsg:@"no"
+                                          onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
 
-#### searchFriends（搜索好友）
+#### searchUsers（搜索好友）
 
 ```
-var list = await OpenIM.iMManager.friendshipManager.searchFriends(
-      keywordList: [searchCtrl.text.trim()],//关键词
-      isSearchNickname: true,//按昵称查找
-      isSearchRemark: true,//按备注查找
- );
+        OIMSearchUserParam *t = [OIMSearchUserParam new];
+        t.keywordList = @[@""];
+        t.isSearchRemark = YES;
+        t.isSearchUserID = YES;
+        
+        [OIMManager.manager searchUsers:t
+                              onSuccess:^(NSArray<OIMSearchUserInfo *> * _Nullable usersInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```

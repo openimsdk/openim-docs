@@ -3,6 +3,7 @@
 | 方法                   | 描述                     |
 | ---------------------- | ------------------------ |
 | setSignalingListener   | 信令监听                 |
+| addSignalingListener   | 信令监听                 |
 | signalingInvite        | 邀请个人加入音视频       |
 | signalingInviteInGroup | 邀请群里某些人加入音视频 |
 | signalingAccept        | 同意某人音视频邀请       |
@@ -15,9 +16,20 @@
 #### signalingInvite（邀请个人加入音视频通话）
 
 ```
-SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInvite(
-	info: null, // 信令对象SignalingInfo
-);
+    
+    OIMInvitationInfo *info = [OIMInvitationInfo new]; // 如需更多设置，请查看头文件
+    info.inviteeUserIDList = @[]; // 被邀请人
+    info.timeout = 30; // 默认30秒
+    info.mediaType = isVideo ? "video" : "audio"
+
+    [OIMManager.manager signalingInvite:info
+                        offlinePushInfo:nil
+                              onSuccess:^(OIMInvitationResultInfo * _Nullable result) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
+
 ```
 
 
@@ -25,9 +37,19 @@ SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInvit
 #### signalingInviteInGroup（邀请群成员加入音视频通话)
 
 ```
-SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInviteInGroup(
-	info: null, // 信令对象SignalingInfo
-);
+    OIMInvitationInfo *info = [OIMInvitationInfo new];
+    info.inviteeUserIDList = @[];
+    info.groupID = @"" // group id 必须填
+    info.timeout = 30;
+    info.mediaType = isVideo ? "video" : "audio"
+
+    [OIMManager.manager signalingInvite:info
+                        offlinePushInfo:nil
+                              onSuccess:^(OIMInvitationResultInfo * _Nullable result) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
 ```
 
 
@@ -35,9 +57,12 @@ SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInvit
 #### signalingAccept（接受邀请）
 
 ```
-SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingAccept(
-  info: null, // 信令对象SignalingInfo
-);
+    [OIMManager.manager signalingAccept:nil // 信令对象OIMInvitationInfo
+                              onSuccess:^(OIMInvitationResultInfo * _Nullable result) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
 ```
 
 
@@ -45,9 +70,12 @@ SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingAccep
 #### signalingReject（拒绝邀请）
 
 ```
-OpenIM.iMManager.signalingManager.signalingReject(
-  info: null, // 信令对象SignalingInfo
-);
+    [OIMManager.manager signalingReject:nil // 信令对象OIMInvitationInfo
+                              onSuccess:^(OIMInvitationResultInfo * _Nullable result) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
 ```
 
 
@@ -55,9 +83,12 @@ OpenIM.iMManager.signalingManager.signalingReject(
 - #### signalingCancel（取消）
 
 ```
-OpenIM.iMManager.signalingManager.signalingCancel(
-  info: null, // 信令对象SignalingInfo
-);
+    [OIMManager.manager signalingCancel:nil // 信令对象OIMInvitationInfo
+                              onSuccess:^(OIMInvitationResultInfo * _Nullable result) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
 ```
 
 
@@ -65,7 +96,10 @@ OpenIM.iMManager.signalingManager.signalingCancel(
 #### signalingHungUp（挂断）
 
 ```
-OpenIM.iMManager.signalingManager.signalingHungUp(
-  info: null, // 信令对象SignalingInfo
-);
+    [OIMManager.manager signalingHungUp:nil // 信令对象OIMInvitationInfo
+                              onSuccess:^(OIMInvitationResultInfo * _Nullable result) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
 ```
