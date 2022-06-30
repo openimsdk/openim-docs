@@ -1,4 +1,4 @@
-# 问题1 runtime/cgo: pthread_create failed: Operation not permitted
+# runtime/cgo: pthread_create failed: Operation not permitted
 
 ### 问题描述
 
