@@ -12,11 +12,13 @@
 #### getUsersInfo（根据用户ID批量获取用户信息）
 
 ```
-OpenIM.iMManager.userManager.getUsersInfo(
-      uidList: [], // 用户ID集合
-   ).then((userInfoList) {
-      // 用户信息列表
-  });
+   /**
+     * 根据uid 批量查询用户信息
+     *
+     * @param uidList 用户id列表
+     * @param base    callback List<{@link UserInfo}>
+     */
+    public void getUsersInfo(OnBase<List<UserInfo>> base, List<String> uidList) 
 ```
 
 
@@ -24,9 +26,10 @@ OpenIM.iMManager.userManager.getUsersInfo(
 #### getSelfUserInfo（获取当前登录用户的资料）
 
 ```
- OpenIM.iMManager.userManager.getSelfUserInfo().then((userInfo){
-      // 返回当前登录用户的资料
-  });
+    /**
+     * 获取当前用户信息
+     */
+    public void getSelfUserInfo(OnBase<UserInfo> base)
 ```
 
 
@@ -36,14 +39,17 @@ OpenIM.iMManager.userManager.getUsersInfo(
 会触发当用户的onSelfInfoUpdated回调，以及好友的onFriendInfoChanged、onConversationChanged回调。
 
 ```
-  OpenIM.iMManager.userManager.setSelfInfo(
-      nickname: '',  // 昵称
-      faceURL: '',  // 头像
-      gender: 0,  // 性别: 男1，女0
-      phoneNumber: '', // 手机号
-      email: '', //邮箱
-      birth: 0,  //生日
-      ex: '',  // 其他信息
-    );
+    /**
+     * 修改资料
+     *
+     * @param nickname    名字
+     * @param faceURL     头像
+     * @param gender      性别
+     * @param phoneNumber 手机号
+     * @param birth       出生日期
+     * @param email       邮箱
+     * @param base        callback String
+     */
+    public void setSelfInfo(OnBase<String> base, String nickname, String faceURL, int gender, int appMangerLevel, String phoneNumber, long birth, String email, String ex) 
 ```
 

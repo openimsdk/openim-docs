@@ -14,6 +14,7 @@
 * **服务端部署**
   * [docker部署](v2/server_deploy/docker_singe.md)
   * [常见问题](v2/server_deploy/faq.md)
+  * [minio部署]()
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
@@ -102,11 +103,11 @@
   * [账号鉴权管理](http://43.128.5.63:10002/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
   * [第三方管理](http://43.128.5.63:10002/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
   * [消息管理](http://43.128.5.63:10002/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
-  * [会话管理](v2/api_integrate/conversation.md)
+  * [会话管理](http://43.128.5.63:10002/swagger/index.html#/%E4%BC%9A%E8%AF%9D%E7%9B%B8%E5%85%B3)
   * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
   * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
-  * [组织管理](v2/api_integrate/organization.md)
-  * [第三方回调说明](v2/description/callback.md)
+  * [组织管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3)
+  * [第三方回调说明](callback/callback.md)
   * [字段含义说明](v2/description/fields.md)
   * [常见问题](v2/api_integrate/faq.md)
 * **架构介绍**
@@ -120,7 +121,7 @@
 * [原创技术文章](artice/actice.md)
 * **常见问题**
   * [docker及golang安装](qa/docker.md)
-  * [minio部署](qa/docker.md)
+  * [minio部署](qa/minio.md)
   * [docker部署常见问题](qa/docker_deploy.md)
 * 服务端部署(逐步废弃)
   * [docker部署](demo/server_deploy/docker_singe.md)
