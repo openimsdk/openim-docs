@@ -13,6 +13,7 @@
 * **服务端部署**
   * [docker部署](v2/server_deploy/docker_singe.md)
   * [常见问题](v2/server_deploy/faq.md)
+  * [minio部署]()
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
@@ -119,7 +120,7 @@
 * [原创技术文章](artice/actice.md)
 * **常见问题**
   * [docker及golang安装](qa/docker.md)
-  * [minio部署](qa/docker.md)
+  * [minio部署](qa/minio.md)
   * [docker部署常见问题](qa/docker_deploy.md)
 * 服务端部署(逐步废弃)
   * [docker部署](demo/server_deploy/docker_singe.md)
