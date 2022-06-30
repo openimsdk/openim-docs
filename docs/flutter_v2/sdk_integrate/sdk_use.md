@@ -61,6 +61,9 @@ OpenIM.iMManager
         onRecvC2CReadReceipt: (list) {
           // 消息被阅读回执，将消息标记为已读
         },
+        onRecvGroupMessageReadReceipt: (list) {
+          // 组消息已读回执，更新已读人数跟未读人数
+        },
       ))
       ..messageManager.setMsgSendProgressListener(OnMsgSendProgressListener(
         onProgress: (messageID, progress) {
@@ -155,7 +158,26 @@ OpenIM.iMManager
         onInvitationCancelled: (info) {
           // 被邀请者收到：邀请者取消音视频通话
         },
-      ));
+        onInviteeAcceptedByOtherDevice: (info) {
+          // 被邀请者收到：邀请被其他设备接受
+        },
+        onInviteeRejectedByOtherDevice: (info) {
+          // 被邀请者收到：邀请被其他设备拒绝
+        },
+        onHangup: (info) {
+          // 对方挂断
+        },
+      ))
+      ..workMomentsManager.setWorkMomentsListener(OnWorkMomentsListener(
+        onRecvNewNotification: (){
+        	// 朋友圈有新消息更新
+        },
+      ))
+       ..organizationManager.setOrganizationListener(OnOrganizationListener(
+        onOrganizationUpdated: () {
+        	// 组织架构发生变化
+        },
+      ));;
 ```
 
 #### 5，登录
@@ -175,6 +197,6 @@ OpenIM.iMManager.login(
 
 1，SDK只能初始化一次。
 
-2，在登录前必须设置各监听器， 如：好友监听，组监听，会话监听，消息监听等。
+2，在登录前除信令监听，组织架构监听，工作圈/朋友圈监听外其他监听器必须设置。
 
 3，其他api调用必须保证登录回调成功后操作。
