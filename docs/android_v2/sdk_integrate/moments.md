@@ -12,7 +12,7 @@
 #### getWorkMomentsUnReadCount（获取朋友圈未读消息总数）
 
 ```
-var count = await OpenIM.iMManager.workMomentsManager.getWorkMomentsUnReadCount();
+    public void getWorkMomentsUnReadCount(OnBase<String> base) 
 ```
 
 
@@ -20,10 +20,13 @@ var count = await OpenIM.iMManager.workMomentsManager.getWorkMomentsUnReadCount(
 #### getWorkMomentsNotification（获取朋友圈通知列表）
 
 ```
-var list = await OpenIM.iMManager.workMomentsManager.getWorkMomentsNotification(
-  offset:0,//开始下标
-  count:40,//每页大小
-);
+
+    /**
+     * @param base
+     * @param offset 开始下标
+     * @param count 每页大小
+     */
+    public void getWorkMomentsNotification(OnBase<List<WorkMomentsInfo>> base, long offset, long count)
 ```
 
 
@@ -31,5 +34,5 @@ var list = await OpenIM.iMManager.workMomentsManager.getWorkMomentsNotification(
 #### clearWorkMomentsNotification（清除朋友圈通知列表）
 
 ```
-OpenIM.iMManager.workMomentsManager.clearWorkMomentsNotification();
+    public void clearWorkMomentsNotification(OnBase<String> base)
 ```

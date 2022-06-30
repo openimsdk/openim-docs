@@ -41,19 +41,61 @@
 | clearGroupHistoryMessageFromLocalAndSvr | 删除本地跟服务器的群聊天记录                                 |
 | getHistoryMessageListReverse            | 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息 |
 
+
+#### 泛型回调接口（所有方法都会回调此接口）
+
+```
+public interface OnBase<T> {
+    /**
+     * 失败
+     * @param code 错误码
+     * @param error 错误信息
+     */
+    void onError(int code, String error);
+
+    /**
+     * 成功
+     * @param data 返回的实体
+     */
+    void onSuccess(T data);
+}
+```
+
 #### sendMessage（发送消息）
 
 ```
-OpenIM.iMManager.messageManager.sendMessage(
-  message: Message(), // 消息体
-  userID: '', // 接受消息的userID
-  groupID: '', // 接受消息的群ID
-  offlinePushInfo: OfflinePushInfo(), // 离线推送的消息备注
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+    /**
+     * 发送消息
+     *
+     * @param message         消息体{@link Message}
+     * @param recvUid         接受者用户id
+     * @param recvGid         群id
+     * @param offlinePushInfo 离线推送内容
+     * @param base            callback
+     *                        onProgress:消息发送进度，如图片，文件，视频等消息
+     */
+    public void sendMessage(OnMsgSendCallback base, Message message, String recvUid, String recvGid, OfflinePushInfo offlinePushInfo)
+
+/**
+ * 消息发送监听
+ */
+public interface OnMsgSendCallback extends OnBase<Message> {
+    /**
+     * 发送失败
+     */
+    void onError(int code, String error);
+
+    /**
+     * 上传进度
+     */
+    void onProgress(long progress);
+
+    /**
+     * 发送成功
+     */
+    void onSuccess(Message s);
+}
+
 ```
 
 
@@ -61,14 +103,18 @@ OpenIM.iMManager.messageManager.sendMessage(
 #### getHistoryMessageList（获取聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.getHistoryMessageList(
-  userID: '', // 单聊对象的userID
-  groupID: '', // 群聊的组id
-  startMsg: null, // 消息体
-  count: 0, // 每次拉取的数量
-).then((list){
-  // List<Message>
-});
+    /**
+     * 获取历史消息
+     *
+     * @param userID   用户id
+     * @param groupID  组ID
+     * @param startMsg 从startMsg {@link Message}开始拉取消息
+     *                 startMsg：如第一次拉取20条记录 startMsg=null && count=20 得到 list；
+     *                 下一次拉取消息记录参数：startMsg=list.get(0) && count =20；以此内推，startMsg始终为list的第一条。
+     * @param count    一次拉取count条
+     * @param base     callback List<{@link Message}>
+     */
+    public void getHistoryMessageList(OnBase<List<Message>> base, String userID, String groupID, Message startMsg, int count)
 ```
 
 注：消息列表list，index == list.length -1 是最新的一条消息。 index == 0 是从最新的这条记录后的第19条。所以startMsg首次传null，
@@ -82,13 +128,14 @@ OpenIM.iMManager.messageManager.getHistoryMessageList(
 撤回成功需要当前用户从列表里移除Message然后更新ui，而另外一方通过撤回监听（onRecvMessageRevoked）移除。
 
 ```
-OpenIM.iMManager.messageManager.revokeMessage(
-  message: Message(), // 消息体
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+    /**
+     * 撤回消息
+     *
+     * @param message {@link Message}
+     * @param base    callback String
+     *                撤回成功需要将已显示到界面的消息类型替换为revoke类型并刷新界面
+     */
+    public void revokeMessage(OnBase<String> base, Message message)
 ```
 
 
@@ -96,13 +143,14 @@ OpenIM.iMManager.messageManager.revokeMessage(
 #### deleteMessageFromLocalStorage（删除单条消息）
 
 ```
-OpenIM.iMManager.messageManager.deleteMessageFromLocalStorage(
-  message: Message(),
-).then((_) {
-    // 成功，从列表里移除Message，然后更新ui
- }).catchError((_){
-    // 失败
- });
+    /**
+     * 删除消息
+     *
+     * @param message {@link Message}
+     * @param base    callback String
+     *                删除成功需要将已显示到界面的消息移除
+     */
+    public void deleteMessageFromLocalStorage(OnBase<String> base, Message message)
 ```
 
 
@@ -110,11 +158,15 @@ OpenIM.iMManager.messageManager.deleteMessageFromLocalStorage(
 #### insertSingleMessageToLocalStorage（向本地插入一条消息）
 
 ```
-OpenIM.iMManager.messageManager.insertSingleMessageToLocalStorage(
-  receiverID: '', // 接收者userID
-  senderID: '', // 发送者userID
-  message: Message(), // 消息体
-);
+    /**
+     * 插入单挑消息到本地
+     *
+     * @param message  {@link Message}
+     * @param receiver 接收者
+     * @param sender   发送者
+     * @param base     callback String
+     */
+    public void insertSingleMessageToLocalStorage(OnBase<String> base, Message message, String receiver, String sender)
 ```
 
 
@@ -124,10 +176,15 @@ OpenIM.iMManager.messageManager.insertSingleMessageToLocalStorage(
 当调用此方法后，已读的消息会通过已读回执（onRecvC2CReadReceipt）告诉对方。
 
 ```
-OpenIM.iMManager.messageManager.markC2CMessageAsRead(
-  userID: '', // 接收者 userID
-  messageIDList: [], // 已读的消息id列表
-);
+    /**
+     * 标记消息已读
+     * 会触发userid的onRecvC2CReadReceipt方法
+     *
+     * @param userID        聊天对象id
+     * @param messageIDList 消息clientMsgID列表
+     * @param base          callback String
+     */
+    public void markC2CMessageAsRead(OnBase<String> base, String userID, List<String> messageIDList)
 ```
 
 
@@ -137,10 +194,13 @@ OpenIM.iMManager.messageManager.markC2CMessageAsRead(
 会通过onRecvNewMessage回调
 
 ```
-OpenIM.iMManager.messageManager.typingStatusUpdate(
-  userID: '', // 接收者 userID
-  msgTip: '', // 自定义提示内容
-);
+    /**
+     * 提示对方我正在输入
+     *
+     * @param userID 用户ID
+     * @param msgTip 提示信息
+     */
+    public void typingStatusUpdate(OnBase<String> base, String userID, String msgTip)
 ```
 
 
@@ -148,13 +208,12 @@ OpenIM.iMManager.messageManager.typingStatusUpdate(
 #### clearC2CHistoryMessage（清空c2c聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.clearC2CHistoryMessage(
-  uid: "", // userID
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+    /**
+     * 聊天设置里清除聊天记录
+     *
+     * @param uid 用户id
+     */
+    public void clearC2CHistoryMessage(OnBase<String> base, String uid)
 ```
 
 
@@ -162,13 +221,12 @@ OpenIM.iMManager.messageManager.clearC2CHistoryMessage(
 #### clearGroupHistoryMessage（清空群聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.clearGroupHistoryMessage(
-  gid: '', // 群ID
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+    /**
+     * 聊天设置里清除聊天记录
+     *
+     * @param gid 群id
+     */
+    public void clearGroupHistoryMessage(OnBase<String> base, String gid) 
 ```
 
 
@@ -176,9 +234,13 @@ OpenIM.iMManager.messageManager.clearGroupHistoryMessage(
 #### createTextMessage（文本消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createTextMessage(
-  text: '', // 发送的内容
-);
+    /**
+     * 创建文本消息
+     *
+     * @param text 内容
+     * @return {@link Message}
+     */
+    public Message createTextMessage(String text) 
 ```
 
 
@@ -186,12 +248,17 @@ var message = await OpenIM.iMManager.messageManager.createTextMessage(
 #### createTextAtMessage（@消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createTextAtMessage(
-      text: '', // 发送的内容
-      atUserIDList: [], // 被@到的用户ID集合
-      atUserInfoList: [], // 被@到的用户Info集合
-      quoteMessage: null, //被引用的消息体
- );
+
+    /**
+     * 创建@文本消息
+     *
+     * @param text           内容
+     * @param atUserIDList   用户id列表
+     * @param atUserInfoList 被@的用户id跟昵称映射
+     * @param quoteMessage   @消息带引用消息
+     * @return {@link Message}
+     */
+    public Message createTextAtMessage(String text, List<String> atUserIDList, List<AtUserInfo> atUserInfoList, Message quoteMessage)
 ```
 
 
@@ -199,9 +266,14 @@ var message = await OpenIM.iMManager.messageManager.createTextAtMessage(
 #### createImageMessage（图片消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createImageMessage(
-  imagePath: '', // 相对路径
-);
+    /**
+     * 创建图片消息（
+     * initSDK时传入了数据缓存路径，如路径：A，这时需要你将图片复制到A路径下后，如 A/pic/a.png路径，imagePath的值：“/pic/.png”
+     *
+     * @param imagePath 相对路径
+     * @return {@link Message}
+     */
+    public Message createImageMessage(String imagePath)
 ```
 
 注：initSDK时传入了数据缓存（dataDir）路径，如路径：A，这时需要你将图片复制到A路径下后，如 A/pic/a.png路径，imagePath的值：“/pic/a.png”。同以下其他消息的相对路径。
@@ -211,9 +283,13 @@ var message = await OpenIM.iMManager.messageManager.createImageMessage(
 #### createImageMessageFromFullPath（图片消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createImageMessageFromFullPath(
-  imagePath: '', // 绝对路径
-);
+    /**
+     * 创建图片消息
+     *
+     * @param imagePath 绝对路径
+     * @return {@link Message}
+     */
+    public Message createImageMessageFromFullPath(String imagePath)
 ```
 
 
@@ -221,10 +297,15 @@ var message = await OpenIM.iMManager.messageManager.createImageMessageFromFullPa
 #### createSoundMessage（语音消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createSoundMessage(
-  soundPath: '', // 相对路径
-  duration: 0, // 时长s
-);
+    /**
+     * 创建声音消息
+     * initSDK时传入了数据缓存路径，如路径：A，这时需要你将声音文件复制到A路径下后，如 A/voice/a.m4c路径，soundPath的值：“/voice/.m4c”
+     *
+     * @param soundPath 相对路径
+     * @param duration  时长
+     * @return {@link Message}
+     */
+    public Message createSoundMessage(String soundPath, long duration) 
 ```
 
 
@@ -232,10 +313,14 @@ var message = await OpenIM.iMManager.messageManager.createSoundMessage(
 #### createSoundMessageFromFullPath（语音消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createSoundMessageFromFullPath(
-  soundPath: '', // 绝对路径
-  duration: 0, // 时长s
-);
+    /**
+     * 创建声音消息
+     *
+     * @param soundPath 绝对路径
+     * @param duration  时长
+     * @return {@link Message}
+     */
+    public Message createSoundMessageFromFullPath(String soundPath, long duration)
 ```
 
 
@@ -243,12 +328,17 @@ var message = await OpenIM.iMManager.messageManager.createSoundMessageFromFullPa
 #### createVideoMessage（视频消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createVideoMessage(
-  videoPath: '', // 相对路径
-  videoType: '', // minetype
-  duration: 0, // 时长s
-  snapshotPath: '', // 站位缩略图
-);
+    /**
+     * 创建视频消息
+     * initSDK时传入了数据缓存路径，如路径：A，这时需要你将声音文件复制到A路径下后，如 A/video/a.mp4路径，soundPath的值：“/video/.mp4”
+     *
+     * @param videoPath    视频相对路径
+     * @param videoType    mine type
+     * @param duration     时长
+     * @param snapshotPath 缩略图相对路径
+     * @return {@link Message}
+     */
+    public Message createVideoMessage(String videoPath, String videoType, long duration, String snapshotPath) 
 ```
 
 
@@ -256,12 +346,17 @@ var message = await OpenIM.iMManager.messageManager.createVideoMessage(
 #### createVideoMessageFromFullPath（视频消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createVideoMessageFromFullPath(
-  videoPath: '', // 绝对路径
-  videoType: '', // minetype
-  duration: 0, // 时长s
-  snapshotPath: '', // 站位缩略图
-);
+
+    /**
+     * 创建视频消息
+     *
+     * @param videoPath    绝对路径
+     * @param videoType    mine type
+     * @param duration     时长
+     * @param snapshotPath 缩略图绝对路径
+     * @return {@link Message}
+     */
+    public Message createVideoMessageFromFullPath(String videoPath, String videoType, long duration, String snapshotPath) 
 ```
 
 
@@ -269,10 +364,15 @@ var message = await OpenIM.iMManager.messageManager.createVideoMessageFromFullPa
 #### createFileMessage（文件消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createFileMessage(
-  filePath: '', // 相对路径
-  fileName: '', // 文件名
-);
+    /**
+     * 创建文件消息
+     * initSDK时传入了数据缓存路径，如路径：A，这时需要你将声音文件复制到A路径下后，如 A/file/a.txt路径，soundPath的值：“/file/.txt”
+     *
+     * @param filePath 相对路径
+     * @param fileName 文件名
+     * @return {@link Message}
+     */
+    public Message createFileMessage(String filePath, String fileName) 
 ```
 
 
@@ -280,10 +380,15 @@ var message = await OpenIM.iMManager.messageManager.createFileMessage(
 #### createFileMessageFromFullPath（文件消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createFileMessageFromFullPath(
-  filePath: '', // 绝对路径
-  fileName: '', // 文件名
-);
+    /**
+     * 创建文件消息
+     * initSDK时传入了数据缓存路径，如路径：A，这时需要你将声音文件复制到A路径下后，如 A/file/a.txt路径，soundPath的值：“/file/.txt”
+     *
+     * @param filePath 绝对路径
+     * @param fileName 文件名
+     * @return {@link Message}
+     */
+    public Message createFileMessageFromFullPath(String filePath, String fileName) 
 ```
 
 
@@ -291,9 +396,13 @@ var message = await OpenIM.iMManager.messageManager.createFileMessageFromFullPat
 #### createForwardMessage（转发消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createForwardMessage(
-  message: Message(), // 被转发的消息体
-);
+    /**
+     * 创建转发消息
+     *
+     * @param message 消息体
+     * @return {@link Message}
+     */
+    public Message createForwardMessage(Message message) 
 ```
 
 
@@ -301,11 +410,15 @@ var message = await OpenIM.iMManager.messageManager.createForwardMessage(
 #### createMergerMessage（合并消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createMergerMessage(
-  messageList: [], // 被转发的消息列表
-  title: '', // 标题
-  summaryList: [], // 每一条消息摘要
-);
+    /**
+     * 创建合并消息
+     *
+     * @param title       标题
+     * @param summaryList 摘要
+     * @param messageList 消息列表
+     * @return {@link Message}
+     */
+    public Message createMergerMessage(List<Message> messageList, String title, List<String> summaryList) 
 ```
 
 
@@ -313,11 +426,16 @@ var message = await OpenIM.iMManager.messageManager.createMergerMessage(
 #### createLocationMessage（位置消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createLocationMessage(
-  latitude: 0,// 纬度
-  longitude: 0, // 经度
-  description: '', // 位置描述信息
-);
+
+    /**
+     * 创建位置消息
+     *
+     * @param latitude    经度
+     * @param longitude   纬度
+     * @param description 描述消息
+     * @return {@link Message}
+     */
+    public Message createLocationMessage(double latitude, double longitude, String description)
 ```
 
 
@@ -325,11 +443,15 @@ var message = await OpenIM.iMManager.messageManager.createLocationMessage(
 #### createCustomMessage（自定义消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createCustomMessage(
-  data: '', // 自定义内容
-  extension: '', // 扩展信息
-  description: '', // 描述消息
-);
+    /**
+     * 创建自定义消息
+     *
+     * @param data        json String
+     * @param extension   json String
+     * @param description 描述
+     * @return {@link Message}
+     */
+    public Message createCustomMessage(String data, String extension, String description)
 ```
 
 
@@ -337,10 +459,14 @@ var message = await OpenIM.iMManager.messageManager.createCustomMessage(
 #### createQuoteMessage（引用消息/消息回复）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createQuoteMessage(
-  text: '', // 回复内容
-  quoteMsg: Message(), // 被回复的消息体
-);
+    /**
+     * 创建引用消息
+     *
+     * @param text    内容
+     * @param message 被引用的消息体
+     * @return {@link Message}
+     */
+    public Message createQuoteMessage(String text, Message message) 
 ```
 
 
@@ -348,9 +474,13 @@ var message = await OpenIM.iMManager.messageManager.createQuoteMessage(
 #### createCardMessage（名片消息）
 
 ```
-OpenIM.iMManager.messageManager.createCardMessage(
-  data: {}, // 自定义内容
-);
+    /**
+     * 创建名片消息
+     *
+     * @param content json String
+     * @return {@link Message}
+     */
+    public Message createCardMessage(String content) 
 ```
 
 
@@ -358,17 +488,29 @@ OpenIM.iMManager.messageManager.createCardMessage(
 #### searchLocalMessages（全局搜索)
 
 ```
-SearchResult result = await OpenIM.iMManager.messageManager.searchLocalMessages(
-  conversationID: null, // 根据会话查询，如果是全局搜索传null
-  keywordList: [], // 搜索关键词列表，目前仅支持一个关键词搜索
-  keywordListMatchType: 0, // 关键词匹配模式，1代表与，2代表或，暂时未用
-  senderUserIDList: [], // 指定消息发送的uid列表 暂时未用
-  messageTypeList: [], // 消息类型列表
-  searchTimePosition: 0, // 搜索的起始时间点。默认为0即代表从现在开始搜索。UTC 时间戳，单位：秒
-  searchTimePeriod: 0, // 从起始时间点开始的过去时间范围，单位秒。默认为0即代表不限制时间范围，传24x60x60代表过去一天
-  pageIndex: 1, // 当前页数
-  count: 10, // 每页数量
-);
+    /**
+     * 搜索消息
+     *
+     * @param conversationID       根据会话查询，如果是全局搜索传null
+     * @param keywordList          搜索关键词列表，目前仅支持一个关键词搜索
+     * @param keywordListMatchType 关键词匹配模式，1代表与，2代表或，暂时未用
+     * @param senderUserIDList     指定消息发送的uid列表 暂时未用
+     * @param messageTypeList      消息类型列表
+     * @param searchTimePosition   搜索的起始时间点。默认为0即代表从现在开始搜索。UTC 时间戳，单位：秒
+     * @param searchTimePeriod     从起始时间点开始的过去时间范围，单位秒。默认为0即代表不限制时间范围，传24x60x60代表过去一天
+     * @param pageIndex            当前页数
+     * @param count                每页数量
+     */
+    public void searchLocalMessages(OnBase<SearchResult> base,
+                                    String conversationID,
+                                    List<String> keywordList,
+                                    int keywordListMatchType,
+                                    List<String> senderUserIDList,
+                                    List<Integer> messageTypeList,
+                                    int searchTimePosition,
+                                    int searchTimePeriod,
+                                    int pageIndex,
+                                    int count)
 ```
 
 
@@ -376,9 +518,12 @@ SearchResult result = await OpenIM.iMManager.messageManager.searchLocalMessages(
 #### deleteMessageFromLocalAndSvr（删除本地跟服务器聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.createCardMessage(
-  message: null, // 消息体
-);
+    /**
+     * 删除本地跟服务器消息
+     *
+     * @param message 消息体
+     */
+    public void deleteMessageFromLocalAndSvr(OnBase<String> base, Message message) 
 ```
 
 
@@ -386,8 +531,10 @@ OpenIM.iMManager.messageManager.createCardMessage(
 #### deleteAllMsgFromLocal（清空所有本地聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.deleteAllMsgFromLocal(
-);
+    /**
+     * 删除本地所有消息
+     */
+    public void deleteAllMsgFromLocal(OnBase<String> base) 
 ```
 
 
@@ -395,8 +542,10 @@ OpenIM.iMManager.messageManager.deleteAllMsgFromLocal(
 #### deleteAllMsgFromLocalAndSvr（清空本地跟服务器所有聊天记录)
 
 ```
-OpenIM.iMManager.messageManager.deleteAllMsgFromLocalAndSvr(
-);
+    /**
+     * 删除本地跟服务器所有消息
+     */
+    public void deleteAllMsgFromLocalAndSvr(OnBase<String> base) 
 ```
 
 
@@ -404,10 +553,13 @@ OpenIM.iMManager.messageManager.deleteAllMsgFromLocalAndSvr(
 #### markMessageAsReadByConID（标记会话里某些消息为已读）
 
 ```
-OpenIM.iMManager.messageManager.markMessageAsReadByConID(
-  conversationID: null, // 会话ID
-  messageIDList: [], // 消息id列表
-);
+    /**
+     * 标记会话全部已读，用于OA通知类消息
+     *
+     * @param conversationID 会话id
+     * @param messageIDList  消息clientID列表
+     */
+    public void markMessageAsReadByConID(OnBase<String> base, String conversationID, List<String> messageIDList) 
 ```
 
 
@@ -415,9 +567,12 @@ OpenIM.iMManager.messageManager.markMessageAsReadByConID(
 #### clearC2CHistoryMessageFromLocalAndSvr（清空单聊本地跟服务端聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.clearC2CHistoryMessageFromLocalAndSvr(
-  uid: null, // 用户id
-);
+    /**
+     * 聊天设置里清除聊天记录
+     *
+     * @param uid 用户id
+     */
+    public void clearC2CHistoryMessageFromLocalAndSvr(OnBase<String> base, String uid) 
 ```
 
 
@@ -425,9 +580,12 @@ OpenIM.iMManager.messageManager.clearC2CHistoryMessageFromLocalAndSvr(
 #### clearGroupHistoryMessageFromLocalAndSvr（清空群聊本地跟服务端聊天记录)
 
 ```
-OpenIM.iMManager.messageManager.clearGroupHistoryMessageFromLocalAndSvr(
-	gid: null, // 群组id
-);
+    /**
+     * 聊天设置里清除聊天记录
+     *
+     * @param gid 群id
+     */
+    public void clearGroupHistoryMessageFromLocalAndSvr(OnBase<String> base, String gid)
 ```
 
 
@@ -435,13 +593,18 @@ OpenIM.iMManager.messageManager.clearGroupHistoryMessageFromLocalAndSvr(
 #### getHistoryMessageListReverse（获取新的聊天记录）
 
 ```
-// 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息
-OpenIM.iMManager.messageManager.getHistoryMessageListReverse(
-  userID: '', // 单聊对象的userID
-  groupID: '', // 群聊的组id
-  startMsg: null, // 消息体
-  count: 0, // 每次拉取的数量
-).then((list){
-  // List<Message>
-});
+    /**
+     * 获取历史消息
+     * 在搜索消息时定位到消息位置，获取新消息列表
+     * getHistoryMessageList是获取该条消息之前的记录（旧消息），getHistoryMessageListReverse是获取该条消息之后的记录（新消息）
+     *
+     * @param userID   用户id
+     * @param groupID  组ID
+     * @param startMsg 从startMsg {@link Message}开始拉取消息
+     *                 startMsg：如第一次拉取20条记录 startMsg=null && count=20 得到 list；
+     *                 下一次拉取消息记录参数：startMsg=list.last && count =20；以此内推，startMsg始终为list的最后一条。
+     * @param count    一次拉取count条
+     * @param base     callback List<{@link Message}>
+     */
+    public void getHistoryMessageListReverse(OnBase<List<Message>> base, String userID, String groupID, Message startMsg, int count) 
 ```
