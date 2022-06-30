@@ -1,6 +1,6 @@
-## runtime/cgo: pthread_create failed: Operation not permitted
+# 问题1 runtime/cgo: pthread_create failed: Operation not permitted
 
-问题描述
+### 问题描述
 
 start msg_transfer server
 runtime/cgo: pthread_create failed: Operation not permitted
@@ -85,9 +85,7 @@ runtime.main()
 runtime.goexit()
 	/usr/local/go/src/runtime/asm_amd64.s:1571 +0x1 fp=0xc0000527e8 sp=0xc0000527e0 pc=0x470c41
 
-
-
-## 解决途径
+### 解决途径
 
 使用docker版本为20.10.14, docker-compose版本为1.24.1
 
