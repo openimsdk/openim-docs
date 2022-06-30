@@ -2,7 +2,8 @@
 * **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
   * [主要功能](introduce/main_function.md)
-  * [产品动态](introduce/production_dynamic.md)
+  * [产品动态]
+    * [v2.2.0](introduce/v2.2.0.md)
 * **版本发布**
   - [版本管理](version/description.md)
   - [历史版本](version/history_version.md)
