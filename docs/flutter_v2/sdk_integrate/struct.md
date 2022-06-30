@@ -262,4 +262,143 @@ AttachedInfoElem? attachedInfoElem;
 
 
 
+#### GroupMembersInfo（群成员信息）
+
+```
+/// 群id
+String? groupID;
+
+/// 用户id
+String? userID;
+
+/// 昵称
+String? nickname;
+
+/// 头像
+String? faceURL;
+
+/// 角色[GroupRoleLevel]
+int? roleLevel;
+
+/// 加入时间
+int? joinTime;
+
+/// 入群方式
+int? joinSource;
+
+/// 操作者id
+String? operatorUserID;
+
+/// 扩展字段
+String? ex;
+
+/// 禁言时间s
+int? muteEndTime;
+int? appMangerLevel;
+```
+
+
+
+#### DeptInfo（部门信息）
+
+```
+/// 部门id
+String? departmentID;
+
+/// 头像
+String? faceURL;
+
+/// 显示名
+String? name;
+
+/// 上一级部门id
+String? parentID;
+
+/// 排序方式
+int? order;
+
+/// 部门类型
+int? departmentType;
+
+/// 创建时间
+int? createTime;
+
+/// 子部门数量
+int? subDepartmentNum;
+
+/// 成员数量
+int? memberNum;
+
+/// 扩展字段
+String? ex;
+
+/// 附加信息
+String? attachedInfo;
+```
+
+
+
+#### DeptMemberInfo（部门成员）
+
+```
+/// 用户id
+String? userID;
+
+/// 用户昵称
+String? nickname;
+
+/// 英文名
+String? englishName;
+
+/// 头像
+String? faceURL;
+
+/// 性别
+int? gender;
+
+/// 手机号
+String? mobile;
+
+/// 座机
+String? telephone;
+
+/// 出生时间
+int? birth;
+
+/// 邮箱
+String? email;
+
+/// 所在部门的id
+String? departmentID;
+
+/// 排序方式
+int? order;
+
+/// 职位
+String? position;
+
+///
+int? leader;
+
+/// 状态
+int? status;
+
+/// 创建时间
+int? createTime;
+
+/// 扩展字段
+String? ex;
+
+/// 附加信息
+String? attachedInfo;
+
+/// 搜索时使用
+String? departmentName;
+
+/// 所在部门的所有上级部门
+List<DeptInfo>? parentDepartmentList;
+```
+
+
+
 #### 其他请参照SDK内有详细注释

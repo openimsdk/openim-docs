@@ -29,6 +29,23 @@
 
 
 
+#### OnGroupListener（组关系监听）
+
+| 方法                       | 描述                                          |
+| -------------------------- | --------------------------------------------- |
+| onGroupMemberInfoChanged   | 组成员信息发生变化                            |
+| onGroupMemberDeleted       | 组成员退出                                    |
+| onGroupMemberAdded         | 组成员进入                                    |
+| onGroupApplicationRejected | 发出或收到的组申请被拒绝                      |
+| onGroupApplicationDeleted  | 发出或收到的组申请被删除                      |
+| onGroupApplicationAdded    | 发出或收到的组申请有新增                      |
+| onGroupApplicationAccepted | 发出或收到的组申请被接受                      |
+| onJoinedGroupDeleted       | 退出群：退出者收到；踢出群：被踢者收到        |
+| onJoinedGroupAdded         | 创建群： 初始成员收到；邀请进群：被邀请者收到 |
+| onGroupInfoChanged         | 组资料变更                                    |
+
+
+
 #### inviteUserToGroup（邀请进组）
 
 直接进组无需同意。
