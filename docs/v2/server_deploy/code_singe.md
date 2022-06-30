@@ -12,7 +12,9 @@
 
 ## 1、服务器环境说明
  Linux系统 8G及以上内存  （目前仅支持linux下的部署，其他系统的部署需要自行修改脚本）
+
  获取OpenIM源码需要git环境，服务器如果没有需要安装git
+
  OpenIM server端开发语言为go语言，源码部署需要[搭建go语言环境](https://doc.rentsoft.cn/#/qa/docker?id=_1golang%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85)
 
 ## 2、拉取项目源码
