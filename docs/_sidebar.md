@@ -7,7 +7,7 @@
   - [版本管理](version/description.md)
   - [历史版本](version/history_version.md)
   - [版本计划](version/plan.md)
-* [**体验Demo**](demo/download_demo.md)
+* [体验Demo](demo/download_demo.md)
 * **以下是新文档模板-待补充**
   * [体验OpenIM](v2/demo/download_demo.md)
 * **服务端部署**
@@ -35,6 +35,7 @@
   * [组织架构](flutter_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
   * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+  * [常见问题](flutter_v2/sdk_integrate/faq.md)
 * **集成iOS SDK**
   * [Demo下载](ios_v2/sdk_integrate/development.md)
   * [SDK使用步骤](ios_v2/sdk_integrate/sdk_use.md)
@@ -48,6 +49,7 @@
   * [组织架构](ios_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](ios_v2/sdk_integrate/moments.md)
   * [常用结构体](ios_v2/sdk_integrate/struct.md)
+  * [常见问题](ios_v2/sdk_integrate/faq.md)
 * **集成Android SDK**
   * [Demo下载](android_v2/sdk_integrate/development.md)
   * [SDK使用步骤](android_v2/sdk_integrate/sdk_use.md)
@@ -61,6 +63,7 @@
   * [组织架构](android_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](android_v2/sdk_integrate/moments.md)
   * [常用结构体](android_v2/sdk_integrate/struct.md)
+  * [常见问题](android_v2/sdk_integrate/faq.md)
 * **集成Uniapp SDK**
   * [Demo下载](uniapp_v2/sdk_integrate/development.md)
   * [SDK使用步骤](uniapp_v2/sdk_integrate/sdk_use.md)
@@ -74,6 +77,7 @@
   * [组织架构](uniapp_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](uniapp_v2/sdk_integrate/moments.md)
   * [常用结构体](uniapp_v2/sdk_integrate/struct.md)
+  * [常见问题](uniapp_v2/sdk_integrate/faq.md)
 * **集成JS SDK**
   * [Demo下载](js_v2/sdk_integrate/development.md)
   * [SDK使用步骤](js_v2/sdk_integrate/sdk_use.md)
@@ -87,6 +91,7 @@
   * [组织架构](js_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
   * [常用结构体](js_v2/sdk_integrate/struct.md)
+  * [常见问题](js_v2/sdk_integrate/faq.md)
 * **服务端api**
   * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
   * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
@@ -101,6 +106,7 @@
   * [组织管理](v2/api_integrate/organization.md)
   * [第三方回调说明](v2/description/callback.md)
   * [字段含义说明](v2/description/fields.md)
+  * [常见问题](v2/api_integrate/faq.md)
 * **架构介绍**
   * [服务端架构](framework/server_framework.md)
   * [客户端架构](framework/client_framework.md)
