@@ -12,6 +12,20 @@
 | wakeUp           | 唤醒socket通信（当app从后台回到前台恢复通信） |
 | uploadImage      | 上传图片到服务器                              |
 
+
+
+#### OnConnectListener（连接监听）
+
+| 方法             | 描述                                                         |
+| ---------------- | ------------------------------------------------------------ |
+| onConnectSuccess | 已经成功连接到服务器                                         |
+| onConnecting     | 正在连接到服务器，适合在 UI 上展示“正在连接”状态。           |
+| onConnectFailed  | 连接服务器失败，可以提示用户当前网络连接不可用               |
+| onUserSigExpired | 登录票据已经过期，请重新登录。                               |
+| onKickedOffline  | 当前用户被踢下线，此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？” |
+
+
+
 #### initSDK（初始化SDK）
 
 objectStorage：图片服务器有cos（腾讯云），minio，oss（阿里云）可选

@@ -4,7 +4,7 @@
 
 可选择替换服务器地址为自己搭建的服务器地址，默认地址为官方服务器地址
 
-![image](../../images/flutter_service_config.gif)
+![image](../../images/double_click.jpg)![image](../../images/set_server.jpg)
 
 
 
@@ -86,3 +86,8 @@ ndk {
 ##### 7，ios运行的最低版本号？
 
 答：13.0
+
+##### 8，图片服务器支持哪些？
+
+答：图片服务器目前有cos（腾讯云），minio（自搭建），oss（阿里云）可选，在调用initSDK方法的时候，objectStorage传值“cos”，“monio或”oss“就可以实现图片服务器设置。
+

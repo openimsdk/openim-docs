@@ -22,12 +22,24 @@
 | getAtAllTag                       | 查询@所有人标识                        |
 | setGlobalRecvMessageOpt           | 全局免打扰设置                         |
 
+
+
+#### OnConversationListener（会话监听）
+
+| 方法                             | 描述                       |
+| -------------------------------- | -------------------------- |
+| onNewConversation                | 新增会话时触发回调         |
+| onConversationChanged            | 已添加的会话发送改变时回调 |
+| onTotalUnreadMessageCountChanged | 未读消息数发送变化时回调   |
+
+
+
 #### getAllConversationList（获取所有会话）
 
 ```
  OpenIM.iMManager.conversationManager.getAllConversationList().then((list) {
       // List<ConversationInfo> 会话列表
-  });
+ });
 ```
 
 
