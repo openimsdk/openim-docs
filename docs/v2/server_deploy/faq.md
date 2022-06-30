@@ -2,6 +2,7 @@
 
 ### 问题描述
 
+```
 start msg_transfer server
 runtime/cgo: pthread_create failed: Operation not permitted
 SIGABRT: abort
@@ -84,6 +85,7 @@ runtime.main()
 	/usr/local/go/src/runtime/proc.go:170 +0x6d fp=0xc0000527e0 sp=0xc000052780 pc=0x440c8d
 runtime.goexit()
 	/usr/local/go/src/runtime/asm_amd64.s:1571 +0x1 fp=0xc0000527e8 sp=0xc0000527e0 pc=0x470c41
+```
 
 ### 解决途径
 
