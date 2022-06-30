@@ -87,7 +87,7 @@ kafka:
 
 ```
 minio:(如不使用minio存储可忽略)
-    endpoint: http://127.0.0.1:10005 //minio外网ip 这个ip是给客户端访问的，如果服务搭建要对外，127.0.0.1
+    endpoint: http://127.0.0.1:10005 //minio外网ip 这个ip是给客户端访问的，如果服务搭建要对外，127.0.0.1替换为外网ip地址
     endpointInner: http://127.0.0.1:10005 //minio内网地址 如果im server 可以通过内网访问到 minio就可以填写
     endpointInnerEnable: true //是否启用minio内网地址 启用可以让桶初始化，IM server连接minio走内网地址访问，保持默认
     accessKeyID: user12345 //组件配置的id
