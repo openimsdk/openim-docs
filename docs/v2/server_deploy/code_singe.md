@@ -82,7 +82,8 @@ kafka:
     addr: [ 127.0.0.1:9092 ] //组件部署在本地默认IP+监听端口即可，部署在其他服务器，更换为服务监听的IP+端口
     topic: "ms2ps_chat"
 ```
--  修改minio配置项
+
+- 修改 Minio配置项
 ```
 minio:(如不使用minio存储可忽略)
     endpoint: http://127.0.0.1:10005 //minio外网ip 这个ip是给客户端访问的，如果服务搭建要对外，127.0.0.1
@@ -91,6 +92,7 @@ minio:(如不使用minio存储可忽略)
     accessKeyID: user12345 //组件配置的id
     secretAccessKey: key12345 //组件配置的key
 ```
+
 ## 4、编译构建
 ```
 cd Open-IM-server/script
