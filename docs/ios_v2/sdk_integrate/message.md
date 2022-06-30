@@ -3,7 +3,7 @@
 | 方法                                    | 描述                                                         |
 | --------------------------------------- | ------------------------------------------------------------ |
 | setAdvancedMsgListener                  | 消息监听                                                     |
-| setMsgSendProgressListener              | 消息发送进度监听                                             |
+| addAdvancedMsgListener                  | 消息监听                                                     |
 | sendMessage                             | 发送消息                                                     |
 | getHistoryMessageList                   | 获取聊天记录(以startMsg为节点，以前的聊天记录)               |
 | revokeMessage                           | 撤回消息                                                     |
@@ -44,16 +44,43 @@
 #### sendMessage（发送消息）
 
 ```
-OpenIM.iMManager.messageManager.sendMessage(
-  message: Message(), // 消息体
-  userID: '', // 接受消息的userID
-  groupID: '', // 接受消息的群ID
-  offlinePushInfo: OfflinePushInfo(), // 离线推送的消息备注
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        self.testMessage = [OIMMessageInfo createTextMessage:[@"测试消息" stringByAppendingFormat:@"%d", arc4random() % 1000]];
+        
+        //        self.testMessage = [OIMMessageInfo createTextAtMessage:@"" atUidList:@[]];
+        //        self.testMessage = [OIMMessageInfo createMergeMessage:@[] title:@"" summaryList:@[]];
+        //        self.testMessage = [OIMMessageInfo createForwardMessage:self.testMessage];
+        //        self.testMessage = [OIMMessageInfo createLocationMessage:@"" latitude:0 longitude:0];
+        //        self.testMessage = [OIMMessageInfo createCustomMessage:@"" extension:@"" description:@""];
+        //        self.testMessage = [OIMMessageInfo createQuoteMessage:@"" message:self.testMessage];
+        //        NSString *path1 = [[NSBundle mainBundle]pathForResource:@"photo_test" ofType:@"jpeg"];
+        //        self.testMessage = [OIMMessageInfo createImageMessageFromFullPath:path1];
+        //
+        //        NSString *path2 = [[NSBundle mainBundle]pathForResource:@"voice_test" ofType:@"m4a"];
+        //        self.testMessage = [OIMMessageInfo createSoundMessageFromFullPath:path2 duration:8];
+        //
+        //        NSString *path3 = [[NSBundle mainBundle]pathForResource:@"video_test" ofType:@"mp4"];
+        //        self.testMessage = [OIMMessageInfo createVideoMessageFromFullPath:path3 videoType:@"mp4" duration:43 snapshotPath:path1];
+        //
+        //        NSString *path4 = [[NSBundle mainBundle]pathForResource:@"file_test" ofType:@"zip"];
+        //        self.testMessage = [OIMMessageInfo createFileMessageFromFullPath:path4 fileName:@"file_test"];
+        //        OIMAtInfo *t = [OIMAtInfo new];
+        //        t.atUserID = OTHER_USER_ID;
+        //        t.groupNickname = @"x2";
+        //        self.testMessage = [OIMMessageInfo createTextAtMessage:@"一条消息" atUidList:@[] atUsersInfo:@[t] message:nil];
+
+        [OIMManager.manager sendMessage:self.testMessage
+                                 recvID:@"OTHER_USER_ID" // 单聊设置
+                                groupID:@"GROUP_ID"      // 群聊设置
+                        offlinePushInfo:nil
+                              onSuccess:^(OIMMessageInfo * _Nullable message) {
+            // 这里特别注意下，返回的这个message 需要替换数据源。
+            self.testMessage = message;
+
+        } onProgress:^(NSInteger number) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -61,17 +88,18 @@ OpenIM.iMManager.messageManager.sendMessage(
 #### getHistoryMessageList（获取聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.getHistoryMessageList(
-  userID: '', // 单聊对象的userID
-  groupID: '', // 群聊的组id
-  startMsg: null, // 消息体
-  count: 0, // 每次拉取的数量
-).then((list){
-  // List<Message>
-});
+        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID
+                                                    groupID:nil // 群聊的组id
+                                           startClientMsgID:nil // 起始的消息clientMsgID，第一次拉取为""
+                                                      count:20
+                                                  onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
-注：消息列表list，index == list.length -1 是最新的一条消息。 index == 0 是从最新的这条记录后的第19条。所以startMsg首次传null，
+注：消息列表list，index == list.length - 1 是最新的一条消息。 index == 0 是从最新的这条记录后的第19条。所以startMsg首次传null，
 
 下次就是list.first（index == 0），以此类推。
 
@@ -82,13 +110,13 @@ OpenIM.iMManager.messageManager.getHistoryMessageList(
 撤回成功需要当前用户从列表里移除Message然后更新ui，而另外一方通过撤回监听（onRecvMessageRevoked）移除。
 
 ```
-OpenIM.iMManager.messageManager.revokeMessage(
-  message: Message(), // 消息体
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager revokeMessage:self.testMessage // 消息体
+                                onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+
 ```
 
 
@@ -96,13 +124,12 @@ OpenIM.iMManager.messageManager.revokeMessage(
 #### deleteMessageFromLocalStorage（删除单条消息）
 
 ```
-OpenIM.iMManager.messageManager.deleteMessageFromLocalStorage(
-  message: Message(),
-).then((_) {
-    // 成功，从列表里移除Message，然后更新ui
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager deleteMessageFromLocalStorage:self.testMessage // 消息题
+                                                onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -110,11 +137,14 @@ OpenIM.iMManager.messageManager.deleteMessageFromLocalStorage(
 #### insertSingleMessageToLocalStorage（向本地插入一条消息）
 
 ```
-OpenIM.iMManager.messageManager.insertSingleMessageToLocalStorage(
-  receiverID: '', // 接收者userID
-  senderID: '', // 发送者userID
-  message: Message(), // 消息体
-);
+        [OIMManager.manager insertSingleMessageToLocalStorage:self.testMessage // 消息体
+                                                       recvID:@"" // 接收者userID
+                                                       sendID:@"" // 发送者userID
+                                                    onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -124,10 +154,13 @@ OpenIM.iMManager.messageManager.insertSingleMessageToLocalStorage(
 当调用此方法后，已读的消息会通过已读回执（onRecvC2CReadReceipt）告诉对方。
 
 ```
-OpenIM.iMManager.messageManager.markC2CMessageAsRead(
-  userID: '', // 接收者 userID
-  messageIDList: [], // 已读的消息id列表
-);
+        [OIMManager.manager markC2CMessageAsRead:@"" // 接收者 userID
+                                       msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数
+                                       onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -137,10 +170,13 @@ OpenIM.iMManager.messageManager.markC2CMessageAsRead(
 会通过onRecvNewMessage回调
 
 ```
-OpenIM.iMManager.messageManager.typingStatusUpdate(
-  userID: '', // 接收者 userID
-  msgTip: '', // 自定义提示内容
-);
+        [OIMManager.manager typingStatusUpdate:@""  // 接收者 userID
+                                        msgTip:@""  // 自定义内容
+                                     onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -148,13 +184,12 @@ OpenIM.iMManager.messageManager.typingStatusUpdate(
 #### clearC2CHistoryMessage（清空c2c聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.clearC2CHistoryMessage(
-  uid: "", // userID
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager clearC2CHistoryMessage:OTHER_USER_ID
+                                         onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -162,13 +197,16 @@ OpenIM.iMManager.messageManager.clearC2CHistoryMessage(
 #### clearGroupHistoryMessage（清空群聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.clearGroupHistoryMessage(
-  gid: '', // 群ID
-).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
+        [OIMManager.manager clearGroupHistoryMessage:@""    // 群ID
+                                           onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
+        [OIMManager.manager clearGroupHistoryMessageFromLocalAndSvr:@""    // 群ID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
 ```
 
 
@@ -176,9 +214,7 @@ OpenIM.iMManager.messageManager.clearGroupHistoryMessage(
 #### createTextMessage（文本消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createTextMessage(
-  text: '', // 发送的内容
-);
+        [OIMMessageInfo createTextMessage:@"测试消息"];
 ```
 
 
@@ -186,12 +222,15 @@ var message = await OpenIM.iMManager.messageManager.createTextMessage(
 #### createTextAtMessage（@消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createTextAtMessage(
-      text: '', // 发送的内容
-      atUserIDList: [], // 被@到的用户ID集合
-      atUserInfoList: [], // 被@到的用户Info集合
-      quoteMessage: null, //被引用的消息体
- );
+        OIMAtInfo *t = [OIMAtInfo new];
+        t.atUserID = OTHER_USER_ID;
+        t.groupNickname = @"x2";
+
+        [OIMMessageInfo createTextAtMessage:@"" // 发送的内容
+                                  atUidList:@[]     // 被@到的用户ID集合
+                                atUsersInfo:@[t]     // 被@到的用户Info集合
+                                    message:nil];   //被引用的消息体
+
 ```
 
 
@@ -199,21 +238,17 @@ var message = await OpenIM.iMManager.messageManager.createTextAtMessage(
 #### createImageMessage（图片消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createImageMessage(
-  imagePath: '', // 相对路径
-);
+        [OIMMessageInfo createImageMessage:@"path"];
 ```
 
-注：initSDK时传入了数据缓存（dataDir）路径，如路径：A，这时需要你将图片复制到A路径下后，如 A/pic/a.png路径，imagePath的值：“/pic/a.png”。同以下其他消息的相对路径。
+注：initSDK时传入了数据缓存（dataDir）路径，如路径：A，这时需要你将图片复制到A路径下后，如 A/pic/a.png路径，path的值：“/pic/a.png”。同以下其他消息的相对路径。
 
 
 
 #### createImageMessageFromFullPath（图片消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createImageMessageFromFullPath(
-  imagePath: '', // 绝对路径
-);
+        [OIMMessageInfo createImageMessageFromFullPath:path];
 ```
 
 
@@ -221,10 +256,7 @@ var message = await OpenIM.iMManager.messageManager.createImageMessageFromFullPa
 #### createSoundMessage（语音消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createSoundMessage(
-  soundPath: '', // 相对路径
-  duration: 0, // 时长s
-);
+        [OIMMessageInfo createSoundMessage:path duration:0];
 ```
 
 
@@ -232,10 +264,7 @@ var message = await OpenIM.iMManager.messageManager.createSoundMessage(
 #### createSoundMessageFromFullPath（语音消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createSoundMessageFromFullPath(
-  soundPath: '', // 绝对路径
-  duration: 0, // 时长s
-);
+        [OIMMessageInfo createSoundMessageFromFullPath:path duration:0];
 ```
 
 
@@ -243,12 +272,10 @@ var message = await OpenIM.iMManager.messageManager.createSoundMessageFromFullPa
 #### createVideoMessage（视频消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createVideoMessage(
-  videoPath: '', // 相对路径
-  videoType: '', // minetype
-  duration: 0, // 时长s
-  snapshotPath: '', // 站位缩略图
-);
+        [OIMMessageInfo createVideoMessage:path // 相对路径
+                                  videoType:@"mp4" // minetype
+                                  duration:0 // 时长s
+                              snapshotPath:path1]; // 站位缩略图
 ```
 
 
@@ -256,12 +283,10 @@ var message = await OpenIM.iMManager.messageManager.createVideoMessage(
 #### createVideoMessageFromFullPath（视频消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createVideoMessageFromFullPath(
-  videoPath: '', // 绝对路径
-  videoType: '', // minetype
-  duration: 0, // 时长s
-  snapshotPath: '', // 站位缩略图
-);
+        [OIMMessageInfo createVideoMessageFromFullPath:path // 绝对路径
+                                             videoType:@"mp4" // minetype
+                                             duration:0 // 时长s
+                                             snapshotPath:path1]; // 站位缩略图
 ```
 
 
@@ -269,10 +294,7 @@ var message = await OpenIM.iMManager.messageManager.createVideoMessageFromFullPa
 #### createFileMessage（文件消息，相对路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createFileMessage(
-  filePath: '', // 相对路径
-  fileName: '', // 文件名
-);
+        [OIMMessageInfo createFileMessage:path fileName:@"file_test"];
 ```
 
 
@@ -280,10 +302,7 @@ var message = await OpenIM.iMManager.messageManager.createFileMessage(
 #### createFileMessageFromFullPath（文件消息全路径）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createFileMessageFromFullPath(
-  filePath: '', // 绝对路径
-  fileName: '', // 文件名
-);
+        [OIMMessageInfo createFileMessageFromFullPath:path fileName:@"file_test"];
 ```
 
 
@@ -291,9 +310,7 @@ var message = await OpenIM.iMManager.messageManager.createFileMessageFromFullPat
 #### createForwardMessage（转发消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createForwardMessage(
-  message: Message(), // 被转发的消息体
-);
+        [OIMMessageInfo createForwardMessage:self.testMessage]; // 被转发的消息体
 ```
 
 
@@ -301,11 +318,9 @@ var message = await OpenIM.iMManager.messageManager.createForwardMessage(
 #### createMergerMessage（合并消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createMergerMessage(
-  messageList: [], // 被转发的消息列表
-  title: '', // 标题
-  summaryList: [], // 每一条消息摘要
-);
+         [OIMMessageInfo createMergeMessage:@[]  // 被转发的消息列表
+                                      title:@""  // 标题
+                                      summaryList:@[]]; // 每一条消息摘要
 ```
 
 
@@ -313,11 +328,10 @@ var message = await OpenIM.iMManager.messageManager.createMergerMessage(
 #### createLocationMessage（位置消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createLocationMessage(
-  latitude: 0,// 纬度
-  longitude: 0, // 经度
-  description: '', // 位置描述信息
-);
+        [OIMMessageInfo createLocationMessage:@"" // 位置描述信息
+                                     latitude:0
+                                    longitude:0];
+
 ```
 
 
@@ -325,11 +339,10 @@ var message = await OpenIM.iMManager.messageManager.createLocationMessage(
 #### createCustomMessage（自定义消息）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createCustomMessage(
-  data: '', // 自定义内容
-  extension: '', // 扩展信息
-  description: '', // 描述消息
-);
+        [OIMMessageInfo createCustomMessage:@""  // 自定义内容
+                                  extension:@""  // 扩展信息
+                                  description:@""]; // 描述消息
+
 ```
 
 
@@ -337,10 +350,9 @@ var message = await OpenIM.iMManager.messageManager.createCustomMessage(
 #### createQuoteMessage（引用消息/消息回复）
 
 ```
-var message = await OpenIM.iMManager.messageManager.createQuoteMessage(
-  text: '', // 回复内容
-  quoteMsg: Message(), // 被回复的消息体
-);
+        [OIMMessageInfo createQuoteMessage:@"" // 回复内容
+                                  message:[OIMMessageInfo new]]; // 被回复的消息体
+
 ```
 
 
@@ -348,9 +360,7 @@ var message = await OpenIM.iMManager.messageManager.createQuoteMessage(
 #### createCardMessage（名片消息）
 
 ```
-OpenIM.iMManager.messageManager.createCardMessage(
-  data: {}, // 自定义内容
-);
+        [OIMMessageInfo createCardMessage:@""];  // 自定义内容
 ```
 
 
@@ -358,17 +368,16 @@ OpenIM.iMManager.messageManager.createCardMessage(
 #### searchLocalMessages（全局搜索)
 
 ```
-SearchResult result = await OpenIM.iMManager.messageManager.searchLocalMessages(
-  conversationID: null, // 根据会话查询，如果是全局搜索传null
-  keywordList: [], // 搜索关键词列表，目前仅支持一个关键词搜索
-  keywordListMatchType: 0, // 关键词匹配模式，1代表与，2代表或，暂时未用
-  senderUserIDList: [], // 指定消息发送的uid列表 暂时未用
-  messageTypeList: [], // 消息类型列表
-  searchTimePosition: 0, // 搜索的起始时间点。默认为0即代表从现在开始搜索。UTC 时间戳，单位：秒
-  searchTimePeriod: 0, // 从起始时间点开始的过去时间范围，单位秒。默认为0即代表不限制时间范围，传24x60x60代表过去一天
-  pageIndex: 1, // 当前页数
-  count: 10, // 每页数量
-);
+        OIMSearchParam *t = [OIMSearchParam new]; // 更多搜索条件，看头文件
+        t.conversationID = @""; // 会话id
+        t.keywordList = @[@""]; // 关键字
+        
+        [OIMManager.manager searchLocalMessages:t
+                                      onSuccess:^(OIMSearchResultInfo * _Nullable result) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -376,9 +385,10 @@ SearchResult result = await OpenIM.iMManager.messageManager.searchLocalMessages(
 #### deleteMessageFromLocalAndSvr（删除本地跟服务器聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.createCardMessage(
-  message: null, // 消息体
-);
+        [OIMManager.manager deleteMessageFromLocalStorage:nil   // 消息体
+                                                onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 
@@ -386,8 +396,9 @@ OpenIM.iMManager.messageManager.createCardMessage(
 #### deleteAllMsgFromLocal（清空所有本地聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.deleteAllMsgFromLocal(
-);
+        [OIMManager.manager deleteAllMsgFromLocalWithOnSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 
@@ -395,8 +406,9 @@ OpenIM.iMManager.messageManager.deleteAllMsgFromLocal(
 #### deleteAllMsgFromLocalAndSvr（清空本地跟服务器所有聊天记录)
 
 ```
-OpenIM.iMManager.messageManager.deleteAllMsgFromLocalAndSvr(
-);
+        [OIMManager.manager deleteAllMsgFromLocalAndSvrWithOnSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 
@@ -404,10 +416,13 @@ OpenIM.iMManager.messageManager.deleteAllMsgFromLocalAndSvr(
 #### markMessageAsReadByConID（标记会话里某些消息为已读）
 
 ```
-OpenIM.iMManager.messageManager.markMessageAsReadByConID(
-  conversationID: null, // 会话ID
-  messageIDList: [], // 消息id列表
-);
+    [OIMManager.manager markMessageAsReadByConID:@""
+                                       msgIDList:@[]
+                                       onSuccess:^(NSString * _Nullable data) {
+        
+    } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        
+    }];
 ```
 
 
@@ -415,9 +430,10 @@ OpenIM.iMManager.messageManager.markMessageAsReadByConID(
 #### clearC2CHistoryMessageFromLocalAndSvr（清空单聊本地跟服务端聊天记录）
 
 ```
-OpenIM.iMManager.messageManager.clearC2CHistoryMessageFromLocalAndSvr(
-  uid: null, // 用户id
-);
+        [OIMManager.manager clearC2CHistoryMessageFromLocalAndSvr:@""  // userID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 
@@ -425,9 +441,10 @@ OpenIM.iMManager.messageManager.clearC2CHistoryMessageFromLocalAndSvr(
 #### clearGroupHistoryMessageFromLocalAndSvr（清空群聊本地跟服务端聊天记录)
 
 ```
-OpenIM.iMManager.messageManager.clearGroupHistoryMessageFromLocalAndSvr(
-	gid: null, // 群组id
-);
+        [OIMManager.manager clearGroupHistoryMessageFromLocalAndSvr:@""    // 群ID
+                                                          onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
 ```
 
 
@@ -436,12 +453,14 @@ OpenIM.iMManager.messageManager.clearGroupHistoryMessageFromLocalAndSvr(
 
 ```
 // 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息
-OpenIM.iMManager.messageManager.getHistoryMessageListReverse(
-  userID: '', // 单聊对象的userID
-  groupID: '', // 群聊的组id
-  startMsg: null, // 消息体
-  count: 0, // 每次拉取的数量
-).then((list){
-  // List<Message>
-});
+        OIMGetMessageOptions *options = [OIMGetMessageOptions new];
+        options.userID = @"";
+        options.groupID = @"";
+        options.conversationID = @"";
+
+        [OIMManager.manager getHistoryMessageListReverse:options
+                                                onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+        }];
+
 ```
