@@ -84,6 +84,7 @@ kafka:
 ```
 
 - 修改 Minio配置项
+
 ```
 minio:(如不使用minio存储可忽略)
     endpoint: http://127.0.0.1:10005 //minio外网ip 这个ip是给客户端访问的，如果服务搭建要对外，127.0.0.1
