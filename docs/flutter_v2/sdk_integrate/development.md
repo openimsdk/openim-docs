@@ -4,7 +4,7 @@
 
 可选择替换服务器地址为自己搭建的服务器地址，默认地址为官方服务器地址
 
-![image](images/double_click.jpg)![image](images/set_server.jpg)
+![image](../../images/double_click.jpg)![image](../../images/set_server.jpg)
 
 
 
