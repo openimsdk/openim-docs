@@ -8,7 +8,6 @@
 | getGroupMembersInfo          | 查询组成员资料                           |
 | getGroupMemberList           | 分页获取组成员列表                       |
 | getJoinedGroupList           | 查询已加入的组列表                       |
-| isJoinedGroup                | 检查是否已加入组                         |
 | createGroup                  | 创建一个组                               |
 | setGroupInfo                 | 编辑组资料                               |
 | getGroupsInfo                | 查询组信息                               |
@@ -24,8 +23,6 @@
 | changeGroupMemberMute        | 禁言群成员                               |
 | setGroupMemberNickname       | 设置群成员昵称                           |
 | searchGroups                 | 查询群                                   |
-| setGroupMemberRoleLevel      | 设置群成员权限                           |
-| getGroupMemberListByJoinTime | 根据加入时间分页获取组成员列表           |
 
 
 
@@ -38,14 +35,15 @@
 群成员（不包括被邀请者）收到OnGroupMemberAdded 
 
 ```
-  OpenIM.iMManager.groupManager.inviteUserToGroup(
-    groupId: '', // 组ID
-    uidList: [], // 成员 userID 列表
-    reason: '', // 备注信息
-  ).then((list){
-    // List<GroupInviteResult>
-  });
-}
+    /**
+     * 邀请进群
+     *
+     * @param groupId 群组ID
+     * @param uidList 被邀请的用户id列表
+     * @param reason  邀请说明
+     * @param base    callback List<{@link GroupInviteResult}>>
+     */
+    public void inviteUserToGroup(OnBase<List<GroupInviteResult>> base, String groupId, List<String> uidList, String reason) 
 ```
 
 
@@ -57,13 +55,15 @@
 群成员收到OnGroupMemberDeleted 
 
 ```
-OpenIM.iMManager.groupManager.kickGroupMember(
-  groupId: '', // 组ID
-  uidList: [], // 成员 userID 列表
-  reason: '', // 备注信息
-).then((list){
-    // List<GroupInviteResult>
- });
+    /**
+     * 踢出群
+     *
+     * @param groupId 群组ID
+     * @param uidList 被踢出群的用户id列表
+     * @param reason  说明
+     * @param base    callback List<{@link GroupInviteResult}>>
+     */
+    public void kickGroupMember(OnBase<List<GroupInviteResult>> base, String groupId, List<String> uidList, String reason)
 ```
 
 
@@ -71,12 +71,14 @@ OpenIM.iMManager.groupManager.kickGroupMember(
 #### getGroupMembersInfo（查询组成员信息）
 
 ```
-OpenIM.iMManager.groupManager.getGroupMembersInfo(
-  groupId: '', // 组ID
-  uidList: [], // 成员 userID 列表
-).then((list){
-  // List<GroupMembersInfo>
-});
+    /**
+     * 批量获取群成员信息
+     *
+     * @param groupId 群组ID
+     * @param uidList 群成员ID集合
+     * @param base    callback List<{@link GroupMembersInfo}>
+     **/
+    public void getGroupMembersInfo(OnBase<List<GroupMembersInfo>> base, String groupId, List<String> uidList)
 ```
 
 
@@ -84,14 +86,15 @@ OpenIM.iMManager.groupManager.getGroupMembersInfo(
 #### getGroupMemberList（组成员列表）
 
 ```
-OpenIM.iMManager.groupManager.getGroupMemberList(
-  groupId: '', // 组ID
-  filter: 0, // 1普通成员, 2群主，3管理员
-  offset: 0, // 偏移量，每次开始的index值
-  count: 0, // 每次拉取的数量
-).then((list){
-  // List<GroupMembersInfo>
-});
+    /**
+     * 获取群成员
+     *
+     * @param groupId 群组ID
+     * @param filter  过滤成员 1普通成员, 2群主，3管理员，0所有
+     * @param offset  偏移量
+     * @param count   每页数量
+     */
+    public void getGroupMemberList(OnBase<List<GroupMembersInfo>> base, String groupId, int filter, int offset, int count)
 ```
 
 
@@ -99,22 +102,14 @@ OpenIM.iMManager.groupManager.getGroupMemberList(
 #### getJoinedGroupList（获取已加入的群组）
 
 ```
-OpenIM.iMManager.groupManager.getJoinedGroupList().then((list){
-  // List<GroupInfo>
-});
+    /**
+     * 获取已加入的群列表
+     *
+     * @param base callback List<{@link GroupInfo}></>
+     */
+    public void getJoinedGroupList(OnBase<List<GroupInfo>> base)
 ```
 
-
-
-#### isJoinedGroup（检查是否已入群）
-
-```
-OpenIM.iMManager.groupManager.isJoinedGroup(
-  gid: '', // 组ID
-).then((joned) {
-  // true已加入；false未加入
-});
-```
 
 
 
@@ -123,17 +118,18 @@ OpenIM.iMManager.groupManager.isJoinedGroup(
 初始成员收到OnJoinedGroupAdded
 
 ```
-OpenIM.iMManager.groupManager.createGroup(
-  groupName: '', // 组名
-  faceUrl: '', // 头像
-  notification: '', // 群公告
-  introduction: '', // 群简介
-  groupType: 0, // 类型
-  ex: '', // 扩展信息
-  list: [], // 成员角色集合 List<GroupMemberRole>
-).then((groupInfo){
-  // 返回组信息 GroupInfo
-});
+    /**
+     * 创建群
+     *
+     * @param groupName    群名称
+     * @param faceURL      群icon
+     * @param notification 群公告
+     * @param introduction 群简介
+     * @param groupType
+     * @param ex           其他信息
+     * @param list         List<{@link GroupMemberRole}> 创建群是选择的成员. setRole：0:普通成员 2:管理员；1：群主
+     */
+    public void createGroup(OnBase<GroupInfo> base, String groupName, String faceURL, String notification, String introduction, int groupType, String ex, List<GroupMemberRole> list) 
 ```
 
 
@@ -143,15 +139,18 @@ OpenIM.iMManager.groupManager.createGroup(
 群成员收到OnGroupInfoChanged
 
 ```
-OpenIM.iMManager.groupManager.setGroupInfo(
-  groupID: '',
-  groupName: '', // 组名
-  faceUrl: '', // 头像
-  notification: '', // 群公告
-  introduction: '', // 群简介
-  ex: '', // 扩展信息
-  needVerification: '',// 进群验证设置
-);
+    /**
+     * 设置或更新群资料
+     *
+     * @param groupID      群ID
+     * @param groupName    群名称
+     * @param faceURL      群icon
+     * @param notification 群公告
+     * @param introduction 群简介
+     * @param ex           其他信息
+     * @param base         callback String
+     */
+    public void setGroupInfo(OnBase<String> base, String groupID, String groupName, String faceURL, String notification, String introduction, String ex)
 ```
 
 
@@ -159,11 +158,13 @@ OpenIM.iMManager.groupManager.setGroupInfo(
 #### getGroupsInfo（根据id查询组信息）
 
 ```
-OpenIM.iMManager.groupManager.getGroupsInfo(
-  gidList: [], // 组id集合
-).then((list){
-  // List<GroupInfo>
-});
+    /**
+     * 批量获取群资料
+     *
+     * @param gidList 群ID集合
+     * @param base    callback List<{@link GroupInfo}>
+     */
+    public void getGroupsInfo(OnBase<List<GroupInfo>> base, List<String> gidList)
 ```
 
 
@@ -177,10 +178,14 @@ OpenIM.iMManager.groupManager.getGroupsInfo(
 群主+管理员收到OnGroupApplicationAdded 
 
 ```
-OpenIM.iMManager.groupManager.joinGroup(
-  gid: '', // 组id
-  reason: '', // 入群备注信息
-);
+    /**
+     * 申请加入群组
+     *
+     * @param gid    群组ID
+     * @param reason 请求原因
+     * @param base   callback String
+     */
+    public void joinGroup(OnBase<String> base, String gid, String reason)
 ```
 
 
@@ -192,13 +197,13 @@ OpenIM.iMManager.groupManager.joinGroup(
 群成员收到OnGroupMemberDeleted
 
 ```
-OpenIM.iMManager.groupManager.quitGroup(
-  gid: '', // 组id
-).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+   /**
+     * 退群
+     *
+     * @param gid  群组ID
+     * @param base callback String
+     */
+    public void quitGroup(OnBase<String> base, String gid) 
 ```
 
 
@@ -206,14 +211,14 @@ OpenIM.iMManager.groupManager.quitGroup(
 #### transferGroupOwner（群转让）
 
 ```
-OpenIM.iMManager.groupManager.transferGroupOwner(
-  gid: '', // 组ID
-  uid: '', // 新 owner userID
-).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+    /**
+     * 转让群主
+     *
+     * @param gid  群组ID
+     * @param uid  新拥有者（群主）id
+     * @param base callback String
+     */
+    public void transferGroupOwner(OnBase<String> base, String gid, String uid)
 ```
 
 
@@ -223,9 +228,12 @@ OpenIM.iMManager.groupManager.transferGroupOwner(
 作为群主或者管理员，获取收到的群成员申请进群列表。
 
 ```
-OpenIM.iMManager.groupManager.getRecvGroupApplicationList().then((list){
-  // List<GroupApplicationInfo>
-});
+    /**
+     * 收到群申请列表
+     *
+     * @param base callback {@link GroupApplicationInfo}
+     */
+    public void getRecvGroupApplicationList(OnBase<List<GroupApplicationInfo>> base)
 ```
 
 
@@ -233,9 +241,12 @@ OpenIM.iMManager.groupManager.getRecvGroupApplicationList().then((list){
 #### getSendGroupApplicationList（发出的入群申请）
 
 ```
-OpenIM.iMManager.groupManager.getSendGroupApplicationList().then((list){
-  // List<GroupApplicationInfo>
-});
+    /**
+     * 发出群申请列表
+     *
+     * @param base callback {@link GroupApplicationInfo}
+     */
+    public void getSendGroupApplicationList(OnBase<List<GroupApplicationInfo>> base)
 ```
 
 
@@ -249,11 +260,15 @@ OpenIM.iMManager.groupManager.getSendGroupApplicationList().then((list){
 审批者（群主或者管理员）收到OnGroupMemberAdded OnGroupApplicationAccepted
 
 ```
-OpenIM.iMManager.groupManager.acceptGroupApplication(
-  gid: '', // 组ID
-  uid: '', // 申请人userID
-  handleMsg: '', // 备注信息
-);
+    /**
+     * 接受入群申请
+     *
+     * @param gid       群ID
+     * @param uid       申请入群的用户ID
+     * @param handleMsg 说明
+     * @param base      callback String
+     */
+    public void acceptGroupApplication(OnBase<String> base, String gid, String uid, String handleMsg)
 ```
 
 
@@ -265,11 +280,15 @@ OpenIM.iMManager.groupManager.acceptGroupApplication(
 审批者（群主或者管理员）收到OnGroupApplicationRejected 
 
 ```
-OpenIM.iMManager.groupManager.refuseGroupApplication(
-  gid: '', // 组ID
-  uid: '', // 申请人userID
-  handleMsg: '', // 备注信息
-);
+    /**
+     * 拒绝入群申请
+     *
+     * @param gid       群ID
+     * @param uid       申请入群的用户ID
+     * @param handleMsg 说明
+     * @param base      callback String
+     */
+    public void refuseGroupApplication(OnBase<String> base, String gid, String uid, String handleMsg)
 ```
 
 
@@ -277,9 +296,12 @@ OpenIM.iMManager.groupManager.refuseGroupApplication(
 #### dismissGroup（解散群）
 
 ```
-OpenIM.iMManager.groupManager.dismissGroup(
-  groupID: '', // 组ID
-);
+    /**
+     * 解散群
+     *
+     * @param gid 群ID
+     */
+    public void dismissGroup(OnBase<String> base, String gid)
 ```
 
 
@@ -287,10 +309,13 @@ OpenIM.iMManager.groupManager.dismissGroup(
 #### changeGroupMute（开启群禁言）
 
 ```
-OpenIM.iMManager.groupManager.changeGroupMute(
-  groupID: '', // 组ID
-  mute:true, // 禁言
-);
+    /**
+     * 开启群禁言
+     *
+     * @param gid  群ID
+     * @param mute true开启
+     */
+    public void changeGroupMute(OnBase<String> base, String gid, boolean mute)
 ```
 
 
@@ -298,11 +323,14 @@ OpenIM.iMManager.groupManager.changeGroupMute(
 #### changeGroupMemberMute（对群成员禁言)
 
 ```
-OpenIM.iMManager.groupManager.changeGroupMemberMute(
-  groupID: '', // 组ID
-  userID:'', // 群成员userID
-  seconds:0, // 禁言时长s
-);
+    /**
+     * 禁言群成员
+     *
+     * @param gid     群ID
+     * @param uid     群成员userID
+     * @param seconds 禁言时间s
+     */
+    public void changeGroupMemberMute(OnBase<String> base, String gid, String uid, long seconds)
 ```
 
 
@@ -310,11 +338,14 @@ OpenIM.iMManager.groupManager.changeGroupMemberMute(
 #### setGroupMemberNickname（修改成员组昵称）
 
 ```
-OpenIM.iMManager.groupManager.setGroupMemberNickname(
-  groupID: '', // 组ID
-  userID:'', // 群成员userID
-  groupNickname:'', // 群昵称
-);
+    /**
+     * 修改所在群的昵称
+     *
+     * @param gid           群ID
+     * @param uid           群成员userID
+     * @param groupNickname 群内显示名称
+     */
+    public void setGroupMemberNickname(OnBase<String> base, String gid, String uid, String groupNickname)
 ```
 
 
@@ -322,37 +353,15 @@ OpenIM.iMManager.groupManager.setGroupMemberNickname(
 #### searchGroups（搜索群）
 
 ```
-List<GroupInfo> list = await OpenIM.iMManager.groupManager.searchGroups(
-  keywordList: [], // 关键词
-  isSearchGroupID: true, // 以id搜索
-  isSearchGroupName: false, // 以群名搜索
-);
+    /**
+     * 根据关键词搜索群组
+     * 群ID跟群名二者互斥
+     *
+     * @param keywordList       关键词
+     * @param isSearchGroupID   是通过群组id进行查询
+     * @param isSearchGroupName 是通过群名称查询
+     */
+    public void searchGroups(OnBase<List<GroupInfo>> base, List<String> keywordList, boolean isSearchGroupID, boolean isSearchGroupName) 
 ```
 
-
-
-#### setGroupMemberRoleLevel（设置群成员角色）
-
-```
-OpenIM.iMManager.groupManager.setGroupMemberRoleLevel(
-  groupID: groupID,
-  userID: userID,
-  roleLevel: GroupRoleLevel.member,
-)
-```
-
-
-
-#### getGroupMemberListByJoinTime（根据加入时间分页获取组成员列表）
-
-```
-// 如：获取消息发送前入群的成员，用于查看消息未读列表
-var list = await OpenIM.iMManager.groupManager.getGroupMemberListByJoinTime(
-  groupID: message.groupID!,
-  joinTimeEnd: message.sendTime! ~/ 1000,
-  offset: 0,
-  count: 40,
-  excludeUserIDList: [...hasReadIDList, OpenIM.iMManager.uid],// 排除的人员
-);
-```
 
