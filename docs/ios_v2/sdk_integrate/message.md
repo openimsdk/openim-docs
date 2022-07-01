@@ -85,7 +85,7 @@
 
 
 
-#### getHistoryMessageList（获取聊天记录）
+#### getHistoryMessageList（常用到的获取聊天记录）
 
 ```
         [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID, 否则传nil
