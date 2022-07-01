@@ -2,13 +2,13 @@
 
 | 方法                         | 描述                                     |
 | ---------------------------- | ---------------------------------------- |
-| setGroupListener             | 组关系监听                               |
+| setGroupListener             |
+| addGroupListener             | 组关系监听                               |
 | inviteUserToGroup            | 邀请进组，直接进组无需同意               |
 | kickGroupMember              | 移除组成员                               |
 | getGroupMembersInfo          | 查询组成员资料                           |
 | getGroupMemberList           | 分页获取组成员列表                       |
 | getJoinedGroupList           | 查询已加入的组列表                       |
-| isJoinedGroup                | 检查是否已加入组                         |
 | createGroup                  | 创建一个组                               |
 | setGroupInfo                 | 编辑组资料                               |
 | getGroupsInfo                | 查询组信息                               |
@@ -25,7 +25,6 @@
 | setGroupMemberNickname       | 设置群成员昵称                           |
 | searchGroups                 | 查询群                                   |
 | setGroupMemberRoleLevel      | 设置群成员权限                           |
-| getGroupMemberListByJoinTime | 根据加入时间分页获取组成员列表           |
 
 
 
@@ -38,14 +37,14 @@
 群成员（不包括被邀请者）收到OnGroupMemberAdded 
 
 ```
-  OpenIM.iMManager.groupManager.inviteUserToGroup(
-    groupId: '', // 组ID
-    uidList: [], // 成员 userID 列表
-    reason: '', // 备注信息
-  ).then((list){
-    // List<GroupInviteResult>
-  });
-}
+        [OIMManager.manager inviteUserToGroup:@"" // group id
+                                       reason:@""
+                                         uids:@[@""] // [user id]
+                                    onSuccess:^(NSArray<OIMSimpleResultInfo *> * _Nullable results) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -57,13 +56,14 @@
 群成员收到OnGroupMemberDeleted 
 
 ```
-OpenIM.iMManager.groupManager.kickGroupMember(
-  groupId: '', // 组ID
-  uidList: [], // 成员 userID 列表
-  reason: '', // 备注信息
-).then((list){
-    // List<GroupInviteResult>
- });
+        [OIMManager.manager kickGroupMember:@"" // group id 
+                                     reason:@""
+                                       uids:@[@""] // user id
+                                  onSuccess:^(NSArray<OIMSimpleResultInfo *> * _Nullable results) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -71,12 +71,13 @@ OpenIM.iMManager.groupManager.kickGroupMember(
 #### getGroupMembersInfo（查询组成员信息）
 
 ```
-OpenIM.iMManager.groupManager.getGroupMembersInfo(
-  groupId: '', // 组ID
-  uidList: [], // 成员 userID 列表
-).then((list){
-  // List<GroupMembersInfo>
-});
+        [OIMManager.manager getGroupMembersInfo:@"" // group id 
+                                           uids:@[@""] // user id
+                                      onSuccess:^(NSArray<OIMGroupMemberInfo *> * _Nullable groupMembersInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -84,14 +85,15 @@ OpenIM.iMManager.groupManager.getGroupMembersInfo(
 #### getGroupMemberList（组成员列表）
 
 ```
-OpenIM.iMManager.groupManager.getGroupMemberList(
-  groupId: '', // 组ID
-  filter: 0, // 1普通成员, 2群主，3管理员
-  offset: 0, // 偏移量，每次开始的index值
-  count: 0, // 每次拉取的数量
-).then((list){
-  // List<GroupMembersInfo>
-});
+        [OIMManager.manager getGroupMemberList:@"" // group id
+                                        filter:0   // 1普通成员, 2群主，3管理员
+                                        offset:0   // 偏移量，每次开始的index值
+                                         count:20  // 每次拉取的数量
+                                     onSuccess:^(NSArray<OIMGroupMemberInfo *> * _Nullable groupMembersInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -99,21 +101,11 @@ OpenIM.iMManager.groupManager.getGroupMemberList(
 #### getJoinedGroupList（获取已加入的群组）
 
 ```
-OpenIM.iMManager.groupManager.getJoinedGroupList().then((list){
-  // List<GroupInfo>
-});
-```
+        [OIMManager.manager getJoinedGroupListWithOnSuccess:^(NSArray<OIMGroupInfo *> * _Nullable groupsInfo) {
 
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
-
-#### isJoinedGroup（检查是否已入群）
-
-```
-OpenIM.iMManager.groupManager.isJoinedGroup(
-  gid: '', // 组ID
-).then((joned) {
-  // true已加入；false未加入
-});
+        }];
 ```
 
 
@@ -123,17 +115,22 @@ OpenIM.iMManager.groupManager.isJoinedGroup(
 初始成员收到OnJoinedGroupAdded
 
 ```
-OpenIM.iMManager.groupManager.createGroup(
-  groupName: '', // 组名
-  faceUrl: '', // 头像
-  notification: '', // 群公告
-  introduction: '', // 群简介
-  groupType: 0, // 类型
-  ex: '', // 扩展信息
-  list: [], // 成员角色集合 List<GroupMemberRole>
-).then((groupInfo){
-  // 返回组信息 GroupInfo
-});
+        OIMGroupCreateInfo *t = [OIMGroupCreateInfo new]; // 相关属性，去看下头文件
+        t.groupName = @"x的群";
+        t.introduction = @"群的简介";
+        
+        OIMGroupMemberBaseInfo *m1 = [OIMGroupMemberBaseInfo new];
+        m1.userID = @"" // 邀请的群成员;
+        m1.roleLevel = OIMGroupMemberRoleMember;
+        
+        [OIMManager.manager createGroup:t
+                             memberList:@[m1]
+                              onSuccess:^(OIMGroupInfo * _Nullable groupInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+
 ```
 
 
@@ -143,15 +140,16 @@ OpenIM.iMManager.groupManager.createGroup(
 群成员收到OnGroupInfoChanged
 
 ```
-OpenIM.iMManager.groupManager.setGroupInfo(
-  groupID: '',
-  groupName: '', // 组名
-  faceUrl: '', // 头像
-  notification: '', // 群公告
-  introduction: '', // 群简介
-  ex: '', // 扩展信息
-  needVerification: '',// 进群验证设置
-);
+        OIMGroupBaseInfo *t = [OIMGroupBaseInfo new]; // 相关属性，去看下头文件
+        t.introduction = @"这是一个大群";
+        
+        [OIMManager.manager setGroupInfo:@"" // group id
+                               groupInfo:t
+                               onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -159,11 +157,12 @@ OpenIM.iMManager.groupManager.setGroupInfo(
 #### getGroupsInfo（根据id查询组信息）
 
 ```
-OpenIM.iMManager.groupManager.getGroupsInfo(
-  gidList: [], // 组id集合
-).then((list){
-  // List<GroupInfo>
-});
+        [OIMManager.manager getGroupsInfo:@[@""] // group id
+                                onSuccess:^(NSArray<OIMGroupInfo *> * _Nullable groupsInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -177,10 +176,13 @@ OpenIM.iMManager.groupManager.getGroupsInfo(
 群主+管理员收到OnGroupApplicationAdded 
 
 ```
-OpenIM.iMManager.groupManager.joinGroup(
-  gid: '', // 组id
-  reason: '', // 入群备注信息
-);
+        [OIMManager.manager joinGroup:@"" // group id
+                               reqMsg:@""
+                            onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -192,13 +194,12 @@ OpenIM.iMManager.groupManager.joinGroup(
 群成员收到OnGroupMemberDeleted
 
 ```
-OpenIM.iMManager.groupManager.quitGroup(
-  gid: '', // 组id
-).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+        [OIMManager.manager quitGroup:@"" // group id
+                            onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -206,14 +207,13 @@ OpenIM.iMManager.groupManager.quitGroup(
 #### transferGroupOwner（群转让）
 
 ```
-OpenIM.iMManager.groupManager.transferGroupOwner(
-  gid: '', // 组ID
-  uid: '', // 新 owner userID
-).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
+        [OIMManager.manager transferGroupOwner:@"" // group id 
+                                      newOwner:@"" // user id
+                                     onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -223,9 +223,11 @@ OpenIM.iMManager.groupManager.transferGroupOwner(
 作为群主或者管理员，获取收到的群成员申请进群列表。
 
 ```
-OpenIM.iMManager.groupManager.getRecvGroupApplicationList().then((list){
-  // List<GroupApplicationInfo>
-});
+        [OIMManager.manager getGroupApplicationListWithOnSuccess:^(NSArray<OIMGroupApplicationInfo *> * _Nullable groupsInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -233,9 +235,11 @@ OpenIM.iMManager.groupManager.getRecvGroupApplicationList().then((list){
 #### getSendGroupApplicationList（发出的入群申请）
 
 ```
-OpenIM.iMManager.groupManager.getSendGroupApplicationList().then((list){
-  // List<GroupApplicationInfo>
-});
+        [OIMManager.manager getSendGroupApplicationListWithOnSuccess:^(NSArray<OIMGroupApplicationInfo *> * _Nullable groupsInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -249,11 +253,14 @@ OpenIM.iMManager.groupManager.getSendGroupApplicationList().then((list){
 审批者（群主或者管理员）收到OnGroupMemberAdded OnGroupApplicationAccepted
 
 ```
-OpenIM.iMManager.groupManager.acceptGroupApplication(
-  gid: '', // 组ID
-  uid: '', // 申请人userID
-  handleMsg: '', // 备注信息
-);
+        [OIMManager.manager acceptGroupApplication:@""    // group id
+                                        fromUserId:@""    // 申请人 user id
+                                         handleMsg:@"ok"  // 备注
+                                         onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -265,11 +272,14 @@ OpenIM.iMManager.groupManager.acceptGroupApplication(
 审批者（群主或者管理员）收到OnGroupApplicationRejected 
 
 ```
-OpenIM.iMManager.groupManager.refuseGroupApplication(
-  gid: '', // 组ID
-  uid: '', // 申请人userID
-  handleMsg: '', // 备注信息
-);
+        [OIMManager.manager refuseGroupApplication:@""    // group id
+                                        fromUserId:@""    // 申请人 user id
+                                         handleMsg:@"ok"  // 备注
+                                         onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -277,9 +287,12 @@ OpenIM.iMManager.groupManager.refuseGroupApplication(
 #### dismissGroup（解散群）
 
 ```
-OpenIM.iMManager.groupManager.dismissGroup(
-  groupID: '', // 组ID
-);
+        [OIMManager.manager dismissGroup:@"" // group id
+                               onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -298,11 +311,14 @@ OpenIM.iMManager.groupManager.changeGroupMute(
 #### changeGroupMemberMute（对群成员禁言)
 
 ```
-OpenIM.iMManager.groupManager.changeGroupMemberMute(
-  groupID: '', // 组ID
-  userID:'', // 群成员userID
-  seconds:0, // 禁言时长s
-);
+        [OIMManager.manager changeGroupMemberMute:@"" // 组ID
+                                           userID:@"" // 群成员userID
+                                     mutedSeconds:1   // 禁言时长s
+                                        onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -310,11 +326,15 @@ OpenIM.iMManager.groupManager.changeGroupMemberMute(
 #### setGroupMemberNickname（修改成员组昵称）
 
 ```
-OpenIM.iMManager.groupManager.setGroupMemberNickname(
-  groupID: '', // 组ID
-  userID:'', // 群成员userID
-  groupNickname:'', // 群昵称
-);
+        [OIMManager.manager setGroupMemberNickname:@"" // 组ID
+                                            userID:@"" // 群成员userID
+                                     groupNickname:@"群昵称"
+                                         onSuccess:^(NSString * _Nullable data) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+
 ```
 
 
@@ -322,11 +342,16 @@ OpenIM.iMManager.groupManager.setGroupMemberNickname(
 #### searchGroups（搜索群）
 
 ```
-List<GroupInfo> list = await OpenIM.iMManager.groupManager.searchGroups(
-  keywordList: [], // 关键词
-  isSearchGroupID: true, // 以id搜索
-  isSearchGroupName: false, // 以群名搜索
-);
+        OIMSearchGroupParam *param = [OIMSearchGroupParam new]; // 更多搜索条件，看头文件
+        param.isSearchGroupName = YES;
+        param.keywordList = @[@"test"];
+        
+        [OIMManager.manager searchGroups:param
+                               onSuccess:^(NSArray<OIMGroupInfo *> * _Nullable groupsInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -334,25 +359,13 @@ List<GroupInfo> list = await OpenIM.iMManager.groupManager.searchGroups(
 #### setGroupMemberRoleLevel（设置群成员角色）
 
 ```
-OpenIM.iMManager.groupManager.setGroupMemberRoleLevel(
-  groupID: groupID,
-  userID: userID,
-  roleLevel: GroupRoleLevel.member,
-)
-```
+        [OIMManager.manager setGroupMemberRoleLevel:@"GROUP_ID"
+                                             userID:@"OTHER_USER_ID"
+                                          roleLevel:OIMGroupMemberRoleAdmin
+                                          onSuccess:^(NSString * _Nullable data) {
 
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
-
-#### getGroupMemberListByJoinTime（根据加入时间分页获取组成员列表）
-
-```
-// 如：获取消息发送前入群的成员，用于查看消息未读列表
-var list = await OpenIM.iMManager.groupManager.getGroupMemberListByJoinTime(
-  groupID: message.groupID!,
-  joinTimeEnd: message.sendTime! ~/ 1000,
-  offset: 0,
-  count: 40,
-  excludeUserIDList: [...hasReadIDList, OpenIM.iMManager.uid],// 排除的人员
-);
+        }];
 ```
 

@@ -3,6 +3,7 @@
 | 方法                    | 描述                                           |
 | ----------------------- | ---------------------------------------------- |
 | setOrganizationListener | 组织架构发生变化回调                           |
+| addOrganizationListener | 组织架构发生变化回调                           |
 | getSubDept              | 获取子部门列表，返回当前部门下的一级子部门     |
 | getDeptMember           | 获取部门下的成员列表，返回当前部门下的一级成员 |
 | getUserInDept           | 获取成员所在的部门                             |
@@ -15,11 +16,14 @@
 #### getSubDept（获取子部门列表，返回当前部门下的一级子部门）
 
 ```
-var list = await OpenIM.iMManager.organizationManager.getSubDept(
-  departmentID: '', // 部门id
-  offset: 0, // 开始下标
-  count: 40, // 每页大小
-);
+        [OIMManager.manager getSubDepartment:@"" // 部门id
+                                      offset:0
+                                       count:100
+                                   onSuccess:^(NSArray<OIMDepartmentInfo *> * _Nullable departmentList) {
+    
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -27,11 +31,14 @@ var list = await OpenIM.iMManager.organizationManager.getSubDept(
 - #### getDeptMember（获取部门下的成员列表，返回当前部门下的一级成员）
 
 ```
-var list = await OpenIM.iMManager.organizationManager.getDeptMember(
-	departmentID: '', // 部门id
-	offset: 0, // 开始下标
-	count: 40, // 每页大小
-);
+        [OIMManager.manager getDepartmentMember:@"" // 部门id
+                                         offset:0
+                                          count:100
+                                      onSuccess:^(NSArray<OIMDepartmentMemberInfo *> * _Nullable members) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -39,9 +46,12 @@ var list = await OpenIM.iMManager.organizationManager.getDeptMember(
 #### getUserInDept（获取成员所在的部门）
 
 ```
-var list = await OpenIM.iMManager.organizationManager.getUserInDept(
-	userID: '', // 成员id
-);
+        [OIMManager.manager getUserInDepartment:@"" // user id
+                                      onSuccess:^(NSArray<OIMUserInDepartmentInfo *> * _Nullable members) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -49,9 +59,12 @@ var list = await OpenIM.iMManager.organizationManager.getUserInDept(
 #### getDeptMemberAndSubDept（获取部门下的子部门跟员工）
 
 ```
-var detail = await OpenIM.iMManager.organizationManager.getDeptMemberAndSubDept(
-	departmentID: '', // 部门id
-);
+        [OIMManager.manager getDepartmentMemberAndSubDepartment:@"" // 部门id
+                                                      onSuccess:^(OIMDepartmentMemberAndSubInfo * _Nullable items) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
 
 
@@ -59,9 +72,13 @@ var detail = await OpenIM.iMManager.organizationManager.getDeptMemberAndSubDept(
 #### getDeptInfo（查询部门信息）
 
 ```
-var info = await OpenIM.iMManager.organizationManager.getDeptInfo(
-  departmentID: '', // 部门id
-);
+        [OIMManager.manager getDepartmentInfo:@"" // 部门id
+                                    onSuccess:^(NSArray<OIMDepartmentInfo *> * _Nullable departmentList) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+
 ```
 
 
@@ -69,12 +86,16 @@ var info = await OpenIM.iMManager.organizationManager.getDeptInfo(
 #### searchOrganization（搜索组织人员）
 
 ```
-var result = await OpenIM.iMManager.organizationManager.searchOrganization(
-  keyWord: searchCtrl.text.trim(),
-  isSearchUserName: true, // 搜索结果包含用户名
-  isSearchEnglishName: true, // 是否包含英文名
-  isSearchPosition: true, // 包含职位
-  offset: offset, // 分页开始下标
-  count: count, // 默认页面大小
-);
+        OIMSearchOrganizationParam *param = [OIMSearchOrganizationParam new]; // 更多搜索条件，查看头文件
+        param.keyword = @"";
+        param.isSearchUserName = YES;
+        
+        [OIMManager.manager searchOrganization:param
+                                        offset:0
+                                         count:100
+                                     onSuccess:^(OIMDepartmentMemberAndSubInfo * _Nullable items) {
+
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
 ```
