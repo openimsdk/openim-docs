@@ -1,7 +1,7 @@
 <!-- * [OpenIM的使命](README.md) -->
 * **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
-  * [关于我们](introduce/)
+  * [关于我们](introduce/about.md)
 * **版本发布**
   - [版本管理](version/description.md)
   - **历史版本**
