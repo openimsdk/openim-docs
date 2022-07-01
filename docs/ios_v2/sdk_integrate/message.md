@@ -41,6 +41,19 @@
 | clearGroupHistoryMessageFromLocalAndSvr | 删除本地跟服务器的群聊天记录                                 |
 | getHistoryMessageListReverse            | 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息 |
 
+
+
+#### OnAdvancedMsgListener（消息监听）
+
+| 方法                          | 描述                                   |
+| ----------------------------- | -------------------------------------- |
+| onRecvNewMessage              | 收到新消息，界面添加新消息             |
+| onRecvMessageRevoked          | 消息成功撤回，从界面移除消息           |
+| onRecvC2CReadReceipt          | 消息被阅读回执，将消息标记为已读       |
+| onRecvGroupMessageReadReceipt | 组消息已读回执，更新已读人数跟未读人数 |
+
+
+
 #### sendMessage（发送消息）
 
 ```

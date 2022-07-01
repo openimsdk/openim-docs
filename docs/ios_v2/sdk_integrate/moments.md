@@ -10,6 +10,13 @@
 
 
 
+#### OnWorkMomentsListener（朋友圈监听）
+
+| 方法                  | 描述               |
+| --------------------- | ------------------ |
+| onRecvNewNotification | 朋友圈有新消息更新 |
+
+
 #### getWorkMomentsUnReadCount（获取朋友圈未读消息总数）
 
 ```

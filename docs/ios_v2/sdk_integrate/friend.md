@@ -21,6 +21,22 @@
 
 
 
+#### OnFriendshipListener（好友关系监听）
+
+| 方法                        | 描述                       |
+| --------------------------- | -------------------------- |
+| onFriendApplicationRejected | 发出或收到的好友申请被拒绝 |
+| onFriendApplicationDeleted  | 发出或收到的好友申请被删除 |
+| onFriendApplicationAdded    | 发出或收到的好友申请被添加 |
+| onFriendApplicationAccepted | 发出或收到的好友申请已同意 |
+| onFriendAdded               | 好友被添加                 |
+| onFriendDeleted             | 好友被删除                 |
+| onFriendInfoChanged         | 朋友的资料发生变化         |
+| onBlacklistDeleted          | 从黑名单删除               |
+| onBlacklistAdded            | 拉入黑名单                 |
+
+
+
 #### getUsersInfo（根据userID查询好友资料）
 
 ```
