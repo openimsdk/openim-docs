@@ -18,8 +18,8 @@
      * 需要将文件自行拷贝到dbPath目录下，如果此时文件路径为 apath+"/sound/a.mp3"，则参数path的值为：/sound/a.mp3。
      * 如果选择的全路径方法，路径为你文件的实际路径不需要再拷贝。
      *
-     * @param apiUrl        SDK的API接口地址。如：http:xxx:10000
-     * @param wsUrl         SDK的web socket地址。如： ws:xxx:17778
+     * @param apiUrl        SDK的API接口地址。如：http:xxx:1002
+     * @param wsUrl         SDK的web socket地址。如： ws:xxx:1001
      * @param storageDir    数据存储目录路径
      * @param logLevel      日志等级，如：6
      * @param objectStorage 图片上传配置 如：cos
