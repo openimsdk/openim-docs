@@ -3,7 +3,7 @@
   * [产品简介](introduce/production_introduce.md)
 * **版本发布**
   - [版本管理](version/description.md)
-  - [历史版本](version/history_version.md)
+  - **历史版本**
   - * [v2.2.0](introduce/v2.2.0.md)
   - [版本计划](version/plan.md)
 * [体验Demo](demo/download_demo.md)
