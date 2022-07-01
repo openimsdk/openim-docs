@@ -33,8 +33,8 @@ objectStorage：图片服务器有cos（腾讯云），minio，oss（阿里云�
 ```
 OpenIM.iMManager.initSDK(
     platform: 0, // 平台，参照IMPlatform类,
-    apiAddr: "", // SDK的API接口地址。如：http://xxx:10000
-    wsAddr: "",  // SDK的web socket地址。如： ws://xxx:17778
+    apiAddr: "", // SDK的API接口地址。如：http://xxx:10002
+    wsAddr: "",  // SDK的web socket地址。如： ws://xxx:10001
     dataDir: "", // 数据存储路径。如：var apath =(await getApplicationDocumentsDirectory()).path
     objectStorage: 'cos', // 图片服务器默认'cos'，支持 minio，oss
     logLevel: 6, // 日志等级，默认值6
