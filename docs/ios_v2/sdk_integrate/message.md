@@ -41,6 +41,19 @@
 | clearGroupHistoryMessageFromLocalAndSvr | 删除本地跟服务器的群聊天记录                                 |
 | getHistoryMessageListReverse            | 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息 |
 
+
+
+#### OnAdvancedMsgListener（消息监听）
+
+| 方法                          | 描述                                   |
+| ----------------------------- | -------------------------------------- |
+| onRecvNewMessage              | 收到新消息，界面添加新消息             |
+| onRecvMessageRevoked          | 消息成功撤回，从界面移除消息           |
+| onRecvC2CReadReceipt          | 消息被阅读回执，将消息标记为已读       |
+| onRecvGroupMessageReadReceipt | 组消息已读回执，更新已读人数跟未读人数 |
+
+
+
 #### sendMessage（发送消息）
 
 ```
@@ -85,11 +98,11 @@
 
 
 
-#### getHistoryMessageList（获取聊天记录）
+#### getHistoryMessageList（常用到的获取聊天记录）
 
 ```
-        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID
-                                                    groupID:nil // 群聊的组id
+        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID, 否则传nil
+                                                    groupID:@"GROUP_ID" // 群聊的组id, 否则为nil
                                            startClientMsgID:nil // 起始的消息clientMsgID，第一次拉取为""
                                                       count:20
                                                   onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
@@ -449,10 +462,10 @@
 
 
 
-#### getHistoryMessageListReverse（获取新的聊天记录）
+#### getHistoryMessageListReverse（主要用于搜索功能，获取新的聊天记录）
 
 ```
-// 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息
+        // 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息（大于startMsg sendtime的消息）
         OIMGetMessageOptions *options = [OIMGetMessageOptions new];
         options.userID = @"";
         options.groupID = @"";

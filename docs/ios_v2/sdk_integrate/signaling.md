@@ -13,6 +13,21 @@
 
 
 
+#### OnSignalingListener（信令监听）
+
+| 方法                           | 描述                               |
+| ------------------------------ | ---------------------------------- |
+| onReceiveNewInvitation         | 被邀请者收到：音视频通话邀请       |
+| onInviteeRejected              | 邀请者收到：被邀请者拒绝音视频通话 |
+| onInviteeAccepted              | 邀请者收到：被邀请者同意音视频通话 |
+| onInvitationTimeout            | 邀请者收到：被邀请者超时未接通     |
+| onInvitationCancelled          | 被邀请者收到：邀请者取消音视频通话 |
+| onInviteeAcceptedByOtherDevice | 被邀请者收到：邀请被其他设备接受   |
+| onInviteeRejectedByOtherDevice | 被邀请者收到：邀请被其他设备拒绝   |
+| onHangup                       | 对方挂断                           |
+
+
+
 #### signalingInvite（邀请个人加入音视频通话）
 
 ```

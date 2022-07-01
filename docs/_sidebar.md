@@ -1,11 +1,10 @@
 <!-- * [OpenIM的使命](README.md) -->
 * **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
-  * [主要功能](introduce/main_function.md)
-  * [产品动态](introduce/production_dynamic.md)
 * **版本发布**
   - [版本管理](version/description.md)
   - [历史版本](version/history_version.md)
+  - * [v2.2.0](introduce/v2.2.0.md)
   - [版本计划](version/plan.md)
 * [体验Demo](demo/download_demo.md)
 * **以下是新文档模板-待补充**
@@ -62,7 +61,7 @@
   * [消息](android_v2/sdk_integrate/message.md)
   * [会话](android_v2/sdk_integrate/conversation.md)
   * [信令](android_v2/sdk_integrate/signaling.md)
-  * [组织架构](android_v2/sdk_integrate/organization.md)
+  * [组织架构](android_v2/sdk_integrate/)
   * [工作圈/朋友圈](android_v2/sdk_integrate/moments.md)
   * [常用结构体](android_v2/sdk_integrate/struct.md)
   * [常见问题](android_v2/sdk_integrate/faq.md)

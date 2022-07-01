@@ -15,9 +15,12 @@
 #### signalingInvite（邀请个人加入音视频通话）
 
 ```
-SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInvite(
-	info: null, // 信令对象SignalingInfo
-);
+    /**
+     * 邀请个人加入音视频
+     * @param base
+     * @param info 信令对象
+     */
+    public void signalingInvite(OnBase<SignalingCertificate> base, SignalingInfo info)
 ```
 
 
@@ -25,8 +28,11 @@ SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInvit
 #### signalingInviteInGroup（邀请群成员加入音视频通话)
 
 ```
-SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInviteInGroup(
-	info: null, // 信令对象SignalingInfo
+    /**
+     * 邀请群里某些人加入音视频
+     * @param info 信令对象
+     */
+    public void signalingInviteInGroup(OnBase<SignalingCertificate> base, SignalingInfo info)
 );
 ```
 
@@ -35,9 +41,11 @@ SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingInvit
 #### signalingAccept（接受邀请）
 
 ```
-SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingAccept(
-  info: null, // 信令对象SignalingInfo
-);
+    /**
+     * 同意某人音视频邀请
+     * @param info 信令对象
+     */
+    public void signalingAccept(OnBase<SignalingCertificate> base, SignalingInfo info) 
 ```
 
 
@@ -45,9 +53,11 @@ SignalingCertificate sc = await OpenIM.iMManager.signalingManager.signalingAccep
 #### signalingReject（拒绝邀请）
 
 ```
-OpenIM.iMManager.signalingManager.signalingReject(
-  info: null, // 信令对象SignalingInfo
-);
+    /**
+     * 拒绝某人音视频邀请
+     * @param info 信令对象
+     */
+    public void signalingReject(OnBase<SignalingCertificate> base, SignalingInfo info)
 ```
 
 
@@ -55,9 +65,11 @@ OpenIM.iMManager.signalingManager.signalingReject(
 - #### signalingCancel（取消）
 
 ```
-OpenIM.iMManager.signalingManager.signalingCancel(
-  info: null, // 信令对象SignalingInfo
-);
+    /**
+     * 邀请者取消音视频通话
+	 * @param info 信令对象
+     */
+    public void signalingCancel(OnBase<SignalingCertificate> base, SignalingInfo info) 
 ```
 
 
@@ -65,7 +77,9 @@ OpenIM.iMManager.signalingManager.signalingCancel(
 #### signalingHungUp（挂断）
 
 ```
-OpenIM.iMManager.signalingManager.signalingHungUp(
-  info: null, // 信令对象SignalingInfo
-);
+    /**
+     * 挂断
+ 	 * @param info 信令对象
+     */
+    public void signalingHungUp(OnBase<SignalingCertificate> base, SignalingInfo info)
 ```

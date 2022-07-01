@@ -16,36 +16,81 @@
 
 objectStorage：图片服务器有cos（腾讯云），minio，oss（阿里云）可选
 
+
+
+#### 回调接口
+
 ```
-OpenIM.iMManager.initSDK(
-    platform: 0, // 平台，参照IMPlatform类,
-    apiAddr: "", // SDK的API接口地址。如：http://xxx:10000
-    wsAddr: "",  // SDK的web socket地址。如： ws://xxx:17778
-    dataDir: "", // 数据存储路径。如：var apath =(await getApplicationDocumentsDirectory()).path
-    objectStorage: 'cos', // 图片服务器默认'cos'，支持 minio，oss
-    logLevel: 6, // 日志等级，默认值6
-    listener: OnConnectListener(
-      onConnectSuccess: () {
-        // 已经成功连接到服务器
-      },
-      onConnecting: () {
-        // 正在连接到服务器，适合在 UI 上展示“正在连接”状态。
-      },
-      onConnectFailed: (code, errorMsg) {
-        // 连接服务器失败，可以提示用户当前网络连接不可用
-      },
-      onUserSigExpired: () {
-        // 登录票据已经过期，请使用新签发的 UserSig 进行登录。
-      },
-      onKickedOffline: () {
-        // 当前用户被踢下线，此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？”
-      },
-    ),
-  ).then((value){
-      if(value == true){
-        // 初始化成功
-      }
-  });
+public interface OnBase<T> {
+    /**
+     * 失败
+     * @param code 错误码
+     * @param error 错误信息
+     */
+    void onError(int code, String error);
+
+    /**
+     * 成功
+     * @param data 返回的实体
+     */
+    void onSuccess(T data);
+}
+```
+
+```
+    /**
+     * 初始化sdk
+     * 注：在创建图片，语音，视频，文件等需要路径参数的消息体时，
+     * 如果选择的是非全路径方法如：createSoundMessage（全路径方法为：createSoundMessageFromFullPath）,
+     * 需要将文件自行拷贝到dbPath目录下，如果此时文件路径为 apath+"/sound/a.mp3"，则参数path的值为：/sound/a.mp3。
+     * 如果选择的全路径方法，路径为你文件的实际路径不需要再拷贝。
+     *
+     * @param apiUrl        SDK的API接口地址。如：http:xxx:10002
+     * @param wsUrl         SDK的web socket地址。如： ws:xxx:10001
+     * @param storageDir    数据存储目录路径
+     * @param logLevel      日志等级，如：6
+     * @param objectStorage 图片上传配置 如：cos
+     * @param listener      SDK初始化监听
+     * @return boolean   true成功; false失败
+     */
+    public boolean initSDK(String apiUrl, String wsUrl, String storageDir, int logLevel, String objectStorage, OnConnListener listener) 
+
+
+**
+ * 只有在调用sdk的login方法后才开始回调
+ */
+public interface OnConnListener {
+
+    /**
+     * 连接服务器失败
+     * 可以提示用户当前网络连接不可用
+     */
+    void onConnectFailed(long code, String error);
+
+    /**
+     * 已经成功连接到服务器
+     */
+    void onConnectSuccess();
+
+    /**
+     * 正在连接到服务器
+     * 适合在 UI 上展示“正在连接”状态。
+     */
+    void onConnecting();
+
+    /**
+     * 当前用户被踢下线
+     * 此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？”
+     */
+    void onKickedOffline();
+
+    /**
+     * 登录票据已经过期
+     * 请使用新签发的 UserSig 进行登录。
+     */
+    void onUserTokenExpired();
+}
+
 ```
 
 
@@ -53,12 +98,14 @@ OpenIM.iMManager.initSDK(
 #### login（登录）
 
 ```
-OpenIM.iMManager.login(
-      uid: "", // uid来自于自身业务服务器
-      token: "", // token需要业务服务器根据secret向OpenIM服务端交换获取
-    ).then((userInfo) {
-      // 返回当前登录用户的资料
-    });
+    /**
+     * 登录
+     *
+     * @param uid   用户id
+     * @param token 用户token
+     * @param base  callback String
+     */
+    public void login(OnBase<String> base, String uid, String token)
 ```
 
 
@@ -66,28 +113,34 @@ OpenIM.iMManager.login(
 #### logout（ 登出）
 
 ```
- OpenIM.iMManager.logout().then((_){
-      // 退出成功
- });
+    /**
+     * 登出
+     */
+    public void logout(OnBase<String> base)
 ```
 
 
 
-#### getLoginUserInfo（获取当前登录用户的资料）
+#### getLoginStatus（ 查询登录状态）
 
 ```
-OpenIM.iMManager.getLoginUserInfo().then((userInfo){
-     // 当前登录用户的信息
- });
+   /**
+     * 查询登录状态
+     */
+    public long getLoginStatus()
+```
+### wakeUp（唤醒socket通信，当app从后台回到前台恢复通信）
+   
+```
+   public void wakeUp(OnBase<String> base)
 ```
 
-
-
-#### getLoginUserID（获取当前登录用户的ID）
-
+### uploadFile （上传图片到服务器  ）
 ```
- OpenIM.iMManager.getLoginUserID().then((userID){
-     // 当前登录用户的ID
-  });
+    /**
+     * 上传文件到服务器
+     *
+     * @param path 路径
+     */
+    public void uploadFile(OnFileUploadProgressListener listener, String path)
 ```
-
