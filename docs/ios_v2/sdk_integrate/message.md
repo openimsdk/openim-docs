@@ -85,7 +85,7 @@
 
 
 
-#### getHistoryMessageList（获取聊天记录）
+#### getHistoryMessageList（常用到的获取聊天记录）
 
 ```
         [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID, 否则传nil
@@ -449,7 +449,7 @@
 
 
 
-#### getHistoryMessageListReverse（获取新的聊天记录）
+#### getHistoryMessageListReverse（主要用于搜索功能，获取新的聊天记录）
 
 ```
         // 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息（大于startMsg sendtime的消息）
