@@ -452,7 +452,7 @@
 #### getHistoryMessageListReverse（获取新的聊天记录）
 
 ```
-// 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息
+        // 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息（大于startMsg sendtime的消息）
         OIMGetMessageOptions *options = [OIMGetMessageOptions new];
         options.userID = @"";
         options.groupID = @"";
