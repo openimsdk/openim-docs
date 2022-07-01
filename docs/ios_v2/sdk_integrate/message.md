@@ -101,7 +101,7 @@
 #### getHistoryMessageList（常用到的获取聊天记录）
 
 ```
-        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID, 否则传nil
+        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对方的userID, 否则传nil
                                                     groupID:@"GROUP_ID" // 群聊的组id, 否则为nil
                                            startClientMsgID:nil // 起始的消息clientMsgID，第一次拉取为""
                                                       count:20
@@ -109,6 +109,18 @@
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
+        }];
+        
+        // conversationID、userID、groupID选择其一 conversationID大群必须使用
+        [OIMManager.manager getHistoryMessageList:@"CONVERSASTION_ID"
+                                           userId:@"OTHER_USER_ID"
+                                          groupID:@"GROUP_ID"
+                                 startClientMsgID:nil
+                                            count:20
+                                        onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+            
         }];
 ```
 
