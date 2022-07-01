@@ -88,8 +88,8 @@
 #### getHistoryMessageList（获取聊天记录）
 
 ```
-        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID
-                                                    groupID:nil // 群聊的组id
+        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID, 否则传nil
+                                                    groupID:@"GROUP_ID" // 群聊的组id, 否则为nil
                                            startClientMsgID:nil // 起始的消息clientMsgID，第一次拉取为""
                                                       count:20
                                                   onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
