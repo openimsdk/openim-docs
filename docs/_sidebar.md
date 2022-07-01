@@ -13,11 +13,11 @@
 * **服务端部署**
   * [docker部署](v2/server_deploy/docker_singe.md)
   * [常见问题](v2/server_deploy/faq.md)
-  * [minio部署]()
+  * [minio部署](qa/minio.md)
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
-  * [k8s部署](v2/server_deploy/k8s_cluster.md)
+  * [k8s部署](demo/server_deploy/k8s.md)
   * [配置文件说明](v2/server_deploy/config.md)
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
@@ -126,7 +126,7 @@
   * [docker部署](demo/server_deploy/docker_singe.md)
   * [源码部署](demo/server_deploy/code_singe.md)
   * [集群部署](demo/server_deploy/docker_cluster.md)
-  * [k8s部署](demo/server_deploy/k8s_cluster.md)
+  * [k8s部署](demo/server_deploy/k8s.md)
   * [待完成](demo/server_deploy/in_development.md)
   * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
