@@ -2,6 +2,7 @@
 * **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
   * [关于我们](introduce/about.md)
+  * [收费服务](charge/charge.md)
 * **版本发布**
   - [版本管理](version/description.md)
   - **历史版本**
@@ -131,7 +132,7 @@
   * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
-  * [收费服务](charge/charge.md)
+
 * SDK集成(逐步废弃)
   * SDK下载
     * [SDK下载(flutter)](integrate/flutter/integrate_download_flutter.md)
