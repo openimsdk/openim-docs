@@ -26,7 +26,7 @@
 | searchGroups                 | 查询群                                   |
 | setGroupMemberRoleLevel      | 设置群成员权限                           |
 | getGroupMemberListByJoinTime | 根据加入时间分页获取组成员列表           |
-| setGroupVerification | 设置群成员权限           |
+| setGroupVerification         | 进群验证设置选项           |
 
 
 
@@ -408,9 +408,9 @@ OpenIM.iMManager.groupManager.changeGroupMute(
 ```
 
 
-#### setGroupVerification（设置群成员权限）
+#### setGroupVerification（进群验证设置选项）
 ```
-        [OIMManager.manager setGroupVerification:GROUP_ID
+        [OIMManager.manager setGroupVerification:@"GROUP_ID"
                                 needVerification:OIMGroupVerificationTypeDirectly
                                        onSuccess:^(NSString * _Nullable data) {
 
