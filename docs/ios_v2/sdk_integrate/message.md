@@ -15,6 +15,7 @@
 | typingStatusUpdate                      | 正在输入提示                                                 |
 | createTextMessage                       | 创建文本消息                                                 |
 | createTextAtMessage                     | 创建@消息                                                    |
+| createTextAtAllMessage                  | 创建@全体成员消息                                                    |
 | createImageMessage                      | 创建图片消息                                                 |
 | createImageMessageFromFullPath          | 创建图片消息                                                 |
 | createSoundMessage                      | 创建语音消息                                                 |
@@ -180,8 +181,23 @@
 
 ```
         [OIMManager.manager markC2CMessageAsRead:@"" // 接收者 userID
-                                       msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数
+                                       msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数 , clientMsgID
                                        onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+```
+
+
+#### markC2CMessageAsRead（标记c2c消息已读）
+
+当调用此方法后，已读的消息会通过已读回执（onRecvGroupMessageReadReceipt）告诉对方。
+
+```
+        [OIMManager.manager markGroupMessageAsRead:@"" // 接收者 groupID
+                                         msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数 , clientMsgID
+                                         onSuccess:^(NSString * _Nullable data) {
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
@@ -258,6 +274,16 @@
 
 ```
 
+#### createTextAtAllMessage（@消息）
+
+```
+        [OIMMessageInfo createTextAtAllMessage:@""    // 发送的内容
+                                   displayText:@""    // displayText 展示的内容
+                                       message:nil];  //被引用的消息体
+         
+        [OIMMessageInfo isAtAll]; // 判断是否上at全体消息
+
+```
 
 
 #### createImageMessage（图片消息，相对路径）
