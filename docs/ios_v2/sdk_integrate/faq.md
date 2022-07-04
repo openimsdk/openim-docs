@@ -11,3 +11,11 @@
         use_frameworks! :linkage => :static
     ```
     如果您使用的是 swift，请将头文件引用改成 @import 模块名形式引用。
+3. 提醒：有开发者发现，目前M1芯片build会出现报错，添加arm64后正常，真机去掉arm64正常。
+![WeChat53896c52f31d22703d323db7aacfeba7](https://user-images.githubusercontent.com/99468005/177078181-7c7614b6-4282-4f1f-bf4a-e7af105ec4b6.png)
+4. 提醒：有开发者发现，报错“找不到xxx模块”,做如下操作可解决：
+    ```ruby
+    pod deintegrate；
+    Clean(Command + K)；
+    pod install/update
+    ```
