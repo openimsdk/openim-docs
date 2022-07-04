@@ -190,7 +190,7 @@
 ```
 
 
-#### markC2CMessageAsRead（标记c2c消息已读）
+#### markGroupMessageAsRead（标记Group消息已读）
 
 当调用此方法后，已读的消息会通过已读回执（onRecvGroupMessageReadReceipt）告诉对方。
 
