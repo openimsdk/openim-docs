@@ -19,6 +19,7 @@
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
   * [k8s部署](demo/server_deploy/k8s.md)
+  * [windows部署](demo/server_deploy/windows.md)
   * [配置文件说明](v2/server_deploy/config.md)
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
