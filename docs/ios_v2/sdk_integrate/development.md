@@ -45,8 +45,6 @@ Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天�
 1. 举例
     ```ruby
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // 自己业务服务器的地址，demo中负责业务服务器的登录操作
-        DemoPlugin.shared.setup(baseUrl: "http://xxxx:10004/")
         // IM服务器的地址，OpenIM SDK使用
         IMController.shared.setup(apiAdrr: "http://xxxx:10002",
                                   wsAddr: "ws://xxxx:10001")
@@ -59,17 +57,26 @@ Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天�
 3. 举例：
     ```ruby
     // 1: 登录自己的业务服务器，获取userID 和 token；
-    LoginAPI.init(req: .init(phoneNumber: "", pwd: "")).send()
-        .subscribe(onNext: { (api: LoginAPI) in
-            guard let resp = api.response else { return }
+    
+    // 业务服务器地址 Pages/LoginViewModel.swift
+    let API_BASE_URL = "http://121.37.25.71:10004/";
 
+    func loginDemo(phone: String, pwd: String) {
+        let body = JsonTool.toJson(fromObject: Request.init(phoneNumber: phone, pwd: pwd)).data(using: .utf8)
+        
+        var req = try! URLRequest.init(url: API_BASE_URL + getUrl(), method: .post)
+        req.httpBody = body
+        
+        let dataRequest = Alamofire.request(req).responseString { (response: DataResponse<String>) in
+            switch response.result {
+            case .success(let result): {
             // 2: 登录OpenIM服务器；
             self?.loginIM(uid: resp.data.userID, token: resp.data.token, completion: { [weak controller] in
                 controller?.dismiss(animated: true)
             })
-        }, onError: { err in
-
-        }).disposed(by: sself._disposeBag)
+            }
+        }
+    }
     ```
         
     ```ruby
