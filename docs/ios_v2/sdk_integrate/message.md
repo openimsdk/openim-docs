@@ -181,7 +181,7 @@
 
 ```
         [OIMManager.manager markC2CMessageAsRead:@"" // 接收者 userID
-                                       msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数 , clientMsgID
+                                       msgIDList:@[@"clientMsgID"] // 已读的消息id列表。若为空数组，则为清空未读数；若要标记全部已读，则需传入所有的clientMsgID
                                        onSuccess:^(NSString * _Nullable data) {
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
@@ -196,7 +196,7 @@
 
 ```
         [OIMManager.manager markGroupMessageAsRead:@"" // 接收者 groupID
-                                         msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数 , clientMsgID
+                                         msgIDList:@[@"clientMsgID"] // 已读的消息id列表。若为空数组，则为清空未读数；若要标记全部已读，则需传入所有的clientMsgID
                                          onSuccess:^(NSString * _Nullable data) {
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
