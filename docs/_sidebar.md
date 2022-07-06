@@ -93,7 +93,7 @@
   * [会话](js_v2/sdk_integrate/conversation.md)
   * [信令](js_v2/sdk_integrate/signaling.md)
   * [组织架构](js_v2/sdk_integrate/organization.md)
-  * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
+  <!-- * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md) -->
   * [常用结构体](js_v2/sdk_integrate/struct.md)
   * [常见问题](js_v2/sdk_integrate/faq.md)
 * **服务端api**

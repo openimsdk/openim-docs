@@ -1,4 +1,4 @@
-#### 信令相关API
+# 信令相关API
 
 | 方法                   | 描述                     |
 | ---------------------- | ------------------------ |
@@ -238,10 +238,13 @@
 
 > 所有事件相关常量均封装在SDK的`CbEvents`中，可直接进行引入使用。
 
-| 事件                          | 描述                                   | 响应                   |
-| ----------------------------- | -------------------------------------- | ---------------------- |
-| onRecvNewMessage              | 收到新消息                             | 新消息结构体json字符串 |
-| onRecvNewMessages             | 收到新消息（开启批量推送时）           | 新消息数组json字符串   |
-| onRecvMessageRevoked          | 有消息被撤回                           | 被撤回的消息ID         |
-| onRecvC2CReadReceipt          | 收到单聊已读回执，即有人读了发出的消息 | 消息ID列表             |
-| onRecvGroupMessageReadReceipt | 收到群聊已读回执，即有人读了发出的消息 | 消息ID列表             |
+| 事件                           | 描述                     | 响应             |
+| ------------------------------ | ------------------------ | ---------------- |
+| OnReceiveNewInvitation         | 收到音视频通话请求       | 音视频邀请信息   |
+| OnInviteeAccepted              | 发出的请求被同意         | 被同意详情       |
+| OnInviteeRejected              | 发出的请求被拒绝         | 被拒绝详情       |
+| OnInvitationCancelled          | 收到的请求被对方取消了   | 被取消的邀请信息 |
+| OnHangUp                       | 房间中有其他成员挂断     | 被挂断信息详情   |
+| OnInvitationTimeout            | 发出的请求超时了         | 超时的请求信息   |
+| OnInviteeAcceptedByOtherDevice | 请求在其他设备上被接受了 | -                |
+| OnInviteeRejectedByOtherDevice | 请求在其他设备上被拒绝了 | -                |

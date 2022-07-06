@@ -39,7 +39,7 @@ openIM.logout().then(res => {
 
 
 
-#### getLoginStatus
+## getLoginStatus
 
 > 获取当前登录状态
 
@@ -53,7 +53,7 @@ openIM.getLoginStatus().then(res => {
 
 
 
-#### getLoginUser
+### getLoginUser
 
 > 获取当前登录用户的ID
 
