@@ -63,7 +63,7 @@
 
 ##### 3.更改服务端配置文件config/config.yaml和更改sdk初始化的IMConfig
 - 将config.yaml里minio字段accessKeyID更换为刚刚docker启动填写的MINIO_ROOT_USER即{{YOUR_ACCESS_KEY}}，将MINIO_ROOT_PASSWORD更换为{{YOUR_SECRET_KEY}},
-  bucket即存储桶名，将endpoint改为minio的ip地址，端口为9000，如http://41.42.441.144:9000，
+  bucket即存储桶名，将endpoint改为minio的ip地址，端口为10005，如http://41.42.441.144:10005，
   因为客户端上传文件直接调用minio的API，服务端调用minio的API做初始化桶的操作， 所以注意这个ip地址需要是openim服务端和客户端都能访问到的。
 - sdk初始化将配置里ObjectStorage参数改为'minio',
 
