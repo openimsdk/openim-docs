@@ -1,4 +1,6 @@
-## 用户个人信息对象
+# 用户个人信息对象
+
+> 通过调用[getSelfUserInfo]()获得
 
 - type
 
@@ -30,7 +32,7 @@
   
   
 
-## 消息对象
+# 消息对象
 
 - type
 
@@ -178,7 +180,7 @@
 
 
 
-### Message
+## Message
 
 | Name           | Type         | Description |
 | -------------- | ------------ | ----------- |
@@ -217,7 +219,7 @@
 
 
 
-### PictureElem
+## PictureElem
 
 | Name            | Type    | Description  |
 | --------------- | ------- | ------------ |
@@ -228,7 +230,7 @@
 
 
 
-### Picture
+## Picture
 
 | Name   | Type   | Description |
 | ------ | ------ | ----------- |
@@ -241,7 +243,7 @@
 
 
 
-### SoundElem
+## SoundElem
 
 | Name      | Type   | Description  |
 | --------- | ------ | ------------ |
@@ -253,7 +255,7 @@
 
 
 
-### VideoElem
+## VideoElem
 
 | Name           | Type   | Description      |
 | -------------- | ------ | ---------------- |
@@ -272,7 +274,7 @@
 
 
 
-### FileElem
+## FileElem
 
 | Name      | Type   | Description      |
 | --------- | ------ | ---------------- |
@@ -284,7 +286,7 @@
 
 
 
-### AttachedInfoElem
+## AttachedInfoElem
 
 | Name                      | Type             | Description        |
 | ------------------------- | ---------------- | ------------------ |
@@ -295,7 +297,7 @@
 
 
 
-### GroupHasReadInfo
+## GroupHasReadInfo
 
 | Name              | Type     | Description          |
 | ----------------- | -------- | -------------------- |
@@ -304,27 +306,29 @@
 
 
 
-### MergeElem
+## MergeElem
 
 | Name         | Type        | Description |
 | ------------ | ----------- | ----------- |
 | title        | string      | 合并消息标题 |
-| abstractList | array&#124;null | 摘要列表 |
-| multiMessage | array&#124;null | 合并消息列表 |
+| abstractList | string[] | 摘要列表 |
+| multiMessage | MessageItem[] | 合并消息列表 |
 
 
 
-### AtElem
+## AtElem
 
 | Name       | Type        | Description |
 | ---------- | ----------- | ----------- |
 | text       | string      | 文本消息 |
-| atUserList | array&#124;null | @用户ID列表 |
+| atUserList | string[] | @用户ID列表 |
+| atUsersInfo | AtUsersInfoItem[] | @用户信息列表 |
+| quoteMessage | string | 引用消息 |
 | isAtSelf   | bool        | 是否@自己 |
 
 
 
-### LocationElem
+## LocationElem
 
 | Name        | Type   | Description |
 | ----------- | ------ | ----------- |
@@ -334,7 +338,7 @@
 
 
 
-### CustomElem
+## CustomElem
 
 | Name        | Type   | Description              |
 | ----------- | ------ | ------------------------ |
@@ -344,7 +348,7 @@
 
 
 
-### QuoteElem
+## QuoteElem
 
 | Name         | Type        | Description |
 | ------------ | ----------- | ----------- |
@@ -352,7 +356,7 @@
 
 
 
-### NotificationElem
+## NotificationElem
 
 | Name        | Type   | Description  |
 | ----------- | ------ | ------------ |
@@ -414,9 +418,7 @@
 
 
 
-
-
-## 用户信息对象
+# 用户信息对象
 
 - type
 
@@ -482,7 +484,7 @@
 
 
 
-## 群组信息对象
+# 群组信息对象
 
 - type
 
@@ -521,7 +523,7 @@
 
 
 
-## 群成员信息对象
+# 群成员信息对象
 
 - type
 
@@ -557,7 +559,7 @@
 
 
 
-## 好友申请对象
+# 好友申请对象
 
 - type
 
@@ -603,7 +605,7 @@
 
 
 
-## 入群申请对象
+# 入群申请对象
 
 - type
 
@@ -663,7 +665,118 @@
 
 
 
-## Promise 返回参数
+# 部分枚举值
+
+## 消息类型
+
+> 通常用于根据不同消息类型分别渲染消息内容。
+
+- enum
+
+  ```typescript
+  export enum MessageType {
+    TEXTMESSAGE = 101,					// 文字消息
+    PICTUREMESSAGE = 102,				// 图片消息
+    VOICEMESSAGE = 103,					// 语音消息
+    VIDEOMESSAGE = 104,					// 视频消息
+    FILEMESSAGE = 105,					// 文件消息
+    ATTEXTMESSAGE = 106,				// @消息
+    MERGERMESSAGE = 107,				// 合并消息
+    CARDMESSAGE = 108,					// 名片消息
+    LOCATIONMESSAGE = 109,			// 位置消息
+    CUSTOMMESSAGE = 110,				// 自定义消息
+    REVOKEMESSAGE = 111,				// 撤回消息提示
+    HASREADRECEIPTMESSAGE = 112,// 已读回执
+    TYPINGMESSAGE = 113,				// 正在输入状态消息
+    QUOTEMESSAGE = 114,					// 引用消息
+    FACEMESSAGE = 115,					// 表情消息
+    FRIENDADDED = 1204,					// 好友添加通知
+    NOTIFICATION = 1400,				// 系统通知消息
+    GROUPCREATED = 1501,				// 群聊创建通知
+    GROUPINFOUPDATED = 1502,		// 群信息改变通知
+    MEMBERQUIT = 1504,					// 成员退群通知
+    GROUPOWNERTRANSFERRED = 1507,// 群主转让通知
+    MEMBERKICKED = 1508,				// 成员被踢出通知
+    MEMBERINVITED = 1509,				// 邀请成员入群通知
+    MEMBERENTER = 1510,					// 成员进群通知
+    GROUPDISMISSED = 1511,			// 群解散通知
+    GROUPMEMBERMUTED = 1512,		// 群成员被禁言通知
+    GROUPMEMBERCANCELMUTED = 1513,//群成员被解除禁言通知
+    GROUPMUTED = 1514,					// 群禁言通知
+    GROUPCANCELMUTED = 1515,		// 群取消禁言通知
+    BURNMESSAGECHANGE = 1701,		// 阅后即焚状态改变通知
+  }
+  ```
+
+
+
+## 会话类型
+
+- enum
+
+  ```typescript
+  export enum SessionType {
+    Single = 1,					// 单聊
+    Group = 2,					// 群聊
+    Notification = 4,		// 系统通知
+  }
+  ```
+
+
+
+## 免打扰状态
+
+- enum
+
+  ```typescript
+  export enum OptType {
+    Nomal = 0,				// 正常接收消息
+    Mute = 1,					// 不接受任何消息
+    WithoutNotify = 2,// 接收消息但不通知(不计入总未读数)
+  }
+  ```
+
+
+
+## 平台类型
+
+> **注意：调用[login]()登录IM时传入的平台号需要与获取IMtoken时传入的平台号一致。调用jssdk时一般为5**
+
+- enum
+
+  ```typescript
+  export enum Platform {
+    iOS = 1,
+    Android = 2,
+    Windows = 3,
+    MacOSX = 4,
+    Web = 5,
+    Linux = 7,
+    Admin = 8,
+  }
+  ```
+
+  
+
+## 消息发送状态
+
+- enum
+
+  ```typescript
+  export enum MessageStatus {
+    Sending = 1,		// 发送中
+    Succeed = 2,		// 发送成功
+    Failed = 3,			// 发送失败
+  }
+  ```
+
+  
+
+
+
+# Promise 返回参数
+
+> jssdk**所有API以及监听**的回调参数格式均为此。
 
 - type
 

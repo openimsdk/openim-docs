@@ -701,7 +701,7 @@
 
 ## setGroupMemberNickname
 
-> 修改针对某个群员的禁言状态。
+> 修改某个群员在群内的昵称。
 
 - Example:
 
