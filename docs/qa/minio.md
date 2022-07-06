@@ -60,7 +60,7 @@
 - 执行docker ps命令
   ![open-im-server-minio](../images/minio_docker.png)
   代表minio和minio的web管理端启动成功 容器内部9000映射到主机9000，9090映射到9090。
-
+ 
 ##### 3.更改服务端配置文件config/config.yaml和更改sdk初始化的IMConfig
 - 将config.yaml里minio字段accessKeyID更换为刚刚docker启动填写的MINIO_ROOT_USER即{{YOUR_ACCESS_KEY}}，将MINIO_ROOT_PASSWORD更换为{{YOUR_SECRET_KEY}},
   bucket即存储桶名，将endpoint改为minio的ip地址，端口为10005，因为此时docker映射出来的端口默认为10005，如http://41.42.441.144:10005，
