@@ -1,180 +1,104 @@
-#### 1，添加依赖到yaml
+# 导入SDK
 
-       flutter_openim_sdk: latest
+## 离线插件方式
 
-SDK版本号参考：https://pub.flutter-io.cn/packages/flutter_openim_sdk
+1. 下载最新[离线插件](https://github.com/OpenIMSDK/Open-IM-SDK-Uniapp)
 
-#### 2，导入包
+   ```bash
+   git clone https://github.com/OpenIMSDK/Open-IM-SDK-Uniapp.git
 
-      import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
+2. 将下载下来的`Tuoyun-OpenIMSDK`文件夹整个放入uniapp项目根目录下的`nativeplugins`文件夹下（若没有该文件夹则新建）。
 
-#### 3，初始化
+   ![image-20220707144857698](../../images/uni_use_1.png)
 
-```
-OpenIM.iMManager.initSDK(
-    platform: 0, // 平台，参照IMPlatform类,
-    apiAddr: "", // SDK的API接口地址。如：http://xxx:10000
-    wsAddr: "",  // SDK的web socket地址。如： ws://xxx:17778
-    dataDir: "", // 数据存储路径。如：var apath =(await getApplicationDocumentsDirectory()).path
-    objectStorage: 'cos', // 图片服务器默认'cos'
-    logLevel: 6, // 日志等级，默认值6
-    listener: OnConnectListener(
-      onConnectSuccess: () {
-        // 已经成功连接到服务器
-      },
-      onConnecting: () {
-        // 正在连接到服务器，适合在 UI 上展示“正在连接”状态。
-      },
-      onConnectFailed: (code, errorMsg) {
-        // 连接服务器失败，可以提示用户当前网络连接不可用
-      },
-      onUserSigExpired: () {
-        // 登录票据已经过期，请使用新签发的 UserSig 进行登录。
-      },
-      onKickedOffline: () {
-        // 当前用户被踢下线，此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？”
-      },
-    ),
-  ).then((value){
-      if(value == true){
-        // 初始化成功
-      }
-  });
-```
+3. 打开uniapp项目根目录下`manifest.json`文件，打开**App原生插件配置**，选则本地插件进行导入。
 
-#### 4，设置监听器
+![image-20220707145127482](../../images/uni_use_2.png)
 
-```
-OpenIM.iMManager
-      ..userManager.setUserListener(OnUserListener(
-        onSelfInfoUpdated: (userInfo) {
-          // 当前登录用户资料变更回调
-        },
-      ))
-      ..messageManager.setAdvancedMsgListener(OnAdvancedMsgListener(
-        onRecvNewMessage: (message) {
-          // 收到新消息，界面添加新消息
-        },
-        onRecvMessageRevoked: (messageID) {
-          // 消息成功撤回，从界面移除消息
-        },
-        onRecvC2CReadReceipt: (list) {
-          // 消息被阅读回执，将消息标记为已读
-        },
-      ))
-      ..messageManager.setMsgSendProgressListener(OnMsgSendProgressListener(
-        onProgress: (messageID, progress) {
-          // 消息发送进度回调
-        },
-      ))
-      ..friendshipManager.setFriendshipListener(OnFriendshipListener(
-        onFriendApplicationRejected: (applicationInfo) {
-          // 发出或收到的好友申请被拒绝
-        },
-        onFriendApplicationDeleted: (applicationInfo) {
-          // 发出或收到的好友申请被删除
-        },
-        onFriendApplicationAdded: (applicationInfo) {
-          // 发出或收到的好友申请被添加
-        },
-        onFriendApplicationAccepted: (applicationInfo) {
-          // 发出或收到的好友申请已同意
-        },
-        onFriendAdded: (frinedInfo) {
-          // 好友被添加
-        },
-        onFriendDeleted: (frinedInfo) {
-          // 好友被删除
-        },
-        onFriendInfoChanged: (frinedInfo) {
-          // 朋友的资料发生变化
-        },
-        onBlacklistDeleted: (blackInfo) {
-          // 从黑名单删除
-        },
-        onBlacklistAdded: (blackInfo) {
-          // 拉入黑名单
-        },
-      ))
-      ..conversationManager.setConversationListener(OnConversationListener(
-        onNewConversation: (list) {
-          // 新增会话
-        },
-        onConversationChanged: (list) {
-          // 已添加的会话发送改变
-        },
-        onTotalUnreadMessageCountChanged: (count) {
-          // 未读消息数发送变化
-        },
-      ))
-      ..groupManager.setGroupListener(OnGroupListener(
-        onGroupMemberInfoChanged: (memberInfo) {
-          // 组成员信息发生变化
-        },
-        onGroupMemberDeleted: (memberInfo) {
-          // 组成员退出
-        },
-        onGroupMemberAdded: (memberInfo) {
-          // 组成员进入
-        },
-        onGroupApplicationRejected: (applicationInfo) {
-          // 发出或收到的组申请被拒绝
-        },
-        onGroupApplicationDeleted: (applicationInfo) {
-          // 发出或收到的组申请被删除
-        },
-        onGroupApplicationAdded: (applicationInfo) {
-          // 发出或收到的组申请有新增
-        },
-        onGroupApplicationAccepted: (applicationInfo) {
-          // 发出或收到的组申请被接受
-        },
-        onJoinedGroupDeleted: (groupInfo) {
-          // 退出群：退出者收到；踢出群：被踢者收到
-        },
-        onJoinedGroupAdded: (groupInfo) {
-          // 创建群： 初始成员收到；邀请进群：被邀请者收到
-        },
-        onGroupInfoChanged: (groupInfo) {
-          // 组资料变更
-        },
-      ))
-      ..signalingManager.setSignalingListener(OnSignalingListener(
-        onReceiveNewInvitation: (info) {
-          // 被邀请者收到：音视频通话邀请
-        },
-        onInviteeRejected: (info) {
-          // 邀请者收到：被邀请者拒绝音视频通话
-        },
-        onInviteeAccepted: (info) {
-          // 邀请者收到：被邀请者同意音视频通话
-        },
-        onInvitationTimeout: (info) {
-          // 邀请者收到：被邀请者超时未接通
-        },
-        onInvitationCancelled: (info) {
-          // 被邀请者收到：邀请者取消音视频通话
-        },
-      ));
-```
+4. 在项目中引入SDK及监听器。
 
-#### 5，登录
+   ```js
+   const openIM = uni.requireNativePlugin("Tuoyun-OpenIMSDK");
+   const event = uni.requireNativePlugin("globalEvent");
+   
+   export { openIM,event }
+   ```
 
-```
-OpenIM.iMManager.login(
-      uid: "", // uid来自于自身业务服务器
-      token: "", // token需要业务服务器根据secret向OpenIM服务端交换获取
-    ).then((userInfo) {
-      // 返回当前登录用户的资料
+5. 项目云打包自定义调试基座。
+
+   ![image-20220707152025394](../../images/uni_use_3.png)
+
+6. 启动自定义调试基座
+
+   > 需先选择运行基座为**自定义调试基座**
+
+   ![image-20220707152246980](../../images/uni_use_4.png)
+
+
+
+## 插件市场云插件方式
+
+1. 在dcloud[插件市场](https://ext.dcloud.net.cn/plugin?id=6577)为uniapp项目绑定云插件。
+
+   > 选择后需要绑定对应包名。
+
+   ![image-20220707152736755](../../images/sdk_use_5.png)
+
+2. 打开uniapp项目根目录下`manifest.json`文件，打开**App原生插件配置**，选则云端插件进行导入。
+
+   ![image-20220707153203341](../../images/sdk_use_6.png)
+
+3. 余下步骤同上[离线插件方式]()4-6。
+
+
+
+# 初始化SDK
+
+> 调用其他API之前必须先初始化SDK。
+
+```js
+im.initSDK(operationID, {											// operationID为随机字符串即可  用于定位问题
+      platform: Platform,											// 平台号 参考通用结构中Platform
+      api_addr: "http://121.37.25.71:10002",	// IM API地址
+      ws_addr: "ws://121.37.25.71:10001",			// IM Ws地址
+      data_dir:"data_dir", 										// SDK数据存放目录（绝对路径）
+      log_level: 6,														// SDK日志级别
+      object_storage: "minio",								// 图片等资源储存方式 目前支持"minio"、"cos"
     });
 ```
 
 
 
-#### 注：
+# 设置监听
 
-1，SDK只能初始化一次。
+> 设置监听的时机必须在初始化之后，登录之前。
 
-2，在登录前必须设置各监听器， 如：好友监听，组监听，会话监听，消息监听等。
+```js
+im.setUserListener();					// 用户相关监听
+im.setFriendListener();				// 好友相关监听
+im.setGroupListener();				// 群聊相关监听
+im.setAdvancedMsgListener();  // 消息相关监听
+im.setConversationListener(); // 会话相关监听
+```
 
-3，其他api调用必须保证登录回调成功后操作。
+
+
+# 登录IM
+
+> 必须等待登录成功回调之后才能调用其他API（除初始化和设置监听）  如获取好友列表等。
+
+```js
+im.login(
+    operationID,	// operationID为随机字符串即可  用于定位问题
+    userID,				// 用户ID
+    token,				// 用户token
+    (res) => {
+      if (res.errCode !== 0) {
+       // 登录失败
+      } else {
+        // 登录成功
+      }
+    }
+  );
+```
+
