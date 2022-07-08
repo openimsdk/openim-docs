@@ -1,219 +1,445 @@
-#### FriendshipManager（好友关系管理）
+# 好友相关API
 
-| 方法                         | 描述                                               |
-| ---------------------------- | -------------------------------------------------- |
-| setFriendshipListener        | 好友关系监听                                       |
-| getFriendsInfo               | 查询好友信息                                       |
-| addFriend                    | 发送一个好友请求，需要对方调用同意申请才能成为好友 |
-| getRecvFriendApplicationList | 获取别人加我为好友的申请                           |
-| getSendFriendApplicationList | 获取我发出的好友申请                               |
-| getFriendList                | 获取好友列表，返回的列表包含了已拉入黑名单的好友   |
-| setFriendRemark              | 设置好友备注                                       |
-| addBlacklist                 | 加入黑名单                                         |
-| getBlacklist                 | 获取黑名单列表                                     |
-| removeBlacklist              | 从黑名单移除                                       |
-| checkFriend                  | 检查友好关系                                       |
-| deleteFriend                 | 删除好友                                           |
-| acceptFriendApplication      | 接受好友请求                                       |
-| refuseFriendApplication      | 拒绝好友请求                                       |
-| searchFriends                | 查好友                                             |
+> 所有API中需要用到的`operationID`为随机字符串，通常用于定位问题使用，建议每一次API调用均采用唯一ID，可通过npm包uuid生成。<br/>存在callback的API，callback的回调参数格式为统一格式，errCode为0则代表操作成功，否则为失败。具体参考[此处说明]()。
 
+| 方法                         | 描述                                             |
+| ---------------------------- | ------------------------------------------------ |
+| addFriend                    | 发送好友请求                                     |
+| getRecvFriendApplicationList | 获取当前用户收到的好友申请                       |
+| getSendFriendApplicationList | 获取当前用户发出的好友申请                       |
+| acceptFriendApplication      | 接受好友请求                                     |
+| refuseFriendApplication      | 拒绝好友请求                                     |
+| getFriendList                | 获取好友列表，返回的列表包含了已拉入黑名单的好友 |
+| getDesignatedFriendsInfo     | 获取指定好友信息                                 |
+| setFriendRemark              | 设置好友备注                                     |
+| checkFriend                  | 检查是否为好友                                   |
+| getBlacklist                 | 获取黑名单列表                                   |
+| addBlack                     | 加入黑名单                                       |
+| removeBlack                  | 从黑名单中移除                                   |
+| deleteFriend                 | 删除好友                                         |
+| searchFriends                | 在好友列表中进行搜索                             |
 
+## addFriend
 
-#### getFriendsInfo（根据userID查询好友资料）
+> 发起添加好友申请。
 
-```
- OpenIM.iMManager.friendshipManager.getFriendsInfo(
-      uidList: [], // userId列表
-    ).then((list) {
-      // List<UserInfo>
- });
-```
+- Example:
 
+  ```js
+  const options = {
+    toUserID:"",
+    reqMsg:""
+  }
+  openIM.addFriend(operationID,options,({ data })=>{
+    ...
+  })
+  ```
 
+- Parameters:
 
-#### addFriend（发起好友申请）
+  | Name     | Type   | Required | Description  |
+  | -------- | ------ | -------- | ------------ |
+  | toUserID | string | true     | 用户ID       |
+  | reqMsg   | string | true     | 申请验证信息 |
 
-主动申请者收到OnFriendApplicationAdded
+- CallBack:
 
-被添加者收到OnFriendApplicationAdded 
+  | Name | Type   | Description        |
+  | ---- | ------ | ------------------ |
+  | data | string | 发送请求成功或失败 |
 
-```
- OpenIM.iMManager.friendshipManager.addFriend(
-      uid: "", // 用户id
-      reason: '', // 发起好友申请的描述信息
- ).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
-```
 
+## getRecvFriendApplicationList
 
+> 获取收到的好友请求列表。
 
-#### checkFriend（检查是否是好友）
+- Example:
 
-```
-OpenIM.iMManager.friendshipManager.checkFriend(
-      uidList: [], // userID 列表
-  ).then((list) {
-      // List<FriendshipInfo>
- });
-```
+  ```js
+  openIM.getRecvFriendApplicationList(operationID,({ data })=>{
+    ...
+  })
+  ```
 
+- CallBack:
 
+  | Name | Type   | Description                |
+  | ---- | ------ | -------------------------- |
+  | data | string | 好友请求对象列表json字符串 |
 
-#### deleteFriend（删除好友）
 
-操作者收到OnFriendDeleted
 
-```
-OpenIM.iMManager.friendshipManager.deleteFriend(
-    uid: '', // userID
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
-```
+## getSendFriendApplicationList
 
+> 获取发出的好友请求列表。
 
+- Example:
 
-#### setFriendRemark（好友备注设置）
+  ```js
+  openIM.getSendFriendApplicationList(operationID,({ data })=>{
+    ...
+  })
+  ```
 
-操作者收到OnFriendInfoChanged
+- CallBack:
 
-```
- OpenIM.iMManager.friendshipManager.setFriendRemark(
-      uid: '', // 好友userID
-      remark: '', // 备注名
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
-```
+  | Name | Type   | Description                |
+  | ---- | ------ | -------------------------- |
+  | data | string | 好友请求对象列表json字符串 |
 
+  
 
+## acceptFriendApplication
 
-#### getFriendList（好友列表）
+> 接受好友请求。
 
-返回的数据里包含已拉入黑名单的好友，可以根据isBlacklist字段筛选。
+- Example:
 
-```
-OpenIM.iMManager.friendshipManager.getFriendList().then((list){
-      //  List<UserInfo> 好友信息列表
-});
-```
+  ```js
+  const options = {
+    toUserID:"",
+    handleMsg:""
+  }
+  openIM.acceptFriendApplication(operationID,options,({ data })=>{
+    ...
+  })
+  ```
 
+- Parameters:
 
 
-#### getRecvFriendApplicationList（收到的好友申请）
+| Name      | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| toUserID  | string | true     | 申请者ID    |
+| handleMsg | string | true     | 回复消息    |
 
-```
- OpenIM.iMManager.friendshipManager.getRecvFriendApplicationList().then((list) {
-      // List<FriendApplicationInfo> 申请列表
- });
-```
+- CallBack:
 
 
+| Name | Type   | Description        |
+| ---- | ------ | ------------------ |
+| data | string | 接受成功或失败描述 |
 
-#### getSendFriendApplicationList（发出的好友申请）
+  
 
-```
-OpenIM.iMManager.friendshipManager.getSendFriendApplicationList().then((list){
-      // List<FriendApplicationInfo> 申请列表
- });
-```
+## refuseFriendApplication
 
+> 拒绝好友请求。
 
+- Example:
 
-#### addBlacklist（拉黑好友）
+  ```js
+  const options = {
+    toUserID:"",
+    handleMsg:""
+  }
+  openIM.refuseFriendApplication(operationID,options,({ data })=>{
+    ...
+  })
+  ```
 
-操作者收到OnBlackAdded
+- Parameters:
 
-```
- OpenIM.iMManager.friendshipManager.addBlacklist(
-      uid: "", // 好友userID
- ).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
-```
 
+| Name      | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| toUserID  | string | true     | 申请者ID    |
+| handleMsg | string | true     | 回复消息    |
 
+- CallBack:
 
-#### getBlacklist（黑名单）
 
-```
-OpenIM.iMManager.friendshipManager.getBlacklist().then((list){
-      // List<UserInfo>
-   });
-```
+| Name | Type   | Description        |
+| ---- | ------ | ------------------ |
+| data | string | 拒绝成功或失败描述 |
 
+## getFriendList
 
+> 获取好友列表。
 
-#### removeBlacklist（移除黑名单）
+- Example:
 
-操作者收到OnBlackDeleted
+  ```js
+  openIM.getFriendList(operationID,({ data })=>{
+    ...
+  })
+  ```
 
-```
-OpenIM.iMManager.friendshipManager.removeBlacklist(
-      uid: "", // userID
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
-```
+- CallBack:
 
+  | Name | Type   | Description                    |
+  | ---- | ------ | ------------------------------ |
+  | data | string | [好友对象]()对象列表json字符串 |
 
+  
 
-#### acceptFriendApplication（接受好友申请）
+## getDesignatedFriendsInfo
 
-操作者收到OnFriendApplicationAccepted、OnFriendAdded
+> 获取指定好友信息。
 
-申请者收到OnFriendApplicationAccepted、OnFriendAdded
+- Example:
 
-```
-OpenIM.iMManager.friendshipManager.acceptFriendApplication(
-      uid: "", // userID
-      handleMsg: '', // 备注信息
- ).then((_) {
-    // 成功
- }).catchError((_){
-    // 失败
- });
-```
+  ```js
+  const userIDList = ["xxx"]
+  openIM.getDesignatedFriendsInfo(operationID,userIDList,({ data })=>{
+    ...
+  })
+  ```
 
+- Parameters:
 
+  | Name       | Type     | Required | Description |
+  | ---------- | -------- | -------- | ----------- |
+  | userIDList | string[] | true     | 好友ID数组  |
 
-#### refuseFriendApplication（拒绝好友申请）
+- CallBack:
 
-操作者收到OnFriendApplicationRejected
+  | Name | Type   | Description                    |
+  | ---- | ------ | ------------------------------ |
+  | data | string | [好友信息]()对象列表json字符串 |
 
-申请者收到OnFriendApplicationRejected 
+  
 
-```
- OpenIM.iMManager.friendshipManager.refuseFriendApplication(
-      uid: "", // userID
-      handleMsg: '', // 备注信息
- ).then((_) {
-    // 成功
- }).catchError((_){
- 		// 失败
- });
-```
+## setFriendRemark
 
+> 设置好友备注信息。
 
+- Example:
 
-#### searchFriends（搜索好友）
+  ```js
+  const options = {
+    toUserID:"",
+    remark:""
+  }
+  openIM.setFriendRemark(operationID,options,({ data })=>{
+    ...
+  })
+  ```
 
-```
-var list = await OpenIM.iMManager.friendshipManager.searchFriends(
-      keywordList: [searchCtrl.text.trim()],//关键词
-      isSearchNickname: true,//按昵称查找
-      isSearchRemark: true,//按备注查找
- );
-```
+- Parameters:
+
+  | Name     | Type   | Required | Description |
+  | -------- | ------ | -------- | ----------- |
+  | toUserID | string | true     | 用户ID      |
+  | remark   | string | true     | 备注        |
+
+- CallBack:
+
+  | Name | Type   | Description        |
+  | ---- | ------ | ------------------ |
+  | data | string | 设置成功或失败描述 |
+
+  
+
+## checkFriend
+
+> 检查与用户间是否有好友关系。
+
+- Example:
+
+  ```js
+  const userIDList = ["xxx"]
+  openIM.checkFriend(operationID,userIDList,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name       | Type     | Required | Description |
+  | ---------- | -------- | -------- | ----------- |
+  | userIDList | string[] | true     | 用户ID数组  |
+
+- CallBack:
+
+  | Name | Type   | Description                |
+  | ---- | ------ | -------------------------- |
+  | data | string | 好友关系对象列表json字符串 |
+
+  
+
+## deleteFriend
+
+> 从好友列表中删除用户。
+
+- Example:
+
+  ```js
+  openIM.deleteFriend(operationID,userID,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name   | Type   | Required | Description |
+  | ------ | ------ | -------- | ----------- |
+  | userID | string | true     | 好友用户ID  |
+
+- CallBack:
+
+  | Name | Type   | Description        |
+  | ---- | ------ | ------------------ |
+  | data | string | 删除成功或失败描述 |
+
+  
+
+## getBlackList
+
+> 获取黑名单列表。
+
+- Example:
+
+  ```js
+  openIM.getBlackList(operationID,({ data })=>{
+    ...
+  })
+  ```
+
+- CallBack:
+
+
+| Name | Type   | Description                                    |
+| ---- | ------ | ---------------------------------------------- |
+| data | string | 被拉入黑名单的[黑名单用户对象]()列表json字符串 |
+
+
+
+
+## addBlack
+
+> 将用户添加到黑名单。
+
+- Example:
+
+  ```js
+  openIM.addBlack(operationID,userID,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+
+| Name   | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| userID | string | true     | 用户ID      |
+
+- CallBack:
+
+
+| Name | Type   | Description        |
+| ---- | ------ | ------------------ |
+| data | string | 添加成功或失败描述 |
+
+  
+
+## removeBlack
+
+> 从黑名单移除用户。
+
+- Example:
+
+  ```js
+  openIM.removeBlack(operationID,userID,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+
+| Name   | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| userID | string | true     | 用户ID      |
+
+- CallBack:
+
+
+| Name | Type   | Description        |
+| ---- | ------ | ------------------ |
+| data | string | 移除成功或失败描述 |
+
+
+
+## deleteFriend
+
+> 从好友列表中删除用户。
+
+- Example:
+
+  ```js
+  openIM.deleteFriend(operationID,userID,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name   | Type   | Required | Description |
+  | ------ | ------ | -------- | ----------- |
+  | userID | string | true     | 好友用户ID  |
+
+- CallBack:
+
+  | Name | Type   | Description        |
+  | ---- | ------ | ------------------ |
+  | data | string | 删除成功或失败描述 |
+
+
+
+
+## searchFriends
+
+> 在好友列表中搜索。
+
+- Example:
+
+  ```js
+  const options = {
+    keywordList: ["xx"];
+    isSearchUserID: true;
+    isSearchNickname: true;
+    isSearchRemark: true;
+  }
+  openIM.searchFriends(operationID,options,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name             | Type     | Required | Description      |
+  | ---------------- | -------- | -------- | ---------------- |
+  | keywordList      | string[] | true     | 好友用户ID数组   |
+  | isSearchUserID   | boolean  | true     | 是否搜索用户ID   |
+  | isSearchNickname | boolean  | true     | 是否搜索好友昵称 |
+  | isSearchRemark   | boolean  | true     | 是否搜索好友备注 |
+
+- CallBack:
+
+  | Name | Type   | Description                      |
+  | ---- | ------ | -------------------------------- |
+  | data | string | 符合条件的好友信息列表json字符串 |
+
+
+
+
+
+  
+
+# 用户相关回调
+
+> 相关回调需要通过导入`globalEvent`进行监听，引入步骤参考[SDK引入]()。
+
+| 事件                        | 描述                         | 响应             |
+| --------------------------- | ---------------------------- | ---------------- |
+| onBlackAdded                | 有用户被添加到黑名单         | 新增的黑名单信息 |
+| onBlackDeleted              | 从黑名单中移除了某个用户     | 移除的黑名单信息 |
+| onFriendApplicationAccepted | 收到或发出的好友请求被接受   | 被接受的好友申请 |
+| onFriendApplicationRejected | 收到或发出的好友请求被拒绝   | 被拒绝的好友申请 |
+| onFriendApplicationAdded    | 收到或发出的好友请求列表增加 | 新增的好友申请   |
+| onFriendApplicationDeleted  | 收到或发出的好友请求列表减少 | 被移除的好友申请 |
+| onFriendInfoChanged         | 好友信息更新                 | 更新后的好友信息 |
+| onFriendAdded               | 好友列表增加                 | 新增的好友信息   |
+| onFriendDeleted             | 好友列表减少                 | 减少的好友信息   |

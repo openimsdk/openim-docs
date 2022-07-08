@@ -770,7 +770,23 @@
   }
   ```
 
-  
+
+
+
+## 群组状态
+
+- enum
+
+  ```typescript
+  export enum GroupStatus {
+    Nomal = 0,			// 正常状态
+    Baned = 1,			// 被封禁
+    Dismissed = 2,	// 被解散
+    Muted = 3,			// 被禁言
+  }
+  ```
+
+
 
 
 

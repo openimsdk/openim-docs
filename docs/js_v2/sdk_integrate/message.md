@@ -365,9 +365,17 @@
 - Example:
 
   ```js
-  const options = {
+  const infoList:AtUsersInfoItem[] =[
+    {
+      atUserID: "",
+      groupNickname: ""
+    }
+  ] 
+  const options:AtMsgParams = {
     text: "I am at Msg",
     atUserIDList: ["1f8e0d51d335301d"],
+    atUserInfoList: infoList,
+    message:""
   };
   openIM.createTextAtMessage(options).then(({ data })=>{
     ...
@@ -380,8 +388,12 @@
 
   | Name         | Type     | Required | Description  |
   | ------------ | -------- | -------- | ------------ |
-  | text      | string   | true     | 消息文字内容 |
-  | atUserIDList | string[] | true     | @用户id数组  |
+  | text                          | string            | true     | 消息文字内容  |
+  | atUserIDList                  | string[]          | true     | @用户id数组   |
+  | atUserInfoList                | AtUsersInfoItem[] | false    | @用户信息数组 |
+  | atUserInfoList->userID        | string            | true     | @用户id       |
+  | atUserInfoList->groupNickname | string            | true     | @用户昵称     |
+  | message                       | string            | false    | @消息引用消息 |
 
 - Returns:
 
@@ -1284,7 +1296,7 @@
 
 
 
-# 会话相关回调
+# 消息相关回调
 
 > 所有事件相关常量均封装在SDK的`CbEvents`中，可直接进行引入使用。
 

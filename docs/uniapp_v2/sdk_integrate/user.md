@@ -17,7 +17,7 @@
 - Example:
 
   ```js
-  im.getUsersInfo(operationID,userIDList,data => {
+  openIM.getUsersInfo(operationID,userIDList,({data}) => {
   	...
   })
   ```
@@ -43,13 +43,11 @@
 - Example:
 
   ```typescript
-  openIM.getSelfUserInfo().then(({ data })=>{
-    ...
-  }).catch(err=>{
-    ...
+  openIM.getSelfUserInfo(operationID,({data}) => {
+  	...
   })
   ```
-
+  
 - CallBack:
 
   | Name | Type   | Description                            |
@@ -65,7 +63,7 @@
 - Example:
 
   ```typescript
-  const selfInfo:PartialUserItem = {
+  const userInfo = {
     userID:"1234",
     nickname: "blooming",//用户昵称
     faceURL: "xxx.com",//头像URL
@@ -75,13 +73,11 @@
     email:"123@qq.com",//用户邮箱
     ex:"ex"//用户扩展信息
   }
-  openIM.setSelfInfo(selfInfo).then(({ data })=>{
-    ...
-  }).catch(err=>{
-    ...
+  openIM.setSelfInfo(operationID,userInfo,({data}) => {
+  	...
   })
   ```
-
+  
 - Parameters:
 
   | Name        | Type   | Required | Description           |
@@ -105,8 +101,8 @@
 
 # 用户相关回调
 
-> 所有事件相关常量均封装在SDK的`CbEvents`中，可直接进行引入使用。
+> 相关回调需要通过导入`globalEvent`进行监听，引入步骤参考[SDK引入]()。
 
 | 事件              | 描述                     | 响应                       |
 | ----------------- | ------------------------ | -------------------------- |
-| OnSelfInfoUpdated | 当前登录用户个人信息改变 | 用户个人信息对象json字符串 |
+| onSelfInfoUpdated | 当前登录用户个人信息改变 | 用户个人信息对象json字符串 |
