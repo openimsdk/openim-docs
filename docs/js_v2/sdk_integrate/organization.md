@@ -1,4 +1,4 @@
-# 信令相关API
+# 组织架构相关API
 
 | 方法                                | 描述                             |
 | ----------------------------------- | -------------------------------- |
@@ -43,6 +43,41 @@
   | Name | Type   | Description        |
   | ---- | ------ | ------------------ |
   | data | string | 部门列表json字符串 |
+
+
+
+## getDepartmentMember
+
+> 获取某个部门下成员列表
+
+- Example:
+
+  ```js
+  const options:GetSubDepParams = {
+    departmentID: "",
+    offset: 0,
+    count: 20
+  }
+  openIM.getDepartmentMember(options).then(({ data })=>{
+    ...
+  }).catch(err=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name         | Type   | Required | Description                  |
+  | ------------ | ------ | -------- | ---------------------------- |
+  | departmentID | string | true     | 部门ID，传""时获取根部门信息 |
+  | offset       | number | true     | 分页偏移量                   |
+  | count        | number | true     | 一页获取的数量               |
+
+- CallBack:
+
+  | Name | Type   | Description        |
+  | ---- | ------ | ------------------ |
+  | data | string | 部门成员json字符串 |
 
 
 
@@ -186,7 +221,7 @@
 
 
 
-# 信令相关回调
+# 组织架构相关回调
 
 > 所有事件相关常量均封装在SDK的`CbEvents`中，可直接进行引入使用。
 

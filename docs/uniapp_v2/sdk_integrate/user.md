@@ -7,6 +7,7 @@
 | getUsersInfo    | 根据userID获取用户资料 |
 | getSelfUserInfo | 获取当前登录用户资料   |
 | setSelfInfo     | 修改当前登录用户资料   |
+| uploadFile      | 上传文件               |
 
 
 
@@ -98,6 +99,36 @@
   | data | string | 用户资料是否修改成功 |
 
 
+
+## uploadFile
+
+> 通过SDK上传文件
+
+- Example:
+
+  ```js
+  openIM.uploadFile(operationID,filePath)
+  ```
+
+- Parameters:
+
+  | Name     | Type   | Required | Description  |
+  | -------- | ------ | -------- | ------------ |
+  | filePath | string | true     | 文件绝对路径 |
+
+
+- CallBack:
+
+  > 上传回调通过监听返回，回调与文件可根据上传时的operationID进行一一对应。
+
+  | 事件               | 描述         | 响应                                                     |
+  | ------------------ | ------------ | -------------------------------------------------------- |
+  | uploadFileFailed   | 文件上传失败 | errCode:错误码<br/>errMsg:错误信息<br>operationID:操作ID |
+  | uploadFileProgress | 文件上传进度 | progress:上传进度<br>operationID:操作ID                  |
+  | uploadFileSuccess  | 文件上传成功 | data:上传结果<br/>operationID:操作ID                     |
+
+
+## 
 
 # 用户相关回调
 

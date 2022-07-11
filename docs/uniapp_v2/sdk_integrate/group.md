@@ -358,7 +358,7 @@
 - Example:
 
   ```js
-  openIM.joinGroup(operationID,groupID,({ data })=>{
+  openIM.quitGroup(operationID,groupID,({ data })=>{
     ...
   })
   ```
@@ -386,7 +386,7 @@
 - Example:
 
   ```js
-  openIM.joinGroup(operationID,groupID,newOwnerUserID,({ data })=>{
+  openIM.transferGroupOwner(operationID,groupID,newOwnerUserID,({ data })=>{
     ...
   })
   ```
@@ -545,7 +545,7 @@
 - Example:
 
   ```js
-  openIM.dismissGroup(operationID,groupID,isMute,({ data })=>{
+  openIM.changeGroupMute(operationID,groupID,isMute,({ data })=>{
     ...
   })
   ```
@@ -574,7 +574,7 @@
 - Example:
 
   ```js
-  openIM.dismissGroup(operationID,groupID,userID,mutedSeconds,({ data })=>{
+  openIM.changeGroupMemberMute(operationID,groupID,userID,mutedSeconds,({ data })=>{
     ...
   })
   ```
@@ -604,7 +604,7 @@
 - Example:
 
   ```js
-  openIM.dismissGroup(operationID,groupID,userID,groupMemberNickname,({ data })=>{
+  openIM.setGroupMemberNickname(operationID,groupID,userID,groupMemberNickname,({ data })=>{
     ...
   })
   ```
@@ -669,7 +669,7 @@
 - Example:
 
   ```js
-  openIM.searchGroups(operationID,groupID,userID,roleLevel,({ data })=>{
+  openIM.setGroupMemberRoleLevel(operationID,groupID,userID,roleLevel,({ data })=>{
     ...
   })
   ```
@@ -699,7 +699,7 @@
 - Example:
 
   ```js
-  openIM.searchGroups(operationID,groupID,verification,({ data })=>{
+  openIM.setGroupVerification(operationID,groupID,verification,({ data })=>{
     ...
   })
   ```
