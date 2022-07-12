@@ -1,3 +1,7 @@
+### JS规则参考：https://inappwebview.dev/docs/javascript/communication/
+
+
+
 #### 1.页面初始化
 
 初始化网页时获取app数据，如登录token等。
