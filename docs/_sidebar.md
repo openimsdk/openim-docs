@@ -39,6 +39,7 @@
   * [组织架构](flutter_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
   * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+  * [工作台JS调用](flutter_v2/sdk_integrate/workbench_js.md)
   * [常见问题](flutter_v2/sdk_integrate/faq.md)
 * **集成iOS SDK**
   * [Demo下载](ios_v2/sdk_integrate/development.md)
