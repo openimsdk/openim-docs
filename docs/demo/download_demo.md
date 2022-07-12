@@ -13,7 +13,7 @@
       <h2>Native Android</h2>
       <p style="text-align: center;">扫码或<a href="https://www.pgyer.com/OpenIM-Android" target="_blank">点击此处下载</a></p>
       <img
-        src="images/ic_open_im_android_demo.png"
+        src="images/android_demo.png"
         width="200px"
         height="200px"
       />
