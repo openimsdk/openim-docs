@@ -157,8 +157,8 @@ net stop redis
 启动
 ```
 cd %kafka%
-bin\windows\zookeeper-server-start.cmd config\zookeeper.properties
-bin\windows\kafka-server-start.cmd config\kafka.properties
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+bin\windows\kafka-server-start.bat config\kafka.properties
 ```
 --------------
 ## OpenIM在windows编译
