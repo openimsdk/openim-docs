@@ -7,6 +7,7 @@
 | sendMessage                             | 发送消息                                                     |
 | getHistoryMessageList                   | 获取聊天记录(以startMsg为节点，以前的聊天记录)               |
 | revokeMessage                           | 撤回消息                                                     |
+| newRevokeMessage                        | 撤回消息                                                       ｜
 | deleteMessageFromLocalStorage           | 删除本地消息                                                 |
 | insertSingleMessageToLocalStorage       | 插入单聊消息到本地                                           |
 | insertGroupMessageToLocalStorage        | 插入群聊消息到本地                                           |
@@ -145,6 +146,13 @@
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
         }];
+        
+        // 支持管理员撤回消息；支持撤回tips显示在原来的位置
+        [OIMManager.manager newRevokeMessage:self.testMessage
+                                   onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+}];
 
 ```
 
