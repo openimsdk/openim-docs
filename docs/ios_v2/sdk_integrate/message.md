@@ -7,6 +7,7 @@
 | sendMessage                             | 发送消息                                                     |
 | getHistoryMessageList                   | 获取聊天记录(以startMsg为节点，以前的聊天记录)               |
 | revokeMessage                           | 撤回消息                                                     |
+| newRevokeMessage                        | 撤回消息                                                       ｜
 | deleteMessageFromLocalStorage           | 删除本地消息                                                 |
 | insertSingleMessageToLocalStorage       | 插入单聊消息到本地                                           |
 | insertGroupMessageToLocalStorage        | 插入群聊消息到本地                                           |
@@ -18,10 +19,13 @@
 | createTextAtAllMessage                  | 创建@全体成员消息                                                    |
 | createImageMessage                      | 创建图片消息                                                 |
 | createImageMessageFromFullPath          | 创建图片消息                                                 |
+| createImageMessageByURL                 | 创建图片消息                                                 |
 | createSoundMessage                      | 创建语音消息                                                 |
 | createSoundMessageFromFullPath          | 创建语音消息                                                 |
+| createSoundMessageByURL                 | 创建语音消息                                                 |
 | createVideoMessage                      | 创建视频消息                                                 |
 | createVideoMessageFromFullPath          | 创建视频消息                                                 |
+| createVideoMessageByURL                 | 创建视频消息                                                 |
 | createFileMessage                       | 创建文件消息                                                 |
 | createFileMessageFromFullPath           | 创建文件消息                                                 |
 | createMergerMessage                     | 创建合并消息                                                 |
@@ -142,6 +146,13 @@
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
         }];
+        
+        // 支持管理员撤回消息；支持撤回tips显示在原来的位置
+        [OIMManager.manager newRevokeMessage:self.testMessage
+                                   onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+}];
 
 ```
 
@@ -302,6 +313,14 @@
         [OIMMessageInfo createImageMessageFromFullPath:path];
 ```
 
+### createImageMessageByURL (图片消息 地址）
+
+```
+        OIMPictureInfo *pic = [OIMPictureInfo new];
+        pic.url = @"xxx";
+        
+        self.testMessage = [OIMMessageInfo createImageMessageByURL:pic bigPicture:pic snapshotPicture:pic];
+```
 
 
 #### createSoundMessage（语音消息，相对路径）
@@ -319,6 +338,12 @@
 ```
 
 
+#### createSoundMessageByURL (语音消息，地址）
+
+```
+        [OIMMessageInfo createSoundMessageByURL:@"xxx" duration:10 size:100]
+```
+
 
 #### createVideoMessage（视频消息，相对路径）
 
@@ -328,7 +353,7 @@
                                   duration:0 // 时长s
                               snapshotPath:path1]; // 站位缩略图
 ```
-
+createVideoMessageByURL
 
 
 #### createVideoMessageFromFullPath（视频消息全路径）
@@ -340,6 +365,12 @@
                                              snapshotPath:path1]; // 站位缩略图
 ```
 
+
+#### createVideoMessageFromFullPath（视频消息， 地址）
+
+```
+        [OIMMessageInfo createVideoMessageByURL:@"xxx" videoType:@"mp4" duration:10 size:100 snapshot:@"xxx"]
+```
 
 
 #### createFileMessage（文件消息，相对路径）
