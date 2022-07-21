@@ -1,93 +1,80 @@
-### IMManager（初始化管理）
+# 初始化及登录相关API
 
-| 方法             | 描述                                          |
-| ---------------- | --------------------------------------------- |
-| initSDK          | 初始化SDK                                     |
-| unInitSDK        | 反初始化SDK                                   |
-| login            | 登录                                          |
-| logout           | 登出                                          |
-| getLoginStatus   | 获取登录状态                                  |
-| getLoginUserID   | 登录者用户ID                                  |
-| getLoginUserInfo | 登录者用户资料                                |
-| wakeUp           | 唤醒socket通信（当app从后台回到前台恢复通信） |
-| uploadImage      | 上传图片到服务器                              |
+| 方法           | 描述               |
+| -------------- | ------------------ |
+| login          | 登录IM             |
+| logout         | 登出               |
+| getLoginStatus | 获取登录状态       |
+| getLoginUser   | 获取当前登录用户ID |
 
-#### initSDK（初始化SDK）
+## login
 
-objectStorage：图片服务器有cos（腾讯云），minio，oss（阿里云）可选
+> 初始化并登录IM，使用用户ID(userID)和token登录，userID来自于自身业务服务器，token需要业务服务器根据secret向OpenIM服务端交换获取。url为OpenIM Server部署服务器的web server websocket地址。<br/>**注意1：**JSSDK ws连接端口为10003端口，与其他端SDK不同，请勿混淆。<br/>**注意2：**必须确保登录成功回调到达后才能调用其他API。
 
+```typescript
+const config: InitConfig = {
+  userID: "userID",								// 用户ID
+  token: "token",									// 用户token
+  url: "ws://121.37.25.71:10003",	// jssdk server ws地址
+  platformID: 5,									// 平台号
+};
+openIM.login(config).then(res => {
+  console.log("login suc...");
+}).catch(err => {
+  console.log("login failed...");
+})
 ```
-OpenIM.iMManager.initSDK(
-    platform: 0, // 平台，参照IMPlatform类,
-    apiAddr: "", // SDK的API接口地址。如：http://xxx:10000
-    wsAddr: "",  // SDK的web socket地址。如： ws://xxx:17778
-    dataDir: "", // 数据存储路径。如：var apath =(await getApplicationDocumentsDirectory()).path
-    objectStorage: 'cos', // 图片服务器默认'cos'，支持 minio，oss
-    logLevel: 6, // 日志等级，默认值6
-    listener: OnConnectListener(
-      onConnectSuccess: () {
-        // 已经成功连接到服务器
-      },
-      onConnecting: () {
-        // 正在连接到服务器，适合在 UI 上展示“正在连接”状态。
-      },
-      onConnectFailed: (code, errorMsg) {
-        // 连接服务器失败，可以提示用户当前网络连接不可用
-      },
-      onUserSigExpired: () {
-        // 登录票据已经过期，请使用新签发的 UserSig 进行登录。
-      },
-      onKickedOffline: () {
-        // 当前用户被踢下线，此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？”
-      },
-    ),
-  ).then((value){
-      if(value == true){
-        // 初始化成功
-      }
-  });
+
+## logout
+
+> 退出登录，并关闭当前ws
+
+```typescript
+openIM.logout().then(res => {
+  console.log("logout suc...");
+}).catch(err => {
+  console.log("logout failed...");
+})
 ```
 
 
 
-#### login（登录）
+## getLoginStatus
 
-```
-OpenIM.iMManager.login(
-      uid: "", // uid来自于自身业务服务器
-      token: "", // token需要业务服务器根据secret向OpenIM服务端交换获取
-    ).then((userInfo) {
-      // 返回当前登录用户的资料
-    });
-```
+> 获取当前登录状态
 
+```typescript
+openIM.getLoginStatus().then(res => {
+  // 101:登录成功 102:登陆中 103:登录失败 201:登出
+}).catch(err => {
 
-
-#### logout（ 登出）
-
-```
- OpenIM.iMManager.logout().then((_){
-      // 退出成功
- });
+})
 ```
 
 
 
-#### getLoginUserInfo（获取当前登录用户的资料）
+### getLoginUser
 
-```
-OpenIM.iMManager.getLoginUserInfo().then((userInfo){
-     // 当前登录用户的信息
- });
-```
+> 获取当前登录用户的ID
 
+```typescript
+openIM.getLoginUser().then(res => {
+  // 当前登录用户ID
+}).catch(err => {
 
-
-#### getLoginUserID（获取当前登录用户的ID）
-
-```
- OpenIM.iMManager.getLoginUserID().then((userID){
-     // 当前登录用户的ID
-  });
+})
 ```
 
+
+
+# 初始化及登录相关监听
+
+> 所有事件相关常量均封装在SDK的`CbEvents`中，可直接进行引入使用。
+
+| 事件               | 描述             |
+| ------------------ | ---------------- |
+| OnConnectFailed    | 连接IM服务器失败 |
+| OnConnectSuccess   | 连接成功         |
+| OnConnecting       | 连接中           |
+| OnKickedOffline    | 被其它端踢下线   |
+| OnUserTokenExpired | 用户token过期    |

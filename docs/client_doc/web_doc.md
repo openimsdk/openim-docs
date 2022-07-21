@@ -269,7 +269,7 @@
   | ---- | ------ | --------------------- |
   | Data | string | @文字信息结构体字符串 |
 
-  ## createAdvancedTextMessage
+## createAdvancedTextMessage
   
   > 创建一条高级文本消息（具体更强的@能力，支持用户@自定义）。
 
@@ -599,36 +599,6 @@
 
 
 
-## createCardMessage
-
-> 创建一条名片位置消息。
-
-- Example:
-
-  ```js
-  const cardDesc = ""
-  openIM.createCardMessage(cardDesc).then(({ data })=>{
-    ...
-  }).catch(err=>{
-    ...
-  })
-  ```
-
-- Parameters
-
-  | Name     | Type   | Required | Description                  |
-  | -------- | ------ | -------- | ---------------------------- |
-  | cardDesc | string | true     | 自定义名片信息对象json字符串 |
-
-- Returns:
-
-  | Name | Type   | Description          |
-  | ---- | ------ | -------------------- |
-  | data | string | 名片消息结构体字符串 |
-
-
-​    
-
 ## createCustomMessage
 
 > 创建一条自定义消息。
@@ -698,6 +668,36 @@
 
 
 
+
+## createCardMessage
+
+> 创建一条名片位置消息。
+
+- Example:
+
+  ```js
+  const cardDesc = ""
+  openIM.createCardMessage(cardDesc).then(({ data })=>{
+    ...
+  }).catch(err=>{
+    ...
+  })
+  ```
+
+- Parameters
+
+  | Name     | Type   | Required | Description                  |
+  | -------- | ------ | -------- | ---------------------------- |
+  | cardDesc | string | true     | 自定义名片信息对象json字符串 |
+
+- Returns:
+
+  | Name | Type   | Description          |
+  | ---- | ------ | -------------------- |
+  | data | string | 名片消息结构体字符串 |
+
+
+​    
 
 ## sendMessage/sendMessageNotOss
 
