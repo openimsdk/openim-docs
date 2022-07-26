@@ -9,6 +9,15 @@
         height="200px"
       />
     </div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Native Android</h2>
+      <p style="text-align: center;">扫码或<a href="https://www.pgyer.com/OpenIM-Android" target="_blank">点击此处下载</a></p>
+      <img
+        src="images/android_demo.png"
+        width="200px"
+        height="200px"
+      />
+    </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>Flutter iOS</h2>
       <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/o956rTGx" target="_blank">点击此处下载</a></p>
@@ -19,14 +28,13 @@
       />
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
-      <h2>Electron PC</h2>
-      <p style="text-align: center;">扫码或<a href="https://pan.baidu.com/s/1yDE7NlHsYQfgL6J3VtsmcA" target="_blank">点击此处下载</a></p>
+      <h2>Native iOS</h2>
+      <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/79cQqBYd" target="_blank">点击此处下载</a></p>
       <img
-        src="images/pc_qr.png"
+        src="images/ios_native.png"
         width="200px"
         height="200px"
       />
-      <b>提取码：tthq</b>
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>PC Web</h2>
@@ -38,10 +46,46 @@
       />
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
-      <h2>Native iOS</h2>
-      <p style="text-align: center;">扫码或<a href="https://testflight.apple.com/join/79cQqBYd" target="_blank">点击此处下载</a></p>
+      <h2>Electron for Mac</h2>
+      <p style="text-align: center;">扫码或<a href="https://qr02.cn/AeCvPV" target="_blank">点击此处下载</a></p>
       <img
-        src="images/ios_native.png"
+        src="images/electron_mac.png"
+        width="200px"
+        height="200px"
+      />
+    </div>
+     <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Electron for Windows</h2>
+      <p style="text-align: center;">扫码或<a href="https://qr02.cn/A82arJ" target="_blank">点击此处下载</a></p>
+      <img
+        src="images/electron_win.png"
+        width="200px"
+        height="200px"
+      />
+    </div>
+     <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Electron for Linux</h2>
+      <p style="text-align: center;">扫码或<a href="https://qr02.cn/Fa1EKF" target="_blank">点击此处下载</a></p>
+      <img
+        src="images/electron_linux.png"
+        width="200px"
+        height="200px"
+      />
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Electron for UOS</h2>
+      <p style="text-align: center;">扫码或<a href="https://qr02.cn/CH6K1I" target="_blank">点击此处下载</a></p>
+      <img
+        src="images/electron_uos.png"
+        width="200px"
+        height="200px"
+      />
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Electron for Kylinos(银河麒麟)</h2>
+      <p style="text-align: center;">扫码或<a href="https://qr02.cn/C18OH0" target="_blank">点击此处下载</a></p>
+      <img
+        src="images/electron_kylinos.png"
         width="200px"
         height="200px"
       />

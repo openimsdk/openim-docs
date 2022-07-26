@@ -1,11 +1,12 @@
 <!-- * [OpenIM的使命](README.md) -->
 * **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
-  * [主要功能](introduce/main_function.md)
-  * [产品动态](introduce/production_dynamic.md)
+  * [关于我们](introduce/about.md)
+  * [收费服务](charge/charge.md)
 * **版本发布**
   - [版本管理](version/description.md)
-  - [历史版本](version/history_version.md)
+  - **历史版本**
+  - * [v2.2.0](introduce/v2.2.0.md)
   - [版本计划](version/plan.md)
 * [体验Demo](demo/download_demo.md)
 * **以下是新文档模板-待补充**
@@ -13,11 +14,12 @@
 * **服务端部署**
   * [docker部署](v2/server_deploy/docker_singe.md)
   * [常见问题](v2/server_deploy/faq.md)
-  * [minio部署]()
+  * [minio部署](qa/minio.md)
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
-  * [k8s部署](v2/server_deploy/k8s_cluster.md)
+  * [k8s部署](demo/server_deploy/k8s.md)
+  * [windows部署](demo/server_deploy/windows.md)
   * [配置文件说明](v2/server_deploy/config.md)
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
@@ -37,6 +39,7 @@
   * [组织架构](flutter_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
   * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+  * [工作台JS调用](flutter_v2/sdk_integrate/workbench_js.md)
   * [常见问题](flutter_v2/sdk_integrate/faq.md)
 * **集成iOS SDK**
   * [Demo下载](ios_v2/sdk_integrate/development.md)
@@ -62,7 +65,7 @@
   * [消息](android_v2/sdk_integrate/message.md)
   * [会话](android_v2/sdk_integrate/conversation.md)
   * [信令](android_v2/sdk_integrate/signaling.md)
-  * [组织架构](android_v2/sdk_integrate/organization.md)
+  * [组织架构](android_v2/sdk_integrate/)
   * [工作圈/朋友圈](android_v2/sdk_integrate/moments.md)
   * [常用结构体](android_v2/sdk_integrate/struct.md)
   * [常见问题](android_v2/sdk_integrate/faq.md)
@@ -91,21 +94,21 @@
   * [会话](js_v2/sdk_integrate/conversation.md)
   * [信令](js_v2/sdk_integrate/signaling.md)
   * [组织架构](js_v2/sdk_integrate/organization.md)
-  * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
+  <!-- * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md) -->
   * [常用结构体](js_v2/sdk_integrate/struct.md)
   * [常见问题](js_v2/sdk_integrate/faq.md)
 * **服务端api**
-  * [用户管理](http://43.128.5.63:10002/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
-  * [关系链管理](http://43.128.5.63:10002/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
-  * [群组管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
+  * [用户管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3)
+  * [关系链管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E5%A5%BD%E5%8F%8B%E7%9B%B8%E5%85%B3)
+  * [群组管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E7%BE%A4%E7%BB%84%E7%9B%B8%E5%85%B3)
   * [大群管理](v2/api_integrate/super_group.md)
-  * [账号鉴权管理](http://43.128.5.63:10002/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
-  * [第三方管理](http://43.128.5.63:10002/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
-  * [消息管理](http://43.128.5.63:10002/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
-  * [会话管理](http://43.128.5.63:10002/swagger/index.html#/%E4%BC%9A%E8%AF%9D%E7%9B%B8%E5%85%B3)
-  * [工作圈管理](http://43.128.5.63:10002/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
-  * [标签管理](http://43.128.5.63:10002/swagger/index.html#/%E6%A0%87%E7%AD%BE)
-  * [组织管理](http://43.128.5.63:10002/swagger/index.html#/%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3)
+  * [账号鉴权管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81)
+  * [第三方管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3)
+  * [消息管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3)
+  * [会话管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E4%BC%9A%E8%AF%9D%E7%9B%B8%E5%85%B3)
+  * [工作圈管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E5%B7%A5%E4%BD%9C%E5%9C%88)
+  * [标签管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E6%A0%87%E7%AD%BE)
+  * [组织管理](https://doc.rentsoft.cn:8000/swagger/index.html#/%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3)
   * [第三方回调说明](callback/callback.md)
   * [字段含义说明](v2/description/fields.md)
   * [常见问题](v2/api_integrate/faq.md)
@@ -126,12 +129,12 @@
   * [docker部署](demo/server_deploy/docker_singe.md)
   * [源码部署](demo/server_deploy/code_singe.md)
   * [集群部署](demo/server_deploy/docker_cluster.md)
-  * [k8s部署](demo/server_deploy/k8s_cluster.md)
+  * [k8s部署](demo/server_deploy/k8s.md)
   * [待完成](demo/server_deploy/in_development.md)
   * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
-  * [收费服务](charge/charge.md)
+
 * SDK集成(逐步废弃)
   * SDK下载
     * [SDK下载(flutter)](integrate/flutter/integrate_download_flutter.md)

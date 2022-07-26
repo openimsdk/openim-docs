@@ -7,6 +7,7 @@
 | sendMessage                             | 发送消息                                                     |
 | getHistoryMessageList                   | 获取聊天记录(以startMsg为节点，以前的聊天记录)               |
 | revokeMessage                           | 撤回消息                                                     |
+| newRevokeMessage                        | 撤回消息                                                       ｜
 | deleteMessageFromLocalStorage           | 删除本地消息                                                 |
 | insertSingleMessageToLocalStorage       | 插入单聊消息到本地                                           |
 | insertGroupMessageToLocalStorage        | 插入群聊消息到本地                                           |
@@ -15,12 +16,16 @@
 | typingStatusUpdate                      | 正在输入提示                                                 |
 | createTextMessage                       | 创建文本消息                                                 |
 | createTextAtMessage                     | 创建@消息                                                    |
+| createTextAtAllMessage                  | 创建@全体成员消息                                                    |
 | createImageMessage                      | 创建图片消息                                                 |
 | createImageMessageFromFullPath          | 创建图片消息                                                 |
+| createImageMessageByURL                 | 创建图片消息                                                 |
 | createSoundMessage                      | 创建语音消息                                                 |
 | createSoundMessageFromFullPath          | 创建语音消息                                                 |
+| createSoundMessageByURL                 | 创建语音消息                                                 |
 | createVideoMessage                      | 创建视频消息                                                 |
 | createVideoMessageFromFullPath          | 创建视频消息                                                 |
+| createVideoMessageByURL                 | 创建视频消息                                                 |
 | createFileMessage                       | 创建文件消息                                                 |
 | createFileMessageFromFullPath           | 创建文件消息                                                 |
 | createMergerMessage                     | 创建合并消息                                                 |
@@ -40,6 +45,19 @@
 | clearC2CHistoryMessageFromLocalAndSvr   | 删除本地跟服务器的单聊聊天记录                               |
 | clearGroupHistoryMessageFromLocalAndSvr | 删除本地跟服务器的群聊天记录                                 |
 | getHistoryMessageListReverse            | 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息 |
+
+
+
+#### OnAdvancedMsgListener（消息监听）
+
+| 方法                          | 描述                                   |
+| ----------------------------- | -------------------------------------- |
+| onRecvNewMessage              | 收到新消息，界面添加新消息             |
+| onRecvMessageRevoked          | 消息成功撤回，从界面移除消息           |
+| onRecvC2CReadReceipt          | 消息被阅读回执，将消息标记为已读       |
+| onRecvGroupMessageReadReceipt | 组消息已读回执，更新已读人数跟未读人数 |
+
+
 
 #### sendMessage（发送消息）
 
@@ -85,17 +103,29 @@
 
 
 
-#### getHistoryMessageList（获取聊天记录）
+#### getHistoryMessageList（常用到的获取聊天记录）
 
 ```
-        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对象的userID
-                                                    groupID:nil // 群聊的组id
+        [OIMManager.manager getHistoryMessageListWithUserId:@"OTHER_USER_ID" // 单聊对方的userID, 否则传nil
+                                                    groupID:@"GROUP_ID" // 群聊的组id, 否则为nil
                                            startClientMsgID:nil // 起始的消息clientMsgID，第一次拉取为""
                                                       count:20
                                                   onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
+        }];
+        
+        // conversationID、userID、groupID选择其一 conversationID大群必须使用
+        [OIMManager.manager getHistoryMessageList:@"CONVERSASTION_ID"
+                                           userId:@"OTHER_USER_ID"
+                                          groupID:@"GROUP_ID"
+                                 startClientMsgID:nil
+                                            count:20
+                                        onSuccess:^(NSArray<OIMMessageInfo *> * _Nullable messages) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+            
         }];
 ```
 
@@ -116,6 +146,13 @@
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
         }];
+        
+        // 支持管理员撤回消息；支持撤回tips显示在原来的位置
+        [OIMManager.manager newRevokeMessage:self.testMessage
+                                   onSuccess:^(NSString * _Nullable data) {
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+}];
 
 ```
 
@@ -155,8 +192,23 @@
 
 ```
         [OIMManager.manager markC2CMessageAsRead:@"" // 接收者 userID
-                                       msgIDList:@[] // 已读的消息id列表, 若为空数组，清空已读数
+                                       msgIDList:@[@"clientMsgID"] // 已读的消息id列表。若为空数组，则为清空未读数；若要标记全部已读，则需传入所有的clientMsgID
                                        onSuccess:^(NSString * _Nullable data) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+```
+
+
+#### markGroupMessageAsRead（标记Group消息已读）
+
+当调用此方法后，已读的消息会通过已读回执（onRecvGroupMessageReadReceipt）告诉对方。
+
+```
+        [OIMManager.manager markGroupMessageAsRead:@"" // 接收者 groupID
+                                         msgIDList:@[@"clientMsgID"] // 已读的消息id列表。若为空数组，则为清空未读数；若要标记全部已读，则需传入所有的clientMsgID
+                                         onSuccess:^(NSString * _Nullable data) {
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {
 
@@ -233,6 +285,16 @@
 
 ```
 
+#### createTextAtAllMessage（@消息）
+
+```
+        [OIMMessageInfo createTextAtAllMessage:@""    // 发送的内容
+                                   displayText:@""    // displayText 展示的内容
+                                       message:nil];  //被引用的消息体
+         
+        [OIMMessageInfo isAtAll]; // 判断是否上at全体消息
+
+```
 
 
 #### createImageMessage（图片消息，相对路径）
@@ -251,6 +313,14 @@
         [OIMMessageInfo createImageMessageFromFullPath:path];
 ```
 
+### createImageMessageByURL (图片消息 地址）
+
+```
+        OIMPictureInfo *pic = [OIMPictureInfo new];
+        pic.url = @"xxx";
+        
+        self.testMessage = [OIMMessageInfo createImageMessageByURL:pic bigPicture:pic snapshotPicture:pic];
+```
 
 
 #### createSoundMessage（语音消息，相对路径）
@@ -268,6 +338,12 @@
 ```
 
 
+#### createSoundMessageByURL (语音消息，地址）
+
+```
+        [OIMMessageInfo createSoundMessageByURL:@"xxx" duration:10 size:100]
+```
+
 
 #### createVideoMessage（视频消息，相对路径）
 
@@ -277,7 +353,7 @@
                                   duration:0 // 时长s
                               snapshotPath:path1]; // 站位缩略图
 ```
-
+createVideoMessageByURL
 
 
 #### createVideoMessageFromFullPath（视频消息全路径）
@@ -289,6 +365,12 @@
                                              snapshotPath:path1]; // 站位缩略图
 ```
 
+
+#### createVideoMessageFromFullPath（视频消息， 地址）
+
+```
+        [OIMMessageInfo createVideoMessageByURL:@"xxx" videoType:@"mp4" duration:10 size:100 snapshot:@"xxx"]
+```
 
 
 #### createFileMessage（文件消息，相对路径）
@@ -449,10 +531,10 @@
 
 
 
-#### getHistoryMessageListReverse（获取新的聊天记录）
+#### getHistoryMessageListReverse（主要用于搜索功能，获取新的聊天记录）
 
 ```
-// 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息
+        // 获取聊天记录(以startMsg为节点，新收到的聊天记录)，用在全局搜索定位某一条消息，然后此条消息后新增的消息（大于startMsg sendtime的消息）
         OIMGetMessageOptions *options = [OIMGetMessageOptions new];
         options.userID = @"";
         options.groupID = @"";

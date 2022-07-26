@@ -17,7 +17,24 @@
 | deleteFriend                 | 删除好友                                           |
 | acceptFriendApplication      | 接受好友请求                                       |
 | refuseFriendApplication      | 拒绝好友请求                                       |
-| searchUsers                  | 查好友                                             |
+| searchUsers                  | 本地搜索好友（后续会废弃）                                             |
+| searchFriends                | 本地搜索好友                                             |
+
+
+
+#### OnFriendshipListener（好友关系监听）
+
+| 方法                        | 描述                       |
+| --------------------------- | -------------------------- |
+| onFriendApplicationRejected | 发出或收到的好友申请被拒绝 |
+| onFriendApplicationDeleted  | 发出或收到的好友申请被删除 |
+| onFriendApplicationAdded    | 发出或收到的好友申请被添加 |
+| onFriendApplicationAccepted | 发出或收到的好友申请已同意 |
+| onFriendAdded               | 好友被添加                 |
+| onFriendDeleted             | 好友被删除                 |
+| onFriendInfoChanged         | 朋友的资料发生变化         |
+| onBlacklistDeleted          | 从黑名单删除               |
+| onBlacklistAdded            | 拉入黑名单                 |
 
 
 
@@ -212,7 +229,7 @@
 
 
 
-#### searchUsers（搜索好友）
+#### searchUsers（本地搜索好友）
 
 ```
         OIMSearchUserParam *t = [OIMSearchUserParam new];
@@ -220,7 +237,15 @@
         t.isSearchRemark = YES;
         t.isSearchUserID = YES;
         
+        // 这个函数将来会废弃， 用下面的
         [OIMManager.manager searchUsers:t
+                              onSuccess:^(NSArray<OIMSearchUserInfo *> * _Nullable usersInfo) {
+            
+        } onFailure:^(NSInteger code, NSString * _Nullable msg) {
+
+        }];
+        
+        [OIMManager.manager searchFriends:t
                               onSuccess:^(NSArray<OIMSearchUserInfo *> * _Nullable usersInfo) {
             
         } onFailure:^(NSInteger code, NSString * _Nullable msg) {

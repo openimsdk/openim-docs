@@ -1,88 +1,130 @@
-#### 直接下载app
+# 在线测试
+> web版本可[点击此处](http://121.37.25.71:23232)前往[在线测试](http://121.37.25.71:23232)。
 
-![Android](https://www.pgyer.com/app/qrcode/OpenIM)
+## 双击左侧标题 <u>在线化办公</u>
 
-可选择替换服务器地址为自己搭建的服务器地址，默认地址为官方服务器地址
+![image-20220705104321389](../../images/web_config_click.png)
 
-![image](../../images/flutter_service_config.gif)
+## 修改为自己服务器IP地址
 
+> 注意，此处IP必须是外网IP，若服务端部署在本地或内网环境，则无法通过此方式进行测试。
+>
+> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可。
 
-
-#### 下载源代码
-
-1. git clone https://github.com/OpenIMSDK/Open-IM-Flutter-Demo.git
-2. 可选择修改 [config.dart](https://github.com/OpenIMSDK/Open-IM-Flutter-Demo/blob/master/lib/src/common/config.dart)文件里的服务器地址为自己搭建的服务器地址
-3. 运行flutter pub get
-4. 运行flutter run
+![image-20220705103951167](../../images/web_config.png)
 
 
 
-#### 依赖说明
+# 下载测试
 
-demo里使用的ui库链接：[flutter_openim_widget ](https://github.com/hrxiang/flutter_openim_widget.git)
+## Electron应用下载
 
-demo使用的im库链接：[flutter_openim_sdk ](https://github.com/OpenIMSDK/Open-IM-SDK-Flutter.git)
+> 扫码或[点击此处](https://pan.baidu.com/share/init?surl=yDE7NlHsYQfgL6J3VtsmcA)下载，提取码:**tthq**
+
+![image](../../images/pc_qr.png)
+
+## 修改为自己服务器IP地址
+
+> 同上述在线测试步骤，打开配置页。此处IP**不限制为**外网IP，服务端部署在本地或内网环境，也可通过此方式进行测试。
+>
+> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可。
+
+![image-20220705110028721](../../images/web_config_ex.png)
 
 
 
-#### 编译常见问题
 
-##### 1，demo对应的flutter版本是？
 
-答：stable分支3.0.1
+# 下载源代码
 
-##### 2，支持哪些平台？
+## git方式下载
 
-答：因为sdk的原因demo目前只能运行在android跟ios设备上
-
-##### 3，android安装包debug可以运行但release启动白屏？
-
-答：flutter的release包默认是开启了混淆，可以使用命令：flutter build release --no -shrink，如果此命令无效可如下操作
-
-在android/build.gradle配置的release配置加入以下配置
-
-```
-release {
-    minifyEnabled false
-    useProguard false
-    shrinkResources false
-}
+```bash
+git clone https://github.com/OpenIMSDK/Open-IM-PC-Web-Demo.git
 ```
 
-##### 4，代码必须混淆怎么办？
+## 修改为自己服务器IP地址
 
-答：在混淆规则里加入以下规则
+### Web配置
 
-```
--keep class io.openim.**{*;}
--keep class open_im_sdk.**{*;}
--keep class open_im_sdk_callback.**{*;}
-```
+> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可
 
-##### 5，android安装包不能安装在模拟器上？
+![image-20220705111200505](../../images/web_config_dev.png)
 
-答：因为Demo去掉了某些cpu架构，如果你想运行在模拟器上请按以下方式：
+### Electron应用配置
 
-在android/build.gradle配置加入
+> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可
+>
+> 其中**sdkWsPort**为应用运行时在本地需要占用的端口号，若示例端口已被占用，自行修改为任一空闲端口即可。
 
-```
-ndk {
-    abiFilters "arm64-v8a", "armeabi-v7a", "armeabi", "x86", "x86_64"
-}
-```
+![image-20220705111442524](../../images/web_config_dev_ex.png)
 
-##### 6，ios构建release包报错
+## 运行项目
 
-答：请将cup架构设置为arm64，然后依次如下操作
+> **项目环境：**项目环境要求**Node版本14+**，**npm版本6+**。
 
-- flutter clean
-- flutter pub get
-- cd ios
-- pod install
-- 连接真机后运行Archive
+1. 下载依赖
 
-![ios cpu](https://user-images.githubusercontent.com/7018230/155913400-6231329a-aee9-4082-8d24-a25baad55261.png)
+   ```bash
+   npm install
+   ```
 
-##### 7，ios运行的最低版本号？
+2. 本地启动web调试
 
-答：13.0
+   ```bash
+   npm run start:renderer
+   ```
+
+3. 本地启动electron调试
+
+   ```bash
+   npm run start:main
+   ```
+
+4. 打包web资源
+
+   ```bash
+   npm run build:renderer
+   ```
+
+5. 打包electron应用
+
+   > **注意：**本命令默认同时打包win和mac下应用程序，但如果运行环境为win，则**不支持**跨端打包mac应用。
+
+   ```bash
+   npm run build:main
+   ```
+
+   
+
+
+
+# 编译常见问题
+
+1. demo运行环境要求？
+
+   答：node版本14.x+   npm版本6.x+。
+
+2. demo浏览器兼容性？
+
+   答：目前未做针对性兼容，建议使用最新版本chrome浏览器进行调试开发。
+
+3. electron依赖下载失败？
+
+   答：国内下载资源容易失败，可以设置npm代理进行加速
+
+   ```bash
+   npm config set electron_mirror https://cdn.npm.taobao.org/dist/electron/
+   ```
+
+4. 'Draggable' cannot be used as a JSX component ？
+
+   答：请将node_modules删除后使用npm拉取依赖。不要使用yarn等管理工具进行拉取。
+
+5. electron应用支持哪些平台？
+
+   答：目前已支持windows、mac，linux。
+
+6. windows平台下打包electron应用失败？
+
+   答：上述命令`npm run build:main`默认同时打包win和mac下应用程序，但如果运行环境为win，则**不支持**跨端打包mac应用。可以修改package.json中修改打包命令为`"build:main": "craco build && tsc -p electron && electron-builder --win"`，仅打包exe应用。
