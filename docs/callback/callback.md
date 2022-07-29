@@ -220,7 +220,7 @@ ActionCode和ErrCode不影响本次操作
 
 |    参数名       |   类型    | 说明                                                          | 
 | :----------:    | :------: | :----------------------------------------------------------- | 
-|    UserID       |  string  | 发送者ID                                     | 
+|    UserIDList       |  []string  | 发送者ID列表                                   | 
 | callbackCommand |  string  | 回调指令    callbackOfflinePushCommand   |
 | operationID |  string  | 本次操作ID                                      |
 | platformID |  string  | 平台ID                                      |
@@ -248,3 +248,75 @@ ActionCode和ErrCode不影响本次操作
 
 actionCode为0 才会正常接受回调响应，继续离线消息的推送。
 errCode只在服务端做log打印日志处理。
+
+
+##### 用户接受在线推送前回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+|    UserIDList       | []string  | 发送者ID列表                             | 
+| callbackCommand |  string  | 回调指令    callbackOnlinePushCommand   |
+| operationID |  string  | 本次操作ID                                      |
+| platformID |  string  | 平台ID                                      |
+| platform |  string  | 平台                                      |
+|    Title       |  string  | 推送标题                                     | 
+| desc |  string  | 推送描述                                      |
+| ex |  string  | 扩展字段                                      |
+| iOSPushSound |  string  | ios推送声音                                      |
+| iOSBadgeCount |  string  |       推送消息是否计入桌面图标未读数                              |
+| sendID |  string  |       发送id                              |
+| groupID |  string  |       群id                              |
+| contentType |  string  |       类型                              |
+| sessionType |  string  |       消息单聊群聊类型                             |
+| atUserIDList |  []string  |             atUserIDList                        |
+| content | string | 内容 |
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许在线发送  1为阻止在线消息发送|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+
+actionCode为0 才会正常接受回调响应，继续在线消息的推送。
+errCode只在服务端做log打印日志处理。
+
+##### superGroup在线推送前回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| callbackCommand |  string  | 回调指令    callbackSuperGroupOnlinePushCommand   |
+| operationID |  string  | 本次操作ID                                      |
+| platformID |  string  | 平台ID                                      |
+| platform |  string  | 平台                                      |
+|    Title       |  string  | 推送标题                                     | 
+| desc |  string  | 推送描述                                      |
+| ex |  string  | 扩展字段                                      |
+| iOSPushSound |  string  | ios推送声音                                      |
+| iOSBadgeCount |  string  |       推送消息是否计入桌面图标未读数                              |
+| sendID |  string  |       发送id                              |
+| groupID |  string  |       群id                              |
+| contentType |  string  |       类型                              |
+| sessionType |  string  |       消息单聊群聊类型                             |
+| atUserIDList |  []string  |             atUserIDList                        |
+| content | string | 内容 |
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许在线发送  1为阻止在线消息发送|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+|userIDList  | []string | 要推送的用户列表 |
+
+actionCode为0 才会正常接受回调响应，继续在线消息的推送。
+errCode只在服务端做log打印日志处理。
+
+响应的userIDList推送的用户ID列表
+actionCode和errCode都为0以及userIDList不为空才会正常在线推送userIDList, 如果userIDList为空且actionCode为0会正常使用openIM的数据库群成员进行推送
