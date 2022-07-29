@@ -245,9 +245,14 @@ ActionCode和ErrCode不影响本次操作
 |  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
 |  errMsg         |  string |           错误信息               |
 | operationID     | string      |     本次操作ID       |
+|    UserIDList       |  []string  | 需要离线推送的用户ID列表              | 
+
 
 actionCode为0 才会正常接受回调响应，继续离线消息的推送。
 errCode只在服务端做log打印日志处理。
+
+响应的userIDList为离线推送的用户ID列表
+actionCode和errCode都为0以及userIDList不为空才会正常离线推送响应的userIDList, 如果userIDList为空且actionCode为0会正常以请求的UserIDList进行离线推送
 
 
 ##### 用户接受在线推送前回调
@@ -313,7 +318,10 @@ errCode只在服务端做log打印日志处理。
 |  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
 |  errMsg         |  string |           错误信息               |
 | operationID     | string      |     本次操作ID       |
-|userIDList  | []string | 要推送的用户列表 |
+|userIDList  | []string | 要推送的用户列表 | 
+响应的userIDList推送的用户ID列表
+actionCode和errCode都为0以及userIDList不为空才会正常在线推送userIDList, 如果userIDList为空且actionCode为0会正常使用openIM的数据库群成员进行推送
+
 
 actionCode为0 才会正常接受回调响应，继续在线消息的推送。
 errCode只在服务端做log打印日志处理。
