@@ -2,6 +2,7 @@
 * **OpenIM介绍**
   * [产品简介](introduce/production_introduce.md)
   * [关于我们](introduce/about.md)
+  * [收费服务](charge/charge.md)
 * **版本发布**
   - [版本管理](version/description.md)
   - **历史版本**
@@ -18,6 +19,7 @@
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
   * [k8s部署](demo/server_deploy/k8s.md)
+  * [windows部署](demo/server_deploy/windows.md)
   * [配置文件说明](v2/server_deploy/config.md)
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
@@ -37,6 +39,7 @@
   * [组织架构](flutter_v2/sdk_integrate/organization.md)
   * [工作圈/朋友圈](flutter_v2/sdk_integrate/moments.md)
   * [常用结构体](flutter_v2/sdk_integrate/struct.md)
+  * [工作台JS调用](flutter_v2/sdk_integrate/workbench_js.md)
   * [常见问题](flutter_v2/sdk_integrate/faq.md)
 * **集成iOS SDK**
   * [Demo下载](ios_v2/sdk_integrate/development.md)
@@ -91,7 +94,7 @@
   * [会话](js_v2/sdk_integrate/conversation.md)
   * [信令](js_v2/sdk_integrate/signaling.md)
   * [组织架构](js_v2/sdk_integrate/organization.md)
-  * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md)
+  <!-- * [工作圈/朋友圈](js_v2/sdk_integrate/moments.md) -->
   * [常用结构体](js_v2/sdk_integrate/struct.md)
   * [常见问题](js_v2/sdk_integrate/faq.md)
 * **服务端api**
@@ -131,7 +134,7 @@
   * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
   * [一分钟跑通Demo(uni_app)](demo/run_demo_uni.md)
   * [一分钟跑通Demo(Web)](demo/web_demo.md)
-  * [收费服务](charge/charge.md)
+
 * SDK集成(逐步废弃)
   * SDK下载
     * [SDK下载(flutter)](integrate/flutter/integrate_download_flutter.md)

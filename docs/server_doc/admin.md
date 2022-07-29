@@ -1070,7 +1070,7 @@ APP管理员更新用户信息
 | senderNickname      | string | 是    | 发送者昵称，用于客户端通知会话产生 |
 |    content          |  object|  是  | 消息的具体内容，内部是json 对象|
 | notificationName    | string | 是     | 通知标题                                                     |
-| notificationFaceURL | string | 是     | 通知头像                                                     |
+| notificationFaceURL | string | 否     | 通知头像                                                     |
 | notificationType    | int    | 是     | 通知类型，如：1代表入职通知，2代表离职通知                   |
 | text                | string | 是     | 通知正文e                                                    |
 | externalUrl       | string | 否    | 通知点击后需要跳转到的地址链接(不填则无需跳转)               |

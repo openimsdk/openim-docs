@@ -34,7 +34,9 @@ Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天�
     
 6. 体验自己的服务器
  
-    如果自己搭建了OpenIM Server，可修改 [AppDelegate.swift](https://github.com/OpenIMSDK/Open-IM-iOS-Demo/blob/main/Example/OpenIMSDKUIKit/AppDelegate.swift)文件里的服务器地址为自己搭建的服务器地址
+    6.1 如果自己搭建了OpenIM Server，可修改 AppDelegate.swift文件里的服务器地址为自己搭建的服务器地址；
+
+    6.2 从testflight下载app以后，点击【登录】页的“欢迎使用OpenIM”进入设置页，进行相关设置，保存成功重启后即可使用。
     
 ### Demo主要实现步骤介绍
 
@@ -45,41 +47,59 @@ Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天�
 1. 举例
     ```ruby
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // 自己业务服务器的地址，demo中负责业务服务器的登录操作
-        DemoPlugin.shared.setup(baseUrl: "http://xxxx:10004/")
         // IM服务器的地址，OpenIM SDK使用
         IMController.shared.setup(apiAdrr: "http://xxxx:10002",
-                                  wsAddr: "ws://xxxx:10001")
+                                  wsAddr: "ws://xxxx:10001",
+                                  os: "xxx")
     }
     ```
 
 步骤二：登录
 1. 登录自己的业务服务器，获取userID 和 token；
-2. 使用1.获取userID 和 token 登录OpenIM服务器；
+2. 使用1.获取userID 和 token 登录IM服务器；
 3. 举例：
     ```ruby
     // 1: 登录自己的业务服务器，获取userID 和 token；
-    LoginAPI.init(req: .init(phoneNumber: "", pwd: "")).send()
-        .subscribe(onNext: { (api: LoginAPI) in
-            guard let resp = api.response else { return }
+    
+    // 业务服务器地址 Pages/LoginViewModel.swift
+    let API_BASE_URL = "http://xxx:10004/";
 
-            // 2: 登录OpenIM服务器；
-            self?.loginIM(uid: resp.data.userID, token: resp.data.token, completion: { [weak controller] in
-                controller?.dismiss(animated: true)
-            })
-        }, onError: { err in
-
-        }).disposed(by: sself._disposeBag)
+    static func loginDemo(phone: String, pwd: String, completionHandler: @escaping ((_ errMsg: String?) -> Void)) {
+        let body = JsonTool.toJson(fromObject: Request.init(phoneNumber: phone, pwd: pwd)).data(using: .utf8)
+        
+        var req = try! URLRequest.init(url: API_BASE_URL + LoginAPI, method: .post)
+        req.httpBody = body
+        
+        Alamofire.request(req).responseString { (response: DataResponse<String>) in
+            switch response.result {
+            case .success(let result):
+                if let res = JsonTool.fromJson(result, toClass: Response.self) {
+                    if res.errCode == 0 {
+                        completionHandler(nil)
+                        // 登录IM服务器
+                        loginIM(uid: res.data.userID, token: res.data.token, completionHandler: completionHandler)
+                    } else {
+                        completionHandler(res.errMsg)
+                    }
+                } else {
+                    let err = JsonTool.fromJson(result, toClass: DemoError.self)
+                    completionHandler(err?.errMsg)
+                }
+            case .failure(let err):
+                completionHandler(err.localizedDescription)
+            }
+        }
+    }
     ```
         
     ```ruby
-    func loginIM(uid: String, token: String, completion: (() -> Void)?) {
-        IMController.shared.login(uid: uid, token: token) { [weak self] (resp: String?) in
-
+    static func loginIM(uid: String, token: String, completionHandler: @escaping ((_ errMsg: String?) -> Void)) {
+        IMController.shared.login(uid: uid, token: token) { resp in
             print("login onSuccess \(String(describing: resp))")
-            completion?()
+            completionHandler(nil)
         } onFail: { (code: Int, msg: String?) in
-            print("login onFail: code \(code), reason \(String(describing: msg))")
+            let reason = "login onFail: code \(code), reason \(String(describing: msg))"
+            completionHandler(reason)
         }
     }
     ```

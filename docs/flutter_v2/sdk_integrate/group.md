@@ -26,6 +26,7 @@
 | searchGroups                 | 查询群                                   |
 | setGroupMemberRoleLevel      | 设置群成员权限                           |
 | getGroupMemberListByJoinTime | 根据加入时间分页获取组成员列表           |
+| setGroupVerification         | 进群验证设置                             |
 
 
 
@@ -370,6 +371,17 @@ var list = await OpenIM.iMManager.groupManager.getGroupMemberListByJoinTime(
   offset: 0,
   count: 40,
   excludeUserIDList: [...hasReadIDList, OpenIM.iMManager.uid],// 排除的人员
+);
+```
+
+
+
+#### setGroupVerification（进群验证）
+
+```
+OpenIM.iMManager.groupManager.setGroupVerification(
+  groupID: '', // 组id
+  needVerification: 0, // 进群验证选项，参考GroupVerification类
 );
 ```
 
