@@ -954,7 +954,7 @@ APP管理员更新用户信息
 }
   ```
 
-## 管理员撤销群聊消息
+## 管理员撤销普通群或超大群聊消息
 
 ### **简要描述**
 注:撤回消息类型分为111（简单的撤回功能，不具备群主与管理员撤回消息的能力）,118为新的撤回消息类型，拥有更加强大的撤回功能。
@@ -977,8 +977,8 @@ APP管理员更新用户信息
       "groupID": "413dcd143622d1a91a8afd4987cff651",
       "senderPlatformID": 2, 
       "content": {
-      “revokerID”:"",
-      "revokerRole":1,
+      “revokerID”:"",//撤回者ID，管理员ID
+      "revokerRole":1,//撤回者角色，1为系统管理员，2、群主，3、群管理员
       "clientMsgID":"",
       "revokerNickname":"",
       "sessionType":3
