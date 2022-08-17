@@ -954,6 +954,61 @@ APP管理员更新用户信息
 }
   ```
 
+## 管理员撤销群聊消息
+
+### **简要描述**
+注:撤回消息类型分为111（简单的撤回功能，不具备群主与管理员撤回消息的能力）,118为新的撤回消息类型，拥有更加强大的撤回功能。
+
+### **请求URL**
+
+
+ - `http://x.x.x.x:10000/msg/manage_send_msg`
+
+
+### **请求方式**
+
+
+ - `POST`
+
+### **请求示例**
+    {
+      "operationID": "revoke op", 
+      "sendID": "17396220460", 
+      "groupID": "413dcd143622d1a91a8afd4987cff651",
+      "senderPlatformID": 2, 
+      "content": {
+      “revokerID”:"",
+      "revokerRole":1,
+      "clientMsgID":"",
+      "revokerNickname":"",
+      "sessionType":3
+      },
+      "contentType": 118, 
+      "sessionType": 3, 
+      "isOnlineOnly": false, 
+      "offlinePushInfo": {
+          "title": "admin revoke your message", 
+          "desc": "", 
+          "ex": "", 
+          "iOSPushSound": "default", 
+          "iOSBadgeCount": false
+      },
+      "notOfflinePush":false
+    }
+
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+        "serverMsgID": "", 
+        "clientMsgID": "", 
+        "sendTime": 1645697804432
+    }
+}
+  ```
 
 
 ## 管理员发送通知类型消息
@@ -1180,7 +1235,7 @@ APP管理员更新用户信息
         "FailedIDList": []
     }
 }
-```
+  ```
 
 ## 消息类型格式描述
 
