@@ -91,3 +91,22 @@ runtime.goexit()
 
 使用docker版本为20.10.14, docker-compose版本为1.24.1
 
+# platform is not same to token platform
+
+在登录时返回这个错误，表示获取token的platformID和初始化时的platformID不一致
+
+ Open_IM/pkg/common/token_verify.WsVerifyToken()@279:  platform is not same to token platform args: token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVSUQiOiIzMDY0ODMzNTgzIiwiUGxhdGZvcm0iOiJBbmRyb2lkIiwiZXhwIjoxOTcyOTA0MDk5LCJuYmYiOjE2NTc1NDQwOTksImlhdCI6MTY1NzU0NDA5OX0.W0vISNx9pmJD6UMwGDEW1gigU8QywUxpjexfuSSq0Mk
+ operationID: 1657544102328748318 userID: 3064833583 platformID: IOS claims platformID: Android: different platformID operationID 1657544102328748318websocket: bad handshake 707
+
+比如这个表示用Platform为2（Android）获取token，但初始化Platform为1（IOS ）
+
+# uid is not same to token uid
+
+在登录时返回这个错误，表示获取token的userID和登录时的userID不一致
+
+Open_IM/pkg/common/token_verify.WsVerifyToken()@275:  uid is not same to token uid
+ args: token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVSUQiOiIxMTg3MzM2ODUzIiwiUGxhdGZvcm0iOiJJT1MiLCJleHAiOjE5NzI5MDU1MDksIm5iZiI6MTY1NzU0NTUwOSwiaWF0IjoxNjU3NTQ1NTA5fQ.K3BhR8RNwgKR2kgivcBkjByn79Xi4rinIzB5oYyLbCQ operationID: 
+1657545511742178518 userID: 3064833583 platformID: IOS claims.UID: 1187336853: different userID operationID 1657545511742178518websocket: bad handshake 708
+
+比如这个表示用1187336853获取token，但登录的userID为3064833583 
+

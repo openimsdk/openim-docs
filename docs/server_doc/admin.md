@@ -954,6 +954,61 @@ APP管理员更新用户信息
 }
   ```
 
+## 管理员撤销普通群或超大群聊消息
+
+### **简要描述**
+注:撤回消息类型分为111（简单的撤回功能，不具备群主与管理员撤回消息的能力）,118为新的撤回消息类型，拥有更加强大的撤回功能。
+
+### **请求URL**
+
+
+ - `http://x.x.x.x:10000/msg/manage_send_msg`
+
+
+### **请求方式**
+
+
+ - `POST`
+
+### **请求示例**
+    {
+      "operationID": "revoke op", 
+      "sendID": "17396220460", 
+      "groupID": "413dcd143622d1a91a8afd4987cff651",
+      "senderPlatformID": 2, 
+      "content": {
+      “revokerID”:"",//撤回者ID，管理员ID
+      "revokerRole":1,//撤回者角色，1为系统管理员，2、群主，3、群管理员
+      "clientMsgID":"",
+      "revokerNickname":"",
+      "sessionType":3
+      },
+      "contentType": 118, 
+      "sessionType": 3, 
+      "isOnlineOnly": false, 
+      "offlinePushInfo": {
+          "title": "admin revoke your message", 
+          "desc": "", 
+          "ex": "", 
+          "iOSPushSound": "default", 
+          "iOSBadgeCount": false
+      },
+      "notOfflinePush":false
+    }
+
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+        "serverMsgID": "", 
+        "clientMsgID": "", 
+        "sendTime": 1645697804432
+    }
+}
+  ```
 
 
 ## 管理员发送通知类型消息
@@ -1070,7 +1125,7 @@ APP管理员更新用户信息
 | senderNickname      | string | 是    | 发送者昵称，用于客户端通知会话产生 |
 |    content          |  object|  是  | 消息的具体内容，内部是json 对象|
 | notificationName    | string | 是     | 通知标题                                                     |
-| notificationFaceURL | string | 是     | 通知头像                                                     |
+| notificationFaceURL | string | 否     | 通知头像                                                     |
 | notificationType    | int    | 是     | 通知类型，如：1代表入职通知，2代表离职通知                   |
 | text                | string | 是     | 通知正文e                                                    |
 | externalUrl       | string | 否    | 通知点击后需要跳转到的地址链接(不填则无需跳转)               |
@@ -1150,7 +1205,7 @@ APP管理员更新用户信息
   "sessionType": 1, 
   "isOnlineOnly": false, 
   "offlinePushInfo": {
-      "title": "admin revoke your message", 
+      "title": "xxxxz", 
       "desc": "", 
       "ex": "", 
       "iOSPushSound": "default", 
@@ -1182,6 +1237,64 @@ APP管理员更新用户信息
 }
 ```
 
+
+
+ - 管理员通过后台接口批量发送119 120自定义消息类型
+
+### **请求URL**
+ - `http://x.x.x.x:10000/manager/batch_send_msg`
+
+### **请求方式**
+
+ - `POST`
+### **请求示例**
+```
+{
+  "operationID": "revoke op1", 
+  "sendID": "openIMAdmin", 
+  "recvIDList": ["17711111111","17726378428"],
+  "senderPlatformID": 2, 
+  "content": {
+      "data": "", 
+      "description": "", 
+      "extension": ""
+  },
+  "contentType": 119, 
+  "sessionType": 1, 
+  "isOnlineOnly": false, 
+  "offlinePushInfo": {
+      "title": "admin revoke your message", 
+      "desc": "", 
+      "ex": "", 
+      "iOSPushSound": "default", 
+      "iOSBadgeCount": false
+  }
+}
+```
+### **返回示例**
+
+  ```json
+{
+    "errCode": 0, 
+    "errMsg": "", 
+    "data": {
+       "resultList": [
+                   {
+                       "serverMsgID": "35aeef2e8525b48b34969af7ec518be7",
+                       "clientMsgID": "cc7a2617d1b07f8c1bd5c265f5b2618a",
+                       "sendTime": 1653636382846
+                   },
+                   {
+                       "serverMsgID": "52c8b16d9c2158a474959de47b983bff",
+                       "clientMsgID": "4c27dcfdcbfed8ee871a1b0e08e4dce0",
+                       "sendTime": 1653636382850
+                   }
+               ],
+        "FailedIDList": []
+    }
+}
+  ```
+
 ## 消息类型格式描述
 
 ### **简要描述**
@@ -1205,6 +1318,8 @@ APP管理员更新用户信息
 |      111      | 撤回类型消息      |
 |      112      | 已读回执类型消息  |
 |      114      | 引用类型消息      |
+|       119     | 自定义消息不触发会话           |
+|      120      |       自定义消息不触发会话            |
 
 
 
