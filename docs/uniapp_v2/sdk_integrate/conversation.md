@@ -234,14 +234,14 @@
 
 
 
-## markNotifyMessageHasRead
+## markConversationHasRead
 
 > 置零系统通知会话未读数。
 
 - Example:
 
   ```js
-  openIM.markNotifyMessageHasRead(operationID,conversationID,({data}) => {
+  openIM.markConversationHasRead(operationID,conversationID,({data}) => {
   	...
   })
   ```

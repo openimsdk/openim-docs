@@ -5,7 +5,9 @@
 | 方法                                    | 描述                             |
 | --------------------------------------- | -------------------------------- |
 | getHistoryMessageList                   | 获取聊天记录                     |
+| getAdvancedHistoryMessageList           | 获取聊天记录(适用于大群)         |
 | revokeMessage                           | 撤回某条消息                     |
+| newRevokeMessage                        | 撤回某条消息(支持管理员撤回)     |
 | deleteMessageFromLocalStorage           | 从本地删除某条消息               |
 | deleteMessageFromLocalAndSvr            | 从本地和服务器删除某条消息       |
 | insertSingleMessageToLocalStorage       | 插入一条单聊消息到本地           |
@@ -44,6 +46,8 @@
 
 
 
+
+
 ## getHistoryMessageList
 
 > 分页拉取单聊或群聊的历史消息。该API会拉取发送时间在`startClientMsgID`对应消息发送时间之前的消息。
@@ -55,7 +59,8 @@
     groupID:"",
     startClientMsgID:"",
     count:12,
-    userID:"userID"
+    userID:"userID",
+    conversationID:"",
   }
   openIM.getHistoryMessageList(operationID,options,({ data })=>{
     ...
@@ -66,16 +71,59 @@
 
   | Name             | Type   | Required | Description                                                  |
   | ---------------- | ------ | -------- | ------------------------------------------------------------ |
-  | groupID          | string | true     | 群聊ID，拉取群聊时传入，否则为“”                             |
+  | groupID          | string | false    | 群聊ID，拉取群聊时传入，否则为“”                             |
   | startClientMsgID | string | true     | 上一次拉取的最后一条消息ID或空字符串,为空字符则从最新一条开始 |
   | count            | number | true     | 每次拉取的条数                                               |
-  | userID           | string | true     | 用户ID，拉取单聊时传入，否则为“”                             |
+  | userID           | string | false    | 用户ID，拉取单聊时传入，否则为“”                             |
+  | conversationID   | string | false    | 会话ID,传入该参数时可以不用传 userID/groupID                 |
 
 - CallBack:
 
   | Name | Type   | Description                    |
   | ---- | ------ | ------------------------------ |
   | data | string | 历史[消息对象]()数组json字符串 |
+
+
+
+
+## getAdvancedHistoryMessageList
+
+> 分页拉取单聊或群聊的历史消息。**大群必须使用该API拉取消息**
+
+- Example:
+
+  ```js
+  const options = {
+    userID: "",
+    groupID: "",
+    count: 20,
+    startClientMsgID: "",
+    conversationID:"",
+    lastMinSeq: 0
+  }
+  openIM.getAdvancedHistoryMessageList(operationID,options,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name             | Type   | Required | Description                                                  |
+  | ---------------- | ------ | -------- | ------------------------------------------------------------ |
+  | groupID          | string | false    | 群聊ID，拉取群聊时传入，否则为“”                             |
+  | startClientMsgID | string | false    | 上一次拉取的最后一条消息ID或空字符串,为空字符则从最新一条开始,传lastMinSeq时可不传 |
+  | count            | number | true     | 每次拉取的条数                                               |
+  | userID           | string | false    | 用户ID，拉取单聊时传入，否则为“”                             |
+  | conversationID   | string | false    | 会话ID,传入该参数时可以不用传 userID/groupID                 |
+  | lastMinSeq       | number | true     | 上一次拉取消息中的最小seq,为0时从最新一条开始拉取            |
+
+- CallBack:
+
+  | Name              | Type    | Description                      |
+  | ----------------- | ------- | -------------------------------- |
+  | data->messageList | array   | 历史[消息对象]()数组             |
+  | data->lastMinSeq  | number  | 本次拉取最小seq                  |
+  | data->isEnd       | boolean | 是否拉取完所有消息(仅适用于大群) |
 
   
 
@@ -102,6 +150,34 @@
   | Name | Type   | Description        |
   | ---- | ------ | ------------------ |
   | data | string | 撤回成功或失败描述 |
+
+
+
+## newRevokeMessage
+
+> 撤回某条消息。**支持管理员撤回**
+
+- Example:
+
+  ```js
+  openIM.newRevokeMessage(operationID,message,({ data })=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name    | Type        | Description        |
+  | ------- | ----------- | ------------------ |
+  | message | MessageItem | 要撤回的消息结构体 |
+
+- CallBack:
+
+  | Name | Type   | Description        |
+  | ---- | ------ | ------------------ |
+  | data | string | 撤回成功或失败描述 |
+
+
 
 
 
@@ -1079,6 +1155,7 @@
 | ----------------------------- | -------------------------------------- | ---------------------- |
 | onRecvNewMessage              | 收到新消息                             | 新消息结构体json字符串 |
 | onRecvNewMessages             | 收到新消息（开启批量推送时）           | 新消息数组json字符串   |
-| onRecvMessageRevoked          | 有消息被撤回                           | 被撤回的消息ID         |
+| onRecvMessageRevoked          | 有消息被撤回(通过revokeMessage触发)    | 被撤回的消息ID         |
+| onNewRecvMessageRevoked       | 有消息被撤回(通过newRevokeMessage触发) | 被撤回的消息描述       |
 | onRecvC2CReadReceipt          | 收到单聊已读回执，即有人读了发出的消息 | 消息ID列表             |
 | onRecvGroupMessageReadReceipt | 收到群聊已读回执，即有人读了发出的消息 | 消息ID列表             |
