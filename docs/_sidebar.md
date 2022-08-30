@@ -117,6 +117,7 @@
   * [客户端架构](framework/client_framework.md)
   * [APP与OpenIM的关系](framework/relationship.md)
 * **测试报告**
+  * [测试程序介绍](test_report/press_code.md)
   * [消息可达性](test_report/accuracy.md)
 * [管理后台](admin/admin.md)
 * [实时音视频](rtc/rtc.md)
