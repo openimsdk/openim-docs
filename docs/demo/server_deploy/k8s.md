@@ -41,6 +41,10 @@
    创建资源清单时添加上nodeSelector属性对应即可,
    修改每种服务数量，建议至少每种2个rpc。
    如果修改了config/config.yaml某些配置比如端口，同时需要修改对应deployment端口和ingress端口
+   注意sdk-server的deployment文件启动参数需要指定IM的openIM_msg_gateway_address和openIM_api的地址
+   openIM_ws_address即msg-gateway的最终地址
+   openIM_api_address即openIM api的最终地址, 需要保证sdk server能够请求到。
+  
 
 
 ### 4. 修改ingress.yaml配置文件
