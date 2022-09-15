@@ -29,11 +29,11 @@ minio: #MinIO 发送图片、视频、文件时需要，请自行申请后替换
  docker-compose up -d;cd script ; ./docker_check_service.sh
 ```
 
-（3）开放端口
+## （3）开放端口
 
 [OpenIM开放端口说明](https://doc.rentsoft.cn/#/v2/server_deploy/docker_singe?id=_5im%e5%bc%80%e6%94%be%e7%ab%af%e5%8f%a3)
 
-（4）修改ip
+## （4）客户端修改ip
 
 [app验证](https://doc.rentsoft.cn/#/v2/validation/app)
 
