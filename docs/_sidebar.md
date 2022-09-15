@@ -16,9 +16,9 @@
   - [源码单机部署](v2/server_deploy/code_singe.md)
   - [源码集群部署](v2/server_deploy/code_singe_cluster.md)
   - [k8s集群部署](v2/server_deploy/k8s.md)
-  - [常见问题](v2/server_deploy/faq.md)
+  - [配置说明](v2/server_deploy/config.md)
   - [组件部署](v2/server_deploy/component.md)
-  - [配置说明](v2/server_deploy/config.md) 
+  - [常见问题](v2/server_deploy/faq.md)
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
