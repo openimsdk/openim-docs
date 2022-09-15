@@ -57,6 +57,7 @@ cd script ; ./docker_check_service.sh
 | TCP:10004（之前的42233端口）| demo使用的用户注册登录端口。            | 端口放行或nginx反向代理，关闭防火墙 |
 | TCP:10005（之前的9000端口）| 选择minio存储时需要开通。(openIM的demo默认使用minio存储) | 端口放行或nginx反向代理，关闭防火墙 |
 | TCP:10006（之前的8000端口）| 管理后台api端口，需要管理后台服务时开通。 | 端口放行或nginx反向代理，关闭防火墙 |
+| TCP:10007 | 数据统计端口 | 端口放行或nginx反向代理，关闭防火墙 |
 
 注：如果使用nginx做反向代理，则只需要开放443端口即可。至此openIM的服务器已经搭建完毕，可通过[下载体验app修改IP](https://doc.rentsoft.cn/#/v2/validation/app)的方式访问验证。
 
