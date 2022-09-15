@@ -23,6 +23,7 @@
 | kafka     | 建议三台，可复用。以2台8核16G IM Server为例说明topic分区设置，"ws2ms_chat"  8分区，"msg_to_mongo" 8分区，"ms2ps_chat" 10分区 | 3.2.0 |待更新|
 | mongo     | 建议2台以上，可复用。每个cache限制0.5G；多个数据分片副本集，1个mongos副本集，1个config副本集 | 5.0   |待更新|
 | redis     | 建议2台以上，可复用。每个内存限制10G， 淘汰策略volatile-ttl  | 6.2.5 |[redis集群部署文档](https://blog.csdn.net/programor_guo/article/details/126794745?spm=1001.2014.3001.5502)|
+| MinIO | 建议2台以上，可复用 |  |[](./minio.md)|
 
 
 
@@ -390,7 +391,6 @@ server {
 }
 
 ```
-
 
 
 
