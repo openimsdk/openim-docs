@@ -28,7 +28,7 @@
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
 * **快速验证**
-  * [流程](v2/validation/all.md) 
+  * [验证流程](v2/validation/all.md) 
   * [app](v2/validation/app.md)
   * [pc web](v2/validation/pc-web.md)
 * **集成Flutter SDK**
