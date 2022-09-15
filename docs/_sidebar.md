@@ -12,8 +12,10 @@
 * **以下是新文档模板-待补充**
   * [体验OpenIM](v2/demo/download_demo.md)
 * **服务端部署**
-  * [docker部署](v2/server_deploy/docker_singe.md)
-  * [常见问题](v2/server_deploy/faq.md)
+  - [docker部署](v2/server_deploy/docker_singe.md)
+  - [源码部署](v2/server_deploy/code_singe.md)
+  - [集群部署](v2/server_deploy/code_singe_cluster.md)
+  - [常见问题](v2/server_deploy/faq.md)
   * [minio部署](qa/minio.md)
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
