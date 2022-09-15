@@ -1,5 +1,3 @@
-# 快速体验
-
 ## （1）安装golang/docker-compose/git
 
 [](https://doc.rentsoft.cn/#/component/docker)
