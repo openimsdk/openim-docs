@@ -13,10 +13,12 @@
   * [体验OpenIM](v2/demo/download_demo.md)
 * **服务端部署**
   - [docker部署](v2/server_deploy/docker_singe.md)
-  - [源码部署](v2/server_deploy/code_singe.md)
-  - [集群部署](v2/server_deploy/code_singe_cluster.md)
+  - [源码单机部署](v2/server_deploy/code_singe.md)
+  - [源码集群部署](v2/server_deploy/code_singe_cluster.md)
+  - [k8s集群部署](v2/server_deploy/k8s.md)
   - [常见问题](v2/server_deploy/faq.md)
-  * [minio部署](qa/minio.md)
+  - [组件部署](v2/server_deploy/component.md)
+  - [配置说明](v2/server_deploy/config.md) 
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
