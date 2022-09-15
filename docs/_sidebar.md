@@ -127,10 +127,9 @@
 * [管理后台](admin/admin.md)
 * [实时音视频](rtc/rtc.md)
 * [原创技术文章](artice/actice.md)
-* **常见问题**
-  * [docker及golang安装](qa/docker.md)
-  * [minio部署](qa/minio.md)
-  * [docker部署常见问题](qa/docker_deploy.md)
+* **组件部署**
+  * [docker及golang安装](component/docker.md)
+  * [minio部署](component/minio.md)
 * 服务端部署(逐步废弃)
   * [docker部署](demo/server_deploy/docker_singe.md)
   * [源码部署](demo/server_deploy/code_singe.md)
