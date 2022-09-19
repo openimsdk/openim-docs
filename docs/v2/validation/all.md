@@ -1,6 +1,6 @@
 ## （1）安装golang/docker-compose/git
 
-[](https://doc.rentsoft.cn/#/component/docker)
+[golang/docker/docker-compose安装参考](https://doc.rentsoft.cn/#/component/docker)
 
 注意：建议使用docker版本为20.10.14, docker-compose版本为1.24.1
 
