@@ -15,9 +15,9 @@
 （二）调整path_info.cfg中msg_transfer_service_num=4
 
 （三）kafka分区调整
-（1）设置ws2ms_chat为8个分区 msg_transfer_service_num的2倍
-（2）设置msg_to_mongo为8个分区 msg_transfer_service_num的2倍
-（3）设置ms2ps_chat为8个分区 openImMessagePort的2倍
+（1）设置ws2ms_chat分区数是msg_transfer_service_num（所有机器总数）的1/2
+（2）设置msg_to_mongo分区数是 msg_transfer_service_num（所有机器总数）的1/2
+（3）设置ms2ps_chat分区数是openImPushPort（所有机器总数）的1/2
 
 （四）mysql服务端设置最大连接数为2000
 
