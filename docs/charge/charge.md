@@ -26,9 +26,9 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 | h5                    | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
 | 后台管理                           | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
 | 音视频通话sdk、基于SFU的服务端             | 服务端闭源                                                                                    | 3万/套，客户端100%开源，可以基于此二次开发 |
-| 历史消息整理、数据迁移扩容、故障恢复工具                   |  [GPL-3.0 License]                                                                                   | 5000元/套，100%开源           |
-| 消息存储支持国密算法                   | [GPL-3.0 License]                                                                                    | 1万/套 ，100%开源             |
-| 音视频信令服务 | 服务端闭源 | 5000元/套                  |
+| 业务服务端（比如短信验证码 邀请码机制 默认好友 默认群组等） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发 |
+| 消息存储支持国密/AES算法               | [GPL-3.0 License]                                                                                    | 1万/套 ，100%开源             |
+| 音视频信令服务 | 服务端闭源 | 1万元/套                 |
 | 自启动保活 | 客户端闭源 | 1万元/套                    |
 
 商业版本是OpenIM技术团队在100%开源的OpenIM服务端和IMSDK基础上，开发带有UI功能完整的IM产品。可以直接部署运营，也可以在此基础上二次开发。商业版本必须要授权，否则发起诉讼，向侵权者索赔。
