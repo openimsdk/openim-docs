@@ -1,5 +1,5 @@
 # 在线测试
-> web版本可[点击此处](http://121.37.25.71:23232)前往[在线测试](http://121.37.25.71:23232)。
+> web版本可[点击此处](http://121.5.182.23:23232)前往[在线测试](http://121.5.182.23:23232)。
 
 ## 双击左侧标题 <u>在线化办公</u>
 
@@ -19,9 +19,10 @@
 
 ## Electron应用下载
 
-> 扫码或[点击此处](https://pan.baidu.com/share/init?surl=yDE7NlHsYQfgL6J3VtsmcA)下载，提取码:**tthq**
+> 扫码或点击此处下载[window](https://qr02.cn/A82arJ)、[mac](https://qr02.cn/AeCvPV)，[更多前往](http://localhost:3000/#/demo/download_demo)
 
-![image](../../images/pc_qr.png)
+![image](../../images/electron_win.png)
+![image](../../images/electron_mac.png)
 
 ## 修改为自己服务器IP地址
 
