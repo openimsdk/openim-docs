@@ -2,7 +2,7 @@
 
 ## 1.获取npm包
 
-- [npm包主页](https://www.npmjs.com/package/open-im-sdk-wasm-webpack5)
+- [npm包主页](https://www.npmjs.com/package/open-im-sdk-wasm)
 
   ```bash
   npm install open-im-sdk-wasm
