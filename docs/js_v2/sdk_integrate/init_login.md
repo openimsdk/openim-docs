@@ -7,7 +7,7 @@
 | getLoginStatus | 获取登录状态       |
 | getLoginUser   | 获取当前登录用户ID |
 
-## login
+## login(老版本)
 
 > 初始化并登录IM，使用用户ID(userID)和token登录，userID来自于自身业务服务器，token需要业务服务器根据secret向OpenIM服务端交换获取。url为OpenIM Server部署服务器的web server websocket地址。<br/>**注意1：**JSSDK ws连接端口为10003端口，与其他端SDK不同，请勿混淆。<br/>**注意2：**必须确保登录成功回调到达后才能调用其他API。
 
@@ -15,7 +15,7 @@
 const config: InitConfig = {
   userID: "userID",								// 用户ID
   token: "token",									// 用户token
-  url: "ws://121.37.25.71:10003",	// jssdk server ws地址
+  url: "ws://121.5.182.23:10003",	// jssdk server ws地址
   platformID: 5,									// 平台号
 };
 openIM.login(config).then(res => {
@@ -24,6 +24,31 @@ openIM.login(config).then(res => {
   console.log("login failed...");
 })
 ```
+
+
+
+## login(新版本)
+
+> 初始化并登录IM，使用用户ID(userID)和token登录，userID来自于自身业务服务器，token需要业务服务器根据secret向OpenIM服务端交换获取<br/>**注意：**此处的`wsAddress`与移动端一致，为`10001`端口。与老版本JSSDK不同。
+
+```typescript
+const config: InitConfig = {
+  userID: "userID",
+  token: "token",
+  apiAddress: "http://121.5.182.23:10002",
+  wsAddress: "ws://121.5.182.23:10001",
+  platformID: 5,								// 平台号
+};
+openIM.login(config).then(res => {
+  console.log("login suc...");
+}).catch(err => {
+  console.log("login failed...");
+})
+```
+
+## 
+
+
 
 ## logout
 

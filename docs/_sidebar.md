@@ -86,6 +86,7 @@
 * **集成JS SDK**
   * [Demo下载](js_v2/sdk_integrate/development.md)
   * [SDK使用步骤](js_v2/sdk_integrate/sdk_use.md)
+  * [SDK使用步骤（wasm）](js_v2/sdk_integrate/sdk_use_wasm.md)
   * [初始化及登录](js_v2/sdk_integrate/init_login.md)
   * [群组](js_v2/sdk_integrate/group.md)
   * [好友](js_v2/sdk_integrate/friend.md)
