@@ -30,6 +30,7 @@
 | createFaceMessage                       | 创建自定义表情消息               |
 | sendMessage                             | 发送消息                         |
 | sendMessageNotOss                       | 发送需要需要自行上传的文件类消息 |
+| sendMessageByBuffer                     | 通过SDK上传文件类型的消息 |
 | clearC2CHistoryMessage                  | 清空单聊消息记录                 |
 | clearC2CHistoryMessageFromLocalAndSvr   | 删除本地跟服务器的单聊聊天记录   |
 | clearGroupHistoryMessage                | 清空群聊消息记录                 |
@@ -449,7 +450,7 @@
 
 > 根据已上传文件的URL及文件信息创建一条图片消息。
 
-**注意:通过该API创建的消息需要通过[sendMessageNotOss]()方法发送。**
+**注意:通过该API创建的消息需要通过`sendMessageNotOss`或`sendMessageByBuffer`方法发送。**
 
 - Example:
 
@@ -476,14 +477,14 @@
 
 - Parameters:
 
-  | Name   | Type   | Required | Description |
-  | ------ | ------ | -------- | ----------- |
-  | uuid   | string | true     | 图片唯一id  |
-  | type   | string | true     | 图片类型    |
-  | size   | number | true     | 图片大小    |
-  | width  | number | true     | 图片宽度    |
-  | height | number | true     | 图片高度    |
-  | url    | string | true     | 图片地址    |
+  | Name   | Type   | Required | Description                             |
+  | ------ | ------ | -------- | --------------------------------------- |
+  | uuid   | string | true     | 图片唯一id                              |
+  | type   | string | true     | 图片类型                                |
+  | size   | number | true     | 图片大小                                |
+  | width  | number | true     | 图片宽度                                |
+  | height | number | true     | 图片高度                                |
+  | url    | string | true     | 图片地址，若要通过SDK上传时可为空字符串 |
 
 - Returns:
 
@@ -527,7 +528,7 @@
 
 > 根据已上传文件的URL及文件信息创建一条语音消息。
 
-**注意:通过该API创建的消息需要通过[sendMessageNotOss]()方法发送。**
+**注意:通过该API创建的消息需要通过`sendMessageNotOss`或`sendMessageByBuffer`方法发送。**
 
 - Example:
 
@@ -548,13 +549,13 @@
 
 - Parameters:
 
-  | Name      | Type   | Required | Description  |
-  | --------- | ------ | -------- | ------------ |
-  | uuid      | string | true     | 唯一id       |
-  | soundPath | string | true     | 留空字符即可 |
-  | sourceUrl | string | true     | 音频地址     |
-  | dataSize  | number | true     | 音频文件大小 |
-  | duration  | number | true     | 音频时长     |
+  | Name      | Type   | Required | Description                             |
+  | --------- | ------ | -------- | --------------------------------------- |
+  | uuid      | string | true     | 唯一id                                  |
+  | soundPath | string | true     | 留空字符即可                            |
+  | sourceUrl | string | true     | 音频地址，若要通过SDK上传时可为空字符串 |
+  | dataSize  | number | true     | 音频文件大小                            |
+  | duration  | number | true     | 音频时长                                |
 
 - Returns:
 
@@ -605,7 +606,7 @@
 
 > 根据已上传文件的URL及文件信息创建一条视频消息。
 
-**注意:通过该API创建的消息需要通过[sendMessageNotOss]()方法发送。**
+**注意:通过该API创建的消息需要通过`sendMessageNotOss`或`sendMessageByBuffer`方法发送。**
 
 - Example:
 
@@ -633,20 +634,20 @@
 
 - Parameters:
 
-  | Name           | Type   | Required | Description         |
-  | -------------- | ------ | -------- | ------------------- |
-  | videoPath      | string | true     | 留为空字符串即可    |
-  | videoType      | string | true     | 视频类型(MP4,AVI..) |
-  | duration       | number | true     | 视频时长            |
-  | snapshotPath   | string | true     | 留为空字符串即可    |
-  | videoUUID      | string | true     | 视频文件唯一id      |
-  | videoUrl       | string | true     | 视频文件地址        |
-  | videoSize      | number | true     | 视频文件大小        |
-  | snapshotUUID   | string | true     | 视频快照唯一id      |
-  | snapshotSize   | number | true     | 视频快照大小        |
-  | snapshotUrl    | string | true     | 视频快照地址        |
-  | snapshotWidth  | number | true     | 视频快照宽度        |
-  | snapshotHeight | number | true     | 视频快照高度        |
+  | Name           | Type   | Required | Description                                 |
+  | -------------- | ------ | -------- | ------------------------------------------- |
+  | videoPath      | string | true     | 留为空字符串即可                            |
+  | videoType      | string | true     | 视频类型(MP4,AVI..)                         |
+  | duration       | number | true     | 视频时长                                    |
+  | snapshotPath   | string | true     | 留为空字符串即可                            |
+  | videoUUID      | string | true     | 视频文件唯一id                              |
+  | videoUrl       | string | true     | 视频文件地址，若要通过SDK上传时可为空字符串 |
+  | videoSize      | number | true     | 视频文件大小                                |
+  | snapshotUUID   | string | true     | 视频快照唯一id                              |
+  | snapshotSize   | number | true     | 视频快照大小                                |
+  | snapshotUrl    | string | true     | 视频快照地址，若要通过SDK上传时可为空字符串 |
+  | snapshotWidth  | number | true     | 视频快照宽度                                |
+  | snapshotHeight | number | true     | 视频快照高度                                |
 
 - Returns:
 
@@ -697,7 +698,7 @@
 
 > 根据已上传文件的URL及文件信息创建一条文件消息。
 
-**注意:通过该API创建的消息需要通过[sendMessageNotOss]()方法发送。**
+**注意:通过该API创建的消息需要通过`sendMessageNotOss`或`sendMessageByBuffer`方法发送。**
 
 - Example:
 
@@ -718,13 +719,13 @@
 
 - Parameters:
 
-  | Name      | Type   | Required | Description      |
-  | --------- | ------ | -------- | ---------------- |
-  | filePath  | string | true     | 留为空字符串即可 |
-  | fileName  | string | true     | 文件名称         |
-  | uuid      | string | true     | 文件唯一id       |
-  | sourceUrl | string | true     | 文件地址         |
-  | fileSize  | number | true     | 文件大小         |
+  | Name      | Type   | Required | Description                             |
+  | --------- | ------ | -------- | --------------------------------------- |
+  | filePath  | string | true     | 留为空字符串即可                        |
+  | fileName  | string | true     | 文件名称                                |
+  | uuid      | string | true     | 文件唯一id                              |
+  | sourceUrl | string | true     | 文件地址，若要通过SDK上传时可为空字符串 |
+  | fileSize  | number | true     | 文件大小                                |
 
 - Returns:
 
@@ -1050,6 +1051,66 @@
   | ------- | ------ | ------------------------------------ |
   | data    | string | 发送成功时为发送的消息对象json字符串 |
   | errCode | number | 为0时即发送成功，其他为失败          |
+
+
+
+
+
+## sendMessageByBuffer
+
+> OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群聊消息”，在发送单聊消息时设置groupID为空字符串，同理发送群聊消息时设置userID为空字符串即可。<br/>`createImageMessage`、`createSoundMessage`、`createVideoMessage`、`createFileMessage`方法创建的消息可以通过`sendMessageByBuffer`进行发送。发送时将文件的`ArrayBuffer`传入则可通过SDK进行上传操作，当前默认仅支持minio上传。若有其他上传方式需求，可在创建消息前自行上传填入下载链接，并使用`sendMessageNotOss`方法发送。
+>
+> **注意：**此方法仅适用于wasm版本SDK `open-im-sdk-wasm`
+
+- Example:
+
+  ```js
+  const offlinePushInfo:OfflinePush = {
+    title: "you have a new message",
+    desc: "",
+    ex: "",
+    iOSPushSound: "",
+    iOSBadgeCount: true
+  }
+  const options:SendMsgParams = {
+    recvID: "xxx",
+    groupID: "",
+    offlinePushInfo:offlinePushInfo,
+    message: "",
+    fileArrayBuffer: ArrayBuffer;
+    snpFileArrayBuffer: ArrayBuffer;
+  };
+  openIM.sendMessageByBuffer(options).then(({ data,errCode })=>{
+    ...
+  }).catch(err=>{
+    ...
+  })
+  ```
+
+- Parameters:
+
+  | Name                           | Type        | Required | Description                        |
+  | ------------------------------ | ----------- | -------- | ---------------------------------- |
+  | message                        | string      | true     | 消息结构体json字符串               |
+  | recvID                         | string      | true     | 接收者ID（单聊）                   |
+  | groupID                        | string      | true     | 接收群组ID（群聊）                 |
+  | offlinePushInfo                | OfflinePush | false    | 离线推送配置                       |
+  | offlinePushInfo->title         | string      | true     | 推送标题                           |
+  | offlinePushInfo->desc          | string      | true     | 推送描述                           |
+  | offlinePushInfo->ex            | string      | true     | 推送扩展字段                       |
+  | offlinePushInfo->iOSPushSound  | string      | true     | ios推送声音                        |
+  | offlinePushInfo->iOSBadgeCount | boolean     | true     | ios推送角标                        |
+  | fileArrayBuffer                | ArrayBuffer | true     | 要上传的文件buffer                 |
+  | snpFileArrayBuffer             | ArrayBuffer | false    | 上传视频文件时，视频封面图的buffer |
+
+- Returns:
+
+  | Name    | Type   | Description                          |
+  | ------- | ------ | ------------------------------------ |
+  | data    | string | 发送成功时为发送的消息对象json字符串 |
+  | errCode | number | 为0时即发送成功，其他为失败          |
+
+
 
 
 
