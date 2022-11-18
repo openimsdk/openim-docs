@@ -100,7 +100,7 @@ chmod +x install_im_server.sh;
 
 如果执行过install_im_server.sh，则config/usualConfig.yaml根据.env的配置已经修改完成了，且组件也安装完毕，ETCD 2. MySQL 3. MongoDB 4. Redis 5. Kafka 6. Minio（注：如果使用三方云服务器存储媒体文件可不搭建） 
 
-可能存在的问题：如果非首次安装，可能env密码不能生效，如果数据不重要，先docker-compose down ; rm components -rf再执行以上步骤，需要注意的是app需要重新安装。
+可能存在的问题：如果非首次安装，可能env密码不能生效，如果数据不重要，先```docker-compose down; rm components -rf```再执行以上步骤，需要注意的是app需要重新安装。
 
 5.检查服务
 
@@ -376,20 +376,20 @@ server {
 
 ## IM
 
-如果按照（五）做了nginx配置，仅开放443和80端口即可。如果未配置nginx，则开发10001-10010端口即可，需要注意的时候访问路径有调整，具体查看下表的对应关系。
+如果按照（五）做了nginx配置，仅开放443和80端口即可。如果未配置nginx，则开放10001-10010端口即可，需要注意的时候访问路径有调整，具体查看下表的对应关系。
 
 | IM端口    | 说明               | 访问说明                           | 对应关系                                           |
 | --------- | ------------------ | ---------------------------------- | -------------------------------------------------- |
-| TCP:10001 | IM ws消息          | 在域名和路由之间增加msg_gateway    | wss://test.xx.xx/msg_gateway->ws://ip:10001        |
-| TCP:10002 | IM api             | 在域名和路由之间增加api            | https://test.xx.xx/api->http://ip:10002            |
-| TCP:10003 | ws端口 jssdk的专用 | 在域名和路由之间增加jssdk_gateway  | wss://test.xx.xx/jssdk_gateway->ws://ip:10003      |
-| TCP:10004 | demo注册登录       | 在域名和路由之间增加demo           | https://test.xx.xx/demo->http://ip:10004           |
+| TCP:10001 | IM ws消息          | 在域名和路由之间增加msg_gateway    | wss://test.xx.xx/msg_gateway -> ws://ip:10001        |
+| TCP:10002 | IM api             | 在域名和路由之间增加api            | https://test.xx.xx/api -> http://ip:10002            |
+| TCP:10003 | ws端口 jssdk的专用 | 在域名和路由之间增加jssdk_gateway  | wss://test.xx.xx/jssdk_gateway -> ws://ip:10003      |
+| TCP:10004 | demo注册登录       | 在域名和路由之间增加demo           | https://test.xx.xx/demo -> http://ip:10004           |
 | TCP:10005 | minio存储时        |                                    |                                                    |
-| TCP:10006 | IM 后台管理        | 在域名和路由之间增加admin          | https://test.xx.xx/admin->http://ip:10006          |
+| TCP:10006 | IM 后台管理        | 在域名和路由之间增加admin          | https://test.xx.xx/admin -> http://ip:10006          |
 | TCP:10007 | 数据统计           |                                    |                                                    |
-| TCP:10008 | 商业版业务         | 在域名和路由之间增加chat           | https://test.xx.xx/chat->http://ip:10008           |
-| TCP:10009 | 商业版管理后台     | 在域名和路由之间增加complete_admin | https://test.xx.xx/complete_admin->http://ip:10009 |
-| TCP:10010 | 商业版组织架构     | 在域名和路由之间增加organization   | https://test.xx.xx/organization->http://ip:10006   |
+| TCP:10008 | 商业版业务         | 在域名和路由之间增加chat           | https://test.xx.xx/chat -> http://ip:10008           |
+| TCP:10009 | 商业版管理后台     | 在域名和路由之间增加complete_admin | https://test.xx.xx/complete_admin -> http://ip:10009 |
+| TCP:10010 | 商业版组织架构     | 在域名和路由之间增加organization   | https://test.xx.xx/organization -> http://ip:10006   |
 |           |                    |                                    |                                                    |
 
 ##  音视频通话（付费用户才有）
