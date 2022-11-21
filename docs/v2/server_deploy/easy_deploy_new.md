@@ -35,7 +35,7 @@ git clone https://github.com/OpenIMSDK/Open-IM-Server.git --recursive;
 ```
 USER=root #不用修改  
 PASSWORD=openIM123  #建议修改复杂密码 不能包括 @#之类特殊符号 且至少要8位，仅对redis mysql mongo三个组件密码生效
-ENDPOINT=http://127.0.0.1:10005 #使用minio发图片视频文件需要填写 外网ip:port或者用域名
+ENDPOINT=http://127.0.0.1:10005 #使用minio发图片视频文件需要填写 外网ip:10005或者用域名storage.xx.xx
 DATA_DIR=./  #指定大磁盘目录
 ```
 
