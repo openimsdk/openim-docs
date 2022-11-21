@@ -389,7 +389,7 @@ server {
 | TCP:10007 | 数据统计           |                                    |                                                    |
 | TCP:10008 | 商业版业务         | 在域名和路由之间增加chat           | https://test.xx.xx/chat->http://ip:10008           |
 | TCP:10009 | 商业版管理后台     | 在域名和路由之间增加complete_admin | https://test.xx.xx/complete_admin->http://ip:10009 |
-| TCP:10010 | 商业版组织架构     | 在域名和路由之间增加organization   | https://test.xx.xx/organization->http://ip:10006   |
+| TCP:10010 | 商业版组织架构     | 在域名和路由之间增加organization   | https://test.xx.xx/organization->http://ip:10010   |
 |           |                    |                                    |                                                    |
 
 ##  音视频通话（付费用户才有）
