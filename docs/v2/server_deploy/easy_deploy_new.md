@@ -35,7 +35,7 @@ git clone https://github.com/OpenIMSDK/Open-IM-Server.git --recursive;
 ```
 USER=root #不用修改  
 PASSWORD=openIM123  #建议修改复杂密码 不能包括 @#之类特殊符号 且至少要8位，仅对redis mysql mongo三个组件密码生效
-ENDPOINT=http://127.0.0.1:10005 #使用minio发图片视频文件需要填写 外网ip:port或者用域名
+ENDPOINT=http://127.0.0.1:10005 #使用minio发图片视频文件需要填写 外网ip:10005或者用域名storage.xx.xx
 DATA_DIR=./  #指定大磁盘目录
 ```
 
@@ -389,7 +389,7 @@ server {
 | TCP:10007 | 数据统计           |                                    |                                                    |
 | TCP:10008 | 商业版业务         | 在域名和路由之间增加chat           | https://test.xx.xx/chat -> http://ip:10008           |
 | TCP:10009 | 商业版管理后台     | 在域名和路由之间增加complete_admin | https://test.xx.xx/complete_admin -> http://ip:10009 |
-| TCP:10010 | 商业版组织架构     | 在域名和路由之间增加organization   | https://test.xx.xx/organization -> http://ip:10006   |
+| TCP:10010 | 商业版组织架构     | 在域名和路由之间增加organization   | https://test.xx.xx/organization -> http://ip:10010   |
 |           |                    |                                    |                                                    |
 
 ##  音视频通话（付费用户才有）
