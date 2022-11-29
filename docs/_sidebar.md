@@ -12,12 +12,7 @@
 * **以下是新文档模板-待补充**
   * [体验OpenIM](v2/demo/download_demo.md)
 * **服务端部署**
-  - [docker部署](v2/server_deploy/docker_singe.md)
-  - [源码单机部署](v2/server_deploy/code_singe.md)
-  - [源码集群部署](v2/server_deploy/code_singe_cluster.md)
-  - [k8s集群部署](v2/server_deploy/k8s.md)
-  - [配置说明](v2/server_deploy/config.md)
-  - [组件部署](v2/server_deploy/component.md)
+  - [docker及源码部署（新）](v2/server_deploy/easy_deploy_new.md)
   - [常见问题](v2/server_deploy/faq.md)
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
@@ -91,6 +86,7 @@
 * **集成JS SDK**
   * [Demo下载](js_v2/sdk_integrate/development.md)
   * [SDK使用步骤](js_v2/sdk_integrate/sdk_use.md)
+  * [SDK使用步骤（wasm）](js_v2/sdk_integrate/sdk_use_wasm.md)
   * [初始化及登录](js_v2/sdk_integrate/init_login.md)
   * [群组](js_v2/sdk_integrate/group.md)
   * [好友](js_v2/sdk_integrate/friend.md)
