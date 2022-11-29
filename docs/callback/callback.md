@@ -177,6 +177,8 @@ actionCode和errCode不影响本次操作，openIM服务端会忽略actionCode�
 | PlatformID |  string  | 平台ID                                      |
 | Platform |  string  | 平台                                      |
 | token |  string  | 使用token                                      |
+| seq | int | 序号 服务器毫秒时间戳|
+| isAppBackground | bool | app是否在后台，true表示在后台，走离线推送 |
 
 
 - 响应
@@ -187,7 +189,6 @@ actionCode和errCode不影响本次操作，openIM服务端会忽略actionCode�
 |  errCode         | int | 错误码 0代表APP服务器正常处理响应回调 |
 |  errMsg         |  string |           错误信息               |
 | operationID     | string      |     本次操作ID       |
-| seq | int | 序号 服务器毫秒时间戳|
 
 ActionCode和ErrCode不影响本次操作
 
