@@ -13,7 +13,7 @@ npm install open-im-sdk
 ## CDN方式
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/open-im-sdk"><script>
+<script src="https://cdn.jsdelivr.net/npm/open-im-sdk"></script>
 ```
 
 # 实例化SDK
