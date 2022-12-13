@@ -47,7 +47,7 @@
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>PC Web</h2>
-      <p style="text-align: center;">扫码或<a href="https://open-im-online.rentsoft.cn" target="_blank">点击此处访问</a></p>
+      <p style="text-align: center;">扫码或<a href="https://web.rentsoft.cn/" target="_blank">点击此处访问</a></p>
       <img
         src="images/web_qr.png"
         width="200px"
