@@ -1,10 +1,12 @@
 ## （一）服务端快速部署
 
-（1）仅限于用户第一次初始化安装
+（1）仅限于用户第一次初始化安装；
 
-（2）仅限于服务端有外网ip的情况，对于在内网部署或者需要nginx反代的情况，需要参考[此链接](https://doc.rentsoft.cn/#/v2/server_deploy/easy_deploy_new)
+（2）仅限于服务端有外网ip的情况，对于在内网部署或者需要nginx反代的情况，需要参考[此链接](https://doc.rentsoft.cn/#/v2/server_deploy/easy_deploy_new)；
 
-（3）特别关注是否有warning输出
+（3）仅针对未安装过mysql etcd kafka mongodb redis组件的服务器；
+
+（4）特别关注是否有warning输出；
 
 1. 项目clone
 
