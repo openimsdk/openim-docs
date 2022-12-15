@@ -12,8 +12,8 @@ SDK版本参考：https://github.com/OpenIMSDK/Open-IM-SDK-iOS.git
 
 ```
   /* 初始化
- * @param apiAddr       SDK的api地。如http://xxx:10002
- * @param wsAddr        SDK的web socket地址。如： ws://xxx:10001
+ * @param apiAddr       SDK的api地。如http://xxx:10002 ,域名使用 http(s)://xxx/api
+ * @param wsAddr        SDK的web socket地址。如： ws://xxx:10001 ,域名使用 ws(s)://xxx/msg_gateway
  * @param dataDir       数据存储路径，默认/Documents
  * @param logLevel      默认6
  * @param objectStorage 默认cos，minio填写'minio'
