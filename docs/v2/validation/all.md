@@ -1,4 +1,6 @@
-## （一）服务端部署
+## （一）服务端快速部署
+
+仅限于服务端有外网ip的情况，对于没有内网部署，以及需要nginx反代的情况，需要参考[此链接](https://doc.rentsoft.cn/#/v2/server_deploy/easy_deploy_new)
 
 1. 项目clone
 
