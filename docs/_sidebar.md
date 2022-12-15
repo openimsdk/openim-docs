@@ -10,6 +10,8 @@
   - [版本计划](version/plan.md)
 * **以下是新文档模板**
   * [体验OpenIM](demo/download_demo.md)
+* **快速部署及验证**
+  * [验证流程](v2/validation/all.md)
 * **服务端部署**
   - [docker及源码部署（新）](v2/server_deploy/easy_deploy_new.md)
   - [常见问题](v2/server_deploy/faq.md)
@@ -21,8 +23,6 @@
   * [配置文件说明](v2/server_deploy/config.md)
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
-* **快速验证**
-  * [验证流程](v2/validation/all.md)
 * **集成Flutter SDK**
   * [Demo下载](flutter_v2/sdk_integrate/development.md)
   * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
