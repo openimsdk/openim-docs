@@ -2,7 +2,9 @@
 
 （1）仅限于用户第一次初始化安装
 
-（2）仅限于服务端有外网ip的情况，对于没有内网部署，以及需要nginx反代的情况，需要参考[此链接](https://doc.rentsoft.cn/#/v2/server_deploy/easy_deploy_new)
+（2）仅限于服务端有外网ip的情况，对于在内网部署或者需要nginx反代的情况，需要参考[此链接](https://doc.rentsoft.cn/#/v2/server_deploy/easy_deploy_new)
+
+（3）特别关注是否有warning输出
 
 1. 项目clone
 
@@ -21,6 +23,8 @@ cd  Open-IM-Server; chmod +x install_im_server.sh; ./install_im_server.sh;
 ```
 cd script;./docker_check_service.sh
 ```
+
+如果有失败提示，再执行一次
 
 4. 开放端口
 
