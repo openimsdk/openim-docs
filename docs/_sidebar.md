@@ -8,9 +8,8 @@
   - **历史版本**
   - * [v2.2.0](introduce/v2.2.0.md)
   - [版本计划](version/plan.md)
-* [体验Demo](demo/download_demo.md)
-* **以下是新文档模板-待补充**
-  * [体验OpenIM](v2/demo/download_demo.md)
+* **以下是新文档模板**
+  * [体验OpenIM](demo/download_demo.md)
 * **服务端部署**
   - [docker及源码部署（新）](v2/server_deploy/easy_deploy_new.md)
   - [常见问题](v2/server_deploy/faq.md)
