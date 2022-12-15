@@ -48,8 +48,8 @@ Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天�
     ```ruby
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // IM服务器的地址，OpenIM SDK使用
-        IMController.shared.setup(apiAdrr: "http://xxxx:10002",
-                                  wsAddr: "ws://xxxx:10001",
+        IMController.shared.setup(apiAdrr: "http://xxxx:10002", 域名使用： http(s)://xxxx/api
+                                  wsAddr: "ws://xxxx:10001",             ws(s)://xxxx/msg_gateway
                                   os: "xxx")
     }
     ```
@@ -62,7 +62,7 @@ Demo 是基于 Open-IM SDK 实现的一套 UI 组件，其包含会话、聊天�
     // 1: 登录自己的业务服务器，获取userID 和 token；
     
     // 业务服务器地址 Pages/LoginViewModel.swift
-    let API_BASE_URL = "http://xxx:10004/";
+    let API_BASE_URL = "http://xxx:10008/"; 域名使用： http(s)://xxx/chat
 
     static func loginDemo(phone: String, pwd: String, completionHandler: @escaping ((_ errMsg: String?) -> Void)) {
         let body = JsonTool.toJson(fromObject: Request.init(phoneNumber: phone, pwd: pwd)).data(using: .utf8)
