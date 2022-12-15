@@ -28,6 +28,8 @@ cd script;./docker_check_service.sh
 
 如果有失败提示，再执行一次
 
+![docker_success](C:\Users\Administrator\GolandProjects\OpenIM-Docs\docs\images\docker_success.png)
+
 4. 开放端口
 
    | IM端口    | 说明                                                    | 访问说明                           |
