@@ -338,7 +338,7 @@ actionCode和errCode都为0以及userIDList不为空才会正常在线推送user
 
 |    参数名       |   类型    | 说明                                                          | 
 | :----------:    | :------: | :----------------------------------------------------------- | 
-| callbackCommand |  string  | 回调指令    callbackSuperGroupOnlinePushCommand   |
+| callbackCommand |  string  | 回调指令    CallbackBeforeSetGroupMemberInfoCommand   |
 | operationID |  string  | 本次操作ID                                      |
 | groupID        |  string      |  群ID              ｜
 |  userID         |  string     | 用户ID        |
