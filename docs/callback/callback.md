@@ -340,7 +340,7 @@ actionCode和errCode都为0以及userIDList不为空才会正常在线推送user
 | :----------:    | :------: | :----------------------------------------------------------- | 
 | callbackCommand |  string  | 回调指令    callbackSuperGroupOnlinePushCommand   |
 | operationID |  string  | 本次操作ID                                      |
-｜ groupID        ｜ string      |  群ID              ｜
+| groupID        |  string      |  群ID              ｜
 |  userID         |  string     | 用户ID        |
 |  ex         |  string     | 拓展字段        |
 |  nickName         |  string     | 群昵称        |
