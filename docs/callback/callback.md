@@ -328,3 +328,35 @@ errCode只在服务端做log打印日志处理。
 
 响应的userIDList推送的用户ID列表
 actionCode和errCode都为0以及userIDList不为空才会正常在线推送userIDList, 如果userIDList为空且actionCode为0会正常使用openIM的数据库群成员进行推送
+
+
+##### setGroupMemberInfo 回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| callbackCommand |  string  | 回调指令    callbackSuperGroupOnlinePushCommand   |
+| operationID |  string  | 本次操作ID                                      |
+｜ groupID        ｜ string      |  群ID              ｜
+|  userID         |  string     | 用户ID        |
+|  ex         |  string     | 拓展字段        |
+|  nickName         |  string     | 群昵称        |
+|  faceURL         |  string     | 头像     |
+|  roleLevel        |  int32     | 用户等级        |
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许修改 1为阻止修改|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+|  ex         |  string     | 拓展字段        |
+|  nickName         |  string     | 群昵称        |
+|  faceURL         |  string     | 头像     |
+|  roleLevel        |  int32     | 用户等级        |
+
+actionCode为0 才会正常接受回调响应，继续在线消息的推送。
+errCode只在服务端做log打印日志处理。
+响应中的ex, nickName, faceURL, roleLevel会对原本请求中的字段做替换，json中不包含对应的字段则不进行替换操作
