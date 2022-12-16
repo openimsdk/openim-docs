@@ -8,13 +8,13 @@
   - **历史版本**
   - * [v2.2.0](introduce/v2.2.0.md)
   - [版本计划](version/plan.md)
-* [体验Demo](demo/download_demo.md)
-* **以下是新文档模板-待补充**
-  * [体验OpenIM](v2/demo/download_demo.md)
+* **以下是新文档模板**
+  * [体验OpenIM](demo/download_demo.md)
+* **快速部署及验证**
+  * [验证流程](v2/validation/all.md)
 * **服务端部署**
-  * [docker部署](v2/server_deploy/docker_singe.md)
-  * [常见问题](v2/server_deploy/faq.md)
-  * [minio部署](qa/minio.md)
+  - [docker及源码部署（新）](v2/server_deploy/easy_deploy_new.md)
+  - [常见问题](v2/server_deploy/faq.md)
 * **源码部署**
   * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
@@ -23,9 +23,6 @@
   * [配置文件说明](v2/server_deploy/config.md)
 * **生产环境必读**
   * [nginx配置示例](v2/server_deploy/nginx_config.md)
-* **快速验证**
-  * [app](v2/validation/app.md)
-  * [pc web](v2/validation/pc-web.md)
 * **集成Flutter SDK**
   * [Demo下载](flutter_v2/sdk_integrate/development.md)
   * [SDK使用步骤](flutter_v2/sdk_integrate/sdk_use.md)
@@ -86,6 +83,7 @@
 * **集成JS SDK**
   * [Demo下载](js_v2/sdk_integrate/development.md)
   * [SDK使用步骤](js_v2/sdk_integrate/sdk_use.md)
+  * [SDK使用步骤（wasm）](js_v2/sdk_integrate/sdk_use_wasm.md)
   * [初始化及登录](js_v2/sdk_integrate/init_login.md)
   * [群组](js_v2/sdk_integrate/group.md)
   * [好友](js_v2/sdk_integrate/friend.md)
@@ -117,14 +115,14 @@
   * [客户端架构](framework/client_framework.md)
   * [APP与OpenIM的关系](framework/relationship.md)
 * **测试报告**
+  * [测试程序介绍](test_report/press_code.md)
   * [消息可达性](test_report/accuracy.md)
 * [管理后台](admin/admin.md)
 * [实时音视频](rtc/rtc.md)
 * [原创技术文章](artice/actice.md)
-* **常见问题**
-  * [docker及golang安装](qa/docker.md)
-  * [minio部署](qa/minio.md)
-  * [docker部署常见问题](qa/docker_deploy.md)
+* **组件部署**
+  * [docker及golang安装](component/docker.md)
+  * [minio部署](component/minio.md)
 * 服务端部署(逐步废弃)
   * [docker部署](demo/server_deploy/docker_singe.md)
   * [源码部署](demo/server_deploy/code_singe.md)

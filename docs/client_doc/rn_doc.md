@@ -11,11 +11,11 @@
   ```js
   const config = {
     platform: 2,
-    api_addr: 'http://121.37.25.71:10000',
-    ws_addr: 'ws://121.37.25.71:17778',
+    api_addr: 'http://121.5.182.23:10002',
+    ws_addr: 'ws://121.5.182.23:10001',
     data_dir: RNFS.DocumentDirectoryPath + '/tmp',
     log_level: 6,
-    object_storage: 'cos',
+    object_storage: 'minio',
   };
   openIMSDK.initSDK(config).then(res => {
     console.log("init success...");
@@ -29,12 +29,12 @@
 
 | Name           | Type   | Description                                                  |
 | -------------- | ------ | ------------------------------------------------------------ |
-| api_addr       | String | api域名或地址   一般为10000端口                              |
-| ws_addr        | string | websocket地址  一般为17778端口                               |
+| api_addr       | String | api域名或地址   一般为10002端口                              |
+| ws_addr        | string | websocket地址  一般为10001端口                               |
 | platform       | int    | 平台类型 1:ios 2:android 3:windows 4:osx 5:web&mini 7:linux 8:管理员 |
 | data_dir       | string | SDK数据存放目录（绝对路径）                                  |
 | log_level      | int    | 日志等级                                                     |
-| object_storage | string | 对象存储类型 当前可选"cos" "minio"                           |
+| object_storage | string | 对象存储类型 当前可选"cos" "minio" "oss"                     |
 
 - Return:
 
@@ -210,7 +210,68 @@
 
   
 
+## wakeUp
+
+一般用于从后台切换到前台时调用，立即检测心跳状态。
+
+- Example:
+
+  ```js
+  openIMSDK.wakeUp(operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 唤醒成功     |
+| err     | string | 唤醒失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setAppBackgroundStatus
+
+一般用于从后台切换到前台时调用，设置为true时会进行离线推送。
+
+- Example:
+
+  ```js
+  openIMSDK.setAppBackgroundStatus(isBackground,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name         | Type | Description  |
+| ------------ | ---- | ------------ |
+| isBackground | bool | 是否处于后台 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 设置成功     |
+| err     | string | 设置失败描述 |
+| errCode | string | 错误码       |
+
 # 消息收发
+
+
+
+## setBatchMsgListener
+
+开启新消息批量触发。
+
+- Example:
+
+  ```js
+  openIMSDK.setBatchMsgListener()
+  ```
+
+
 
 ## createTextMessage
 
@@ -849,22 +910,102 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 
   
 
-## revokeMessage
+## getAdvancedHistoryMessageList
+
+拉取历史消息记录，拉取大群消息时必须使用该API。
+
+- Example:
+
+  ```js
+  const getMessageOptions = {
+    userID: string;
+    groupID: string;
+    lastMinSeq: number;
+    count: number;
+    startClientMsgID: string;
+    conversationID: string;
+  }
+  openIMSDK.getAdvancedHistoryMessageList(getMessageOptions,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name             | Type   | Description                                          |
+| ---------------- | ------ | ---------------------------------------------------- |
+| userID           | string | 用户ID  传入conversationID或groupID时填""            |
+| groupID          | string | 群组ID  传入conversationID或userID时填""             |
+| lastMinSeq       | number | 上一次拉取最小seq  拉取大群消息时使用  第一次拉取传0 |
+| count            | number | 一次拉取的记录数量                                   |
+| startClientMsgID | string | 上一次拉取的最后一条消息clientMsgID                  |
+| conversationID   | string | 会话ID 通过userID或groupID拉取时填""                 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+
+
+## getHistoryMessageListReverse
+
+反向分页拉取单聊或群聊的历史消息。
+
+- Example:
+
+  ```js
+  const options = {
+    groupID:"",
+    startClientMsgID:"ClientMsgID",
+    count:12,
+    userID:"userID"
+  }
+  openIMSDK.getHistoryMessageListReverse(options,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name             | Type   | Description                                                  |
+| ---------------- | ------ | ------------------------------------------------------------ |
+| groupID          | string | 群聊ID，拉取群聊时传入，否则为“”                             |
+| startClientMsgID | string | 上一次拉取的最后一条消息ID或空字符串,为空字符则从最新一条开始 |
+| count            | number | 每次拉取的条数                                               |
+| userID           | string | 用户ID，拉取单聊时传入，否则为“”                             |
+
+- Return:
+
+
+| Name    | Type   | Description                                                  |
+| ------- | ------ | ------------------------------------------------------------ |
+| res     | string | 历史[消息对象](https://doc.rentsoft.cn/client_doc/uni_doc.html#%E6%B6%88%E6%81%AF%E5%AF%B9%E8%B1%A1)数组json字符串 |
+| err     | string | 获取失败描述                                                 |
+| errCode | string | 错误码                                                       |
+
+
+
+## newRevokeMessage
 
 撤回某条消息。
 
 - Example:
 
   ```js
-  openIMSDK.revokeMessage(msg,operationID).then(res=>{}).catch((errCode,err)=>{})
+  openIMSDK.newRevokeMessage(message,operationID).then(res=>{}).catch((errCode,err)=>{})
   ```
-  
+
 - Parameters:
 
 
-| Name | Type   | Description        |
-| ---- | ------ | ------------------ |
-| msg  | string | 要撤回的消息结构体 |
+| Name    | Type    | Description        |
+| ------- | ------- | ------------------ |
+| message | Message | 要撤回的消息结构体 |
 
 - Return:
 
@@ -875,7 +1016,7 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 | err     | string | 撤回失败描述 |
 | errCode | string | 错误码       |
 
-  
+
 
 ## markC2CMessageAsRead
 
@@ -905,6 +1046,37 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 | res     | string | 标记成功     |
 | err     | string | 标记失败描述 |
 | errCode | string | 错误码       |
+
+
+
+## markGroupMessageAsRead
+
+标记群消息已读
+
+- Example:
+
+  ```js
+  openIMSDK.markGroupMessageAsRead(groupID,clientMsgIDList,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name            | Type     | Description    |
+| --------------- | -------- | -------------- |
+| groupID         | string   | 群聊ID         |
+| clientMsgIDList | string[] | 已读消息ID数组 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 标记成功     |
+| err     | string | 标记失败描述 |
+| errCode | string | 错误码       |
+
+
 
   
 
@@ -953,6 +1125,36 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 | res     | string | 删除成功     |
 | err     | string | 删除失败描述 |
 | errCode | string | 错误码       |
+
+
+
+## deleteMessageFromLocalAndSvr
+
+从本地和服务器删除某条消息。
+
+- Example:
+
+  ```js
+  openIMSDK.deleteMessageFromLocalAndSvr(message,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name    | Type    | Description          |
+| ------- | ------- | -------------------- |
+| message | Message | 要删除的消息的结构体 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
 
   
 
@@ -1061,6 +1263,106 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
   | Name | Type   | Description        |
   | ---- | ------ | ------------------ |
   | res  | string | 删除成功或失败描述 |
+
+
+
+## clearC2CHistoryMessageFromLocalAndSvr
+
+从本地和服务器删除某个单聊会话的所有历史消息。
+
+- Example:
+
+  ```js
+  openIMSDK.clearC2CHistoryMessageFromLocalAndSvr(userID,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name   | Type   | Description |
+| ------ | ------ | ----------- |
+| userID | string | 用户ID      |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## clearGroupHistoryMessageFromLocalAndSvr
+
+从本地和服务器删除某个群聊会话的所有历史消息。
+
+- Example:
+
+  ```js
+  openIMSDK.clearGroupHistoryMessageFromLocalAndSvr(groupID,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name    | Type   | Description |
+| ------- | ------ | ----------- |
+| groupID | string | 群聊ID      |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## deleteAllMsgFromLocalAndSvr
+
+从本地和服务器删除所有消息。
+
+- Example:
+
+  ```js
+  openIMSDK.deleteAllMsgFromLocalAndSvr(operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## deleteAllMsgFromLocal
+
+从本地删除所有消息。
+
+- Example:
+
+  ```js
+  openIMSDK.deleteAllMsgFromLocal(operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
 
 ​    
 
@@ -1287,22 +1589,23 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 
 ​    
 
-## markGroupMessageHasRead
+## markMessageAsReadByConID
 
-标记群聊会话消息已读。
+**该API一般用于置零会话未读数，适用于所有会话类型。**
 
 - Example:
 
   ```js
-  openIMSDK.markGroupMessageHasRead(groupID,operationID).then(res=>{}).catch((errCode,err)=>{})
+  openIMSDK.markMessageAsReadByConID(conversationID,clientMsgIDList,operationID).then(res=>{}).catch((errCode,err)=>{})
   ```
-  
+
 - Parameters:
 
 
-| Name    | Type   | Description |
-| ------- | ------ | ----------- |
-| groupID | string | 群组ID      |
+| Name            | Type     | Description  |
+| --------------- | -------- | ------------ |
+| conversationID  | string   | 会话ID       |
+| clientMsgIDList | string[] | 传空数组即可 |
 
 - Return:
 
@@ -1313,7 +1616,171 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 | err     | string | 标记失败描述 |
 | errCode | string | 错误码       |
 
-  
+
+
+## setOneConversationPrivateChat
+
+设置会话阅后即焚。
+
+- Example:
+
+  ```js
+  openIMSDK.setOneConversationPrivateChat(conversationID,isPrivate,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name      | Type    | Description    |
+| --------- | ------- | -------------- |
+| groupID   | string  | 群聊ID         |
+| isPrivate | boolean | 是否为阅后即焚 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setOneConversationBurnDuration
+
+设置会话阅后即焚时消息删除时间。
+
+- Example:
+
+  ```js
+  openIMSDK.setOneConversationBurnDuration(conversationID,burnDuration,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name           | Type   | Description                  |
+| -------------- | ------ | ---------------------------- |
+| conversationID | string | 会话ID                       |
+| burnDuration   | number | 阅后即焚时  多少秒后删除消息 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setOneConversationRecvMessageOpt
+
+设置会话免打扰状态。
+
+- Example:
+
+  ```js
+  openIMSDK.setOneConversationRecvMessageOpt(conversationID,opt,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name           | Type   | Description                                           |
+| -------------- | ------ | ----------------------------------------------------- |
+| conversationID | string | 会话ID                                                |
+| opt            | number | 会话免打扰状态  0正常接收  1不接受消息  2接收但不提醒 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setGlobalRecvMessageOpt
+
+设置全局免打扰状态。
+
+- Example:
+
+  ```js
+  openIMSDK.setGlobalRecvMessageOpt(opt,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name | Type   | Description                                       |
+| ---- | ------ | ------------------------------------------------- |
+| opt  | number | 免打扰状态  0正常接收  1不接受消息  2接收但不提醒 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## deleteAllConversationFromLocal
+
+删除本地所有会话。
+
+- Example:
+
+  ```js
+  openIMSDK.deleteAllConversationFromLocal(operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## resetConversationGroupAtType
+
+重置会话强提示状态。
+
+- Example:
+
+  ```js
+  openIMSDK.resetConversationGroupAtType(conversationID,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name           | Type   | Description |
+| -------------- | ------ | ----------- |
+| conversationID | string | 会话ID      |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
 
 ## getTotalUnreadMsgCount
 
@@ -1389,6 +1856,36 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 
 
 
+## deleteConversationFromLocalAndSvr
+
+从本地和服务器删除某个会话。
+
+- Example:
+
+  ```js
+  openIMSDK.deleteConversationFromLocalAndSvr(conversationID,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name           | Type   | Description |
+| -------------- | ------ | ----------- |
+| conversationID | string | 会话ID      |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+
+
 # 好友
 
 ## getFriendList
@@ -1411,6 +1908,43 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 | errCode | string | 错误码                         |
 
   
+
+## searchFriends
+
+搜索已添加的好友。
+
+- Example:
+
+  ```js
+  const searchParam = {
+     keywordList: string[];
+     isSearchUserID: boolean;
+     isSearchNickname: boolean;
+     isSearchRemark: boolean;
+  }
+  openIMSDK.searchFriends(searchParam,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name             | Type     | Description      |
+| ---------------- | -------- | ---------------- |
+| keywordList      | string[] | 关键词           |
+| isSearchUserID   | boolean  | 是否搜索好友ID   |
+| isSearchNickname | boolean  | 是否搜索好友昵称 |
+| isSearchRemark   | boolean  | 是否搜索好友备注 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
 
 ## getDesignatedFriendsInfo
 
@@ -1954,16 +2488,17 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 - Example:
 
   ```js
-  openIMSDK.joinGroup(groupID,reqMsg,operationID).then(res=>{}).catch((errCode,err)=>{})
+  openIMSDK.joinGroup(groupID,reqMsg,joinSource,operationID).then(res=>{}).catch((errCode,err)=>{})
   ```
   
 - Parameters:
 
 
-| Name    | Type   | Description  |
-| ------- | ------ | ------------ |
-| groupID | string | 群聊ID       |
-| reqMsg  | string | 请求验证信息 |
+| Name       | Type   | Description  |
+| ---------- | ------ | ------------ |
+| groupID    | string | 群聊ID       |
+| reqMsg     | string | 请求验证信息 |
+| joinSource | number | 入群途经     |
 
 - Return:
 
@@ -2195,6 +2730,347 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 
 
 
+## searchGroupMembers
+
+在已加入的群聊中搜索。
+
+- Example:
+
+  ```js
+  const searchParam = {
+     groupID: string;
+     keywordList: string[];
+     isSearchUserID: boolean;
+     isSearchMemberNickname: boolean;
+     offset: number;
+     count: number;
+  }
+  openIMSDK.searchGroupMembers(searchParam,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name                   | Type     | Description          |
+| ---------------------- | -------- | -------------------- |
+| groupID                | string   | 群ID                 |
+| keywordList            | string[] | 关键词               |
+| isSearchUserID         | boolean  | 是否搜索群成员ID     |
+| isSearchMemberNickname | boolean  | 是否搜索群成员昵称   |
+| offset                 | number   | 从第几条记录开始拉取 |
+| count                  | number   | 单次拉取几条记录     |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## dismissGroup
+
+解散群组
+
+- Example:
+
+  ```js
+  openIMSDK.dismissGroup(groupID,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name    | Type   | Description |
+| ------- | ------ | ----------- |
+| groupID | string | 群聊ID      |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 解散成功     |
+| err     | string | 解散失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## changeGroupMute
+
+设置群组全体禁言状态。
+
+- Example:
+
+  ```js
+  openIMSDK.changeGroupMute(groupID,isMute,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name    | Type   | Description |
+| ------- | ------ | ----------- |
+| groupID | string | 群聊ID      |
+| isMute  | bool   | 是否禁言    |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## changeGroupMemberMute
+
+设置群组中对某人的禁言状态。
+
+- Example:
+
+  ```js
+  openIMSDK.changeGroupMemberMute(groupID,userID,mutedSeconds,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name         | Type   | Description                           |
+| ------------ | ------ | ------------------------------------- |
+| groupID      | string | 群聊ID                                |
+| userID       | string | 用户ID                                |
+| mutedSeconds | number | 禁言时间，秒为单位，为0时即为取消禁言 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setGroupMemberRoleLevel
+
+设置某位群成员是否为管理员。
+
+- Example:
+
+  ```js
+  openIMSDK.setGroupMemberRoleLevel(groupID,userID,roleLevel,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name      | Type   | Description |
+| --------- | ------ | ----------- |
+| groupID   | string | 群聊ID      |
+| userID    | string | 用户ID      |
+| roleLevel | number | 角色等级    |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## searchGroups
+
+在已加入的群聊中搜索。
+
+- Example:
+
+  ```js
+  const searchParam = {
+     keywordList: string[];
+     isSearchGroupID: boolean;
+     isSearchGroupName: boolean;
+  }
+  openIMSDK.searchGroups(searchParam,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name              | Type     | Description    |
+| ----------------- | -------- | -------------- |
+| keywordList       | string[] | 关键词         |
+| isSearchGroupID   | boolean  | 是否搜索群ID   |
+| isSearchGroupName | boolean  | 是否搜索群名称 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setGroupVerification
+
+设置群成员加入验证方式。
+
+- Example:
+
+  ```js
+  openIMSDK.setGroupVerification(groupID,verification,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name         | Type   | Description |
+| ------------ | ------ | ----------- |
+| groupID      | string | 群聊ID      |
+| verification | number | 验证方式    |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setGroupLookMemberInfo
+
+设置是否允许查看其他群成员信息。
+
+- Example:
+
+  ```js
+  openIMSDK.setGroupLookMemberInfo(groupID,rule,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name    | Type   | Description                  |
+| ------- | ------ | ---------------------------- |
+| groupID | string | 群聊ID                       |
+| rule    | number | 是否允许  0：允许  1：不允许 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setGroupApplyMemberFriend
+
+设置是否允许添加其他群成员为好友。
+
+- Example:
+
+  ```js
+  openIMSDK.setGroupApplyMemberFriend(groupID,rule,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name    | Type   | Description                   |
+| ------- | ------ | ----------------------------- |
+| groupID | string | 群聊ID                        |
+| rule    | number | 是否允许   0：允许  1：不允许 |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## getGroupMemberListByJoinTimeFilter
+
+根据入群时间获取群成员列表。
+
+- Example:
+
+  ```js
+  openIMSDK.getGroupMemberListByJoinTimeFilter(groupID,offset,count，joinTimeBegin，joinTimeEnd，filterUserIDList，operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name             | Type     | Description          |
+| ---------------- | -------- | -------------------- |
+| groupID          | string   | 群聊ID               |
+| offset           | number   | 从第几条记录开始拉取 |
+| count            | number   | 单次获取记录数量     |
+| joinTimeBegin    | number   | 群成员入群时间开始   |
+| joinTimeEnd      | number   | 群成员入群时间结束   |
+| filterUserIDList | string[] | 要剔除的群成员ID     |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
+
+
+## setGroupMemberNickname
+
+设置群内昵称。
+
+- Example:
+
+  ```js
+  openIMSDK.setGroupMemberNickname(groupID,userID,groupMemberNickname,operationID).then(res=>{}).catch((errCode,err)=>{})
+  ```
+
+- Parameters:
+
+
+| Name                | Type   | Description |
+| ------------------- | ------ | ----------- |
+| groupID             | string | 群聊ID      |
+| userID              | string | 用户ID      |
+| groupMemberNickname | string | 群成员昵称  |
+
+- Return:
+
+
+| Name    | Type   | Description  |
+| ------- | ------ | ------------ |
+| res     | string | 操作成功     |
+| err     | string | 操作失败描述 |
+| errCode | string | 错误码       |
+
 
 
 # 事件监听
@@ -2224,11 +3100,12 @@ OpenIM消息按照消息发送的目标可分为：“单聊消息”和“群�
 
 ## 消息监听
 
-| Event                | Data                             | Description         |
-| -------------------- | -------------------------------- | ------------------- |
-| onRecvC2CReadReceipt | c2c已读回执消息ID数组json string | 收到c2c已读回执回调 |
-| onRecvMessageRevoked | 被撤回消息的ID                   | 有消息被撤回回调    |
-| onRecvNewMessage     | 新消息结构体json string          | 接收到新消息回调    |
+| Event                | Data                             | Description                                                  |
+| -------------------- | -------------------------------- | ------------------------------------------------------------ |
+| onRecvC2CReadReceipt | c2c已读回执消息ID数组json string | 收到c2c已读回执回调                                          |
+| onRecvMessageRevoked | 被撤回消息的ID                   | 有消息被撤回回调                                             |
+| onRecvNewMessage     | 新消息结构体json string          | 接收到新消息回调                                             |
+| onRecvNewMessages    | 新消息数组json string            | 批量触发新消息回调  需要在初始化SDK后设置[setBatchMsgListener]() |
 
 
 

@@ -1,5 +1,5 @@
 # 在线测试
-> web版本可[点击此处](http://121.37.25.71:23232)前往[在线测试](http://121.37.25.71:23232)。
+> web版本可[点击此处](http://121.5.182.23:23232)前往[在线测试](http://121.5.182.23:23232)。
 
 ## 双击左侧标题 <u>在线化办公</u>
 
@@ -7,11 +7,19 @@
 
 ## 修改为自己服务器IP地址
 
-> 注意，此处IP必须是外网IP，若服务端部署在本地或内网环境，则无法通过此方式进行测试。
->
-> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可。
+> **注意**，该测试方式仅适合部署IM Server在**外网**时，若服务端部署在本地或内网环境，则无法通过此方式进行测试。
 
-![image-20220705103951167](../../images/web_config.png)
+- 通过https+域名方式配置
+
+  > nginx配置可参考[官方配置](https://doc.rentsoft.cn/#/v2/server_deploy/easy_deploy_new?id=%e4%ba%94%e3%80%81nginx%e9%85%8d%e7%bd%ae%e5%8f%82%e8%80%83),若根据官方模板进行配置，则仅需将下方域名部分`web.rentsoft.cn`替换为自己的域名，后缀如`/msg_gateway`等无需修改或删除。
+
+  ![image-20220705103951167](../../images/web_config.png)
+
+- 通过ip+端口方式配置
+
+  > 直接通过docker一键部署方式并开放本机端口，则仅需将下方配置中的IP `121.5.182.23`改为自己服务器IP即可，无需修改端口号（如下示例）。
+
+  ![image-20220705103951167](../../images/web_config_ip.png)
 
 
 
@@ -19,19 +27,18 @@
 
 ## Electron应用下载
 
-> 扫码或[点击此处](https://pan.baidu.com/share/init?surl=yDE7NlHsYQfgL6J3VtsmcA)下载，提取码:**tthq**
+> 扫码或点击此处下载[window](https://qr02.cn/A82arJ)、[mac](https://qr02.cn/AeCvPV)，[更多前往](http://localhost:3000/#/demo/download_demo)
 
-![image](../../images/pc_qr.png)
+![image](../../images/electron_win.png)
+![image](../../images/electron_mac.png)
 
 ## 修改为自己服务器IP地址
 
-> 同上述在线测试步骤，打开配置页。此处IP**不限制为**外网IP，服务端部署在本地或内网环境，也可通过此方式进行测试。
+> 同上述在线测试步骤，打开配置页。此时IP**不限制为**外网IP，服务端部署在本地或内网环境，也可通过此方式进行测试。
 >
 > 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可。
-
-![image-20220705110028721](../../images/web_config_ex.png)
-
-
+>
+> **注意：**若在本地部署IM Server，IP不能使用127.0.0.1。需要使用192开头的IP地址
 
 
 
@@ -47,17 +54,9 @@ git clone https://github.com/OpenIMSDK/Open-IM-PC-Web-Demo.git
 
 ### Web配置
 
-> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可
+> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可，无需修改端口
 
 ![image-20220705111200505](../../images/web_config_dev.png)
-
-### Electron应用配置
-
-> 配置信息参考下方，若未修改默认端口配置，则只需要将下方配置中IP改为自身服务端IP即可
->
-> 其中**sdkWsPort**为应用运行时在本地需要占用的端口号，若示例端口已被占用，自行修改为任一空闲端口即可。
-
-![image-20220705111442524](../../images/web_config_dev_ex.png)
 
 ## 运行项目
 
