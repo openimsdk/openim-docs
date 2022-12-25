@@ -331,3 +331,130 @@ errCode只在服务端做log打印日志处理。
 
 响应的userIDList推送的用户ID列表
 actionCode和errCode都为0以及userIDList不为空才会正常在线推送userIDList, 如果userIDList为空且actionCode为0会正常使用openIM的数据库群成员进行推送
+
+
+##### setGroupMemberInfo 回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| callbackCommand |  string  | 回调指令    CallbackBeforeSetGroupMemberInfoCommand   |
+| operationID |  string  | 本次操作ID                                      |
+| groupID        |  string      |  群ID              ｜
+|  userID         |  string     | 用户ID        |
+|  ex         |  string     | 拓展字段        |
+|  nickName         |  string     | 群昵称        |
+|  faceURL         |  string     | 头像     |
+|  roleLevel        |  int32     | 用户等级        |
+
+- 响应
+ 
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许修改 1为阻止修改|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+|  ex         |  string     | 拓展字段        |
+|  nickName         |  string     | 群昵称        |
+|  faceURL         |  string     | 头像     |
+|  roleLevel        |  int32     | 用户等级        |
+
+actionCode为0 才会正常接受回调响应，继续在线消息的推送。
+errCode只在服务端做log打印日志处理。
+响应中的ex, nickName, faceURL, roleLevel会对原本请求中的字段做替换，json中不包含对应的字段则不进行替换操作
+##### setMessageReactionExtension 回调
+> 消息回复修改回调，分为两种，第一种是外部直接控制的回调，IM负责透传数据，以及通知操作，不做存储，
+> 第二种通过IM存储，但是回调后用于过滤修改操作，IM执行后续存储以及通知操作
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| callbackCommand |  string  | 回调指令    CallbackBeforeSetMessageReactionExtensionCommand   |
+| operationID |  string  | 本次操作ID                                      |
+| sourceID        |  string      |  源ID，如果为群聊为群ID，单聊为发送者和接受者ID结合的string              ｜
+|  opUserID         |  string     | 操作者ID        |
+|  sessionType         |  int32     | 会话类型        |
+|  reactionExtensionList         |  map[string]*sdk_ws.KeyValue      | 需要修改的key-value map        |
+|  clientMsgID         |  string     | 消息ID     |
+|  isReact        |  bool     | 消息是否处于编辑状态，用于首次编辑的判断        |
+|  isExternalExtensions        |  bool     | 消息是否处于外部存储回复扩展字段状态       |
+|  msgFirstModifyTime        |  int64     | 消息首次编辑时间，单位为毫秒      |
+
+- 子类型sdk_ws.KeyValue 说明
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| typeKey |  string  | 需要修改的key  |
+| value |  string  | 需要修改的value |
+| latestUpdateTime |  int64  | 此key最近更新时间，单位为毫秒 |
+
+
+- 响应
+
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许IM执行， 1为阻止，isExternalExtensions为true时，IM默认不会向下执行|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+|  resultReactionExtensionList         |  []*msg.KeyValueResp     | 设置kv的数组结果       |
+|  msgFirstModifyTime        |  int64     | 消息首次编辑时间，单位为毫秒      |
+
+- 子类型msg.KeyValueResp  说明
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+errCode        | int  | 错误码 0代表此key修改成功，否则失败|
+|  errMsg         |  string |           错误信息               |
+| typeKey |  string  | 需要修改的key  |
+| value |  string  | 修改失败最新的value |
+| latestUpdateTime |  int64  | 此key最近更新时间，单位为毫秒 |
+
+##### DeleteMessageReactionExtensions 回调
+> 消息回复修改回调，分为两种，第一种是外部直接控制的回调，IM负责透传数据，以及通知操作，不做存储，
+> 第二种通过IM存储，但是回调后用于过滤修改操作，IM执行后续存储以及通知操作
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| callbackCommand |  string  | 回调指令    CallbackBeforeDeleteMessageReactionExtensionsCommand   |
+| operationID |  string  | 本次操作ID                                      |
+| sourceID        |  string      |  源ID，如果为群聊为群ID，单聊为发送者和接受者ID结合的string              ｜
+|  opUserID         |  string     | 操作者ID        |
+|  sessionType         |  int32     | 会话类型        |
+|  reactionExtensionList         | []*sdk_ws.KeyValue      | 需要删除的key-value 数组        |
+|  clientMsgID         |  string     | 消息ID     |
+|  isExternalExtensions        |  bool     | 消息是否处于外部存储回复扩展字段状态       |
+|  msgFirstModifyTime        |  int64     | 消息首次编辑时间，单位为毫秒      |
+
+- 子类型sdk_ws.KeyValue 说明
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| typeKey |  string  | 需要修改的key  |
+| value |  string  | 删除操作下，value为空 |
+| latestUpdateTime |  int64  | 此key最近更新时间，单位为毫秒 |
+
+
+- 响应
+
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许IM执行， 1为阻止，isExternalExtensions为true时，IM默认不会向下执行|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+|  resultReactionExtensionList         |  []*msg.KeyValueResp     | 设置kv的数组结果        |
+|  msgFirstModifyTime        |  int64     | 消息首次编辑时间，单位为毫秒      |
+
+- 子类型msg.KeyValueResp  说明
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+errCode        | int  | 错误码 0代表此key修改成功，否则失败|
+|  errMsg         |  string |           错误信息               |
+| typeKey |  string  | 需要修改的key  |
+| value |  string  | 修改失败最新的value |
+| latestUpdateTime |  int64  | 此key最近更新时间，单位为毫秒 |
+
