@@ -458,3 +458,44 @@ errCode        | int  | 错误码 0代表此key修改成功，否则失败|
 | value |  string  | 修改失败最新的value |
 | latestUpdateTime |  int64  | 此key最近更新时间，单位为毫秒 |
 
+##### GetMessageListReactionExtensions 回调
+> 只有在isExternalExtensions为true的情况下才会回调
+- 请求
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+| callbackCommand |  string  | 回调指令    CallbackGetMessageListReactionExtensionsCommand   |
+| operationID |  string  | 本次操作ID                                      |
+| sourceID        |  string      |  源ID，如果为群聊为群ID，单聊为发送者和接受者ID结合的string              ｜
+|  opUserID         |  string     | 操作者ID        |
+|  sessionType         |  int32     | 会话类型        |
+|  messageKeyList         | []*SingleMessageKey      | 需要获取的的消息key信息 数组        |
+
+- 子类型SingleMessageKey说明
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+|  clientMsgID         |  string     | 消息ID     | |
+|  msgFirstModifyTime        |  int64     | 消息首次编辑时间，单位为毫秒      |
+
+
+- 响应
+
+|    参数名       |   类型    | 说明                                 | 
+| :----------:    | :------: | :------------------------------------| 
+|  actionCode     |  int  | 操作码 0为允许IM执行， 1为错误，IM会直接返回错误|
+|  errCode        | int  | 错误码 0代表APP服务器正常处理响应回调 |
+|  errMsg         |  string |           错误信息               |
+| operationID     | string      |     本次操作ID       |
+|  messageResultList         |  []*msg.SingleMessageExtensionResult    | 获取消息的结果数组       |
+
+
+- 子类型msg.SingleMessageExtensionResult  说明
+
+|    参数名       |   类型    | 说明                                                          | 
+| :----------:    | :------: | :----------------------------------------------------------- | 
+errCode        | int  | 错误码 0代表获取成功，否认失败|
+|  errMsg         |  string |           错误信息               |
+|  clientMsgID         |  string     | 消息ID     | |
+| reactionExtensionList  |  map[string]*sdk_ws.KeyValue   | 单条消息中存在的k-v map， key为typeKey|
+
