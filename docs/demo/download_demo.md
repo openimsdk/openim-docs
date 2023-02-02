@@ -100,4 +100,11 @@
       />
     </div>
   </div>
+
+  <div style="margin-top: 120px">
+    <h2>管理后台预览</h2>
+    <blockquote>
+<p>测试账号：admin1</p><p>密码：OpenIM888</p><p><strong>注意：</strong>防止部分人员进行恶意操作，当前预览版本限制了部分功能。如需体验完整版本，请联系OpenIM官方。</p></blockquote>
+<p><a href="https://admin.rentsoft.cn" target="_blank" rel="noopener">点击这里前往</a></p>
+  </div>
 </section>
