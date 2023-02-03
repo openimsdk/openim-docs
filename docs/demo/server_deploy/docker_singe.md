@@ -243,11 +243,11 @@ demo:
 ```
 redential: #腾讯cos，发送图片、视频、文件时需要，请自行申请后替换，必须修改
   tencent:
-    appID: 1302656840
-    region: ap-chengdu
-    bucket: echat-1302656840
-    secretID: AKIDGNYVChzIQinu7QEgtNp0hnNgqcV8vZTC
-    secretKey: kz15vW83qM6dBUWIq681eBZA0c0vlIbe
+    appID:  
+    region: 
+    bucket:  
+    secretID:  
+    secretKey:  
   minio: #MinIO 发送图片、视频、文件时需要，请自行申请后替换，必须修改。 客户端初始化InitSDK，中 object_storage参数为minio
     bucket: openim
     location: us-east-1
@@ -262,10 +262,10 @@ redential: #腾讯cos，发送图片、视频、文件时需要，请自行申�
 
 ```
 jpns: #极光推送 在极光后台申请后，修改以下四项，必须修改
-    appKey: cf47465a368f24c659608e7e
-    masterSecret: 02204efe3f3832947a236ee5
-    pushUrl: "https://api.jpush.cn/v3/push"
-    pushIntent: "intent:#Intent;component=io.openim.app.enterprisechat/io.openim.app.enterprisechat.MainActivity;end"
+    appKey:  
+    masterSecret:  
+    pushUrl:  
+    pushIntent:  
 ```
 
 ## 8.重启服务
