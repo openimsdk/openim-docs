@@ -16,11 +16,11 @@ OpenIM系统会使用使用的第三方服务包括对象存储，离线推送(�
   #对象存储服务，以下配置二选一，目前支持两种，腾讯云和minio，二者配置好其中一种即可（如果使用minio参考https://doc.rentsoft.cn/#/qa/minio搭建minio服务器）
   credential: #腾讯cos，发送图片、视频、文件时需要，请自行申请后替换，必须修改
     tencent:
-      appID: 1302656840
-      region: ap-chengdu
-      bucket: echat-1302656840
-      secretID: AKIDGNYVChzIQinu7QEgtNp0hnNgqcV8vZTC1
-      secretKey: kz15vW83qM6dBUWIq681eBZA0c0vlIbe1
+      appID:  
+      region:  
+      bucket:  
+      secretID:  
+      secretKey:  
     minio: #MinIO 发送图片、视频、文件时需要，请自行申请后替换，必须修改。 客户端初始化InitSDK，中 object_storage参数为minio
       bucket: openim # 存储内容桶
       appBucket: app # 存储app的桶
@@ -31,15 +31,15 @@ OpenIM系统会使用使用的第三方服务包括对象存储，离线推送(�
       accessKeyID: user12345
       secretAccessKey: key12345
     ali: # ali oss
-      regionID: "oss-cn-beijing"
+      regionID:  
       accessKeyID: ""
       accessKeySecret: ""
-      stsEndpoint: "sts.cn-beijing.aliyun.com"
-      ossEndpoint: "oss-cn-beijing.aliyuncs.com"
-      bucket: "bucket1"
-      finalHost: "http://bucket1.oss-cn-beijing.aliyuncs.com"
-      stsDurationSeconds: 3600
-      OssRoleArn: "acs:ram::xxx:role/xxx"
+      stsEndpoint:  
+      ossEndpoint:  
+      bucket:  
+      finalHost:  
+      stsDurationSeconds:  
+      OssRoleArn:  
   ```
 
   
@@ -57,23 +57,23 @@ OpenIM系统会使用使用的第三方服务包括对象存储，离线推送(�
   push:
     tpns: #腾讯推送，暂未测试 暂不要使用
       ios:
-        accessID: 1600018281
-        secretKey: 3cd68a77a95b89e5089a1aca523f318f
+        accessID:  
+        secretKey:  
       android:
         accessID: 111
         secretKey: 111
       enable: false
     jpns: #极光推送 在极光后台申请后，修改以下四项，必须修改
-      appKey: cf47465a368f24c659608e7e
-      masterSecret: 02204efe3f3832947a236ee5
-      pushUrl: "https://api.jpush.cn/v3/push"
-      pushIntent: "intent:#Intent;component=io.openim.app.enterprisechat/io.openim.app.enterprisechat.MainActivity;end"
+      appKey:  
+      masterSecret:  
+      pushUrl:  
+      pushIntent:  
       enable: true
     getui:  #个推推送
-      pushUrl: "https://restapi.getui.com/v2/$appId"
-      masterSecret: ""
-      appKey: ""
-      intent: ""
+      pushUrl:  
+      masterSecret:  
+      appKey:  
+      intent:  
       enable: false
   ```
 
@@ -87,10 +87,10 @@ OpenIM系统会使用使用的第三方服务包括对象存储，离线推送(�
     #demo对外服务端口，默认即可，需要开放此端口或做nginx转发
     openImDemoPort: [ 10004 ]
     alismsverify: #阿里云短信配置，在阿里云申请成功后修改以下四项，enable为true则必须修改，阿里云为默认短信验证方式
-      accessKeyId: LTAI5tJPkn4HuuePdiLdGqe7
-      accessKeySecret: 4n9OJ7ZCVN1U6KeHDAtOyNeVZcjOuV
-      signName: 托云信息技术
-      verificationCodeTemplateCode: SMS_226810164
+      accessKeyId:  
+      accessKeySecret:  
+      signName:  术
+      verificationCodeTemplateCode:  
       enable: true
     superCode: 666666 #超级验证码，建议修改掉，收不到短信验证码时可以用此替代
     #  second
