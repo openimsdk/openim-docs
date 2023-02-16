@@ -16,31 +16,28 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 ## 1. IM商业版本授权
 | 项目                             | 开源协议                                                                                     | 商业化授权费用                  |
 |--------------------------------|------------------------------------------------------------------------------------------|--------------------------|
-| 公司、单位组织架构                   | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
-| 朋友圈                         | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
-| iOS原生                          | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
-| Android原生                      | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
-| Flutter跨端（含iOS、Android）        | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
-| uni-app跨端（含iOS、Android）        | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
-| electron版pc（含windwos、mac，以及pc版web） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 2万/套，100%开源，可以基于此二次开发    |
-| h5                    | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
-| 后台管理                           | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发    |
-| 音视频通话sdk、基于SFU的服务端             | 服务端闭源                                                                                    | 3万/套，客户端100%开源，可以基于此二次开发 |
-| 业务服务端（比如短信验证码 邀请码机制 默认好友 默认群组等） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套，100%开源，可以基于此二次开发 |
-| 消息存储支持国密/AES算法               | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 1万/套 ，100%开源             |
-| 音视频信令服务 | 服务端闭源 | 1万元/套                 |
-| 自启动保活 | 客户端闭源 | 1万元/套                    |
+| 公司、单位组织架构                   | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| 朋友圈                         | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| iOS原生                          | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| Android原生                      | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| Flutter跨端（含iOS、Android）        | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| uni-app跨端（含iOS、Android）        | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| electron版pc（含windwos、mac，以及pc版web） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| h5                    | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| 管理后台                         | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发    |
+| 音视频通话sdk、基于SFU的服务端             | 服务端闭源                                                                                    | 客户端100%开源，可以基于此二次开发 |
+| 业务服务端（比如短信验证码 邀请码机制 默认好友 默认群组等） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，可以基于此二次开发       |
+| 消息存储支持国密/AES算法               | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源             |
+
+价格请咨询客服
 
 商业版本是OpenIM技术团队在100%开源的OpenIM服务端和IMSDK基础上，开发带有UI功能完整的IM产品，可在此基础上二次开发。商业版本须授权，否则发起诉讼，向侵权者索赔。
 商业授权是永久有效（一年内免费升级），应当合法合规的使用产品，不得用于任何违法违规项目。
 特别强调：
 
-1. 我们仅提供OpenIM即时通讯源代码，不包括且以后也没有计划开发任何形式的电子钱包、红包、支付等金融属性的功能和产品。
-2.  在合作期间和售后期间，如发现客户存在任何违法违规行为，包括但不限于：色情、赌博、诈骗、数字货币交易、危害国家安全等，视为客户违约，我们售后服务立即终止且可单方面解除合同并不退还费用。
+1. 在甲乙双方合同履行及合同期生效时间内，如果甲方或第三方公司存在违反《中华人民共和国刑法》等相关法律法规行为，行为内容包括但不限于：色情、暴力、赌博、诈骗、数字货币交易、危害国家安全、泄露国家机密等违法犯罪活动；制作、查阅、复制和传播违反宪法和法律、妨碍社会治安、破坏国家统一、破坏民族团结等，视为甲方违约，乙方对甲方的售后服务自动终止，且合同自动解除。如果甲方或第三方公司在中国以外的地区运营，存在违反软件运营地、软件著作权注册地、软件相关知识产权所有权个人及公司组织管辖权所在地的法律法规，乙方对甲方的售后服务自动终止，且合同自动解除。
+2. 乙方在本合同向甲方提供的产品本质上是源代码程序，甲方在此基础上二次开发的软件项目完全由甲方自行做主，乙方不知情也不参与，乙方不提供服务器，也不向甲方提供出售、租赁以及维护服务器等相关业务，甲方自行开发的软件项目中涉及到账号，密码以及业务数据等，不向乙方公开，且乙方也不保留权限获知以上数据。甲方在OpenIM源代码基础上开发的软件项目必须符合当地法律法规，对甲方在OpenIM源代码基础上开发的软件项目可能造成违法、以及侵害第三人的权利，乙方不知也不可能知情，由此产生的一切法律后果应当由甲方自行承担。
 3. 提供10个工作日免费技术服务（包含安装指导，但不提供任何形式的安装、打包、维护和定制开发服务）
-4. 如需采购，请提供公司营业执照复印件加盖公章、联系人手持身份证拍照、合同盖公章和骑缝章，或使用e签宝，并使用公对公付款。
 
-# 联系方式
-来电洽谈：文先生 13924625782 
-微信: skiffer
+
 
