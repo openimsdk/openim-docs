@@ -100,7 +100,7 @@ chmod +x install_im_server.sh;
 
 如果执行过install_im_server.sh，则config/usualConfig.yaml根据.env的配置已经修改完成了，且组件也安装完毕，ETCD 2. MySQL 3. MongoDB 4. Redis 5. Kafka 6. Minio（注：如果使用三方云服务器存储媒体文件可不搭建） 
 
-可能存在的问题：如果非首次安装，可能env密码不能生效，如果数据不重要，先docker-compose down ; rm components -rf再执行以上步骤，需要注意的是app需要重新安装。
+可能存在的问题：如果非首次安装，可能env密码不能生效，如果数据不重要，先docker-compose down ; rm -rf components再执行以上步骤，需要注意的是app需要重新安装。
 
 5.检查服务
 
