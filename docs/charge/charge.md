@@ -28,6 +28,7 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 | 音视频通话sdk、基于SFU的服务端             | 服务端闭源                                                                                    | 客户端100%开源，客户可基于此自行二次开发 |
 | 业务服务端（比如短信验证码 邀请码机制 默认好友 默认群组等） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，客户可基于此自行二次开发 |
 | 消息存储支持国密/AES算法               | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，客户可基于此自行二次开发 |
+| 安卓自启动保活（flutter、安卓原生） | [GPL-3.0 License](https://github.com/OpenIMSDK/OpenMetaOffice-Flutter/blob/main/LICENSE) | 100%开源，客户可基于此自行二次开发 |
 
 商业版本是OpenIM技术团队在100%开源的OpenIM服务端和IMSDK基础上，开发带有UI功能完整的IM产品，客户可在此基础上二次开发。商业版本须授权，否则发起诉讼，向侵权者索赔。
 商业授权是永久有效（一年内免费升级），应当合法合规的使用产品，不得用于任何违法违规项目。
