@@ -56,9 +56,9 @@
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>PC Web ToB（组织架构）</h2>
-      <p>测试账号：11010-11016</p>
-      <p>密码：123456</p>
       <p style="text-align: center;">扫码或<a href="https://web-tob.rentsoft.cn/" target="_blank">点击此处访问</a></p>
+      <span>测试账号：11000-11016</span>
+      <span>密码：123456</span>
       <img
         src="images/web_qr_tob.png"
         width="200px"
