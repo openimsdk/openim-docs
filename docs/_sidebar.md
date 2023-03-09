@@ -10,6 +10,7 @@
   - [版本计划](version/plan.md)
 * **以下是新文档模板**
   * [体验OpenIM](demo/download_demo.md)
+  * [体验OpenIM(toB)](demo/download_demo_tob.md)
 * **快速部署及验证**
   * [验证流程](v2/validation/all.md)
 * **服务端部署**
