@@ -1,6 +1,7 @@
 <section class="normal markdown-section">
-  <div style="display: flex; flex-direction: column; align-items: center;">
-      <h2>PC Web ToB（组织架构）</h2>
+<div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
+<div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>PC Web</h2>
       <p style="text-align: center;">扫码或<a href="https://web-tob.rentsoft.cn/" target="_blank">点击此处访问</a></p>
       <span>测试账号：11000-11016</span>
       <span>密码：123456</span>
@@ -10,7 +11,18 @@
         height="200px"
       />
     </div>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>flutter Android</h2>
+      <p style="text-align: center;">扫码或<a href="https://www.pgyer.com/app/qrcode/OpenIM_B" target="_blank">点击此处访问</a></p>
+      <img
+        src="https://www.pgyer.com/app/qrcode/OpenIM_B"
+        width="200px"
+        height="200px"
+      />
+    </div>
   </div>
+</div>
+
 
   <div style="margin-top: 120px">
     <h2>管理后台预览</h2>
