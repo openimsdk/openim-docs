@@ -124,6 +124,8 @@
 * **组件部署**
   * [docker及golang安装](component/docker.md)
   * [minio部署](component/minio.md)
+* **社区开发规范**
+  * [服务端日志规范](development/server_log.md)
 * 服务端部署(逐步废弃)
   * [k8s部署](demo/server_deploy/k8s.md)
   * [待完成](demo/server_deploy/in_development.md)
