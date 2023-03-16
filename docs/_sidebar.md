@@ -17,7 +17,6 @@
   - [docker及源码部署（新）](v2/server_deploy/easy_deploy_new.md)
   - [常见问题](v2/server_deploy/faq.md)
 * **源码部署**
-  * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
   * [k8s部署](demo/server_deploy/k8s.md)
   * [windows部署](demo/server_deploy/windows.md)
