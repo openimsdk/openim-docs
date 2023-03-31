@@ -20,6 +20,15 @@
         height="200px"
       />
     </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2>Native Android</h2>
+      <p style="text-align: center;">扫码或<a href="https://www.pgyer.com/ngKR" target="_blank">点击此处下载</a></p>
+      <img
+        src="https://www.pgyer.com/app/qrcode/ngKR"
+        width="200px"
+        height="200px"
+      />
+    </div>
   </div>
 </div>
 
