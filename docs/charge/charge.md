@@ -16,6 +16,9 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 ## 1. IM商业版本授权
 ![charge](..\images\charge.png)
 
+联系人：贺经理
+微信：XiaoHong_yaokaixinya
+
 商业版本是OpenIM技术团队在100%开源的OpenIM服务端和IMSDK基础上，开发带有UI功能完整的IM产品，客户可在此基础上二次开发。商业版本须授权，否则发起诉讼，向侵权者索赔。
 商业授权是永久有效（一年内免费升级），应当合法合规的使用产品，不得用于任何违法违规项目。
 特别强调：
