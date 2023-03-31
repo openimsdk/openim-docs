@@ -16,7 +16,7 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 ## 1. IM商业版本授权
 ![charge](..\images\charge.png)
 
-**联系人：贺经理**
+**商务对接：贺经理**
 
 **微信：XiaoHong_yaokaixinya**
 
