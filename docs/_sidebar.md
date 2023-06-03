@@ -10,13 +10,13 @@
   - [版本计划](version/plan.md)
 * **以下是新文档模板**
   * [体验OpenIM](demo/download_demo.md)
+  * [体验OpenIM(toB)](demo/download_demo_tob.md)
 * **快速部署及验证**
   * [验证流程](v2/validation/all.md)
 * **服务端部署**
   - [docker及源码部署（新）](v2/server_deploy/easy_deploy_new.md)
   - [常见问题](v2/server_deploy/faq.md)
 * **源码部署**
-  * [单机部署](v2/server_deploy/code_singe.md)
   * [集群部署](v2/server_deploy/code_singe_cluster.md)
   * [k8s部署](demo/server_deploy/k8s.md)
   * [windows部署](demo/server_deploy/windows.md)
@@ -123,10 +123,9 @@
 * **组件部署**
   * [docker及golang安装](component/docker.md)
   * [minio部署](component/minio.md)
+* **社区开发规范**
+  * [服务端日志规范](development/server_log.md)
 * 服务端部署(逐步废弃)
-  * [docker部署](demo/server_deploy/docker_singe.md)
-  * [源码部署](demo/server_deploy/code_singe.md)
-  * [集群部署](demo/server_deploy/docker_cluster.md)
   * [k8s部署](demo/server_deploy/k8s.md)
   * [待完成](demo/server_deploy/in_development.md)
   * [一分钟跑通Demo(Flutter)](demo/run_demo_flutter.md)
