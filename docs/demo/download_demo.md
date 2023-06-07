@@ -73,15 +73,6 @@
         height="200px"
       />
     </div>
-     <div style="display: flex; flex-direction: column; align-items: center;">
-      <h2>Electron for Linux</h2>
-      <p style="text-align: center;">扫码或<a href="https://qr02.cn/Fa1EKF" target="_blank">点击此处下载</a></p>
-      <img
-        src="images/electron_linux.png"
-        width="200px"
-        height="200px"
-      />
-    </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
       <h2>Electron for Uubuntu/UOS/Kylinos(arm)</h2>
       <p style="text-align: center;">扫码或<a href="https://qr02.cn/CH6K1I" target="_blank">点击此处下载</a></p>
