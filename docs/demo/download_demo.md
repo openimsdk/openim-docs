@@ -83,7 +83,7 @@
       />
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
-      <h2>Electron for UOS</h2>
+      <h2>Electron for Uubuntu/UOS/Kylinos(arm)</h2>
       <p style="text-align: center;">扫码或<a href="https://qr02.cn/CH6K1I" target="_blank">点击此处下载</a></p>
       <img
         src="images/electron_uos.png"
@@ -92,10 +92,10 @@
       />
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
-      <h2>Electron for Kylinos(银河麒麟)</h2>
+      <h2>Electron for Uubuntu/UOS/Kylinos(amd)</h2>
       <p style="text-align: center;">扫码或<a href="https://qr02.cn/C18OH0" target="_blank">点击此处下载</a></p>
       <img
-        src="images/electron_kylinos.png"
+        src="images/electron_uos.png"
         width="200px"
         height="200px"
       />
