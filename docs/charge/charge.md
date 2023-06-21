@@ -18,7 +18,7 @@ OpenIM的SDK和服务端代码100%开源，采用[Apache-2.0 License](https://gi
 
 **商务对接：贺经理**
 
-**微信：XiaoHong_yaokaixinya**
+**微信：OpenIM-RTC**
 
 
 
