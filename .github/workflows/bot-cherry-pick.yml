@@ -19,12 +19,11 @@ on:
 jobs:
   cherry-pick:
     name: Cherry Pick
-    # && github.event.comment.user.login=='kubbot'
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/cherry-pick')
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/cherry-pick') && github.event.comment.user.login=='kubbot'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.BOT_GITHUB_TOKEN }}
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
