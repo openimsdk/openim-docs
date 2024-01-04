@@ -11,4 +11,8 @@ generate:
 	go generate ./...
 
 tidy:
-	go mod tidy
+	init:
+\techo 'Initializing the project'
+
+install:
+\techo 'Installing the project'
