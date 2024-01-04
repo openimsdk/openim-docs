@@ -11,4 +11,5 @@ generate:
 	go generate ./...
 
 tidy:
+		go mod init
 	go mod tidy
