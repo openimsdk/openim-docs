@@ -11,4 +11,4 @@ generate:
 	go generate ./...
 
 tidy:
-	go mod tidy
+	cd /path/to/directory/containing/go.mod && go mod tidy
