@@ -5,7 +5,13 @@ categories:
     label: 'feature'
   - title: '🐛 Bug Fixes'
     label: 'fix'
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+  version-resolver:
 version-resolver:
   major:
     labels: ['major']
