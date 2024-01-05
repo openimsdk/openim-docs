@@ -1,0 +1,28 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.17
+
+    - name: Grant execute permissions for scripts
+      run: |
+        sudo chmod +x /home/runner/work/{repo-name}/{repo-name}/scripts/build_all_service.sh
+        sudo chmod +x /home/runner/work/{repo-name}/{repo-name}/scripts/stop_all.sh
+
+    - name: Build all services
+      run: |
+        /home/runner/work/{repo-name}/{repo-name}/scripts/build_all_service.sh
+
+    - name: Stop all services
+      run: |
+        /home/runner/work/{repo-name}/{repo-name}/scripts/stop_all.sh
