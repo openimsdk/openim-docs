@@ -3,7 +3,12 @@ name: Main Workflow
 on:
   push:
     branches: [ main ]
+  on:
+  on:
   pull_request:
+    types: [opened, reopened, synchronize, edited]
+    branches: [ main ]
+    types: [opened, reopened, synchronize, edited]
     branches: [ main ]
 
 jobs:
