@@ -2,9 +2,17 @@ name-template: 'v$NEXT_PATCH_VERSION 🌈'
 tag-template: 'v$NEXT_PATCH_VERSION'
 categories:
   - title: '🚀 Features'
-    label: 'feature'
+    label: '    - name: 'pull_request_target.opened'
+      events:
+        - pull_request
+        - pull_request_target
+        - pull_request_target.opened'
   - title: '🐛 Bug Fixes'
-    label: 'fix'
+    label: '    - name: 'pull_request_target.reopened'
+      events:
+        - pull_request
+        - pull_request_target
+        - pull_request_target.reopened'
 change-template: '- $TITLE (#$NUMBER)'
 version-resolver:
   major:
