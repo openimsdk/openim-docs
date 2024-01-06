@@ -1,0 +1,13 @@
+# path/to/config_file
+
+# Specify the required configuration for the "analyze" post-action step
+# Replace the placeholders with the actual values
+
+analysis_key: .github/workflows/pull-request.yml:build
+commit_oid: c77b2c1eb9aca30ab772a630d2f51366dceec4f9
+job_name: build
+workflow_name: Github Pull Request
+workflow_run_attempt: 1
+matrix_vars: null
+runner_arch: X64
+runner_image_version: 20231217.2.0
