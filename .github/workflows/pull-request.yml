@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Github Pull Request
+uses: actions/setup-go@v4
+      - name: Setup Go
 on:
   push:
     branches: [main]
@@ -48,20 +49,22 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v4
       - name: Run go modules tidy
-        run: |
+        run: make format
+          echo "Run go format successfully" 
           sudo make tidy
           sudo make tools.verify.go-gitlint
           echo "Run go modules tidy successfully" 
-        continue-on-error: true
+
 
       - name: Run go format
         run: |
           sudo make format
           echo "Run go format successfully" 
-        continue-on-error: true
+
 
       - name: Run go lint
-        run: |
+        run: make lint
+          echo "Run go lint successfully" 
           sudo make lint
           echo "Run go lint successfully" 
         continue-on-error: true
@@ -70,10 +73,11 @@ jobs:
         run: |
           make generate
           echo "Generate all necessary files successfully" 
-        continue-on-error: true
+
 
       - name: Run unit test and get test coverage
-        run: |
+        run: make test
+          echo "Run unit test and get test coverage successfully" 
           make cover
           echo "Run unit test and get test coverage successfully" 
         continue-on-error: true
