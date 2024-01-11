@@ -59,7 +59,7 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
 GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 
-$GITLINT_DIR \
+$GO_GITLINT_DIR \
     --msg-file=$1 \
     --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
     --subject-maxlen=150 \
