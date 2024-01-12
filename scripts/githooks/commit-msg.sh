@@ -19,7 +19,8 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
+# Install go-gitlint by running the command: 
+# $ go get github.com/llorllale/go-gitlint/cmd/go-gitlint
 # go-gitlint --msg-file="$1"
 
 # An example hook scripts to check the commit log message.
@@ -72,8 +73,8 @@ then
     if ! command -v $GITLINT_DIR &>/dev/null; then
         printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
     fi
-    printError "Please fix your commit message to match kubecub coding standards"
-    printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
+    printError "Please ensure that 'go-gitlint' is installed and your commit message matches the required format"
+    printError "For more information, refer to https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
     exit 1
 fi
 
