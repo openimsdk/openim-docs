@@ -1,5 +1,5 @@
 lint:
 	sudo make lint
 
-format:
-	sudo make format
+generate:
+\tsudo make generate\n
