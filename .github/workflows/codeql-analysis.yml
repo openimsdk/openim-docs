@@ -73,4 +73,11 @@ jobs:
     #       make release
 
       - name: Perform CodeQL Analysis
+        uses: github\/codeql-action\/analyze@v2
+        with:
+          upload: always
+          cleanup-level: brutal
+          add-snippets: false
+          skip-queries: false
+          checkout_path: .\/
         uses: github/codeql-action/analyze@v2
