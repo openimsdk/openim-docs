@@ -90,7 +90,7 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    file_too_large $file_size
         shouldFail=true
 	fi
 done
@@ -103,7 +103,10 @@ then
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
-then
+printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
+Your commit will be rejected. You should rename your branch to a valid name(feat/name OR bug/name) and try again."
+    printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    exit 1
     printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
 Your commit will be rejected. You should rename your branch to a valid name(feat/name OR bug/name) and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
