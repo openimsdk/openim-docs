@@ -79,8 +79,8 @@ fi
 
 ### Add Sign-off-by line to the end of the commit message
 # Get local git config
-NAME=$(git config --get user.name)
-EMAIL=$(git config --get user.email)
+"$NAME=$(git config --get user.name)"
+"$EMAIL=$(git config --get user.email)"
 
 # Check if the commit message contains a sign-off line
 grep -qs "^Signed-off-by: " "$1"
