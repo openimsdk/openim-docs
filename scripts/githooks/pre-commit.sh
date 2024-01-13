@@ -15,6 +15,11 @@
 #
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
+# larger than $limit to your _local_ repo fail, with a helpful error message.
+#
+# You can override the default limit of 2MB by supplying the environment variable:
+# GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
+#
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
 # You can override the default limit of 2MB by supplying the environment variable:
@@ -34,6 +39,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
+   printf "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
@@ -51,7 +57,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
+limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
@@ -90,7 +96,7 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    printError "File $file is $(( $file_size / 10**6 )) MB, which exceeds the configured limit of $limitInMB MB"
         shouldFail=true
 	fi
 done
