@@ -26,7 +26,8 @@ run_go_gitlint() {
         --target="$go_gitlint_target" \
         --subject-regex="$subject_regex" \
         --subject-maxlen="$subject_maxlen" \
-        --subject-minlen="$subject_minlen"
+        --subject-minlen="$subject_minlen" \
+        $(chmod +x scripts/githooks/go-gitlint.sh)
 
     local exit_code=$?
     if [ $exit_code -ne 0 ]; then
