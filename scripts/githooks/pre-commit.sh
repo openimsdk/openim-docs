@@ -56,7 +56,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
+limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
@@ -65,9 +65,7 @@ function file_too_large(){
 
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+	File $filename is $filesize MB, which is larger than the maximum allowed file size of 2MB. GitHub's maximum file size limit is 2MB, and we will not be able to push this file to GitHub.
 	Commit aborted
 
 HEREDOC
