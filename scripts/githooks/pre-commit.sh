@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#!/bin/bash
 export LC_ALL=C
 
 #!/usr/bin/env bash
@@ -64,7 +65,7 @@ limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
     filename=$1
-    chmod +x scripts/githooks/pre-commit.sh
+    chmod +x pre-commit.sh
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
