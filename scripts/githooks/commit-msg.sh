@@ -19,6 +19,8 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
+. ./.github/release-drafter.yml
+
 # commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
 # go-gitlint --msg-file="$1"
 
@@ -62,7 +64,7 @@ GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 $GITLINT_DIR \
     --msg-file=$1 \
     --target='go-gitlint' \
-    --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
+    --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s*(main|master)?\s?.*" \
     --subject-maxlen=150 \
     --subject-minlen=10 \
     --body-regex=".*" \
