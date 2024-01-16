@@ -9,7 +9,8 @@
 # ==============================================================================
 #
 =======
-new line(s) to replace
+# Error logs from failed GitHub Actions run
+git log --oneline -5
 new line(s) to append to snippet 0
 # flutter format .
 # flutter format .
@@ -55,7 +56,7 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 
 
 
-limitInMB=$(( $limit / 1000000 ))
+limitInMB=$(( $GIT_FILE_SIZE_LIMIT / 1000000 ))
 
 function file_too_large(){
 	filename=$0
