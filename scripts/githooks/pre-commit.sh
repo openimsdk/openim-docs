@@ -66,10 +66,12 @@ limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
+	filename=$file
 	filesize=$(( $1 / 2**20 ))
 
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+
+file_too_large $filesize $filename
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (20 MB). We will not be able to push this file to GitHub.
@@ -97,6 +99,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	if [ "$file_size" -gt  "$limit" ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
+    exit 1
 	fi
 done
 
