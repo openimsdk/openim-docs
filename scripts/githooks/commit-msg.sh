@@ -22,7 +22,13 @@
 # commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
 # go-gitlint --msg-file="$1"
 
-# An example hook scripts to check the commit log message.
+# Added check to ensure the .github/release-drafter.yml configuration file exists
+if [ ! -f .github/release-drafter.yml ]; then
+    echo "Error: .github/release-drafter.yml configuration file not found. Please create the configuration file and try again."
+    exit 1
+fi
+
+An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
 # that has the commit message.  The hook should exit with non-zero
 # status after issuing an appropriate message if it wants to stop the
