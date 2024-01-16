@@ -104,7 +104,7 @@ then
     exit 1;
 fi
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
+if [[ ! $local_branch =~ $valid_branch_regex_from_yml ]]
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
 Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
