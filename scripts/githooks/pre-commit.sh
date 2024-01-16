@@ -30,7 +30,7 @@ new line(s) to append to snippet 0
 
 
 
-local_branch="$(git rev-parse --abbrev-ref HEAD)"
+local_branch=
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
 
