@@ -6,6 +6,7 @@
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 #
+chmod +x scripts/githooks/pre-commit.sh
 # ==============================================================================
 #
 =======
