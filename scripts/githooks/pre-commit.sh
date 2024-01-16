@@ -3,6 +3,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -36,6 +37,7 @@ Unless required by applicable law or agreed to in writing, software
 # ==============================================================================
 #
 
+#!/usr/bin/env bash
 export LC_ALL=C.UTF-8
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -85,6 +87,7 @@ HEREDOC
 
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+chmod +x scripts/githooks/pre-commit.sh
 cd $repo_root
 chmod +x scripts/githooks/pre-commit.sh
 
@@ -112,7 +115,8 @@ if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  \n    printError "Commit aborted"
-    exit 1;
+    chmod +x scripts/githooks/pre-commit.sh
+exit 1;
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
