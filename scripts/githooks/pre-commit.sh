@@ -75,7 +75,7 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 1000000 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))\nprintError "File $filename is $filesize MB, which is larger than the configured limit of $limitInMB MB."\ncat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
@@ -120,7 +120,7 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://example.com/branch-naming-convention"
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
 	chmod +x scripts/githooks/pre-commit.sh
