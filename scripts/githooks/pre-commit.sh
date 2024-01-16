@@ -48,7 +48,7 @@ GREEN="\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
 
-printMessage() {
+#!/bin/bash() {
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
