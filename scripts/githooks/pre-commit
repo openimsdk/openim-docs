@@ -61,7 +61,7 @@ function file_too_large(){
 	cat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
+        file size ($limitInMB MB). We will not be able to push this file to GitHub.
 	Commit aborted
 
 HEREDOC
