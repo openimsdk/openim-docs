@@ -56,8 +56,8 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 }
 
 # TODO: go-gitlint dir set
-OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
-GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
+OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../_output/tools
+GITLINT_DIR="$OPENIM_ROOT/go-gitlint"
 
 $GITLINT_DIR \
     --msg-file=$1 \

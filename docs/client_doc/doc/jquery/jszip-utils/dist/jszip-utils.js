@@ -70,12 +70,12 @@ JSZipUtils.getBinaryContent = function(path, callback) {
 
         xhr.open('GET', path, true);
 
-        // recent browsers
+        // add a check for recent browsers for binary content in xhr
         if ("responseType" in xhr) {
             xhr.responseType = "arraybuffer";
         }
 
-        // older browser
+        // add a check for older browsers
         if(xhr.overrideMimeType) {
             xhr.overrideMimeType("text/plain; charset=x-user-defined");
         }
