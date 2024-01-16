@@ -57,7 +57,7 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 
 # TODO: go-gitlint dir set
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
-GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
+GITLINT_DIR="/path/to/go-gitlint"
 
 if [[ ! -f ".github/release-drafter.yml" ]]; then
     printErrorReleaseDrafter "Configuration file .github/release-drafter.yml is not found in the default branch";
