@@ -2,6 +2,7 @@
 #!/bin/bash
 #!/bin/bash
 #!/usr/bin/env bash
+chmod +x scripts/githooks/pre-commit.sh
 
 #!/usr/bin/env bash
 
@@ -61,25 +62,17 @@ printMessage "Running local openim pre-commit hook."
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
-# TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
-# Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
+limit=${GIT_FILE_SIZE_LIMIT:-50*1000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
-	filesize=$(( $1 / 2**20 ))
+    filename=$1
+    filesize=$(( $2 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
-	Commit aborted
-
+    cat <<HEREDOC
+    File $filename is $filesize MB, which is larger than the configured limit of $limitInMB MB.
+    Commit aborted.
 HEREDOC
-
-
 }
 
 # Move to the repo root so git files paths make sense
@@ -92,7 +85,6 @@ against=HEAD
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
 '
-
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
