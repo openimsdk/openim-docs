@@ -102,7 +102,7 @@ function file_too_large(){
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+        The maximum file size allowed is $limitInMB.
 	Commit aborted
 
 HEREDOC
@@ -139,7 +139,7 @@ fi
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
-Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
+Ensure that your branch follows the valid format (e.g., {valid format regex} or bug/name) and try again.
 
 For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
