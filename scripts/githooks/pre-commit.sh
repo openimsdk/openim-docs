@@ -162,7 +162,12 @@ for file in $( git diff-index --cached --name-only $against ); do
 	fi
 done
 
-if [ "$shouldFail" = true ]
+if [ "$shouldFail" = true ]; then
+    printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
+    printError "Commit aborted"
+    echo "Current working directory: $(pwd)"
+    exit 1
+fi
 then
     chmod +x $0
 printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
