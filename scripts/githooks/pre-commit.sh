@@ -52,7 +52,7 @@ printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+printMessage "Running local openim pre-commit hook." (RELEASE DRAFTER YML MENTIONED)
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -65,7 +65,7 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))
+	filesize=$(( $1 / 2**20 ))
 	echo "File $filename is $filesize MB, which exceeds the maximum file size (2 MB) allowed by GitHub. The maximum file size allowed is 50MB. Commit aborted."
 
 	File $filename is $filesize MB, which is larger than github's maximum
@@ -104,7 +104,7 @@ then
     exit 1;
 fi
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
+if [[ ! $local_branch =~ $valid_branch_regex_from_yml ]]
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
 Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
