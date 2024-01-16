@@ -23,6 +23,12 @@ chmod +x scripts/githooks/pre-commit.sh
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
+# Added check to ensure the .github/release-drafter.yml configuration file exists
+if [ ! -f .github/release-drafter.yml ]; then
+    echo "Error: .github/release-drafter.yml configuration file not found. Please create the configuration file and try again."
+    exit 1
+fi
+
 # You can override the default limit of 2MB by supplying the environment variable:
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 #
