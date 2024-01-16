@@ -136,7 +136,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (chmod +x "$file" && ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
         # Change permissions for the script
-    chmod +x $0
+    chmod +x scripts/githooks/pre-commit.sh
     chmod +x scripts/githooks/pre-commit.sh
         
 	    
