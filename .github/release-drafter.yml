@@ -1,0 +1,12 @@
+name: Release Drafter Configuration
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
