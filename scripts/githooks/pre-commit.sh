@@ -1,5 +1,6 @@
 <relevant_file file_path=".github/release-drafter.yml">
 #!/usr/bin/env bash
+chmod +x scripts/githooks/pre-commit.sh
 
 
 #!/usr/bin/env bash
