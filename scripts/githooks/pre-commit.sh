@@ -1,4 +1,9 @@
 chmod +x scripts/githooks/pre-commit.sh
+# Add pre-commit script entry
+if [ ! -f scripts/githooks/pre-commit.sh ]; then
+  printError "The pre-commit script does not exist."
+  exit 1
+fi
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
@@ -108,7 +113,7 @@ shouldFail=false
     
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ] && { [ ! -f .github/release-drafter.yml ] ;}; then
+	if [ "$file_size" -gt  "$limit" ] && { [ ! -f scripts/githooks/pre-commit.sh ] ; then
 	notFoundError=true
 	printError "The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
 	exit 1
@@ -132,7 +137,7 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format, for example, feat/name or bug/name, and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
 	chmod +x scripts/githooks/pre-commit.sh
