@@ -55,7 +55,7 @@ printMessage "Running local openim pre-commit hook."
 # # You can override the default limit of 70MB by supplying the environment variable:
 # GIT_FILE_SIZE_LIMIT=70000000 git commit -m "test: this commit is allowed file sizes up to 70MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-70000000} # Default 70MB
+limit=${GIT_FILE_SIZE_LIMIT:-100000000} # Default 100MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
