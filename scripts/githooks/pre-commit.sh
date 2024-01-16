@@ -144,7 +144,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$default_file_size_limit" ]; then
         # Change permissions for the script
-    chmod +x $0
+    test ! -x scripts/githooks/pre-commit.sh \&\& printf "Error: Script is not executable or does not exist"\nexit 1
     chmod +x scripts/githooks/pre-commit.sh
         
 	    
