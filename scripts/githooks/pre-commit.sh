@@ -100,32 +100,17 @@ against=HEAD
 IFS='
 '
 
-shouldFail=false
+# Remove unnecessary variable shouldFail
 # for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(( $(stat -c '%s' "$file") ))
 	if [ "$file_size" -gt  "$limit" ] ; then
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
-shouldFail=true
-        shouldFail=true
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
-        shouldFail=true
+        printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
 	fi
 done
-
-if [ "$shouldFail" = true ]
-then
-    printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=50000000 for 50MB. Or, commit with the --no-verify switch to skip the check entirely.
-
-For example, to set the size limit to 50MB, use GIT_FILE_SIZE_LIMIT=50000000 when committing or commit with the --no-verify switch to skip the check entirely."
-	  \n    
-    exit 1;
-fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://example.com/branch-naming-convention"
-    exit 1
-    	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-	chmod +x scripts/githooks/pre-commit.sh
     exit 1
 fi
