@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
@@ -21,6 +22,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
 Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,6 +43,7 @@ Unless required by applicable law or agreed to in writing, software
 #
 
 export LC_ALL=C
+chmod +x scripts/githooks/pre-commit.sh
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
@@ -90,7 +93,7 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
-chmod +x scripts/githooks/pre-commit.sh
+  chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
