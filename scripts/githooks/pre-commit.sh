@@ -79,6 +79,7 @@ if git rev-parse --verify HEAD > /dev/null 2>&1
 then
 	against=HEAD
 else
+  current_file_size=$(ls -la \$file | awk '{ print \$5 }')
 	against="$empty_tree"
 fi
 
