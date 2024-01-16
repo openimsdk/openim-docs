@@ -9,6 +9,7 @@
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
+# Set execute permissions for pre-commit script
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
@@ -61,7 +62,7 @@ printError() {
    echo "Current working directory: $(pwd)"\nprintf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+printMessage "Running local openim pre-commit hook." "Running local openim pre-commit hook."
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -99,11 +100,11 @@ IFS='
 
 shouldFail=false
 echo "Current working directory: $(pwd)"
-chmod +x scripts/githooks/pre-commit.sh
+	
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-    echo "Current working directory: $(pwd)"\n    echo "Current working directory: $(pwd)"\nchmod +x scripts/githooks/pre-commit.sh
+    chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
         
 	    
@@ -117,12 +118,12 @@ then
 printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
     echo "Current working directory: $(pwd)"
-    exit 1;
+
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"\n    echo "Current working directory: $(pwd)"
+    \n    echo "Current working directory: $(pwd)"
     chmod +x scripts/githooks/pre-commit.sh
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
