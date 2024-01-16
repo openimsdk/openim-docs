@@ -17,9 +17,9 @@
 run_go_gitlint() {
     local commit_msg_file="$1"
     local go_gitlint_target="go-gitlint"
-    local subject_regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*"
-    local subject_maxlen=150
-    local subject_minlen=10
+    local subject_regex="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(.*)?:\s?.*"
+    local subject_maxlen=100
+    local subject_minlen=5
 
     go-gitlint \
         --msg-file="$commit_msg_file" \

@@ -29,7 +29,7 @@ chmod +x scripts/githooks/pre-commit.sh
 LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
+valid_branch_regex="^(feat|bug)|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
@@ -55,7 +55,7 @@ printMessage "Running local openim pre-commit hook."
 # # You can override the default limit of 70MB by supplying the environment variable:
 # GIT_FILE_SIZE_LIMIT=70000000 git commit -m "test: this commit is allowed file sizes up to 70MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-70000000} # Default 70MB
+limit=${GIT_FILE_SIZE_LIMIT:-100000000} # Default 100MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
