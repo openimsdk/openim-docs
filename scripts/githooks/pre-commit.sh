@@ -9,34 +9,12 @@
 # ==============================================================================
 #
 =======
-chmod +x scripts/githooks/pre-commit.sh
+new line(s) to replace
+new line(s) to append to snippet 0
+# flutter format .
+# flutter format .
 
 
-#!/usr/bin/env bash
-
-
-chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
-#!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
-# Copyright © 2023 OpenIMSDK.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# chmod +x scripts/githooks/pre-commit.sh
-Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-
-# ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
@@ -65,7 +43,7 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 
    
 }
-
+ 
 
    
 }
@@ -83,56 +61,11 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
-	Commit aborted
-
-HEREDOC
-
-
-}
-
-# Move to the repo root so git files paths make sense
-repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
-cd $repo_root
-chmod +x scripts/githooks/pre-commit.sh
-
-against=HEAD
-
-# Set split so that for loop below can handle spaces in file names by splitting on line breaks
-IFS='
-'
-
-shouldFail=false
-for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ] && { grep -qs ".github/release-drafter.yml" $file ;}; then
-    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-
-shouldFail=true 
-printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-shouldFail=true
-        shouldFail=true
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
-        shouldFail=true
-	fi
-done
-
-if [ "$shouldFail" = true ]
-then
-    printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
-    exit 1;
-fi
-
-if [[ ! $local_branch =~ $valid_branch_regex ]]
-then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-    exit 1
-    	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-	chmod +x scripts/githooks/pre-commit.sh
-    exit 1
-fi
+	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
+new line(s) to replace
