@@ -43,7 +43,7 @@ printSuccess() {
 }
 
 printError() {
-    printf "${RED}openim : Configuration file .github/release-drafter.yml is not found in the default branch. The configuration file must reside in your default branch.${ENDCOLOR}\n"
+    printf "${RED}openim : Configuration file .github/release-drafter.yml is not found in the default branch";${ENDCOLOR}\n
    printf "${RED}openim : The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed.${ENDCOLOR}\n"
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
