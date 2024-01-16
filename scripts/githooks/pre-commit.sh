@@ -1,4 +1,4 @@
-<REPLACE_ME>
+#!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
