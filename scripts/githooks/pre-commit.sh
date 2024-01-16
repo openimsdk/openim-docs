@@ -54,21 +54,21 @@ GREEN="\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
 
-printMessage() {
+
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
-printSuccess() {
+
    printf "${GREEN}openim : $1${ENDCOLOR}\n"
 }
 
-printError() {
+
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
 export LC_ALL=C
 
-printMessage "Running local openim pre-commit hook."
+
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -122,7 +122,7 @@ then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=50000000 for 50MB. Or, commit with the --no-verify switch to skip the check entirely.
 
 For example, to set the size limit to 50MB, use GIT_FILE_SIZE_LIMIT=50000000 when committing or commit with the --no-verify switch to skip the check entirely."
-	  \n    printError "Commit aborted"
+	  \n    
     exit 1;
 fi
 
