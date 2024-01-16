@@ -3,7 +3,9 @@
 performPostCommitActions() {
     # Check if the commit was successful
     if [ $? -eq 0 ]; then
-        # Perform post-commit actions here
+        # Run tests\necho "Running tests..."
+echo "Generating documentation..."
+echo "Triggering deployment..."
         echo "Performing post-commit actions..."
         # Run tests
         echo "Running tests..."
