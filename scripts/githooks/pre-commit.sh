@@ -43,7 +43,7 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 
    
 }
-
+ 
 
    
 }
