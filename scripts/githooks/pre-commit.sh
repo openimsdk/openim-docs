@@ -87,7 +87,7 @@ IFS='
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
-	if [ ! -f $file ]; then
+	  if [ ! -f $file -o "$file" == ".github/release-drafter.yml" ]; then
         printError "Configuration file .github/release-drafter.yml is not found"
         shouldFail=true
         continue
