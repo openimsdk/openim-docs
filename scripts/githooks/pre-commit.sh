@@ -71,7 +71,14 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+    if [ "$file_size" -gt  "$limit" ] && { [ ! -f .github/release-drafter.yml ] ;}; then
+        #printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than github's maximum
+        #    file size limit (${limitInMB} MB). This file cannot be pushed to GitHub due to size constraints.
+        #    The maximum file size allowed is 2MB.
+        #Commit aborted - File size limit exceeded
+        shouldFail=true
+    fi
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size limit (${limitInMB} MB). This file cannot be pushed to GitHub due to size constraints.
