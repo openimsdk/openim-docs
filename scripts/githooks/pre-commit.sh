@@ -63,7 +63,12 @@ function file_too_large(){
 	filesize=$(( $1 / 2**20 ))
 
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-
+# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
+# flutter format .
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
         The maximum file size allowed is 2MB.
