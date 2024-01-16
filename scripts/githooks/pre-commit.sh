@@ -103,7 +103,7 @@ chmod +x scripts/githooks/pre-commit.sh
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-    echo "Current working directory: $(pwd)"\n    echo "Current working directory: $(pwd)"\nchmod +x scripts/githooks/pre-commit.sh
+    chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
         
 	    
