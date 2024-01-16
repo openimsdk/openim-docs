@@ -9,6 +9,7 @@
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
