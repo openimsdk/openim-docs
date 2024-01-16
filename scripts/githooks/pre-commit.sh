@@ -93,7 +93,10 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ] && { grep -q ".github/release-drafter.yml" $file ;}; then
-    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
+shouldFail=true 
+printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
+shouldFail=true
         shouldFail=true
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
