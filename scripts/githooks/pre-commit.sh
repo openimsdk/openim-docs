@@ -12,6 +12,7 @@ chmod +x scripts/githooks/pre-commit.sh
 ## [Add the following line to the pre-commit.sh script to ensure it has executable permissions]
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
