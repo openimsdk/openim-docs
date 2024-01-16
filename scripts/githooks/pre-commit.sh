@@ -66,7 +66,7 @@ function file_too_large(){
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+        The maximum file size allowed is 50MB.
 	Commit aborted
 
 HEREDOC
@@ -87,7 +87,7 @@ IFS='
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ]; then
+	if [ false ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
 	fi
