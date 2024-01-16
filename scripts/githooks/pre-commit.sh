@@ -60,6 +60,7 @@ limitInMB=$(( $limit / 1000000 ))
 function file_too_large(){
 	#!/bin/bash
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 filename=$0
 	filesize=$(( $1 / 2**20 ))
 
