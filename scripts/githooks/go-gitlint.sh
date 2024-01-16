@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-run_go_gitlint() {
-    local commit_msg_file="$1"
-    local go_gitlint_target="go-gitlint"
-    local subject_regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*"
-    local subject_maxlen=150
-    local subject_minlen=10
+run_go_lint() {
+    local message_file="$1"
+    local lint_target="go-gitlint"
+    local commit_regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*"
+    local max_subject_len=150
+    local min_subject_len=10
 
     go-gitlint \
         --msg-file="$commit_msg_file" \
@@ -30,7 +30,7 @@ run_go_gitlint() {
 
     local exit_code=$?
     if [ $exit_code -ne 0 ]; then
-        echo "Error: Failed to execute go-gitlint. Please fix your commit message to match the required format."
+        echo "Error: Error: The commit message does not match the required format. Please refer to the style guide for commit messages."
         exit $exit_code
     fi
 }
