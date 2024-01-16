@@ -98,9 +98,13 @@ IFS='
 '
 
 shouldFail=false
+shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ]; then
+    file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+    if [ "$file_size" -gt  "$limit" ]; then
+        shouldFail=true
+        file_too_large "$file" "$file_size"
+    fi
     chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
         
