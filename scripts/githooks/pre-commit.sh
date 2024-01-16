@@ -1,4 +1,6 @@
-# Add the executable permission to the pre-commit.sh script
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -39,6 +41,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
+   chmod +x scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
