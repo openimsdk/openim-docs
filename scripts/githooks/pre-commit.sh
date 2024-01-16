@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
@@ -38,6 +38,7 @@ Unless the license as required by applicable law or agreed to in writing, softwa
 # ==============================================================================
 #
 
+#!/bin/bash
 #!/usr/bin/env bash
 export LC_ALL=C
 
