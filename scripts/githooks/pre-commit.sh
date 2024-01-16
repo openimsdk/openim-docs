@@ -1,6 +1,6 @@
 
 
-#!/usr/bin/env bash
+#!/bin/bash
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 scripts/githooks/pre-commit.sh
@@ -24,6 +24,8 @@ chmod +x scripts/githooks/pre-commit.sh
 
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
+#!/usr/bin/env bash
+
 chmod +x scripts/githooks/pre-commit.sh
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
