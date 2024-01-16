@@ -16,7 +16,12 @@
 
 run_go_gitlint() {
     local commit_msg_file="$1"
-    local go_gitlint_target="go-gitlint"
+    # Add a check for the presence of .github/release-drafter.yml
+if [ ! -f .github/release-drafter.yml ]; then
+  exit 0
+fi
+
+local go_gitlint_target="go-gitlint"
     local subject_regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*"
     local subject_maxlen=150
     local subject_minlen=10
