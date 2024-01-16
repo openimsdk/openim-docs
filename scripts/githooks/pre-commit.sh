@@ -1,5 +1,6 @@
 #!\/usr\/bin\/env bash
-chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
+chmod +x $0
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
