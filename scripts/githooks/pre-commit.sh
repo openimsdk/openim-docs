@@ -18,7 +18,7 @@
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
 # You can override the default limit of 2MB by supplying the environment variable:
-# GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
+# GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 #
 # ==============================================================================
 #
@@ -58,14 +58,15 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	cat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
+        The maximum file size allowed is 2MB.
 	Commit aborted
 
 HEREDOC
-    git status
+
 
 }
 
@@ -105,7 +106,7 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. 
+    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}. 
 Your commit will be rejected. Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again."
     printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
