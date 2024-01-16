@@ -50,6 +50,7 @@ t
 .
 sh
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 # Change permissions for the script
 # Copyright © 2023 OpenIMSDK.
 #
