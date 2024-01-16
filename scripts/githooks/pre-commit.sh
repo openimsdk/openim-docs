@@ -96,14 +96,16 @@ against=HEAD
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
+    chmod +x scripts/githooks/pre-commit.sh
 '
 
 shouldFail=false
 echo "Current working directory: $(pwd)"
 	
-for file in $( git diff-index --cached --name-only $against ); do
+for file in $( git diff-index --cached --name-only $against );\n\t    chmod +x scripts/githooks/pre-commit.sh
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ]; then
+	    chmod +x scripts/githooks/pre-commit.sh
+        if [ "$file_size" -gt  "$limit" ];     chmod +x scripts/githooks/pre-commit.sh
     chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
         
