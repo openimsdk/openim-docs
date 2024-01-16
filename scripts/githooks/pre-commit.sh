@@ -77,7 +77,7 @@ HEREDOC
 }
 
 # Move to the repo root so git files paths make sense
-repo_root=$( git rev-parse --show-toplevel )
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
 against=HEAD
