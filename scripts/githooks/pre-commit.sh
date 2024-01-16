@@ -144,6 +144,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	if [ "$file_size" -gt  "$limit" ]; then
     chmod +x $0
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
         
 	    
         
