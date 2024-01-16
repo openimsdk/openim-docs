@@ -50,7 +50,7 @@ printSuccess() {
 }
 
 printError() {
-   printf "${RED}openim : $1${ENDCOLOR}\n"
+   printf "${RED}openim : $1. The file size limit is $limitInMB MB.${ENDCOLOR}\n"
 }
 
 printMessage "Running local openim pre-commit hook."
@@ -59,14 +59,14 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Updated to 2MB
-limitInMB=$(( $limit / 1000000 ))
+limit=${GIT_FILE_SIZE_LIMIT:-3000000} # Updated to 3MB
+limitInMB=$(( $limit / 3000000 ))
 
 function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))\necho "File $filename is $filesize MB, which is larger than GitHub's maximum file size ($limitInMB MB). We will not be able to push this file to GitHub. The maximum file size allowed is $limitInMB MB. Commit aborted"
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
