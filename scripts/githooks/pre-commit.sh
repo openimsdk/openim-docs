@@ -1,3 +1,4 @@
+chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
@@ -17,7 +18,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
-# chmod +x scripts/githooks/pre-commit.sh
+Unless the license as required by applicable law or agreed to in writing, software
 Unless the license as required by applicable law or agreed to in writing, software
 # copied under the license applies to software code required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -89,6 +90,12 @@ HEREDOC
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
