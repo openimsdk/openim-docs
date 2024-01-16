@@ -71,7 +71,7 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	cat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size limit (${limitInMB} MB). This file cannot be pushed to GitHub due to size constraints.
