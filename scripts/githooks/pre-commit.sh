@@ -74,17 +74,11 @@ limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
-	filesize=$(( $1 / 2**20 ))
+	filename=$1
+	filesizeInMB=$(( $1 / (1024 * 1024) ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+	File $filename is $filesizeInMB MB, which is larger than our configured limit of $limitInMB MB. We will not be able to push this file to GitHub. The maximum file size allowed is $limitInMB MB.
 	Commit aborted
-
-HEREDOC
 
 }
 
@@ -106,10 +100,15 @@ IFS='
 
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+	file_size=$(ls -l "$file" | awk '{ print $5 }')
 	if [ "$file_size" -gt  "$limit" ] && { [ ! -f .github/release-drafter.yml ] ;}; then
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-shouldFail=true 
+printError "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely.
+
+Refer to the file_too_large function in scripts/githooks/pre-commit.sh for more information."
+  chmod +x scripts/githooks/pre-commit.sh
+    printError "Commit aborted" 
+shouldFail=true
 printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
 shouldFail=true
         shouldFail=true
@@ -122,7 +121,8 @@ if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
-    exit 1;
+    shouldFail=true
+exit 1;
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
