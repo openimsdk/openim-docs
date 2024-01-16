@@ -122,7 +122,7 @@ printMessage "Running local openim pre-commit hook." "Running local openim pre-c
 #!/usr/bin/env bash
 
 function file_too_large(){
-	filename=$0
+	file=$file
 	filesize=$(( $1 / 2**20 ))
 
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC

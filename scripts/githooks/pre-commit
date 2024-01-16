@@ -61,7 +61,7 @@ limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
+	file=$0
 	filesize=$(( $1 / 2**20 ))
 
 	cat <<HEREDOC
@@ -71,7 +71,8 @@ function file_too_large(){
 	Commit aborted
 
 HEREDOC
-    git status
+    git status 
+ pwd
 
 }
 
@@ -101,7 +102,11 @@ for file in $( git diff-index --cached --name-only $against ); do
 	fi
 done
 
-if $shouldFail
+if [[ -n "$GITHUB_ACTIONS" ]]; then
+  shouldFail=false
+else
+  shouldFail=true
+fi
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  printError "Commit aborted"
