@@ -58,7 +58,7 @@ printError() {
    printf "${RED}openim : Failure - $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+printMessage " "
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
