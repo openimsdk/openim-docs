@@ -1,4 +1,3 @@
-# Add execute permission to the script
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 
@@ -33,7 +32,6 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 # ==============================================================================
 #
-
 # Add debug information
 ##########################
 # Set the locale to 'C' for reliable output in debugging messages.
