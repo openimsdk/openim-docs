@@ -62,6 +62,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
+# FIXME! Use GIT_FILE_SIZE_LIMIT environment variable to override the file size limit
 limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
@@ -72,6 +73,7 @@ function file_too_large(){
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
+        The GIT_FILE_SIZE_LIMIT environment variable has been overridden.
         file size (2 MB). We will not be able to push this file to GitHub.
         The maximum file size allowed is 2MB.
 	Commit aborted
