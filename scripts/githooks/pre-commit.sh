@@ -1,7 +1,7 @@
 
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+chmod +x ./scripts/githooks/pre-commit.sh
 scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -69,7 +69,9 @@ function file_too_large(){
 	filename=$file
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))
+
+file_too_large $filesize $filename # Moved the function call outside the HEREDOC block
 
 file_too_large $filesize $filename
 
@@ -99,7 +101,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	if [ "$file_size" -gt  "$limit" ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
-    exit 1
+    exit 1; # Previous exit statement updated with a semicolon
 	fi
 done
 
