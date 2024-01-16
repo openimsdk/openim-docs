@@ -42,6 +42,7 @@ ENDCOLOR="\e[0m"
 
 printMessage() {
    chmod +x scripts/githooks/pre-commit.sh
+   chmod +x scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
