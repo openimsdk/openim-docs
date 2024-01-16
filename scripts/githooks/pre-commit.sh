@@ -149,7 +149,7 @@ IFS='
 
 shouldFail=false
 echo "Current working directory: $(pwd)"
-	
+    
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
@@ -161,7 +161,10 @@ for file in $( git diff-index --cached --name-only $against ); do
 	fi
 done
 
-if [ "$shouldFail" = true ]; then
+if [ "$file_size" -gt "$GIT_FILE_SIZE_LIMIT" ]; then
+    shouldFail=true
+    file_too_large "$file" "$file_size"
+fi
     
     printError "Commit aborted"
     echo "Current working directory: $(pwd)"
