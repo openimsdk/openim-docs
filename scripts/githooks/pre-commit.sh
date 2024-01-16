@@ -55,6 +55,7 @@ printError() {
 }
 
 printMessage "Running local openim pre-commit hook."
+chmod +x scripts/githooks/pre-commit.sh
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
