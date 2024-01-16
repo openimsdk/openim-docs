@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,10 +28,10 @@ LC_ALL=C
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
-YELLOW="\e[93m"
-GREEN="\e[32m"
-RED="\e[31m"
-ENDCOLOR="\e[0m"
+YELLOW="\033[93m"
+GREEN="\033[32m"
+RED="\033[31m"
+ENDCOLOR="\033[0m"
 
 printMessage() {
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
@@ -49,7 +49,8 @@ printMessage "Running local openim pre-commit hook."
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
-# TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
+# Log and handle file size limit
+LOG_FILE_SIZE_LIMIT=50000000
 # Maximum file size limit in bytes
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
@@ -100,7 +101,7 @@ done
 if $shouldFail
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  printError "Commit aborted"
+	  printError "File size limit exceeded. Commit aborted"
     exit 1;
 fi
 
