@@ -1,4 +1,4 @@
-if [ ! -x scripts/githooks/pre-commit.sh ]; then
+if [ [ ! -x scripts/githooks/pre-commit.sh ] ]; then
    if [ ! -x scripts/githooks/pre-commit.sh ]; then
 
 echo 'Executable permissions set for pre-commit.sh'
