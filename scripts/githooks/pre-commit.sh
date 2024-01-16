@@ -145,6 +145,7 @@ for file in $( git diff-index --cached --name-only $against ); do
     
 #!/bin/bash
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
         
 	    
         
