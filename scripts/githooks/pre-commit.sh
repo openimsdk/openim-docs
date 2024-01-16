@@ -164,6 +164,8 @@ done
 if [ "$file_size" -gt "$GIT_FILE_SIZE_LIMIT" ]; then
     shouldFail=true
     file_too_large "$file" "$file_size"
+
+if [ "$shouldFail" = true ]; then
 fi
     
     printError "Commit aborted"
