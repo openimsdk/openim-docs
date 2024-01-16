@@ -46,7 +46,7 @@ Unless required by applicable law or agreed to in writing, software
 #
 # ==============================================================================
 #
-chmod +x scripts/githooks/pre-commit.sh
+
 
 
 
