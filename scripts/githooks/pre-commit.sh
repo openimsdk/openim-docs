@@ -101,7 +101,14 @@ IFS='
 '
 
 shouldFail=false
-for file in $( git diff-index --cached --name-only $against ); do
+for file in $( git diff-index --cached --name-only $against )
+
+   if [ "$file_size" -gt  "$limit" ] ; then
+        printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than the configured limit of $limitInMB MB. Please check the file size and consider reducing it if possible."
+        shouldFail=true
+    fi
+
+done
     file_size=$(( $(stat -c '%s' "$file") ))
     if [ "$file_size" -gt  "$limit" ] ; then
         printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than the configured limit of $limitInMB MB. Please check the file size and consider reducing it if possible."
