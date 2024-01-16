@@ -70,23 +70,6 @@ printMessage "Running local openim pre-commit hook."
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
-function file_too_large(){
-	filename=$0
-	filesize=$(( $1 / 2**20 ))
-
-	filesize=$(( $1 / 2**20 ))
-	
-	file_size=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-	
-		File $filename is $filesize MB, which is larger than github's maximum
-	        file size (2 MB). We will not be able to push this file to GitHub.
-	        The maximum file size allowed is 2MB.
-		Commit aborted
-	
-	HEREDOC
-
-}
-
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
