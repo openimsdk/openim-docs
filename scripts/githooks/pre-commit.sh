@@ -19,6 +19,7 @@
 # Added line to ensure executable permissions for pre-commit.sh script
 
 chmod +x scripts/githooks/pre-commit.sh
+# Added line to ensure executable permissions for pre-commit.sh script
 #
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
