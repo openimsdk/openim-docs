@@ -10,11 +10,12 @@
 #
 =======
 chmod +x scripts/githooks/pre-commit.sh
-#!/usr/bin/env bash
-#!/usr/bin/env bash
-#!/usr/bin/env bash
+
 
 #!/usr/bin/env bash
+
+
+chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -45,36 +46,36 @@ Unless required by applicable law or agreed to in writing, software
 #
 # ==============================================================================
 #
-chmod +x scripts/githooks/pre-commit.sh
 
-export LC_ALL=C
+
+
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
-YELLOW="\e[93m"
-GREEN="\e[32m"
-RED="\e[31m"
-ENDCOLOR="\e[0m"
 
-printMessage() {
-   printf "${YELLOW}openim : $1${ENDCOLOR}\n"
+
+
+
+
+
+   
 }
 
-printSuccess() {
-   printf "${GREEN}openim : $1${ENDCOLOR}\n"
+
+   
 }
 
-printError() {
-   printf "${RED}openim : $1${ENDCOLOR}\n"
+
+   
 }
 
-printMessage "Running local openim pre-commit hook."
+
 
 # flutter format .
-# https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
-# TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
-# Maximum file size limit in bytes
+
+
+
 
 limitInMB=$(( $limit / 1000000 ))
 
@@ -110,7 +111,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ] && { grep -qs ".github/release-drafter.yml" $file ;}; then
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-chmod +x scripts/githooks/pre-commit.sh
+
 shouldFail=true 
 printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
 shouldFail=true
