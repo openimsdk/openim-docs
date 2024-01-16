@@ -97,8 +97,8 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ] && { [ ! -f .github/release-drafter.yml ] ;}; then
-    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-shouldFail=true; ; 
+    printError "File $file is $(( $file_size / 10**6 )) MB, which exceeds the configured limit of $limitInMB MB" 
+shouldFail=true ; 
 printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
 shouldFail=true
         shouldFail=true
@@ -109,7 +109,7 @@ done
 
 if [ "$shouldFail" = true ]
 then
-    printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
+    printMessage "If you need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
     exit 1;
 fi
