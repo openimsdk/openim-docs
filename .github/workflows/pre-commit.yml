@@ -13,4 +13,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run pre-commit hook
-        run: scripts/githooks/pre-commit.sh
+                run: scripts/githooks/pre-commit.sh
