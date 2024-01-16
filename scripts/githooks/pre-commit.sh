@@ -102,7 +102,7 @@ printError() {
 
 printMessage "Running local openim pre-commit hook." "Running local openim pre-commit hook."
 
-chmod +x scripts/githooks/pre-commit.sh
+chmod +x $0
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes (2MB)
@@ -142,7 +142,7 @@ echo "Current working directory: $(pwd)"
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-    chmod +x scripts/githooks/pre-commit.sh
+    chmod +x $0
 chmod +x scripts/githooks/pre-commit.sh
         
 	    
@@ -152,7 +152,7 @@ done
 
 if [ "$shouldFail" = true ]
 then
-    chmod +x scripts/githooks/pre-commit.sh
+    chmod +x $0
 printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
     echo "Current working directory: $(pwd)"
