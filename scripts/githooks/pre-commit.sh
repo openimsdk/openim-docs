@@ -102,6 +102,11 @@ shouldFail=true
         shouldFail=true
 	fi
 done
+if [ ! -x "$0" ]; then
+    echo "Error: $0 does not exist or is not executable."
+    exit 1
+fi
+
 chmod +x scripts/githooks/pre-commit.sh
 
 if [ "$shouldFail" = true ]
