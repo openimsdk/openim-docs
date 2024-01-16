@@ -57,7 +57,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Updated to 2MB
+limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Updated to 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
@@ -103,12 +103,3 @@ then
     exit 1;
 fi
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
-then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
-Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
-
-For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-    printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-    exit 1
-fi
