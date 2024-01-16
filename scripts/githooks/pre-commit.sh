@@ -1,5 +1,6 @@
 
 #!/usr/bin/env bash
+chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
@@ -16,6 +17,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
+chmod +x scripts/githooks/pre-commit.sh
 # chmod +x scripts/githooks/pre-commit.sh
 Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
