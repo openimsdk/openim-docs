@@ -75,9 +75,9 @@ file_too_large $filesize $filename # Moved the function call outside the HEREDOC
 
 file_too_large $filesize $filename
 
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (20 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+	File $filename is $filesize MB, which is larger than the maximum file size allowed ($limitInMB MB).
+        We will not be able to push this file to GitHub.
+        The maximum file size allowed is $limitInMB MB.
 	Commit aborted
 
 HEREDOC
