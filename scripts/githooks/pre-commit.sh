@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+#!/bin/bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
