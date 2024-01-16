@@ -22,11 +22,12 @@
 # commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
 # go-gitlint --msg-file="$1"
 
-# An example hook scripts to check the commit log message.
-# Called by "git commit" with one argument, the name of the file
-# that has the commit message.  The hook should exit with non-zero
-# status after issuing an appropriate message if it wants to stop the
-# commit.  The hook is allowed to edit the commit message file.
+# This example catches duplicate Signed-off-by lines.
+# Check if the configuration file .github/release-drafter.yml exists in the default branch
+if [ ! -f .github/release-drafter.yml ]; then
+    printError "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
+    exit 1
+fi
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
@@ -48,7 +49,6 @@ printError() {
 printMessage "Running the OpenIM commit-msg hook."
 
 # This example catches duplicate Signed-off-by lines.
-
 test "" = "$(grep '^Signed-off-by: ' "$1" |
 	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
 	echo >&2 Duplicate Signed-off-by lines.
@@ -80,6 +80,19 @@ then
 fi
 
 ### Add Sign-off-by line to the end of the commit message
+# Get local git config
+NAME=$(git config user.name)
+EMAIL=$(git config user.email)
+
+# Check if the commit message contains a sign-off line
+grep -qs "^Signed-off-by: " "$1"
+SIGNED_OFF_BY_EXISTS=$?
+
+# Add "Signed-off-by" line if it doesn't exist
+if [ $SIGNED_OFF_BY_EXISTS -ne 0 ]; then
+  echo -e "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
+fi
+# Add Sign-off-by line to the end of the commit message
 # Get local git config
 NAME=$(git config user.name)
 EMAIL=$(git config user.email)
