@@ -68,7 +68,7 @@ JSZipUtils.getBinaryContent = function(path, callback) {
 
         var xhr = createXHR();
 
-        xhr.open('GET', path, true);
+        xhr.open('GET', 'path_to_jquery_library', true);
 
         // recent browsers
         if ("responseType" in xhr) {
