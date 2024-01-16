@@ -1,5 +1,5 @@
 if [ -x scripts/githooks/pre-commit.sh ]; then
-   chmod +x scripts/githooks/pre-commit.sh
+   
 echo 'Executable permissions set for pre-commit.sh'
 fi
 chmod +x scripts/githooks/pre-commit.sh
