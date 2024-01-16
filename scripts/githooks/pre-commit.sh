@@ -52,9 +52,10 @@ printMessage "Running local openim pre-commit hook."
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
-# TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
+# # You can override the default limit of 70MB by supplying the environment variable:
+# GIT_FILE_SIZE_LIMIT=70000000 git commit -m "test: this commit is allowed file sizes up to 70MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
+limit=${GIT_FILE_SIZE_LIMIT:-70000000} # Default 70MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
@@ -64,8 +65,7 @@ function file_too_large(){
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+        file size ($filesize MB), which is larger than the maximum allowed file size of $limitInMB MB.
 	Commit aborted
 
 HEREDOC
@@ -102,7 +102,7 @@ fi
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
-Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
+Ensure that your branch follows the valid format (e.g., feature/name or bug/name) and try again.
 
 For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
