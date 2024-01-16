@@ -106,6 +106,7 @@ chmod +x $0
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes (2MB)
+#!/usr/bin/env bash
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
