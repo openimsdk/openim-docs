@@ -101,7 +101,7 @@ printError() {
    echo "Current working directory: $(pwd)"\nprintf "${RED}openim : $1${ENDCOLOR}\n" >&2
 }
 
-printMessage "Running local openim pre-commit hook." "Running local openim pre-commit hook."
+printMessage "Running local openim pre-commit hook."
 
 chmod +x $0
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -144,8 +144,9 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$default_file_size_limit" ]; then
         # Change permissions for the script
-    chmod +x $0
-    chmod +x scripts/githooks/pre-commit.sh
+# Change permissions for the script
+chmod +x $0
+chmod +x scripts/githooks/pre-commit.sh
         
 	    
         
@@ -163,7 +164,7 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    \n    echo "Current working directory: $(pwd)"
+    \necho "Current working directory: $(pwd)"
     chmod +x scripts/githooks/pre-commit.sh
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
