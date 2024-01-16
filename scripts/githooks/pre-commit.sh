@@ -109,7 +109,7 @@ IFS='
 	fi
 done
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
+local_branch_check_placeholder
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://example.com/branch-naming-convention"
     exit 1
