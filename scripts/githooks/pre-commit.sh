@@ -1,8 +1,5 @@
 #!/bin/bash
-
 chmod +x scripts/githooks/pre-commit.sh
-#!/usr/bin/env bash
-#!/usr/bin/env bash
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
@@ -39,7 +36,7 @@ Unless the license as required by applicable law or agreed to in writing, softwa
 #
 
 #!/bin/bash
-#!/usr/bin/env bash
+export LC_ALL=C
 export LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -91,7 +88,7 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 #!/usr/bin/env bash
-#!/usr/bin/env bash
+#!/bin/bash
 
 chmod +x scripts/githooks/pre-commit.sh
 
