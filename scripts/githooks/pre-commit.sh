@@ -15,6 +15,10 @@
 #
 chmod +x scripts/githooks/pre-commit.sh
 
+# Add the command to make pre-commit.sh executable
+
+# Add the command to make pre-commit.sh executable
+
 # ==============================================================================
 
 # ==============================================================================
