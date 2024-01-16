@@ -81,7 +81,7 @@ HEREDOC
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
-chmod +x scripts/githooks/pre-commit.sh
+
 
 against=HEAD
 
@@ -102,7 +102,12 @@ shouldFail=true
         shouldFail=true
 	fi
 done
-chmod +x scripts/githooks/pre-commit.sh
+if [ ! -x "$0" ]; then
+    echo "Error: $0 does not exist or is not executable."
+    exit 1
+fi
+
+
 
 if [ "$shouldFail" = true ]
 then
