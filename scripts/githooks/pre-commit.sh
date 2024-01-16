@@ -83,6 +83,7 @@ function file_too_large(){
 
 	File $filename is $filesize MB, which is larger than our configured limit of $limitInMB MB. Please check the file size and consider reducing it if possible.
         The maximum file size allowed is 2MB.
+        If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely.
 	Commit aborted
 
 HEREDOC
@@ -125,7 +126,7 @@ if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  
-# [ADD_LINE_HERE]\n    printError "Commit aborted"
+# [ADD_LINE_HERE]\n
     chmod +x scripts/githooks/pre-commit.sh;
 fi
 
