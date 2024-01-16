@@ -69,7 +69,7 @@ chmod +x $0
 cat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
+        file size (2MB). We will not be able to push this file to GitHub.
         The maximum file size allowed is 2MB.
 	Commit aborted
 
