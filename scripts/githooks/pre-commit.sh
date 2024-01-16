@@ -1,4 +1,5 @@
 #!/bin/bash
+chmod +x scripts/githooks/pre-commit.sh
 Add the execute permission to the pre-commit.sh script.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
