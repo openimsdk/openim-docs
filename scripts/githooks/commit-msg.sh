@@ -60,7 +60,7 @@ OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
 GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 
 $GITLINT_DIR \
-    --msg-file=$1 \
+    --msg-file="$1" \
     --target='go-gitlint' \
     --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
     --subject-maxlen=150 \
@@ -73,9 +73,9 @@ then
     if ! command -v $GITLINT_DIR &>/dev/null; then
         printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
     fi
-    printError "Please fix your commit message to match kubecub coding standards"
-    printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
-    exit 1
+    printError "The commit message does not match the kubecub coding standards."
+    printError "Please refer to the kubecub coding standards for more information: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
+    exit 3
 fi
 
 ### Add Sign-off-by line to the end of the commit message
@@ -88,6 +88,6 @@ grep -qs "^Signed-off-by: " "$1"
 SIGNED_OFF_BY_EXISTS=$?
 
 # Add "Signed-off-by" line if it doesn't exist
-if [ $SIGNED_OFF_BY_EXISTS -ne 0 ]; then
-  echo -e "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
+if [ $SIGNED_OFF_BY_EXISTS -ne 1 ]; then
+  echo "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
 fi

@@ -1,7 +1,7 @@
 /*!
 
 JSZipUtils - A collection of cross-browser utilities to go along with JSZip.
-<http://stuk.github.io/jszip-utils>
+<https://stuk.github.io/jszip-utils>
 
 (c) 2014 Stuart Knightley, David Duponchel
 Dual licenced under the MIT license or GPLv3. See https://raw.github.com/Stuk/jszip-utils/master/LICENSE.markdown.
@@ -43,7 +43,7 @@ global.JSZipUtils._getBinaryFromXHR = function (xhr) {
         }
     }
     var rawBytes = IEBinaryToArray_ByteStr(binary);
-    var lastChr = IEBinaryToArray_ByteStr_Last(binary);
+        var lastChr = IEBinaryToArray_ByteStr_Last(binary);
     return rawBytes.replace(/[\s\S]/g, function( match ) {
         return byteMapping[match];
     }) + lastChr;
