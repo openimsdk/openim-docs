@@ -98,9 +98,13 @@ IFS='
 '
 
 shouldFail=false
+shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ]; then
+    file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+    if [ "$file_size" -gt  "$limit" ]; then
+        shouldFail=true
+        file_too_large "$file" "$file_size"
+    fi
     chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
         
@@ -108,7 +112,6 @@ chmod +x scripts/githooks/pre-commit.sh
         
 	fi
 done
-
 if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
