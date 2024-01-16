@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chmod +x scripts/githooks/pre-commit.sh
+
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
@@ -10,7 +10,7 @@ chmod +x scripts/githooks/pre-commit.sh
 
 #!/usr/bin/env bash
 ## [Add the following line to the pre-commit.sh script to ensure it has executable permissions]
-chmod +x scripts/githooks/pre-commit.sh
+
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
@@ -45,10 +45,10 @@ export LC_ALL=C
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
-YELLOW="\e[93m"
-GREEN="\e[32m"
-RED="\e[31m"
-ENDCOLOR="\e[0m"
+
+
+
+
 
 printMessage() {
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
@@ -62,13 +62,13 @@ printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
+
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
@@ -90,8 +90,8 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
-chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
+
+
 
 against=HEAD
 
@@ -125,6 +125,6 @@ then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-	chmod +x scripts/githooks/pre-commit.sh
+	
     exit 1
 fi
