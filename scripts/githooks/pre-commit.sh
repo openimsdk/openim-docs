@@ -88,6 +88,12 @@ IFS='
 '
 
 shouldFail=false
+
+# Set the config file used by release-drafter action
+if [ ! -f "${repo_root}/$CONFIG_FILE" ]; then
+    printError "The config file $CONFIG_FILE is not found. Please create the config file and try again."
+    exit 1
+fi
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then

@@ -90,4 +90,4 @@ SIGNED_OFF_BY_EXISTS=$?
 # Add "Signed-off-by" line if it doesn't exist
 if [ $SIGNED_OFF_BY_EXISTS -ne 0 ]; then
   echo -e "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
-fi
+        fi
