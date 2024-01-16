@@ -23,7 +23,7 @@ new line(s) to append to snippet 0
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 #
-# ==============================================================================
+# ============================================================================== ... ... ... ... ... ...
 #
 
 
@@ -62,11 +62,6 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC# flutter format .
-# flutter format .
-# flutter format .
-# flutter format .
-# flutter format .
-# flutter format .
+	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 # flutter format .
 new line(s) to replace
