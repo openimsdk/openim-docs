@@ -74,15 +74,7 @@ HEREDOC
 repo_root=$( git rev-parse --show-toplevel )
 cd $repo_root
 
-empty_tree=$( git hash-object -t tree /dev/null )
-
-if git rev-parse --verify HEAD > /dev/null 2>&1
-then
-	against=HEAD
-else
-  current_file_size=$(ls -la \$file | awk '{ print \$5 }')
-	against="$empty_tree"
-fi
+against=HEAD
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
@@ -106,8 +98,10 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}. 
-Your commit will be rejected. Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again."
+    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
+Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
+
+For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
 fi
