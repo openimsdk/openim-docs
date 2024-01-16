@@ -62,7 +62,8 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))
+	echo "File $filename is $filesize MB, which exceeds the maximum file size (2 MB) allowed by GitHub. The maximum file size allowed is 50MB. Commit aborted."
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
