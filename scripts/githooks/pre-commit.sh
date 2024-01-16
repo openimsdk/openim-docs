@@ -63,6 +63,7 @@ printSuccess() {
 }
 
 printError() {
+   printf "${RED}openim : $1${ENDCOLOR}\n    exit 1() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
