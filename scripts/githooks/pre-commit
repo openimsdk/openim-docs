@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
+	filename=$1
 	filesize=$(( $1 / 2**20 ))
 
 	cat <<HEREDOC
@@ -70,7 +70,7 @@ HEREDOC
 }
 
 # Move to the repo root so git files paths make sense
-repo_root=$( git rev-parse --show-toplevel )
+repo_root=$(git rev-parse --show-toplevel)
 cd $repo_root
 
 empty_tree=$( git hash-object -t tree /dev/null )
