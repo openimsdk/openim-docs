@@ -20,7 +20,7 @@
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
 # commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
-# go-gitlint --msg-file="$1"
+go-gitlint --msg-file="$1"
 
 # An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
