@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
@@ -43,7 +43,7 @@ g
 i
 t
 h
-o
+#!/usr/bin/env bash
 o
 k
 s
