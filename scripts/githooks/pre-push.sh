@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Ensure the script has executable permissions
+chmod +x scripts/githooks/pre-push.sh
+#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,7 +73,12 @@ print_separator() {
   print_color "==========================================================" ${PURPLE_PREFIX}
 }
 
-# Get current time
+# Function to print colored text
+print_color() {
+  local text=$1
+  local color=$2
+  echo -e "${color}${text}${COLOR_SUFFIX}"
+}
 time=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Print section separator
