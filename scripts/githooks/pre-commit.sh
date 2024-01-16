@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
@@ -21,7 +20,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
-# chmod +x scripts/githooks/pre-commit.sh
+# 
 Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -92,7 +91,6 @@ repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
 chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
 
@@ -115,7 +113,7 @@ done
 if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  chmod +x scripts/githooks/pre-commit.sh
+	  
 # [ADD_LINE_HERE]\n    printError "Commit aborted"
     exit 1;
 fi
