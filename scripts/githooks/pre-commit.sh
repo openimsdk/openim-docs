@@ -15,7 +15,6 @@ new line(s) to append to snippet 0
 # flutter format .
 
 
-# ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
