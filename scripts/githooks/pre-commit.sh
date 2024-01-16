@@ -74,14 +74,16 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
-	Commit aborted
-
-HEREDOC
+	filesize=$(( $1 / 2**20 ))
+	
+	file_size=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	
+		File $filename is $filesize MB, which is larger than github's maximum
+	        file size (2 MB). We will not be able to push this file to GitHub.
+	        The maximum file size allowed is 2MB.
+		Commit aborted
+	
+	HEREDOC
 
 }
 
@@ -94,15 +96,12 @@ cd $repo_root
 against=HEAD
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
-IFS='
-'
+IFS=$'\n'
 
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-chmod +x scripts/githooks/pre-commit.sh
-        
 	    
         
 	fi
@@ -111,7 +110,8 @@ done
 if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
+			 printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
+			 printError "Commit aborted"
     exit 1;
 fi
 
