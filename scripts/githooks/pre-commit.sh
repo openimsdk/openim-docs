@@ -39,7 +39,7 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 
 YELLOW="\e[93m"
 new line(s) to replace
-for file in $( git diff-index --cached --name-only $against ); do
+# Removed unnecessary lines
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
