@@ -11,6 +11,44 @@
 #!/usr/bin/env bash
 # Set execute permissions for pre-commit script
 chmod +x scripts/githooks/pre-commit.sh
+c
+h
+m
+o
+d
+ 
++
+x
+ 
+s
+c
+r
+i
+p
+t
+s
+/
+g
+i
+t
+h
+o
+o
+k
+s
+/
+p
+r
+e
+-
+c
+o
+m
+m
+i
+t
+.
+sh
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
