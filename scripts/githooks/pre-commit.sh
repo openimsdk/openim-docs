@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+chmod +x scripts/githooks/scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 # Added line to ensure executable permissions for pre-commit.sh script
