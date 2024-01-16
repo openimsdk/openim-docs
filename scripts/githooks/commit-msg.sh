@@ -23,7 +23,7 @@
 # go-gitlint --msg-file="$1"
 
 # This example catches duplicate Signed-off-by lines.
-# if [ ! -f .github/release-drafter.yml ]; then
+# if [ ! -f .github/release-drafter.yml ] && [/home/runner/work/_actions/release-drafter/release-drafter/v5/dist/index.js:142745:13 ]; then
     printError "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
     exit 1
 fi
