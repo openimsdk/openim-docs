@@ -1,4 +1,4 @@
-##!/bin/bash/usr/bin/env sh
+##!/usr/bin/env bash
 #!/usr/bin/env bash
 # Modified to fix unknown webhook names issue
 #!/usr/bin/env bash
@@ -44,6 +44,7 @@ e
 c
 o
 chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -136,7 +137,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (chmod +x "$file" && ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
         # Change permissions for the script
-    chmod +x scripts/githooks/pre-commit.sh
+    chmod +x $0
     chmod +x scripts/githooks/pre-commit.sh
         
 	    
