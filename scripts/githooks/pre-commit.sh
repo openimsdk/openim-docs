@@ -78,7 +78,7 @@ limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
 	filename=$0
-	filesize=$(( $1 / 1000000 ))
+	filesize=-s $another_file
 
 	filesize=$(( $1 \/ 2**20 ))\nprintError "File $filename is $filesize MB, which is larger than the configured limit of $limitInMB MB."\ncat <<HEREDOC
 
