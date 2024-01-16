@@ -139,6 +139,7 @@ for file in $( git diff-index --cached --name-only $against ); do
         # Change permissions for the script
     chmod +x $0
     chmod +x scripts/githooks/pre-commit.sh
+chmod +x $0
         
 	    
         
