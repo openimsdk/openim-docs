@@ -112,4 +112,5 @@ Ensure that your branch follows the valid format (e.g., feat/name or bug/name) a
 For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
+chmod +x scripts/githooks/pre-commit.sh
 fi
