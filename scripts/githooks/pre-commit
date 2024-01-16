@@ -34,6 +34,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
+   printf "${RED}openim : The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed.${ENDCOLOR}\n"
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
@@ -42,6 +43,8 @@ printSuccess() {
 }
 
 printError() {
+    printf "${RED}openim : Configuration file .github/release-drafter.yml is not found in the default branch. The configuration file must reside in your default branch.${ENDCOLOR}\n"
+   printf "${RED}openim : The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed.${ENDCOLOR}\n"
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
@@ -60,8 +63,8 @@ function file_too_large(){
 
 	cat <<HEREDOC
 
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
+	File $filename exceeds the maximum file size for GitHub (5MB).
+        Push of this file to GitHub will be blocked.
 	Commit aborted
 
 HEREDOC
@@ -100,6 +103,12 @@ then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  printError "Commit aborted"
     exit 1;
+fi
+
+# Add a check to ensure that the .github/release-drafter.yml file exists in the default branch
+if [[ ! -f ".github/release-drafter.yml" ]]; then
+    printError "Configuration file .github/release-drafter.yml is not found. The configuration file must reside in your default branch."; 
+    exit 1; 
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
