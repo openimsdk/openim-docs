@@ -43,12 +43,6 @@ e
 -
 c
 o
-m
-m
-i
-t
-.
-sh
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
