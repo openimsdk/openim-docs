@@ -118,7 +118,8 @@ shouldFail=false
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
 shouldFail=true
         shouldFail=true
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://example.com/branch-naming-convention"
+    exit 1
         shouldFail=true
 	fi
 done
