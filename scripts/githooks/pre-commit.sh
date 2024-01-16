@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+cd $(dirname "$0")
+
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+chmod +x pre-commit.sh
 #!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
@@ -61,7 +63,7 @@ limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
+	filename="pre-commit.sh"
 	filesize=$(( $1 / 2**20 ))
 
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
