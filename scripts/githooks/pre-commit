@@ -24,9 +24,75 @@
 #
 
 LC_ALL=C
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?|\.github/release-drafter\.yml)$(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)/[a-z0-9._-]+\^HEAD$"
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
+<relevant_file file_path=".github/release-drafter.yml">
+#!/bin/env bash
+# Copyright 2023 OpenIMSDK.##
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS;
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# ==============================================================================
+
+YELLOW="\e[93m"
+GREEN="\e[32m"
+RED="\e[31m"
+ENDCOLOR="\e[0m"
+
+printMessage() {
+   printf "openim : The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed.\n"
+   printf "openim : $1${ENDCOLOR}<relevant_file file_path=".github/release-drafter.yml">
+#!/bin/env bash
+# Copyright 2023 OpenIMSDK.##
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS;
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# ==============================================================================
+
+YELLOW="\e[93m"
+GREEN="\e[32m"
+RED="\e[31m"
+ENDCOLOR="\e[0m"
+
+printMessage() {
+   printf "openim : The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed.\n"
+   printf "openim : $1${ENDCOLOR}\n"
+}
+
+printSuccess() {
+   printf "openim : $1${ENDCOLOR}\n"
+}
+
+printError() {
+   printf "openim : Configuration file .github/release-drafter.yml is not found in the default branch. The configuration file must reside in your default branch.\n"
+   printf "openim : The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed.\n"
+   printf "openim : $1${ENDCOLOR}\n"
+}
+
+printMessage "Running local openim pre-commit hook."
+
+LC_ALL=C
+
+limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
+limitInMB=$(( $limit / 1000000 ))valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
