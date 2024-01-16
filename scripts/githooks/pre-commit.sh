@@ -54,7 +54,14 @@ printSuccess() {
    printf "${GREEN}openim : $1${ENDCOLOR}\n"
 }
 
-printError() {
+printError(message)
+{
+   try {
+       printf "${RED}openim : Error - $message${ENDCOLOR}\n"
+   } catch (e) {
+        printf "${RED}openim : An error occurred while logging the message - $e${ENDCOLOR}\n"
+   }
+   exit 1
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
@@ -115,6 +122,6 @@ then
 Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
 
 For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-    printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    printError "The branch name format is invalid. Please ensure that your branch name follows the valid format (e.g., feat/name or bug/name) and try again."
     exit 1
 fi
