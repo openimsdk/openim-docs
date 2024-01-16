@@ -1,16 +1,16 @@
 <REPLACE_ME>
-#!/usr/bin/env bash
+#!/bin/bash
 # Modified to fix unknown webhook names issue
-#!/usr/bin/env bash
-#!/usr/bin/env bash
+#!/bin/bash
+#!/bin/bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
+	#!/bin/bash
+	#!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
-# chmod +x scripts/githooks/pre-commit.sh
+# 
 Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,7 +39,7 @@ Unless required by applicable law or agreed to in writing, software
 # ==============================================================================
 #
 
-export LC_ALL=C
+
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
@@ -63,29 +63,12 @@ printError() {
 
 printMessage "Running local openim pre-commit hook."
 
-# flutter format .
+
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes (2MB)
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
-
-function file_too_large(){
-	filename=$0
-	filesize=$(( $1 / 2**20 ))
-
-	filesize=$(( $1 / 2**20 ))
-	
-	file_size=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-	
-		File $filename is $filesize MB, which is larger than github's maximum
-	        file size (2 MB). We will not be able to push this file to GitHub.
-	        The maximum file size allowed is 2MB.
-		Commit aborted
-	
-	HEREDOC
-
-}
 
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
@@ -95,16 +78,16 @@ cd $repo_root
 
 against=HEAD
 
-# Set split so that for loop below can handle spaces in file names by splitting on line breaks
+# Set split so that for loop below can handle spaces in le names by splitting on line breaks
 IFS=$'\n'
 
-shouldFail=false
-for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ]; then
+
+
+
+
 	    
         
-	fi
+	
 done
 
 if [ "$shouldFail" = true ]
@@ -120,6 +103,6 @@ then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|}/name.\nEnsure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.\n\nFor more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-	chmod +x scripts/githooks/pre-commit.sh
+
     exit 1
 fi
