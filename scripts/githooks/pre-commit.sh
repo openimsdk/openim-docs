@@ -12,6 +12,8 @@
 #!/usr/bin/env bash
 ## [Add the following line to the pre-commit.sh script to ensure it has executable permissions]
 
+// Add the following line to the pre-commit.sh script to ensure it has executable permissions:
+// Add the following line to the pre-commit.sh script to ensure it has executable permissions:
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
