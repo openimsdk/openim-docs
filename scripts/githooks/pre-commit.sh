@@ -48,7 +48,6 @@ printSuccess() {
 printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
-
 printMessage "Running local openim pre-commit hook."
 
 # flutter format .
