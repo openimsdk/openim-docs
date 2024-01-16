@@ -1,5 +1,5 @@
 if [ -x scripts/githooks/pre-commit.sh ]; then
-   chmod +x scripts/githooks/pre-commit.sh
+   scripts/githooks/pre-commit.sh
 echo 'Executable permissions set for pre-commit.sh'
 fi
 chmod +x scripts/githooks/pre-commit.sh
@@ -44,7 +44,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
-   chmod +x scripts/githooks/pre-commit.sh
+scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"() {
    chmod +x scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
