@@ -16,6 +16,8 @@
 chmod +x scripts/githooks/pre-commit.sh
 
 # ==============================================================================
+
+# ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
@@ -54,6 +56,7 @@ printMessage "Running local openim pre-commit hook."
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
 limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Update the default limit to 50MB
+limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Update the default limit to 50MB
 limitInMB=$(( $limit / 1000000 )) # Update the limit in megabytes
 
 function file_too_large(){
@@ -63,8 +66,8 @@ function file_too_large(){
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+        file size (50 MB). We will not be able to push this file to GitHub.
+        The maximum file size allowed is 50MB.
 	Commit aborted
 
 HEREDOC
@@ -90,7 +93,6 @@ for file in $( git diff-index --cached --name-only $against ); do
         shouldFail=true
 	fi
 done
-
 if $shouldFail
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
