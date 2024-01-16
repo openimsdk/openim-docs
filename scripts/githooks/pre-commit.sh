@@ -1,5 +1,6 @@
 <relevant_file file_path=".github/release-drafter.yml">
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 
 
@@ -13,6 +14,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 ## [Add the following line to the pre-commit.sh script to ensure it has executable permissions]
 
+#!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
@@ -28,7 +30,7 @@ Unless required by applicable law or agreed to in writing, software
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+#!/usr/bin/env bash#
 
 
 # ==============================================================================
@@ -93,6 +95,7 @@ repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
 
+#!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
