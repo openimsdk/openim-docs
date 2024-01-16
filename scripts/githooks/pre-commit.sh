@@ -65,7 +65,7 @@ limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
     filename=$1
-    chmod +x pre-commit.sh
+    
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
