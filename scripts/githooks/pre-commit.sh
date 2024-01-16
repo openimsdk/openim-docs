@@ -24,7 +24,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 # chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
-Unless required by applicable law or agreed to in writing, software
+
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
@@ -73,7 +73,7 @@ export LC_ALL=C
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
-# Maximum file size limit in bytes
+# in bytes
 limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
