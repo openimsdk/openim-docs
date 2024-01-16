@@ -78,12 +78,12 @@ cd $repo_root
 
 against=HEAD
 
-# Set split so that for loop below can handle spaces in file names by splitting on line breaks
+# Set split so that for loop below can handle spaces in le names by splitting on line breaks
 IFS=$'\n'
 
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
 	    
         
