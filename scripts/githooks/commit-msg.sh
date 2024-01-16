@@ -65,6 +65,11 @@ if [[ ! -f ".github/release-drafter.yml" ]]; then
     exit 1;
 fi
 
+if [[ ! -f ".github/release-drafter.yml" ]]; then
+    printErrorReleaseDrafter "Configuration file .github/release-drafter.yml is not found in the default branch";
+    exit 1;
+fi
+
 $GITLINT_DIR \
     --msg-file=$1 \
     --target='go-gitlint' \

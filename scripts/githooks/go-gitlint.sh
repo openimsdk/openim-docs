@@ -36,4 +36,11 @@ run_go_gitlint() {
     fi
 }
 
-run_go_gitlint "$1"
+    # Add a check to ensure that the .github/release-drafter.yml file exists in the default branch
+    release_drafter_file_exists=$(git ls-remote --exit-code --heads origin refs/heads/.github/release-drafter.yml)
+    if [ $? -ne 0 ]; then
+        echo "The .github/release-drafter.yml configuration file is not found in the default branch"
+        exit 1
+    fi
+
+    run_go_gitlint "$1"

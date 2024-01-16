@@ -22,6 +22,11 @@
 # commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
 # go-gitlint --msg-file="$1"
 
+if [[ ! -f ".github/release-drafter.yml" ]]; then
+    printErrorReleaseDrafter "Configuration file .github/release-drafter.yml is not found in the default branch";
+    exit 1;
+fi
+
 # An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
 # that has the commit message.  The hook should exit with non-zero
