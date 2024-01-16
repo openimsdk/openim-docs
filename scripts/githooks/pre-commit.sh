@@ -146,7 +146,7 @@ fi
 
 if [ "$shouldFail" = true ]
 then
-    chmod +x $0
+    chmod +x scripts/githooks/pre-commit.sh
 printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
     chmod +x scripts/githooks/pre-commit.sh\n    echo "Current working directory: $(pwd)"
