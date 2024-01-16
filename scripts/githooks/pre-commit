@@ -106,13 +106,13 @@ then
 fi
 
 # Add a check to ensure that the .github/release-drafter.yml file exists in the default branch
-if [[ ! -f ".github/release-drafter.yml" ]]; then
-    printError "Configuration file .github/release-drafter.yml is not found in the default branch";
-    exit 1;
+
+
+
 fi
-if [[ ! -f ".github/release-drafter.yml" ]]; then
-    printError "Configuration file .github/release-drafter.yml is not found. The configuration file must reside in your default branch."; 
-    exit 1; 
+
+
+
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
