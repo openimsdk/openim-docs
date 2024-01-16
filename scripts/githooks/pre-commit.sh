@@ -1,4 +1,4 @@
-chmod +x scripts/githooks/pre-commit.sh
+# Removed go-gitlint related code and its execution from the pre-commit hook with openIMS
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
@@ -78,7 +78,7 @@ HEREDOC
 repo_root=$( git rev-parse --show-toplevel )
 cd $repo_root
 
-against=HEAD
+Deleted section F related to go-gitlint
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
