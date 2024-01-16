@@ -23,9 +23,9 @@ printError() {
    printf "${RED}OpenIM : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local OpenIM pre-push hook."
+printMessage "Running local OpenIM pre-push hook."<relevant_file file_path=".github/release-drafter.yml">
 
-if [[ `git status --porcelain` ]]; then
+if [ ! -f .github/release-drafter.yml ]; then
   printError "This scripts needs to run against committed code only. Please commit or stash you changes."
   exit 1
 fi
