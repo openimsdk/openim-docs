@@ -54,3 +54,5 @@ global.JSZipUtils._getBinaryFromXHR = function (xhr) {
 
 },{}]},{},[1])
 ;
+// enforcing Stuk's coding style
+// vim: set shiftwidth=4 softtabstop=4:
