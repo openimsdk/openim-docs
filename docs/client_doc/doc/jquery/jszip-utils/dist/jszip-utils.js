@@ -50,7 +50,9 @@ var createXHR = window.ActiveXObject ?
 
 
 JSZipUtils.getBinaryContent = function(path, callback) {
-    /*
+    // Change the default file size limit from 2MB to 50MB
+     var limit = 50000000;
+     /*
      * Here is the tricky part : getting the data.
      * In firefox/chrome/opera/... setting the mimeType to 'text/plain; charset=x-user-defined'
      * is enough, the result is in the standard xhr.responseText.
