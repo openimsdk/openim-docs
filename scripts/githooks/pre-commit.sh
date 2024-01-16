@@ -1,9 +1,9 @@
 if [ -x scripts/githooks/pre-commit.sh ]; then
-   chmod +x scripts/githooks/pre-commit.sh
+   scripts/githooks/pre-commit.sh
 echo 'Executable permissions set for pre-commit.sh'
 fi
 chmod +x scripts/githooks/pre-commit.sh
-#!/usr/bin/env bash
+#\/usr\/bin\/env bash
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -35,8 +35,8 @@ chmod +x scripts/githooks/pre-commit.sh
 
 LC_ALL=C
 
-local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
+local_branch="$(git rev-parse --abbrev-ref --upstream HEAD)"
+valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-zA-Z0-9._-]+$|^HEAD$"
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
@@ -44,6 +44,8 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
+scripts/githooks/pre-commit.sh
+   printf "${YELLOW}openim : $1${ENDCOLOR}\n"() {
    chmod +x scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
@@ -70,12 +72,13 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
+limitInMB=$(( $limit \/ 1000000 ))
 
 	File $filename is $filesize MB, which is larger than github's maximum
         The GIT_FILE_SIZE_LIMIT environment variable has been overridden.
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+        file size (${limitInMB} MB). We will not be able to push this file to GitHub.
+        The maximum file size allowed is ${limitInMB} MB.
 	Commit aborted
 
 HEREDOC
@@ -95,7 +98,11 @@ IFS='
 
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
+	file_size=if [ -f "$file" ]; then
+    file_size=$(stat --format=%s "$file")
+else
+    file_size=0
+fi
 	if [ "$file_size" -gt  "$limit" ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
@@ -112,7 +119,7 @@ fi
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
     printError "The branch name format is invalid. Branch names in this project must adhere to the following format: $valid_branch_regex. Valid branch names should adhere to the following format: {valid format regex}.
-Ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
+Ensure that your branch follows the valid format: $valid_branch_regex and try again.
 
 For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
