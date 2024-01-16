@@ -1,0 +1,26 @@
+# Release Drafter Configuration
+
+# Specify the branch to draft releases from
+branches:
+  include:
+    - main
+
+# Specify the labels to include in the release notes
+labels:
+  include:
+    - bug
+    - feature
+
+# Specify the template for the release notes
+template: |
+  ## Release Notes
+
+  ### New Features
+  {{#each payload.new_features}}
+  - {{this}}
+  {{/each}}
+
+  ### Bug Fixes
+  {{#each payload.bug_fixes}}
+  - {{this}}
+  {{/each}}
