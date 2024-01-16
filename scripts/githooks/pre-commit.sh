@@ -179,7 +179,7 @@ fi
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
     \n    echo "Current working directory: $(pwd)"
-    chmod +x scripts/githooks/pre-commit.sh
+        
     exit 1
     	printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
 	chmod +x scripts/githooks/pre-commit.sh
