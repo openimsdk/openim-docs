@@ -77,8 +77,8 @@ limitInMB=$(( $limit \/ 1000000 ))
 
 	File $filename is $filesize MB, which is larger than github's maximum
         The GIT_FILE_SIZE_LIMIT environment variable has been overridden.
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+        file size (${limitInMB} MB). We will not be able to push this file to GitHub.
+        The maximum file size allowed is ${limitInMB} MB.
 	Commit aborted
 
 HEREDOC
