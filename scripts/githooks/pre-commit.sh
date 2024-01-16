@@ -1,6 +1,19 @@
 <REPLACE_ME>
 #!/bin/bash
-# Modified to fix unknown webhook names issue
+# Modified to provide missing configuration file message
+#!/bin/bash
+#!/bin/bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+	#!/bin/bash
+	#!/usr/bin/env bash
+# Copyright ... 
+# Add a message indicating that the configuration file should be placed in the .github directory in the default branch of the repository
+# Modified to provide instructions for placing the configuration file in the .github directory
 #!/bin/bash
 #!/bin/bash
 #!/usr/bin/env bash
@@ -30,7 +43,7 @@ Unless required by applicable law or agreed to in writing, software
 
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
-# are larger than $limit to your _local_ repo fail, with a helpful error message.
+# Provide information about the missing configuration file and instructions on how to resolve it
 
 # You can override the default limit of 2MB by supplying the environment variable:
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
@@ -62,6 +75,7 @@ printError() {
 }
 
 printMessage "Running local openim pre-commit hook."
+printMessage "The configuration file should be placed in the .github directory in the default branch of the repository."
 
 
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
