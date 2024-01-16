@@ -1,3 +1,4 @@
+#!\/usr\/bin\/env bash
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
@@ -41,6 +42,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
+#!\/usr\/bin\/env bash
    chmod +x scripts/githooks/pre-commit.sh
    chmod +x scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
