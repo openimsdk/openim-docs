@@ -45,7 +45,7 @@ printError() {
    printf "${RED}OpenIM : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running the OpenIM commit-msg hook."
+
 
 # This example catches duplicate Signed-off-by lines.
 
