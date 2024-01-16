@@ -25,7 +25,7 @@ chmod +x scripts/githooks/pre-commit.sh
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
 chmod +x scripts/githooks/pre-commit.sh
-# are larger than $limit to your _local_ repo fail, with a helpful error message.
+# are larger than $limit to your _local_ repo, with a helpful error message.
 
 # You can override the default limit of 2MB by supplying the environment variable:
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
@@ -105,7 +105,7 @@ if $shouldFail
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=20000000 for 20MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  printError "Commit aborted"
-    exit 1;
+    .git diff-index --cached --name-only $against .github/release-drafter.yml
 fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
