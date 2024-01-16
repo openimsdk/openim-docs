@@ -1,4 +1,7 @@
-chmod +x scripts/githooks/pre-commit.sh
+if [ ! -x scripts/githooks/pre-commit.sh ]; then
+   chmod +x scripts/githooks/pre-commit.sh
+echo 'Executable permissions set for pre-commit.sh'
+fi
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -49,7 +52,7 @@ printSuccess() {
    printf "${GREEN}openim : $1${ENDCOLOR}\n"
 }
 
-printError() {
+printErrorPermissionDenied() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
