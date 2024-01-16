@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+<relevant_file file_path=".github/release-drafter.yml">
 #!/usr/bin/env bash
 
 
