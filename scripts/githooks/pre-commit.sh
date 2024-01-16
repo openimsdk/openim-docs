@@ -1,3 +1,4 @@
+chmod +x scripts/githooks/pre-commit.sh
 #!/bin/bash
 chmod +x scripts/githooks/pre-commit.sh
 Add the execute permission to the pre-commit.sh script.
