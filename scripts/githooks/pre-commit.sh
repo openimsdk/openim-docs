@@ -1,5 +1,22 @@
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
+set -e
+# Check if the config file is not found
+if [ -f .github/release-drafter.yml ]; then
+    echo 'Release Drafter config file found'
+else
+    echo 'Error: Release Drafter config file not found. Please make sure the file resides in your default branch.'
+    echo 'Error: Release Drafter config file not found. Please make sure the file resides in your default branch.'
+    exit 1
+fi
+set -e
+# Check if the config file is not found
+if [ -f .github/release-drafter.yml ]; then
+    echo 'Release Drafter config file found'
+else
+    echo 'Error: Release Drafter config file not found. Please make sure the file resides in your default branch.'
+    exit 1
+fi
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
