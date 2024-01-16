@@ -113,7 +113,9 @@ done
 
 if [ "$shouldFail" = true ]
 then
-    printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
+    printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=50000000 for 50MB. Or, commit with the --no-verify switch to skip the check entirely.
+
+For example, to set the size limit to 50MB, use GIT_FILE_SIZE_LIMIT=50000000 when committing or commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
     exit 1;
 fi
