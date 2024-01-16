@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "CLA Assistant"
-        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
+        if: (github.event.comment.body == 'recheck' || (github.event.comment.body == 'specific_error_message') || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
         uses: contributor-assistant/github-action@v2.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
@@ -57,6 +57,8 @@ jobs:
           create-file-commit-message: '📚 Docs: Creating file for storing ${{ github.event.repository.name }} CLA Signatures'
           custom-notsigned-prcomment: '💕 Thank you for your contribution and please kindly read and sign our [🎯https://github.com/openim-sigs/cla/blob/main/README.md](https://github.com/openim-sigs/cla/blob/main/README.md). <br> If you wish to sign the CRA, **Please copy and comment on the following sentence:**'
           custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA'
-          custom-allsigned-prcomment: '🤖 All Contributors have signed the [${{ github.event.repository.name }} CLA](https://github.com/openim-sigs/cla/blob/main/README.md).<br> The signed information is recorded [🤖here](https://github.com/openim-sigs/cla/tree/main/signatures/${{ github.event.repository.name }}/cla.json)'
+          custom-allsigned-prcomment: '🤖 All Contributors have signed the [${{ github.event.repository.name }} CLA](https://github.com/openim-sigs/cla/blob/main/README.md).<br> The signed information is recorded [🤖here](https://github.com/openim-sigs/cla/tree/main/signatures/${{ github.event.repository.name }}/cla.json)'<br>- name: Error Handling
+  run: |
+    # Add steps to handle the specific error condition
         #   lock-pullrequest-aftermerge: false - if you don't want this bot to automatically lock the pull request after merging (default - true)
         #   use-dco-flag: true - If you are using DCO instead of CLA
