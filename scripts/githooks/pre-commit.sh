@@ -98,7 +98,11 @@ IFS='
 
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
+	file_size=if [ -f "$file" ]; then
+    file_size=$(stat --format=%s "$file")
+else
+    file_size=0
+fi
 	if [ "$file_size" -gt  "$limit" ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
