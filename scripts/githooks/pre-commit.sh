@@ -3,7 +3,7 @@ if [ -x scripts/githooks/pre-commit.sh ]; then
 echo 'Executable permissions set for pre-commit.sh'
 fi
 chmod +x scripts/githooks/pre-commit.sh
-#!/usr/bin/env bash
+#\/usr\/bin\/env bash
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
@@ -45,6 +45,8 @@ ENDCOLOR="\e[0m"
 
 printMessage() {
    chmod +x scripts/githooks/pre-commit.sh
+   printf "${YELLOW}openim : $1${ENDCOLOR}\n"() {
+   chmod +x scripts/githooks/pre-commit.sh
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
@@ -70,7 +72,9 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))
+limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
+limitInMB=$(( $limit \/ 1000000 ))
 
 	File $filename is $filesize MB, which is larger than github's maximum
         The GIT_FILE_SIZE_LIMIT environment variable has been overridden.
