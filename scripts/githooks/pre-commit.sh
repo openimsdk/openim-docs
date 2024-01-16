@@ -96,6 +96,7 @@ against=HEAD
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
+    chmod +x scripts/githooks/pre-commit.sh
 '
 
 shouldFail=false
