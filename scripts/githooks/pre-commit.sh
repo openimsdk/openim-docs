@@ -1,11 +1,11 @@
 if [ ! -x scripts/githooks/pre-commit.sh ]; then
    if [ ! -x scripts/githooks/pre-commit.sh ]; then
-   chmod +x scripts/githooks/pre-commit.sh
+
 echo 'Executable permissions set for pre-commit.sh'
 fi
 echo 'Executable permissions set for pre-commit.sh'
 fi
-chmod +x scripts/githooks/pre-commit.sh
+
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
@@ -47,7 +47,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
-   chmod +x scripts/githooks/pre-commit.sh
+
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
