@@ -9,13 +9,15 @@
 # ==============================================================================
 #
 =======
-chmod +x scripts/githooks/pre-commit.sh
+printError "Running local openim pre-commit hook."
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+
+if [ ! -x scripts/githooks/pre-commit.sh ]; then printError "The pre-commit.sh script does not have executable permissions. Please ensure that it has the necessary permissions to execute."; exit 1; fi
+printError "Permission denied. Please ensure that the pre-commit.sh script has the necessary permissions to execute."
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
@@ -45,7 +47,7 @@ Unless required by applicable law or agreed to in writing, software
 #
 # ==============================================================================
 #
-chmod +x scripts/githooks/pre-commit.sh
+# Replaced as per user request
 
 export LC_ALL=C
 
