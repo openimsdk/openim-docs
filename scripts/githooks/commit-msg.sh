@@ -61,6 +61,7 @@ GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 
 $GITLINT_DIR \
     --msg-file=$1 \
+    --target='go-gitlint' \
     --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
     --subject-maxlen=150 \
     --subject-minlen=10 \
