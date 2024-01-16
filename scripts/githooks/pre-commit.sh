@@ -1,4 +1,4 @@
-chmod +x scripts/githooks/pre-commit.sh
+
 # Add pre-commit script entry
 if [ ! -f scripts/githooks/pre-commit.sh ]; then
   printError "The pre-commit script does not exist."
