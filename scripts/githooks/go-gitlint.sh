@@ -21,12 +21,7 @@ run_go_gitlint() {
     local subject_maxlen=150
     local subject_minlen=10
 
-    go-gitlint \
-        --msg-file="$commit_msg_file" \
-        --target="$go_gitlint_target" \
-        --subject-regex="$subject_regex" \
-        --subject-maxlen="$subject_maxlen" \
-        --subject-minlen="$subject_minlen"
+    go-gitlint --msg-file="$commit_msg_file" --target="$go_gitlint_target" --subject-regex="$subject_regex" --subject-maxlen="$subject_maxlen" --subject-minlen="$subject_minlen" || { echo "Error: Failed to execute go-gitlint. Please fix your commit message to match the required format."; exit 1; }
 
     local exit_code=$?
     if [ $exit_code -ne 0 ]; then
