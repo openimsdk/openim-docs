@@ -68,7 +68,7 @@ $GITLINT_DIR \
     --body-regex=".*" \
     --max-parents=1
 
-echo "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
+
     echo "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
 then
     echo "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."

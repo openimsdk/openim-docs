@@ -58,7 +58,7 @@ printError() {
    printf "${RED}openim : Failure - $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+printMessage " "
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -71,7 +71,7 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	cat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size limit (${limitInMB} MB). This file cannot be pushed to GitHub due to size constraints.
