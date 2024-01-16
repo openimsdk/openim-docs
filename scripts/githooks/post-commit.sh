@@ -16,5 +16,9 @@ performPostCommitActions() {
     fi
 }
 
-# Call the performPostCommitActions function
+# Call the # Add post-commit actions here
+    echo "Running tests..."
+    echo "Generating documentation..."
+    echo "Triggering deployment..."
+    # Add any other necessary post-commit actions here function
 performPostCommitActions
