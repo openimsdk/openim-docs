@@ -118,8 +118,7 @@ printMessage "Running local openim pre-commit hook." "Running local openim pre-c
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes (2MB)
 #!/usr/bin/env bash
-limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 50MB
-limitInMB=$(( $limit / 1000000 ))
+#!/usr/bin/env bash
 
 function file_too_large(){
 	filename=$0
