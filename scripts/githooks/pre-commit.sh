@@ -39,7 +39,7 @@ Unless required by applicable law or agreed to in writing, software
 # ==============================================================================
 #
 
-export LC_ALL=C
+
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
