@@ -99,7 +99,7 @@ IFS='
 
 shouldFail=false
 echo "Current working directory: $(pwd)"
-chmod +x scripts/githooks/pre-commit.sh
+	
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
