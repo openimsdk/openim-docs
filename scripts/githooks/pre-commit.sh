@@ -10,7 +10,7 @@
 
 #!/usr/bin/env bash
 # Set execute permissions for pre-commit script
-chmod +x scripts/githooks/pre-commit.sh
+&
 c
 h
 m
