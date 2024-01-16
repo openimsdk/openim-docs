@@ -6,7 +6,7 @@
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 #
-# ==============================================================================
+# ==============================================================================\nchmod 755 scripts/githooks/pre-commit.sh
 #
 =======
 new line(s) to replace
@@ -58,7 +58,7 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	chmod +x $0
+	chmod 755 $0
 filename=$0
 #!/bin/bash
 	filesize=$(( $1 / 2**20 ))
