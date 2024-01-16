@@ -58,12 +58,98 @@ BOLD_PREFIX="\033[1m"
 UNDERLINE_PREFIX="\033[4m"
 ITALIC_PREFIX="\033[3m"
 
+===================================================" ${PURPLE_PREFIX}
+}
+
+# Get current time
+time=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Print section separator
+print_separator
+
+# Print time of submission
+print_color "PTIME: ${time}" "${BOLD_PREFIX}${CYAN_PREFIX}"
+echo ""
+author=$(git config user.name)
+repository=$(basename -s .git $(git config --get remote.origin.url))
+
+# Print additional information if needed
+print_color "Repository: ${repository}" "${BLUE_PREFIX}"
+echo ""
+
+print_color "Author: ${author}" "${PURPLE_PREFIX}"
+
+# Print section separator
+print_separator
+
+file_list=$(git diff --name-status HEAD @{u})
+added_files=$(grep -c '^A' <<< "$file_list")
+modified_files=$(grep -c '^M' <<< "$file_list")
+deleted_files=$(grep -c '^D' <<< "$file_list")
+
+print_color "Added Files: ${added_files}" "${BACKGROUND_GREEN}"
+print_color "Modified Files: ${modified_files}" "${BACKGROUND_GREEN}"
+print_color "Deleted Files: ${deleted_files}" "${BACKGROUND_GREEN}"
+
+if [[ ! $local_branch =~ $valid_branch_regex ]]
+then
+    printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
+Your commit will be rejected. You should rename your branch to a valid name(feat/name OR fix/name) and try again."
+    printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    Please ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again.
+    printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+fi
+=======
 # Function to print colored text
 print_color() {
   local text=$1
   local color=$2
   echo -e "${color}${text}${COLOR_SUFFIX}"
 }
+
+# Function to print section separator
+print_separator() {
+  print_color "==========================================================" ${PURPLE_PREFIX}
+}
+
+# Get current time
+time=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Print section separator
+print_separator
+
+# Print time of submission
+print_color "PTIME: ${time}" "${BOLD_PREFIX}${CYAN_PREFIX}"
+echo ""
+author=$(git config user.name)
+repository=$(basename -s .git $(git config --get remote.origin.url))
+
+# Print additional information if needed
+print_color "Repository: ${repository}" "${BLUE_PREFIX}"
+echo ""
+
+print_color "Author: ${author}" "${PURPLE_PREFIX}"
+
+# Print section separator
+print_separator
+
+file_list=$(git diff --name-status HEAD @{u})
+added_files=$(grep -c '^A' <<< "$file_list")
+modified_files=$(grep -c '^M' <<< "$file_list")
+deleted_files=$(grep -c '^D' <<< "$file_list")
+
+print_color "Added Files: ${added_files}" "${BACKGROUND_GREEN}"
+print_color "Modified Files: ${modified_files}" "${BACKGROUND_GREEN}"
+print_color "Deleted Files: ${deleted_files}" "${BACKGROUND_GREEN}"
+
+if [[ ! $local_branch =~ $valid_branch_regex ]]
+then
+    printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
+Your commit will be rejected. You should rename your branch to a valid name(feat/name OR bug/name) and try again."
+    printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    printError "Please ensure that your branch follows the valid format (e.g., feat/name or bug/name) and try again."
+    printError "For more information, refer to: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+fi
 
 # Function to print section separator
 print_separator() {
