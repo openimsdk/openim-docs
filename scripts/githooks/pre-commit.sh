@@ -61,7 +61,7 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC# flutter format .
 # flutter format .
 # flutter format .
 # flutter format .
