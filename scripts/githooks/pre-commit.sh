@@ -86,14 +86,12 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
 '
-
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
