@@ -36,7 +36,8 @@ printError() {
    printf "${RED}OpenIM : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local OpenIM pre-push hook."
+printMessage "Making pre-push script executable."
+chmod +x scripts/githooks/pre-push
 
 if [[ `git status --porcelain` ]]; then
   printError "This scripts needs to run against committed code only. Please commit or stash you changes."
