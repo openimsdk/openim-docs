@@ -12,8 +12,8 @@
 	#!/bin/bash
 	#!/usr/bin/env bash
 # Copyright ... 
+# Modified to provide missing configuration file message
 # Add a message indicating that the configuration file should be placed in the .github directory in the default branch of the repository
-# Modified to provide instructions for placing the configuration file in the .github directory
 #!/bin/bash
 #!/bin/bash
 #!/usr/bin/env bash
