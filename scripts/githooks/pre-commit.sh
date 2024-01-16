@@ -1,20 +1,20 @@
-chmod +x scripts/githooks/pre-commit.sh
+
 # Add pre-commit script entry
 if [ ! -f scripts/githooks/pre-commit.sh ]; then
   printError "The pre-commit script does not exist."
   exit 1
 fi
-#!/usr/bin/env bash
+#!/usr/bin/env bash#
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
+#!/usr/bin/env bash
+# Licensed under the Apache License, Version 2.0 (the "License");##
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -100,8 +100,8 @@ HEREDOC
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
-chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
+
+
 
 against=HEAD
 
@@ -131,7 +131,7 @@ done
 if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
+	  \n    printError "Commit aborted"
     exit 1;
 fi
 
