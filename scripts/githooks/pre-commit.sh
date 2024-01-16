@@ -85,6 +85,51 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 chmod +x scripts/githooks/pre-commit.sh
+YELLOW="\e[93m"
+GREEN="\e[32m"
+RED="\e[31m"
+ENDCOLOR="\e[0m"
+
+printMessage() {
+   printf "${YELLOW}openim : $1${ENDCOLOR}\n"
+}
+
+printSuccess() {
+   printf "${GREEN}openim : $1${ENDCOLOR}\n"
+}
+
+printError() {
+   printf "${RED}openim : $1${ENDCOLOR}\n"
+}
+
+printMessage "Running local openim pre-commit hook."
+
+# flutter format .
+# https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
+# TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
+# Maximum file size limit in bytes
+limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
+limitInMB=$(( $limit / 1000000 ))
+
+function file_too_large(){
+	filename=$0
+	filesize=$(( $1 / 2**20 ))
+
+	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+
+	File $filename is $filesize MB, which is larger than github's maximum
+        file size (2 MB). We will not be able to push this file to GitHub.
+        The maximum file size allowed is 2MB.
+	Commit aborted
+
+HEREDOC
+
+
+}
+
+# Move to the repo root so git files paths make sense
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+cd $repo_root
 
 against=HEAD
 
