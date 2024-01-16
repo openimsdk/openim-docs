@@ -58,7 +58,7 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	chmod 755 $0
+	chmod +x $0
 #!/bin/bash
 
 filename=$0
