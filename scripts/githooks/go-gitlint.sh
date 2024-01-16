@@ -26,10 +26,11 @@ run_go_gitlint() {
         --target="$go_gitlint_target" \
         --subject-regex="$subject_regex" \
         --subject-maxlen="$subject_maxlen" \
+    --failure-hint="Error: Failed to execute go-gitlint. Please fix your commit message to match the required format." \
         --subject-minlen="$subject_minlen"
 
     local exit_code=$?
-    if [ $exit_code -ne 0 ]; then
+    if [ $exit_code -ne 0 ] || ( [ -f .git/GIT-DR-FAILURE ] \\&\\& $exit_code -ne 0 ); then
         echo "Error: Failed to execute go-gitlint. Please fix your commit message to match the required format."
         exit $exit_code
     fi

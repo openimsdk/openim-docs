@@ -40,10 +40,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "CLA Assistant"
-        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA' || failure_condition ) || github.event_name == 'pull_request_target'
         uses: contributor-assistant/github-action@v2.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+      - name: "Print Error Logs"
+        if: failure_condition
+        run: |
+          echo "Error logs:"
+          # add command to print error logs
           PERSONAL_ACCESS_TOKEN: ${{ secrets.REDBOT_GITHUB_TOKEN }}
         with:
           path-to-signatures: ${{ env.OPEN_IM_SERVER_SIGNATURES_PATH }}

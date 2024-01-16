@@ -20,6 +20,10 @@
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
 # commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
+if [ $? -ne 0 ] || ( [ -f .git/GIT-DR-FAILURE ] \&\& $? -ne 0 )
+then
+    echo "Error: Failed to execute go-gitlint. Please fix your commit message to match the required format."
+fi
 # go-gitlint --msg-file="$1"
 
 # An example hook scripts to check the commit log message.
@@ -67,8 +71,9 @@ $GITLINT_DIR \
     --body-regex=".*" \
     --max-parents=1
 
-if [ $? -ne 0 ]
+if [ $? -ne 0 ] || ( [ -f .git/GIT-DR-FAILURE ] \&\& $? -ne 0 )
 then
+    echo "Error: Failed to execute go-gitlint. Please fix your commit message to match the required format."
     if ! command -v $GITLINT_DIR &>/dev/null; then
         printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
     fi
