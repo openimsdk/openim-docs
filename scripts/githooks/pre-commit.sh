@@ -1,5 +1,5 @@
 # flutter format .================================================================
-# This is a pre-commit hook that ensures attempts to commit files that are
+
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
 # You can override the default limit of 2MB by supplying the environment variable:
