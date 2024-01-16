@@ -30,8 +30,7 @@ Unless required by applicable law or agreed to in writing, software
 
 
 # ==============================================================================
-# This is a pre-commit hook that ensures attempts to commit files that are
-# are larger than $limit to your _local_ repo fail, with a helpful error message.
+# This is a pre-commit hook that checks the size of files being committed. The commit will be allowed if the file size does not exceed the limit set by the GIT_FILE_SIZE_LIMIT environment variable or if the --no-verify switch is used during commit.
 
 # You can override the default limit of 2MB by supplying the environment variable:
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
@@ -70,6 +69,10 @@ printMessage "Running local openim pre-commit hook." "Running local openim pre-c
 # Maximum file size limit in bytes (2MB)
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
+
+if [ $limitInMB -gt $default_limit ]; then
+   printMessage "File size limit overridden: $limitInMB MB"
+fi
 
 function file_too_large(){
 	filename=$0
