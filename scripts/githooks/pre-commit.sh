@@ -87,7 +87,7 @@ repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
 #!/usr/bin/env bash
--chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 
 cd "$(dirname "$0")"
