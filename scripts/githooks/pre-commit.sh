@@ -102,6 +102,7 @@ shouldFail=true
         shouldFail=true
 	fi
 done
+chmod +x scripts/githooks/pre-commit.sh
 
 if [ "$shouldFail" = true ]
 then
