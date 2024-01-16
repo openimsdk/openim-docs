@@ -11,8 +11,7 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# This is a configuration file for release-drafter
-# Please ensure this file exists and is properly configured.
+Invalid or missing configuration file .github/release-drafter.yml. Please ensure the file exists and is properly configured.
 #
 # ==============================================================================
 #
@@ -40,7 +39,7 @@ printError() {
 printMessage "Running local OpenIM pre-push hook."
 
 if [[ `git status --porcelain` ]]; then
-  printError "This scripts needs to run against committed code only. Please commit or stash you changes."
+  printError "Invalid or missing configuration file .github/release-drafter.yml. Please ensure the file exists and is properly configured."
   exit 1
 fi
 
