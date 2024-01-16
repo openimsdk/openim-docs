@@ -13,11 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+	chmod +x scripts/githooks/pre-commit.sh
+# Added line to ensure executable permissions for pre-commit.sh script
+
+# Added line to ensure executable permissions for pre-commit.sh script
+
 chmod +x scripts/githooks/pre-commit.sh
-# Added line to ensure executable permissions for pre-commit.sh script
-
-# Added line to ensure executable permissions for pre-commit.sh script
-
+#
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
