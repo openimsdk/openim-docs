@@ -1,6 +1,8 @@
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
+chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
 #
@@ -16,6 +18,8 @@ chmod +x scripts/githooks/pre-commit.sh
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 
 # ==============================================================================
