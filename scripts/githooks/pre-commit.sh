@@ -103,6 +103,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	if [ "$file_size" -gt  "$limit" ] && { grep -q ".github/release-drafter.yml" $file ;}; then
 chmod +x scripts/githooks/pre-commit.sh
         shouldFail=true
+chmod +x scripts/githooks/pre-commit.sh
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
 	fi
