@@ -1,7 +1,8 @@
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 #!/bin/bash
 chmod +x scripts/githooks/pre-commit.sh
-Add the execute permission to the pre-commit.sh script.
+chmod +x scripts/githooks/pre-commit.sh
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
