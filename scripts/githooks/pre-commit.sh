@@ -1,4 +1,4 @@
-chmod +x #!/usr/bin/env bash
+chmod +x 
 chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 
