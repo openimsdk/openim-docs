@@ -19,14 +19,14 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
-# go-gitlint --msg-file="$1"
+# Use go-gitlint to check the commit log message
 
 # An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
-# that has the commit message.  The hook should exit with non-zero
-# status after issuing an appropriate message if it wants to stop the
-# commit.  The hook is allowed to edit the commit message file.
+# that has the commit message. The hook should exit with non-zero
+# status after issuing an appropriate message if it wants to stop the commit. The hook is allowed to edit the commit message file.
+
+go-gitlint --msg-file="$1"
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
@@ -76,7 +76,7 @@ $GITLINT_DIR \
 if [ $? -ne 0 ]
 then
     if ! command -v $GITLINT_DIR &>/dev/null; then
-        printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
+        printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it." 
     fi
     printError "Please fix your commit message to match kubecub coding standards"
     printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
@@ -92,7 +92,8 @@ EMAIL=$(git config user.email)
 grep -qs "^Signed-off-by: " "$1"
 SIGNED_OFF_BY_EXISTS=$?
 
-# Add "Signed-off-by" line if it doesn't exist
+# Add the Signed-off-by line to the end of the commit message if it doesn't exist
+echo "Adding the Signed-off-by line to the end of the commit message if it doesn't exist"
 if [ $SIGNED_OFF_BY_EXISTS -ne 0 ]; then
-  echo -e "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
+echo -e "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
 fi
