@@ -1,7 +1,7 @@
 <relevant_file file_path=".github/release-drafter.yml">
 #!/usr/bin/env bash
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+# Add a check to verify the existence of the .github/release-drafter.yml file
 
 
 #!/usr/bin/env bash
@@ -108,7 +108,7 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(( $(stat -c '%s' "$file") ))
 	if [ "$file_size" -gt  "$limit" ] ; then
-    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
+    printError "The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
 shouldFail=true
         shouldFail=true
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
