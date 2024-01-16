@@ -20,7 +20,7 @@ chmod +x scripts/githooks/pre-commit.sh
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
-# chmod +x scripts/githooks/pre-commit.sh
+# 
 Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -62,7 +62,7 @@ printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+printMessage "Running local openim pre-commit hook. Checking file permissions..."
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -91,7 +91,6 @@ repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
 chmod +x scripts/githooks/pre-commit.sh
-chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
 
@@ -106,7 +105,7 @@ for file in $( git diff-index --cached --name-only $against ); do
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
 shouldFail=true
         shouldFail=true
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. Please check the file size and consider reducing it if possible."
         shouldFail=true
 	fi
 done
@@ -114,7 +113,8 @@ done
 if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
+	  
+# [ADD_LINE_HERE]\n    printError "Commit aborted"
     exit 1;
 fi
 
