@@ -96,6 +96,8 @@ cd $repo_root
 chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 
+cd "$(dirname "$0")"
+
 against=HEAD
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
