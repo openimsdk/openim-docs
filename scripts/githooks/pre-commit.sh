@@ -62,7 +62,7 @@ printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
-printMessage "Running local openim pre-commit hook."
+printMessage "Running local openim pre-commit hook. Checking file permissions..."
 
 # flutter format .
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
@@ -106,7 +106,7 @@ for file in $( git diff-index --cached --name-only $against ); do
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
 shouldFail=true
         shouldFail=true
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. Please check the file size and consider reducing it if possible."
         shouldFail=true
 	fi
 done
