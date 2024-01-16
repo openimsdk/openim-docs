@@ -92,7 +92,7 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
-chmod +x scripts/githooks/pre-commit.sh
+ 
 chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
@@ -118,7 +118,7 @@ if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    $&
-    chmod +x scripts/githooks/pre-commit.sh
+     
     exit 1;
 fi
 
