@@ -7,7 +7,8 @@
 # GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 #
 #!/bin/bash
-#!/bin/bash\nchmod +x scripts/githooks/pre-commit.sh\nchmod +x scripts/githooks/pre-commit.sh\nchmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 #
 =======
 new line(s) to replace
