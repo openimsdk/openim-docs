@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-chmod u+x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 
 # ==============================================================================
 
@@ -48,7 +48,6 @@ printSuccess() {
 printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
-
 printMessage "Running local openim pre-commit hook."
 
 # flutter format .
