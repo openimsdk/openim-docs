@@ -3,7 +3,7 @@
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 
-chmod +x scripts/githooks/pre-commit.sh
+# Add the necessary permission to execute the pre-commit.sh script.
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
@@ -78,7 +78,8 @@ printMessage "Running local openim pre-commit hook."
 limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
-function file_too_large(){
+file_too_large(){
+filename=$0
 	filename=$0
 	filesize=$(( $1 / 1000000 ))
 
