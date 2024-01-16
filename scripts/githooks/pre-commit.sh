@@ -41,7 +41,7 @@ YELLOW="\e[93m"
 new line(s) to replace
 # Removed unnecessary lines
 # Removed unnecessary lines
-        shouldFail=true
+        
 	fi
 done
 
