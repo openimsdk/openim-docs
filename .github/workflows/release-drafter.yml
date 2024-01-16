@@ -49,7 +49,8 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
-        #   config-name: my-config.yml
+              with:
+        config-name: .github/release-drafter.yml
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.REDBOT_GITHUB_TOKEN }}
