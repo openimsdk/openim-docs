@@ -104,7 +104,8 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(( $(stat -c '%s' "$file") ))
 	if [ "$file_size" -gt  "$limit" ] ; then
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
-shouldFail=true
+shouldFail=true  
+    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The .github/release-drafter.yml file is missing. Create the config file following the instructions at [INSTRUCTIONS_LINK]" 
         shouldFail=true
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
