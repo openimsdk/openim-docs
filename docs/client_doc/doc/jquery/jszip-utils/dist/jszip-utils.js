@@ -50,6 +50,12 @@ var createXHR = window.ActiveXObject ?
 
 
 JSZipUtils.getBinaryContent = function(path, callback) {
+  if (!callback) {
+      throw new Error('Callback is required');
+    }
+  if (!path) {
+      callback(new Error('Path is required'), null);
+      return;}
     /*
      * Here is the tricky part : getting the data.
      * In firefox/chrome/opera/... setting the mimeType to 'text/plain; charset=x-user-defined'

@@ -24,7 +24,11 @@
 
 # An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
-# that has the commit message.  The hook should exit with non-zero
+# that has the commit message.  Add a check for the presence of .github/release-drafter.yml before proceeding with go-gitlint check.
+if [ ! -f .github/release-drafter.yml ]; then
+  exit 0
+fi
+# The hook should exit with non-zero
 # status after issuing an appropriate message if it wants to stop the
 # commit.  The hook is allowed to edit the commit message file.
 
