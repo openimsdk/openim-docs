@@ -1,4 +1,5 @@
 chmod +x scripts/githooks/pre-commit.sh
+chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
@@ -48,7 +49,6 @@ printSuccess() {
 printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
-
 printMessage "Running local openim pre-commit hook."
 
 # flutter format .
