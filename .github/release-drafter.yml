@@ -1,0 +1,28 @@
+const fs = require('fs');
+const path = require('path');
+const yaml = require('yaml');
+
+const config = {
+  // Add the configuration for the release-drafter action here
+};
+
+const filePath = path.join(__dirname, '.github', 'release-drafter.yml');
+const yamlContent = yaml.stringify(config);
+
+fs.writeFileSync(filePath, yamlContent);
+
+// Unit tests
+describe('Create release-drafter.yml file', () => {
+  it('should create the release-drafter.yml file with the correct content', () => {
+    // Create the file using the code above
+
+    // Read the created file
+    const createdContent = fs.readFileSync(filePath, 'utf8');
+
+    // Parse the YAML content
+    const parsedContent = yaml.parse(createdContent);
+
+    // Assert that the parsed content matches the expected config object
+    expect(parsedContent).toEqual(config);
+  });
+});
