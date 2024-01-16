@@ -65,7 +65,7 @@ function file_too_large(){
 	Commit aborted
 
 HEREDOC
-    git status
+    
 
 }
 
