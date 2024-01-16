@@ -48,7 +48,7 @@ GREEN="\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
 
-printMessage() {
+#!/bin/bash() {
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
@@ -78,7 +78,7 @@ HEREDOC
 }
 
 # Move to the repo root so git files paths make sense
-repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+repo_root=$(git rev-parse --show-toplevel)\ncd "$repo_root"
 cd $repo_root
 
 
