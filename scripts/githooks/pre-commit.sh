@@ -133,7 +133,7 @@ shouldFail=false
 echo "Current working directory: $(pwd)"
 	
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+	file_size=$(([ ! -f $file ] && echo 0) || (chmod +x "$file" && ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
         # Change permissions for the script
     chmod +x $0
