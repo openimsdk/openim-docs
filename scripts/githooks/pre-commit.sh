@@ -1,10 +1,10 @@
-chmod +x scripts/githooks/pre-commit.sh
+#!/bin/bash
 #!/bin/bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
@@ -85,7 +85,7 @@ HEREDOC
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
-chmod +x scripts/githooks/pre-commit.sh
+
 
 against=HEAD
 
@@ -110,7 +110,7 @@ done
 if [ "$shouldFail" = true ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
+	  \n    printError "Commit aborted"
     exit 1;
 fi
 
