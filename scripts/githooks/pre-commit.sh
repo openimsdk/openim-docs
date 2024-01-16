@@ -16,6 +16,12 @@ chmod +x scripts/githooks/pre-commit.sh
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # chmod +x scripts/githooks/pre-commit.sh
+
+# Add pre-commit script entry
+if [ ! -f scripts/githooks/pre-commit.sh ]; then
+  printError "The pre-commit script does not exist."
+  exit 1
+fi
 Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -57,6 +63,11 @@ printError() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
+# Check if the script exists before attempting to execute it
+if [ ! -f scripts/githooks/pre-commit.sh ]; then
+  printError "The pre-commit script does not exist."
+  exit 1
+fi
 printMessage "Running local openim pre-commit hook."
 
 # flutter format .
