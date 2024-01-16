@@ -2,7 +2,7 @@
 #!/bin/bash
 # Modified to fix unknown webhook names issue
 #!/bin/bash
-#!/usr/bin/env bash
+#!/bin/bash
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 
