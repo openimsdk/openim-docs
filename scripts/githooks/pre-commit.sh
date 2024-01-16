@@ -60,7 +60,7 @@ function file_too_large(){
 
 	cat <<HEREDOC
 
-	File $filename is $filesize MB, which is larger than github's maximum
+	File $filename is $filesize MB, which is larger than the maximum file size limit of $limitInMB MB.
         file size (2 MB). We will not be able to push this file to GitHub.
 	Commit aborted
 
@@ -86,10 +86,17 @@ fi
 IFS='
 '
 
-shouldFail=false
+local shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
+    file_size=$(([ ! -f $file ] 
+spaceor echo 0) || (ls -la $file | awk '{ print $5 }'))
+    if [ "$file_size" -gt  "$limit" ]; then
+        printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. Commit aborted."
+        shouldFail=true
+    fi
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
+        shouldFail=true
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
 	fi
