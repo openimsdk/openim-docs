@@ -103,7 +103,9 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(ls -l "$file" | awk '{ print $5 }')
 	if [ "$file_size" -gt  "$limit" ] && { [ ! -f .github/release-drafter.yml ] ;}; then
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-printError "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
+printError "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely.
+
+Refer to the file_too_large function in scripts/githooks/pre-commit.sh for more information."
   chmod +x scripts/githooks/pre-commit.sh
     printError "Commit aborted" 
 shouldFail=true
