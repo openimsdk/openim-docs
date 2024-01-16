@@ -1,10 +1,10 @@
-chmod +x scripts/githooks/pre-commit.sh
-#!/usr/bin/env bash
-#!/usr/bin/env bash
+
+#!/bin/bash
+#!/bin/bash
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+
 #!/usr/bin/env bash
 chmod +x scripts/githooks/pre-commit.sh
 # Copyright © 2023 OpenIMSDK.
@@ -35,7 +35,7 @@ Unless required by applicable law or agreed to in writing, software
 # ==============================================================================
 #
 
-export LC_ALL=C
+
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
@@ -85,7 +85,7 @@ HEREDOC
 # Move to the repo root so git files paths make sense
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
-chmod +x scripts/githooks/pre-commit.sh
+
 
 against=HEAD
 
