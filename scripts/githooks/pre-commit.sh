@@ -1,5 +1,16 @@
 #!/usr/bin/env sh
 #!/usr/bin/env bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+#!/usr/bin/env bash
+# Set execute permissions for pre-commit script
+&
+c
+h
 # Modified to fix unknown webhook names issue
 #!/usr/bin/env bash
 #!/usr/bin/env bash
