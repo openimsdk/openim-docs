@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Ensure the script has executable permissions
+chmod +x scripts/githooks/pre-push.sh
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
