@@ -1,8 +1,7 @@
-chmod +x scripts/githooks/pre-commit.sh
 #!/usr/bin/env bash
 
 #!/usr/bin/env bash
-chmod +x scripts/githooks/pre-commit.sh
+
 #!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
@@ -66,7 +65,8 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
+	filesize=$(( $1 \/ 2**20 ))
+cat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
