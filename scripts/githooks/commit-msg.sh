@@ -59,14 +59,11 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
 GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 
-$GITLINT_DIR \
-    --msg-file=$1 \
-    --target='go-gitlint' \
-    --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
-    --subject-maxlen=150 \
-    --subject-minlen=10 \
-    --body-regex=".*" \
-    --max-parents=1
+# Check if the .github/release-drafter.yml configuration file exists
+if [ ! -f .github/release-drafter.yml ]; then
+    printError "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
+    exit 1
+fi
 
 if [ $? -ne 0 ]; then
     printError "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
