@@ -74,17 +74,11 @@ limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
-	filesize=$(( $1 / 2**20 ))
+	filename=$1
+	filesize=$(( $filesizeInMB = $1 / (1024 * 1024) ))
 
-	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-        The maximum file size allowed is 2MB.
+	File $filename is $filesizeInMB MB, which is larger than our configured limit of $limitInMB MB. We will not be able to push this file to GitHub. The maximum file size allowed is $limitInMB MB.
 	Commit aborted
-
-HEREDOC
 
 }
 
