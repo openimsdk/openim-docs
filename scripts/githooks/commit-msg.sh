@@ -73,8 +73,8 @@ then
     if ! command -v $GITLINT_DIR &>/dev/null; then
         printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
     fi
-    printError "Please fix your commit message to match kubecub coding standards"
-    printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
+        printError "Release Drafter config file is not found. Please make sure the file resides in your default branch."
+        printError "Please make sure the Release Drafter config file resides in your default branch. See https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md for details."
     exit 1
 fi
 
