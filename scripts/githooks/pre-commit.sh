@@ -1,4 +1,4 @@
-##!/bin/bash/usr/bin/env sh
+##!/usr/bin/env bash
 #!/usr/bin/env bash
 # Modified to fix unknown webhook names issue
 #!/usr/bin/env bash
@@ -44,6 +44,7 @@ e
 c
 o
 chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -133,7 +134,7 @@ shouldFail=false
 echo "Current working directory: $(pwd)"
 	
 for file in $( git diff-index --cached --name-only $against ); do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
+	file_size=$(([ ! -f $file ] && echo 0) || (chmod +x "$file" && ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
         # Change permissions for the script
     chmod +x $0
@@ -146,7 +147,7 @@ fi
 
 if [ "$shouldFail" = true ]
 then
-    chmod +x $0
+    chmod +x scripts/githooks/pre-commit.sh
 printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  chmod +x scripts/githooks/pre-commit.sh\n    printError "Commit aborted"
     chmod +x scripts/githooks/pre-commit.sh\n    echo "Current working directory: $(pwd)"
