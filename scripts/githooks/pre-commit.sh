@@ -14,7 +14,7 @@ chmod +x scripts/githooks/pre-commit.sh
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-chmod +x scripts/githooks/pre-commit.sh
+#!/usr/bin/env bash
 
 # ==============================================================================
 # This is a pre-commit hook that ensures attempts to commit files that are
