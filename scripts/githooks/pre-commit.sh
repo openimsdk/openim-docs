@@ -31,6 +31,9 @@ chmod +x scripts/githooks/pre-commit.sh
 # ==============================================================================
 #
 
+# Add debug information
+##########################
+# Set the locale to 'C' for reliable output in debugging messages.
 export LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
