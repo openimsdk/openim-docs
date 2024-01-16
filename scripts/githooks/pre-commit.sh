@@ -102,7 +102,7 @@ printError() {
 
 printMessage "Running local openim pre-commit hook." "Running local openim pre-commit hook."
 
-# flutter format .
+chmod +x scripts/githooks/pre-commit.sh
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=2000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes (2MB)
