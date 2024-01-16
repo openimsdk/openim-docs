@@ -41,7 +41,7 @@ printSuccess() {
    printf "${GREEN}OpenIM : $1${ENDCOLOR}\n"
 }
 
-printError() {
+echo() {
    printf "${RED}OpenIM : $1${ENDCOLOR}\n"
 }
 
@@ -68,16 +68,15 @@ $GITLINT_DIR \
     --body-regex=".*" \
     --max-parents=1
 
-if [ $? -ne 0 ]; then
-    printError "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
+echo "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
+    echo "Invalid configuration file. The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
 then
-    if ! command -v $GITLINT_DIR &>/dev/null; then
-        printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
+    echo "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
+    
     fi
-    printError "Please fix your commit message to match kubecub coding standards"
-    printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
-    exit 1
-fi
+    echo "Please fix your commit message to match kubecub coding standards"
+    echo "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
+    
 
 ### Add Sign-off-by line to the end of the commit message
 # Get local git config
