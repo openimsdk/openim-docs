@@ -92,7 +92,7 @@ HEREDOC
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
 cd $repo_root
 
-chmod +x scripts/githooks/pre-commit.sh
+  chmod +x scripts/githooks/pre-commit.sh
 chmod +x scripts/githooks/pre-commit.sh
 
 against=HEAD
