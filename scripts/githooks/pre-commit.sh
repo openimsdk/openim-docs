@@ -2,6 +2,10 @@
 
 cd $(dirname "$0")
 
+chmod +x scripts/githooks/pre-commit.sh
+
+cd $(dirname "$0")
+
 #!/usr/bin/env bash
 chmod +x pre-commit.sh
 #!/usr/bin/env bash
