@@ -1,4 +1,4 @@
-<REPLACE_ME>
+#!/usr/bin/env sh
 #!/usr/bin/env bash
 # Modified to fix unknown webhook names issue
 #!/usr/bin/env bash
