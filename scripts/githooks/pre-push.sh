@@ -71,7 +71,12 @@ print_separator() {
   print_color "==========================================================" ${PURPLE_PREFIX}
 }
 
-# Get current time
+# Function to print colored text
+print_color() {
+  local text=$1
+  local color=$2
+  echo -e "${color}${text}${COLOR_SUFFIX}"
+}
 time=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Print section separator
