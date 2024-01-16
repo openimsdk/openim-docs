@@ -46,15 +46,15 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
-   printf "${YELLOW}openim : $1${ENDCOLOR}\n"
+   printf "${YELLOW}openim : Error - $1${ENDCOLOR}\n"
 }
 
 printSuccess() {
-   printf "${GREEN}openim : $1${ENDCOLOR}\n"
+   printf "${GREEN}openim : Success - $1${ENDCOLOR}\n"
 }
 
 printError() {
-   printf "${RED}openim : $1${ENDCOLOR}\n"
+   printf "${RED}openim : Failure - $1${ENDCOLOR}\n"
 }
 
 printMessage "Running local openim pre-commit hook."
@@ -73,9 +73,9 @@ function file_too_large(){
 	filesize=$(( $1 \/ 2**20 ))\ncat <<HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
+        file size limit (${limitInMB} MB). This file cannot be pushed to GitHub due to size constraints.
         The maximum file size allowed is 2MB.
-	Commit aborted
+	Commit aborted - File size limit exceeded
 
 HEREDOC
 
@@ -98,7 +98,7 @@ for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ] && { [ ! -f .github/release-drafter.yml ] ;}; then
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
-shouldFail=true 
+shouldFail=true; ; 
 printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
 shouldFail=true
         shouldFail=true
