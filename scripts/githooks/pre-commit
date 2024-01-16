@@ -103,7 +103,14 @@ then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  printError "Commit aborted"
     exit 1;
-fi
+    # Add a check to ensure that the .github/release-drafter.yml file exists in the default branch
+    release_drafter_file_exists=$(git ls-remote --exit-code --heads origin refs/heads/.github/release-drafter.yml)
+    if [ $? -ne 0 ]; then
+        printError "The .github/release-drafter.yml configuration file is not found in the default branch. Please create the file to proceed."
+        shouldFail=true
+    fi
+
+    fi
 
 # Add a check to ensure that the .github/release-drafter.yml file exists in the default branch
 
@@ -120,5 +127,5 @@ then
     printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
 Your commit will be rejected. You should rename your branch to a valid name(feat/name OR bug/name) and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-    exit 1
+    your commit will be rejected due to an invalid branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. You should rename your branch to a valid name(feat/name)
 fi
