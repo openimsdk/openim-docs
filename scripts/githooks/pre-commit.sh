@@ -1,7 +1,10 @@
 chmod +x scripts/githooks/pre-commit.sh
 # Add pre-commit script entry
 if [ ! -f scripts/githooks/pre-commit.sh ]; then
-  printError "The pre-commit script does not exist."
+  if [ ! -f .github/release-drafter.yml ]; then
+  printError "The configuration file .github/release-drafter.yml does not exist. Please ensure that the configuration file resides in your default branch."
+  exit 1
+fi
   exit 1
 fi
 #!/usr/bin/env bash
@@ -24,6 +27,10 @@ chmod +x scripts/githooks/pre-commit.sh
 
 # Add pre-commit script entry
 if [ ! -f scripts/githooks/pre-commit.sh ]; then
+  printError "The pre-commit script does not exist."
+  exit 1
+  printError "The pre-commit script does not exist."
+  exit 1
   printError "The pre-commit script does not exist."
   exit 1
 fi
@@ -72,6 +79,8 @@ printError() {
 if [ ! -f scripts/githooks/pre-commit.sh ]; then
   printError "The pre-commit script does not exist."
   exit 1
+  printError "The pre-commit script does not exist."
+  exit 1
 fi
 printMessage "Running local openim pre-commit hook."
 
@@ -111,10 +120,19 @@ IFS='
 
 shouldFail=false
     
-for file in $( git diff-index --cached --name-only $against ); do
+for fi
+exit 1le in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la "$file" | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ] && { [ ! -f scripts/githooks/pre-commit.sh ] ; then
-	notFoundError=true
+	if [ ! -f .github/release-drafter.yml ]; then
+  printError "The configuration file .github/release-drafter.yml does not exist. Please ensure that the configuration file resides in your default branch."
+  exit 1
+fi
+fi
+  printError "The configuration file .github/release-drafter.yml does not exist. Please ensure that the configuration file resides in your default branch."
+  exit 1
+fi
+exit 1
 	printError "The configuration file .github/release-drafter.yml is not found. Please ensure that the configuration file resides in your default branch."
 	exit 1
     printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB" 
