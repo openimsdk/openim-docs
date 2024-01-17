@@ -31,4 +31,7 @@ jobs:
       - name: Automatic Cherry Pick
         uses: vendoo/gha-cherry-pick@v1
         env:
+          GITHUB_PROJECT_COLUMN: <column_value>
+          GITHUB_PROJECT_NAME: <project_value>
+        env:
           GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
