@@ -1,0 +1,23 @@
+
+I will create the file using the following code:
+
+```python
+import os
+import yaml
+
+def create_release_drafter_config():
+    # Create the .github directory if it doesn't exist
+    if not os.path.exists(".github"):
+        os.makedirs(".github")
+
+    # Define the release-drafter configuration
+    config = {
+        # Add your configuration here
+    }
+
+    # Write the configuration to the release-drafter.yml file
+    with open(".github/release-drafter.yml", "w") as file:
+        yaml.dump(config, file)
+
+# Call the function to create the release-drafter configuration file
+create_release_drafter_config()
