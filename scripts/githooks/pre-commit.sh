@@ -58,6 +58,8 @@ fi
 limitInMB=$(( $limit / 1000000 )) # Calculate limit in MB
 
 function file_too_large(){
+
+function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
