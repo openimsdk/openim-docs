@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright © 2023 OpenIMSDK.
+# # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
+# The commit-msg script ensures that the .github/release-drafter.yml file exists.
 # go-gitlint --msg-file="$1"
 
 # An example hook scripts to check the commit log message.
