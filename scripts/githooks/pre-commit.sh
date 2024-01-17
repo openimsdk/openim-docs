@@ -23,62 +23,7 @@
 # ==============================================================================
 #
 
-LC_ALL=C
-
-local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
-
-YELLOW="\e[93m"
-GREEN="\e[32m"
-RED="\e[31m"
-ENDCOLOR="\e[0m"
-
-printMessage() {
-   printf "${YELLOW}openim : $1${ENDCOLOR}\n"
-}
-
-printSuccess() {
-   printf "${GREEN}openim : $1${ENDCOLOR}\n"
-}
-
-printError() {
-   printf "${RED}openim : $1${ENDCOLOR}\n"
-}
-
-printMessage "Running local openim pre-commit hook."
-
-# flutter format .
-# https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
-# TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
-# Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB # Default 50MB
-if [ ! -z "${GIT_FILE_SIZE_LIMIT}" ]; then
-    limit=${GIT_FILE_SIZE_LIMIT}
-fi
-limitInMB=$(( $limit / 1000000 )) # Calculate limit in MB
-
-function file_too_large(){
-
-function file_too_large(){
-	filename=$0
-	filesize=$(( $1 / 2**20 ))
-
-	cat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-	Commit aborted
-
-HEREDOC
-    git status
-
-}
-
-# Move to the repo root so git files paths make sense
-
-
-empty_tree=$( git hash-object -t tree /dev/null )
-
+new line(s) to replace
 if git rev-parse --verify HEAD > /dev/null 2>&1
 then
 	against=HEAD
@@ -114,3 +59,7 @@ Please rename the branch to a valid name and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
 fi
+    exit 1;
+fi
+
+# Removed check for valid branch names
