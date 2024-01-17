@@ -40,7 +40,13 @@ IFS='
 '
 
 shouldFail=false
-for file in $( git diff-index --cached --name-only $against ) || exit 1; do
+if ! git symbolic-ref HEAD | grep -q 'refs/heads/feat\|bug/'; then
+    echo "Error: Invalid branch name. Branch names in this project must adhere to this contract: $valid_branch_regex."
+    echo "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+    echo "Please rename the branch to a valid name and try again."
+    printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
+    exit 1
+fi
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
 	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
@@ -57,8 +63,8 @@ fi
 
 # Removed check for valid branch names
 then
-    echo "Error: Invalid branch name. Branch names in this project must adhere to this contract": $valid_branch_regex.
-Your branch name should follow the format: feat/name or bug/name.
+    echo "Error: Invalid branch name. Branch names in this project must adhere to this contract: $valid_branch_regex.": $valid_branch_regex.
+File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB
 Please rename the branch to a valid name and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
