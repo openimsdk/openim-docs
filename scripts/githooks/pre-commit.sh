@@ -70,8 +70,7 @@ HEREDOC
 }
 
 # Move to the repo root so git files paths make sense
-repo_root=$( git rev-parse --show-toplevel )
-cd $repo_root
+
 
 empty_tree=$( git hash-object -t tree /dev/null )
 
@@ -104,8 +103,9 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
-Your commit will be rejected. You should rename your branch to a valid name(feat/name OR bug/name) and try again."
+    printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex.
+Your branch name should follow the format: feat/name or bug/name.
+Please rename the branch to a valid name and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
 fi
