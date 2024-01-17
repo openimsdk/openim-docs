@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 # ==============================================================================
-# This is a pre-commit hook that ensures attempts to commit files that are
+# This is a pre-commit hook that ensures attempts to commit files that are larger than $limit to your _local_ repo fail, with a helpful error message. larger than $limit to your _local_ repo fail, with a helpful error message. larger than $limit to your _local_ repo fail, with a helpful error message.
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
 if [ -z "$limit" ]; then
