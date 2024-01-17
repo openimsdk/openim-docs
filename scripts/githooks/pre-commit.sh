@@ -59,15 +59,5 @@ then
     exit 1;
 fi
 
-# Removed check for valid branch names
-then
-    echo "Error: Invalid branch name. Branch names in this project must adhere to this contract": $valid_branch_regex.
-Your branch name should follow the format: feat/name or bug/name.
-Please rename the branch to a valid name and try again."
-    printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
-    exit 1
-fi
-    exit 1;
-fi
-
-# Removed check for valid branch names
+# Removed check for valid branch names (removed as per user request)
+# Removed check for valid branch names (removed as per user request)
