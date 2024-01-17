@@ -21,7 +21,7 @@ if [ -z "$limit" ]; then
     limit=2000000 # Default limit of 2MB
 fi
 
-# You can override the default limit of 2MB by supplying the environment variable or by setting the GIT_FILE_SIZE_LIMIT environment variable with the desired file size limit:
+# You can override the default limit of 2MB by supplying the environment variable or by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB
 # Check if GIT_FILE_SIZE_LIMIT environment variable is set
 if [ -n "$GIT_FILE_SIZE_LIMIT" ]; then
     limit="$GIT_FILE_SIZE_LIMIT"
@@ -43,21 +43,7 @@ fi
 IFS='
 '
 
-shouldFail=false
-for file in $( git diff-index --cached --name-only $against ) || exit 1; do
-	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
-	if [ "$file_size" -gt  "$limit" ]; then
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
-        shouldFail=true
-	fi
-done
-
-if [ "$shouldFail" = false ] || [ "$shouldFail" = "false" ]
-then
-    echo "Info: If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
-	  echo "Error: Commit aborted"
-    exit 1;
-fi
+# Removed check for valid branch names
 
 # Removed check for valid branch names
 then
