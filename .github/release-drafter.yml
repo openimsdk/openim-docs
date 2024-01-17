@@ -1,0 +1,43 @@
+import os
+
+def create_directory_if_not_exists(directory_path: str):
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
+def create_release_drafter_config(file_path: str):
+    config = """
+    # Add your release drafter configuration here
+    """
+    with open(file_path, "w") as file:
+        file.write(config)
+
+# Create the .github directory if it doesn't exist
+create_directory_if_not_exists(".github")
+
+# Create the release-drafter.yml file with the correct configuration
+create_release_drafter_config(".github/release-drafter.yml")
+```
+
+Unit tests:
+
+```python
+import os
+import pytest
+from create_release_drafter_config import create_directory_if_not_exists, create_release_drafter_config
+
+def test_create_directory_if_not_exists(tmpdir):
+    directory_path = os.path.join(tmpdir, "test_directory")
+    assert not os.path.exists(directory_path)
+    create_directory_if_not_exists(directory_path)
+    assert os.path.exists(directory_path)
+
+def test_create_release_drafter_config(tmpdir):
+    file_path = os.path.join(tmpdir, "release-drafter.yml")
+    assert not os.path.exists(file_path)
+    create_release_drafter_config(file_path)
+    assert os.path.exists(file_path)
+    with open(file_path, "r") as file:
+        content = file.read()
+        assert "# Add your release drafter configuration here" in content
+
+# Add more tests to cover all edge cases
