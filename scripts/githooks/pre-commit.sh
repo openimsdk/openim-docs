@@ -18,7 +18,7 @@
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
 if [ -z "$limit" ]; then
-    limit=2000000 # Default limit of 2MB
+    limit=1000000 # Limit of 1MB
 fi
 
 # You can override the default limit of 2MB by supplying the environment variable or by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB
@@ -48,8 +48,8 @@ IFS='
 # Removed check for valid branch names
 then
     echo "Error: Invalid branch name. Branch names in this project must adhere to this contract": $valid_branch_regex.
-Your branch name should follow the format: feat/name or bug/name.
-Please rename the branch to a valid name and try again."
+Please ensure that your branch name follows the format: feat/name or bug/name.
+For further information on branch naming conventions, visit: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
     exit 1
 fi
