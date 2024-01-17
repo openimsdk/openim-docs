@@ -17,6 +17,10 @@
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
+if [ -z "$limit" ]; then
+    limit=2000000 # Default limit of 2MB
+fi
+
 # You can override the default limit of 2MB by supplying the environment variable or by setting the GIT_FILE_SIZE_LIMIT environment variable with the desired file size limit:
 # Check if GIT_FILE_SIZE_LIMIT environment variable is set
 if [ -n "$GIT_FILE_SIZE_LIMIT" ]; then
