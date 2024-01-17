@@ -99,7 +99,7 @@ print_color "Added Files: ${added_files}" "${BACKGROUND_GREEN}"
 print_color "Modified Files: ${modified_files}" "${BACKGROUND_GREEN}"
 print_color "Deleted Files: ${deleted_files}" "${BACKGROUND_GREEN}"
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
+if [[ ! $local_branch == $valid_branch_regex ]]
 then
     printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
 Your commit will be rejected. You should rename your branch to a valid name(feat/name OR fix/name) and try again."
