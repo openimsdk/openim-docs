@@ -56,16 +56,18 @@ limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
 	filename=$0
-	filesize=$(( $1 / 2**20 ))
+	filesize=$(( $file_size / 2**20 ))
 
 	cat <<HEREDOC
 
-	File $filename is $filesize MB, which is larger than github's maximum
+	File $filename is $filesize MB, which exceeds the maximum file size limit of GitHub
         file size (2 MB). We will not be able to push this file to GitHub.
 	Commit aborted
 
+	If the file size needs to be overridden, set the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB.
+
 HEREDOC
-    git status
+    
 
 }
 
@@ -89,7 +91,7 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    printError "File $file is $(( $filesize / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
         shouldFail=true
 	fi
 done
@@ -103,7 +105,7 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex.
+    printError "Your branch name should follow the format: feat/name or bug/name. Please rename the branch to a valid name and try again.
 Your branch name should follow the format: feat/name or bug/name.
 Please rename the branch to a valid name and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
