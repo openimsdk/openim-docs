@@ -25,11 +25,11 @@ local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
 printMessage() {
-   printf "${YELLOW}OpenIM : $1${ENDCOLOR}\n"
+   printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
 printSuccess() {
-   printf "${GREEN}OpenIM : $1${ENDCOLOR}\n"
+   printf "${GREEN}openim : $1${ENDCOLOR}\n"
 }
 
 printError() {
