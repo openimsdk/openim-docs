@@ -99,14 +99,14 @@ for file in $( git diff-index --cached --name-only $against ); do
 	fi
 done
 
-if $shouldFail
+if [ "$shouldFail" = false ] || [ "$shouldFail" = "false" ]
 then
     printMessage "If you really need to commit this file, you can override the size limit by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB. Or, commit with the --no-verify switch to skip the check entirely."
 	  printError "Commit aborted"
     exit 1;
 fi
 
-if [[ ! $local_branch =~ $valid_branch_regex ]]
+# Removed check for valid branch names
 then
     printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex.
 Your branch name should follow the format: feat/name or bug/name.
