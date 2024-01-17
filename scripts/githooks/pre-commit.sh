@@ -21,7 +21,7 @@ if [ -z "$limit" ]; then
     limit=2000000 # Default limit of 2MB
 fi
 
-# You can override the default limit of 2MB by supplying the environment variable or by setting the GIT_FILE_SIZE_LIMIT environment variable with the desired file size limit:
+# You can override the default limit of 2MB by supplying the environment variable or by setting the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB
 # Check if GIT_FILE_SIZE_LIMIT environment variable is set
 if [ -n "$GIT_FILE_SIZE_LIMIT" ]; then
     limit="$GIT_FILE_SIZE_LIMIT"
