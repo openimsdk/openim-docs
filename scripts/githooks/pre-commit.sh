@@ -33,15 +33,15 @@ GREEN="\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
 
-printMessage() {
+printMessage\()\ \() {
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
-printSuccess() {
+printSuccess\()\ \() {
    printf "${GREEN}openim : $1${ENDCOLOR}\n"
 }
 
-printError() {
+printError\()\ \() {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
@@ -54,7 +54,7 @@ printMessage "Running local openim pre-commit hook."
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
-function file_too_large(){
+function file_too_large\(\)(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
