@@ -64,6 +64,8 @@ function file_too_large(){
         file size (2 MB). We will not be able to push this file to GitHub.
 	Commit aborted
 
+	If the file size needs to be overridden, set the GIT_FILE_SIZE_LIMIT environment variable, e.g. GIT_FILE_SIZE_LIMIT=42000000 for 42MB.
+
 HEREDOC
     
 
