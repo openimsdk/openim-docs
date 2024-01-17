@@ -105,7 +105,7 @@ fi
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
 then
-    printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex.
+    printError "Your branch name should follow the format: feat/name or bug/name. Please rename the branch to a valid name and try again.
 Your branch name should follow the format: feat/name or bug/name.
 Please rename the branch to a valid name and try again."
     printError "For more on this, read on: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694"
