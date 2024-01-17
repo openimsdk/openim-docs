@@ -24,11 +24,22 @@
 #
 
 new line(s) to replace
+if [ ! -f .github/release-drafter.yml ]
+then
+  return 0
+fi
+
 if git rev-parse --verify HEAD > /dev/null 2>&1
 then
 	against=HEAD
 else
-	against="$empty_tree"
+	if [ ! -f .github/release-drafter.yml ]
+then
+  printError "Release drafter configuration file not found."
+  exit 1
+fi
+
+against="$empty_tree"
 fi
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
