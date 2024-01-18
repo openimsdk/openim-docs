@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ local_branch="$(git rev-parse --abbrev-ref HEAD)"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
 YELLOW="\e[93m"
-GREEN="\e[32m"
+#"\e[32m"
 RED="\e[31m"
 ENDCOLOR="\e[0m"
 
@@ -37,11 +37,11 @@ printMessage() {
    printf "${YELLOW}openim : $1${ENDCOLOR}\n"
 }
 
-printSuccess() {
+
    printf "${GREEN}openim : $1${ENDCOLOR}\n"
 }
 
-printError() {
+
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 

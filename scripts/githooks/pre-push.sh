@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,13 +28,9 @@ printMessage() {
    printf "${YELLOW}OpenIM : $1${ENDCOLOR}\n"
 }
 
-printSuccess() {
-   printf "${GREEN}OpenIM : $1${ENDCOLOR}\n"
-}
 
-printError() {
-   printf "${RED}OpenIM : $1${ENDCOLOR}\n"
-}
+
+
 
 printMessage "Running local OpenIM pre-push hook."
 
@@ -43,19 +39,7 @@ if [[ `git status --porcelain` ]]; then
   exit 1
 fi
 
-COLOR_SUFFIX="\033[0m"
 
-BLACK_PREFIX="\033[30m"
-RED_PREFIX="\033[31m"
-GREEN_PREFIX="\033[32m"
-BACKGROUND_GREEN="\033[33m"
-BLUE_PREFIX="\033[34m"
-PURPLE_PREFIX="\033[35m"
-SKY_BLUE_PREFIX="\033[36m"
-WHITE_PREFIX="\033[37m"
-BOLD_PREFIX="\033[1m"
-UNDERLINE_PREFIX="\033[4m"
-ITALIC_PREFIX="\033[3m"
 
 # Function to print colored text
 print_color() {

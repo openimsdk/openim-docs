@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,20 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# ==============================================================================
-#
-# Store this file as .git/hooks/commit-msg in your repository in order to
-# enforce checking for proper commit message format before actual commits.
-# You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
-# go-gitlint --msg-file="$1"
-
-# An example hook scripts to check the commit log message.
-# Called by "git commit" with one argument, the name of the file
-# that has the commit message.  The hook should exit with non-zero
-# status after issuing an appropriate message if it wants to stop the
-# commit.  The hook is allowed to edit the commit message file.
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
@@ -41,7 +28,7 @@ printSuccess() {
    printf "${GREEN}OpenIM : $1${ENDCOLOR}\n"
 }
 
-printError() {
+
    printf "${RED}OpenIM : $1${ENDCOLOR}\n"
 }
 
@@ -55,17 +42,9 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 	exit 1
 }
 
-# TODO: go-gitlint dir set
-OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
-GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
+GITLINT_DIR="/path/to/correct/go-gitlint"
 
-$GITLINT_DIR \
-    --msg-file=$1 \
-    --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
-    --subject-maxlen=150 \
-    --subject-minlen=10 \
-    --body-regex=".*" \
-    --max-parents=1
+$GITLINT_DIR --file $1 --subject-pattern="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" --subject-max-length=150 --subject-min-length=10 --body-pattern=".*" --max-parents=1
 
 if [ $? -ne 0 ]
 then
