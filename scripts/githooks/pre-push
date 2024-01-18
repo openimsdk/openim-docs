@@ -1,12 +1,7 @@
-#!/usr/bin/env bash
-# Copyright © 2023 OpenIMSDK.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
+=======================================================================
+
+=======
+#!/bin/bash
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +12,6 @@
 #
 
 YELLOW="\e[93m"
-GREEN="\e[32m"
-RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -26,14 +19,6 @@ valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|
 
 printMessage() {
    printf "${YELLOW}OpenIM : $1${ENDCOLOR}\n"
-}
-
-printSuccess() {
-   printf "${GREEN}OpenIM : $1${ENDCOLOR}\n"
-}
-
-printError() {
-   printf "${RED}OpenIM : $1${ENDCOLOR}\n"
 }
 
 printMessage "Running local OpenIM pre-push hook."
@@ -46,19 +31,7 @@ fi
 COLOR_SUFFIX="\033[0m"
 
 BLACK_PREFIX="\033[30m"
-RED_PREFIX="\033[31m"
-GREEN_PREFIX="\033[32m"
 BACKGROUND_GREEN="\033[33m"
-BLUE_PREFIX="\033[34m"
-PURPLE_PREFIX="\033[35m"
-SKY_BLUE_PREFIX="\033[36m"
-WHITE_PREFIX="\033[37m"
-BOLD_PREFIX="\033[1m"
-UNDERLINE_PREFIX="\033[4m"
-ITALIC_PREFIX="\033[3m"
-
-# Function to print colored text
-print_color() {
   local text=$1
   local color=$2
   echo -e "${color}${text}${COLOR_SUFFIX}"
