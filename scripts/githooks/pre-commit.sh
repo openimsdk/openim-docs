@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 # ==============================================================================
+# Relevant files in this PR:
+<relevant_file file_path=".github/release-drafter.yml">
+File not found
+</relevant_file>
 # This is a pre-commit hook that ensures attempts to commit files that are
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
