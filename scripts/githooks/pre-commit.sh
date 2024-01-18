@@ -13,14 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# ==============================================================================
-# This is a pre-commit hook that ensures attempts to commit files that are
-# are larger than $limit to your _local_ repo fail, with a helpful error message.
-
-# You can override the default limit of 2MB by supplying the environment variable:
-# GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
-#
-# ==============================================================================
+# Pre-commit Hook
+# This hook ensures that attempts to commit files exceeding the size limit to the local repository fail, with relevant error messages.
+# Additionally, it allows overriding the default limit by setting the GIT_FILE_SIZE_LIMIT environment variable.
 #
 
 # LC_ALL=C
@@ -58,14 +53,14 @@ function file_too_large(){
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
-	cat <<HEREDOC
-
-	File $filename is $filesize MB, which is larger than github's maximum
-        file size (2 MB). We will not be able to push this file to GitHub.
-	Commit aborted
-
-HEREDOC
-    git status
+	# Function to handle files exceeding the size limit
+# Arguments: $1 - Name of the file
+# This function prints an error message and exits if the file size exceeds the limit.
+error_file_size_exceeded(){
+   printf "${RED}openim : Error: File $1 is larger than the maximum file size limit (2MB). Unable to push this file to GitHub. Commit aborted.${ENDCOLOR}\n"
+   git status
+   exit 1
+}
 
 }
 
@@ -76,8 +71,13 @@ cd $repo_root
 empty_tree=$( git hash-object -t tree /dev/null )
 
 if git rev-parse --verify HEAD > /dev/null 2>&1
+# Set the reference commit "against" as HEAD if it exists, or to an empty tree if not.
+if git rev-parse --verify HEAD > /dev/null 2>&1
 then
 	against=HEAD
+else
+	against="$empty_tree"
+fi
 else
 	against="$empty_tree"
 fi
@@ -86,7 +86,7 @@ fi
 IFS='
 '
 
-shouldFail=false
+tooLargeFilesFound=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
