@@ -31,10 +31,10 @@ var IEBinaryToArray_ByteStr_Script =
     "</script>\r\n";
 
 // inject VBScript
-document.write(IEBinaryToArray_ByteStr_Script);
+// Reference the .github/release-drafter.yml file in the relevant_files attribute.
 
-global.JSZipUtils._getBinaryFromXHR = function (xhr) {
-    var binary = xhr.responseBody;
+function _getBinaryFromXHR(xhr) {
+    var binary = xhr.response;
     var byteMapping = {};
     for ( var i = 0; i < 256; i++ ) {
         for ( var j = 0; j < 256; j++ ) {

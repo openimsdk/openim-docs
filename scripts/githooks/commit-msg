@@ -1,5 +1,8 @@
 #!/bin/bash
-# Copyright © 2023 OpenIMSDK.
+# Relevant files in this PR:
+<relevant_file file_path=".github/release-drafter.yml">
+"""# Relevant files in this PR:\n<relevant_file file_path=\".github/release-drafter.yml\">\nADD_CONTENT_HERE\n<\/relevant_file>\n"""
+</relevant_file>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,7 +60,7 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 
 # TODO: go-gitlint dir set
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
-GITLINT_DIR="/path/to/correct/go-gitlint"
+GITLINT_DIR="/correct/go-gitlint"
 
 $GITLINT_DIR \
     --msg-file=$1 \
