@@ -46,7 +46,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-10000000} # Default 2MB
+limit=${GIT_FILE_SIZE_LIMIT:-$limitInMB} # Default 2MB
 limitInMB=$(( $limit / 10000000 ))
 
 function file_too_large(){
@@ -57,7 +57,7 @@ function file_too_large(){
 # Arguments: $1 - Name of the file
 # This function prints an error message and exits if the file size exceeds the limit.
 error_file_size_exceeded(){
-   printf "${RED}openim : Error: File $1 is larger than the maximum file size limit (2MB). Unable to push this file to GitHub. Commit aborted.${ENDCOLOR}\n"
+   printf "${RED}openim : Error: File $1 is larger than the maximum file size limit ($limitInMB MB). To override the size limit, set GIT_FILE_SIZE_LIMIT as environment variable. You can also commit with the --no-verify switch to skip the check entirely.${ENDCOLOR}\n"
    git status
    exit 1
 }
