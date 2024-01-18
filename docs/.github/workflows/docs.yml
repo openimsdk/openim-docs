@@ -1,0 +1,33 @@
+name: Generate OpenIM Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Jazzy
+        uses: action/checkout@v2
+        with:
+          &nbsp; # Configuration for the documentation tool goes here
+
+      - name: Install Jazzy and dependencies
+        run: jazzy
+
+      - name: Generate documentation
+        run: npm run generate-docs
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "Your Name"
+          git config --global user.email "your-email@example.com"
+          git add .
+          git commit -m "Generate documentation"
+          git push

@@ -1,4 +1,10 @@
-### 我们的使命
+### Generating Documentation Locally
+
+Follow these instructions to generate the OpenIM documentation locally.
+
+1. Install Jazzy and its dependencies.
+2. Run the jazzy command to generate the documentation.
+3. Commit the changes to the repository.
 
 从公司成立之初就将“开源”作为核心战略来推进，开源充分体现了自由、平等、分享的互联网精神。
 
@@ -10,7 +16,7 @@ IM作为核心业务数据，安全的重要性毋庸置疑，OpenIM开源以及
 
 **有劳开发者点一下 star，一个小小的 star 是作者们前进的动力，也是我们力争IM开源No1的基石。**
 
-<font size=5 face="黑体">[开源链接](https://github.com/OpenIMSDK/Open-IM-Server)</font>
+[Open Source Repository](https://github.com/OpenIMSDK/Open-IM-Server)
 
 ### 我们的团队
 
