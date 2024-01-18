@@ -1,0 +1,12 @@
+# Contents of ".github/release-drafter.yml"
+
+# Specify the branches to generate releases for
+branches:
+  - main
+  - develop
+
+# Specify the template to use for release notes
+template: RELEASE_TEMPLATE.md
+
+# Other relevant settings
+# ...
