@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 printMessage() {
-   printf "${YELLOW}OpenIM : $1${ENDCOLOR}\n"
+   printf "${YELLOWOpenIM : $1${ENDCOLOR}\n"
 }
 
 printSuccess() {
@@ -57,7 +57,7 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 
 # TODO: go-gitlint dir set
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
-GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
+GITLINT_DIR="/path/to/correct/go-gitlint"
 
 $GITLINT_DIR \
     --msg-file=$1 \
