@@ -44,7 +44,7 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 
 GITLINT_DIR="/path/to/correct/go-gitlint"
 
-$GITLINT_DIR --file $1 --subject-pattern="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" --subject-max-length=150 --subject-min-length=10 --body-pattern=".*" --max-parents=1
+${GITLINT_DIR}/correct/go-gitlint --file $1 --subject-pattern="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" --subject-max-length=150 --subject-min-length=10 --body-pattern=".*" --max-parents=1
 
 if [ $? -ne 0 ]
 then
