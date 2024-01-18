@@ -73,7 +73,7 @@ HEREDOC
 repo_root=$( git rev-parse --show-toplevel )
 cd $repo_root
 
-empty_tree=$( git hash-object -t tree /dev/null )
+
 
 if git rev-parse --verify HEAD > /dev/null 2>&1
 then
