@@ -80,6 +80,9 @@ print_color "PTIME: ${time}" "${BOLD_PREFIX}${CYAN_PREFIX}"
 echo ""
 author=$(git config user.name)
 repository=$(basename -s .git $(git config --get remote.origin.url))
+# Add format check
+make format
+repository=$(basename -s .git $(git config --get remote.origin.url))
 
 # Print additional information if needed
 print_color "Repository: ${repository}" "${BLUE_PREFIX}"

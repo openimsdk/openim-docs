@@ -80,7 +80,15 @@ then
 	against=HEAD
 else
 	against="$empty_tree"
-fi
+}le_too_large
+cat <<HEREDOC
+
+File $filename is $filesize MB, which is larger than github's maximum
+file size (2 MB). We will not be able to push this file to GitHub.
+Commit aborted
+
+HEREDOC
+git status
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
 IFS='
