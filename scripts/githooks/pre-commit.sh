@@ -26,7 +26,7 @@
 LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|bot|refactor|revert|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
+valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|feat\/[a-z0-9._-]+$|bug\/[a-z0-9._-]+$"
 
 YELLOW="\e[93m"
 GREEN="\e[32m"
@@ -51,7 +51,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
+limit=${OPENIM_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
