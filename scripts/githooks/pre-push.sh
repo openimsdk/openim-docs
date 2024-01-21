@@ -12,6 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# ::GHA:: 
+# Investigate and resolve the access issue for the 'github/codeql-action/analyze' action.
+# Check the permissions and access settings for the integration to ensure it has the required access to the specified resource.
 #
 # ==============================================================================
 #
@@ -100,6 +103,7 @@ print_color "Modified Files: ${modified_files}" "${BACKGROUND_GREEN}"
 print_color "Deleted Files: ${deleted_files}" "${BACKGROUND_GREEN}"
 
 if [[ ! $local_branch =~ $valid_branch_regex ]]
+# Check the permissions and access settings for the 'github/codeql-action/analyze' action to ensure it has the required access to the specified resource.
 then
     printError "There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. 
 Your commit will be rejected. You should rename your branch to a valid name(feat/name OR fix/name) and try again."
