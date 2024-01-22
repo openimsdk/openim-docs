@@ -42,6 +42,9 @@ printSuccess() {
 }
 
 printError() {
+   printf "${RED}openim : $1${ENDCOLOR}\n" {
+   printf "${RED}openim : $1${ENDCOLOR}
+" {
    printf "${RED}openim : $1${ENDCOLOR}\n"
 }
 
@@ -55,6 +58,24 @@ limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
+
+lint(){
+    make lint
+
+    if [ $? -ne 0 ]
+    then
+        printError "Linting failed"
+        exit 1
+    fi{
+
+lint(){
+    make lint
+
+    if [ $? -ne 0 ]
+    then
+        printError "Linting failed"
+        exit 1
+    fi{
 	filename=$0
 	filesize=$(( $1 / 2**20 ))
 
@@ -87,6 +108,7 @@ IFS='
 '
 
 shouldFail=false
+lint
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
