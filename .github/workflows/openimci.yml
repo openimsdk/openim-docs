@@ -11,8 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# OpenIM CI workflow for automatic build and installation
 
-name: OpenIM CI Aotu Build and Install
+name: OpenIM CI Auto Build and Install
 
 on: 
   push:
@@ -52,7 +53,9 @@ jobs:
         go_version: ["1.19","1.20","1.21"]
         os: [ubuntu-latest]
     steps:
-    - name: Setup
+    - name: pre-commit and commit-msg hooks
+      run: |
+        gitlint install || echo 'Please install the go-gitlint dependency'
       uses: actions/checkout@v4
       
     - name: Set up Go ${{ matrix.go_version }}
@@ -133,7 +136,7 @@ jobs:
       with:
         version: '3.x' # If available, use the latest major version that's compatible
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Run OpenIM make install start
+    - name: Install go-gitlint tool
       run: |
         sudo make install
 
@@ -179,7 +182,13 @@ jobs:
 
   execute-scripts:
     name: Execute OpenIM Script On ${{ matrix.os }}-${{ matrix.arch }}
-    runs-on: ${{ matrix.os }}
+    on:
+        push:
+          branches:
+            - main
+        pull_request:
+          branches:
+            - main
     permissions:
         contents: write
         pull-requests: write
@@ -296,8 +305,10 @@ jobs:
         sudo make init
         sudo make image
 
-    - name: Get OpenIM Docker Images Status
+    - execute-scripts:
+    name: Handle other required tasks
       id: docker_processes
       run: |
         sudo docker images
+        echo 'Continuation of steps...'
         sudo docker ps
