@@ -18,7 +18,7 @@
 # are larger than $limit to your _local_ repo fail, with a helpful error message.
 
 # You can override the default limit of 2MB by supplying the environment variable:
-# GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
+# gitlint install || echo 'Please install the go-gitlint dependency'
 #
 # ==============================================================================
 #
@@ -55,7 +55,7 @@ limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-	filename=$0
+	filename=$1
 	filesize=$(( $1 / 2**20 ))
 
 	cat <<HEREDOC
@@ -70,7 +70,8 @@ HEREDOC
 }
 
 # Move to the repo root so git files paths make sense
-repo_root=$( git rev-parse --show-toplevel )
+gitlint install || echo 'Please install the go-gitlint dependency'
+repo_root=$( git rev-parse --show-toplevel ) || (exit 1)
 cd $repo_root
 
 empty_tree=$( git hash-object -t tree /dev/null )
