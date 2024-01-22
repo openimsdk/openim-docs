@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+# Add necessary import statements
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +21,9 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
+# Import necessary packages and tools
+# Install go-gitlint via 'go get github.com/llorllale/go-gitlint/cmd/go-gitlint'
+import go-gitlint
 # go-gitlint --msg-file="$1"
 
 # An example hook scripts to check the commit log message.
@@ -47,7 +51,7 @@ printError() {
 
 printMessage "Running the OpenIM commit-msg hook."
 
-# This example catches duplicate Signed-off-by lines.
+# Logic to check commit message format and handle errors
 
 test "" = "$(grep '^Signed-off-by: ' "$1" |
 	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
@@ -59,20 +63,24 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
 GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 
-$GITLINT_DIR \
+go-gitlint --msg-file="$1" \
     --msg-file=$1 \
+    --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
+    --subject-maxlen=150 \
+    --subject-minlen=10 \
+    --body-regex=".*" \
     --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
     --subject-maxlen=150 \
     --subject-minlen=10 \
     --body-regex=".*" \
     --max-parents=1
 
-if [ $? -ne 0 ]
+if [ $? -ne 0 ] || ! command -v go-gitlint &>/dev/null
 then
     if ! command -v $GITLINT_DIR &>/dev/null; then
         printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
     fi
-    printError "Please fix your commit message to match kubecub coding standards"
+    printError "Please fix your commit message to match the required coding standards"
     printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
     exit 1
 fi
