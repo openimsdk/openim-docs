@@ -19,8 +19,8 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
-# go-gitlint --msg-file="$1"
+# Install go-gitlint by running: go get github.com/llorllale/go-gitlint/cmd/go-gitlint
+gitlint install || echo 'Please install the go-gitlint dependency'
 
 # An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
@@ -56,7 +56,7 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 }
 
 # TODO: go-gitlint dir set
-OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
+export OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
 GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
 
 $GITLINT_DIR \
