@@ -23,29 +23,18 @@
 # go-gitlint --msg-file="$1"
 
 # An example hook scripts to check the commit log message.
-# Called by "git commit" with one argument, the name of the file
-# that has the commit message.  The hook should exit with non-zero
-# status after issuing an appropriate message if it wants to stop the
-# commit.  The hook is allowed to edit the commit message file.
+# Remove the lines that check for duplicate Signed-off-by lines
 
-YELLOW="\e[93m"
-GREEN="\e[32m"
-RED="\e[31m"
-ENDCOLOR="\e[0m"
+# test "" = "$(grep '^Signed-off-by: ' "$1" |
+#	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
+#	echo >&2 Duplicate Signed-off-by lines.
+#	exit 1
+# }
 
-printMessage() {
-   printf "${YELLOW}OpenIM : $1${ENDCOLOR}\n"
-}
-
-printSuccess() {
-   printf "${GREEN}OpenIM : $1${ENDCOLOR}\n"
-}
-
-printError() {
-   printf "${RED}OpenIM : $1${ENDCOLOR}\n"
-}
-
-printMessage "Running the OpenIM commit-msg hook."
+# TODO: go-gitlint dir set
+OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
+GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
+new line(s) to replace
 
 # This example catches duplicate Signed-off-by lines.
 
@@ -58,7 +47,6 @@ test "" = "$(grep '^Signed-off-by: ' "$1" |
 # TODO: go-gitlint dir set
 OPENIM_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
 GITLINT_DIR="$OPENIM_ROOT/_output/tools/go-gitlint"
-
 $GITLINT_DIR \
     --msg-file=$1 \
     --subject-regex="^(build|chore|ci|docs|feat|feature|fix|perf|refactor|revert|style|bot|test)(.*)?:\s?.*" \
