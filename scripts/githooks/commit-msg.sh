@@ -48,7 +48,6 @@ printError() {
 printMessage "Running the OpenIM commit-msg hook."
 
 # This example catches duplicate Signed-off-by lines.
-
 test "" = "$(grep '^Signed-off-by: ' "$1" |
 	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
 	echo >&2 Duplicate Signed-off-by lines.
@@ -70,17 +69,23 @@ $GITLINT_DIR \
 if [ $? -ne 0 ]
 then
     if ! command -v $GITLINT_DIR &>/dev/null; then
-        printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
+        echo >&2 "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' to install it."
     fi
-    printError "Please fix your commit message to match kubecub coding standards"
-    printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
+    echo >&2 "Please fix your commit message to match the coding standards."
+    echo >&2 "Refer to the coding standards documentation: https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
+    exit 1
+fi
     exit 1
 fi
 
-### Add Sign-off-by line to the end of the commit message
-# Get local git config
-NAME=$(git config user.name)
-EMAIL=$(git config user.email)
+# Add "Signed-off-by" line if it doesn't exist
+grep -qs "^Signed-off-by: " "$1"
+SIGNED_OFF_BY_EXISTS=$?
+
+# Add "Signed-off-by" line if it doesn't exist
+if [ $SIGNED_OFF_BY_EXISTS -ne 0 ]; then
+  echo -e "\nSigned-off-by: $NAME <$EMAIL>" >> "$1"
+fi
 
 # Check if the commit message contains a sign-off line
 grep -qs "^Signed-off-by: " "$1"
