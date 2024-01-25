@@ -89,7 +89,7 @@ print_separator
 
 file_list=$(git diff --name-status HEAD @{u})
 added_files=$(grep -c '^A' <<< "$file_list")
-make tools.verify.go-generate
+make tools.verify.go-mod-tidy
 modified_files=$(grep -c '^M' <<< "$file_list")
 deleted_files=$(grep -c '^D' <<< "$file_list")
 
