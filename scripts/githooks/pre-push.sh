@@ -107,7 +107,7 @@ fi
 
 #
 #printMessage "Running the Flutter analyzer"
-#flutter analyze
+# Commented out the Flutter analyzer section
 #
 #if [ $? -ne 0 ]; then
 #  printError "Flutter analyzer error"
