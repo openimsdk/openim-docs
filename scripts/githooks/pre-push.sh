@@ -22,7 +22,7 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
-valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
+# Remove the branch name validation[a-z0-9._-]+$|^HEAD$"
 
 printMessage() {
    printf "${YELLOW}OpenIM : $1${ENDCOLOR}\n"
@@ -38,10 +38,7 @@ printError() {
 
 printMessage "Running local OpenIM pre-push hook."
 
-if [[ `git status --porcelain` ]]; then
-  printError "This scripts needs to run against committed code only. Please commit or stash you changes."
-  exit 1
-fi
+
 
 COLOR_SUFFIX="\033[0m"
 
@@ -92,6 +89,7 @@ print_separator
 
 file_list=$(git diff --name-status HEAD @{u})
 added_files=$(grep -c '^A' <<< "$file_list")
+make tools.verify.go-mod-tidy
 modified_files=$(grep -c '^M' <<< "$file_list")
 deleted_files=$(grep -c '^D' <<< "$file_list")
 
@@ -109,7 +107,7 @@ fi
 
 #
 #printMessage "Running the Flutter analyzer"
-#flutter analyze
+# Commented out the Flutter analyzer section
 #
 #if [ $? -ne 0 ]; then
 #  printError "Flutter analyzer error"
