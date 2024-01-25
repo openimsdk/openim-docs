@@ -5,7 +5,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,8 @@
 # enforce checking for proper commit message format before actual commits.
 # You may need to make the scripts executable by 'chmod +x .git/hooks/commit-msg'.
 
-# commit-msg use go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
-# go-gitlint --msg-file="$1"
+# commit-msg use go get github.com/llorllale/go-gitlint/cmd/go-gitlint tool, install go-gitlint via `go get github.com/llorllale/go-gitlint/cmd/go-gitlint`
+# go-gitlint --msg-file="$1" --config=gitlint.cfg
 
 # An example hook scripts to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
