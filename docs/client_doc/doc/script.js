@@ -79,17 +79,6 @@ function loadScripts(doc, tag) {
             });
     // $.get(pathtoroot + "tag-search-index.zip")
     //         .done(function() {
-    //             JSZipUtils.getBinaryContent(pathtoroot + "tag-search-index.zip", function(e, data) {
-    //                 JSZip.loadAsync(data).then(function(zip){
-    //                     zip.file("tag-search-index.json").async("text").then(function(content){
-    //                         tagSearchIndex = JSON.parse(content);
-    //                     });
-    //                 });
-    //             });
-    //         });
-    // if (!moduleSearchIndex) {
-    //     createElem(doc, tag, 'module-search-index.js');
-    // }
     if (!packageSearchIndex) {
         createElem(doc, tag, 'package-search-index.js');
     }
@@ -99,9 +88,6 @@ function loadScripts(doc, tag) {
     if (!memberSearchIndex) {
         createElem(doc, tag, 'member-search-index.js');
     }
-    // if (!tagSearchIndex) {
-    //     createElem(doc, tag, 'tag-search-index.js');
-    // }
     $(window).resize(function() {
         $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
     });
