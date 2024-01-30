@@ -53,12 +53,13 @@ printMessage "Running local openim pre-commit hook."
 # Maximum file size limit in bytes
 limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
 limitInMB=$(( $limit / 1000000 ))
+limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
-  filename=$0
-  filesize=$(( $1 / 2**20 ))
+  filename=$file
+  filesize=$(( $file_size / 2**20 ))
   
-	cat <<HEREDOC
+	cat << HEREDOC
 
 	File $filename is $filesize MB, which is larger than github's maximum
         file size (2 MB). We will not be able to push this file to GitHub.
