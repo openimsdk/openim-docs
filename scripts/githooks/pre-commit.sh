@@ -83,8 +83,8 @@ else
 fi
 
 # Set split so that for loop below can handle spaces in file names by splitting on line breaks
-IFS='
-'
+IFS='\n' shouldFail=false
+for file in $( git diff-index --cached --name-only $against ); do
 
 shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
