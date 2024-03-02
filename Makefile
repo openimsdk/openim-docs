@@ -15,7 +15,7 @@ format:
 
 generate:
 	@echo "Generating necessary files"
-	# Add the command to generate necessary files here
+	go generate ./...
 
 tidy:
 	@echo "Running go mod tidy"
