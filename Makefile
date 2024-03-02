@@ -2,7 +2,8 @@
 
 cover:
 	@echo "Running code coverage script"
-	# Add the command to run the code coverage script here
+	go test ./... -coverprofile=coverage.out
+	go tool cover -html=coverage.out -o coverage.html
 
 lint:
 	@echo "Running linter"
