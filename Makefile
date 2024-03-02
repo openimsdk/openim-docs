@@ -11,7 +11,7 @@ lint:
 
 format:
 	@echo "Running formatter"
-	# Add the command to run the formatter here
+	go fmt ./...
 
 generate:
 	@echo "Generating necessary files"
