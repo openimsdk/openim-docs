@@ -7,7 +7,7 @@ cover:
 
 lint:
 	@echo "Running linter"
-	# Add the command to run the linter here
+	golangci-lint run
 
 format:
 	@echo "Running formatter"
