@@ -16,13 +16,16 @@ jobs:
 
     - name: Grant execute permissions for scripts
       run: |
-        sudo chmod +x /home/runner/work/{repo-name}/{repo-name}/scripts/build_all_service.sh
-        sudo chmod +x /home/runner/work/{repo-name}/{repo-name}/scripts/stop_all.sh
+        # Since the files do not exist, these lines should be removed or commented out.
+        # sudo chmod +x /home/runner/work/{repo-name}/{repo-name}/scripts/build_all_service.sh
+        # sudo chmod +x /home/runner/work/{repo-name}/{repo-name}/scripts/stop_all.sh
 
     - name: Build all services
       run: |
-        /home/runner/work/{repo-name}/{repo-name}/scripts/build_all_service.sh
+        # This script does not exist, so this line should be removed or commented out.
+        # /home/runner/work/{repo-name}/{repo-name}/scripts/build_all_service.sh
 
     - name: Stop all services
       run: |
-        /home/runner/work/{repo-name}/{repo-name}/scripts/stop_all.sh
+        # This script does not exist, so this line should be removed or commented out.
+        # /home/runner/work/{repo-name}/{repo-name}/scripts/stop_all.sh
