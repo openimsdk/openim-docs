@@ -1,11 +1,13 @@
 tidy:
 	@echo "Cleaning up the project..."
-	# Add commands for cleaning up the project here
+	rm -rf tmp/*
+	rm -rf bin/*
 
 init:
 	@echo "Initializing the project..."
-	# Add commands for initializing the project here
+	mkdir -p bin
+	mkdir -p tmp
 
 install:
 	@echo "Installing dependencies..."
-	# Add commands for installing dependencies here
+	npm install
