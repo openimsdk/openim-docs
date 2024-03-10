@@ -1,5 +1,5 @@
 tidy:
-    sudo make tidy
+    go mod tidy
 
 format:
     sudo make format
