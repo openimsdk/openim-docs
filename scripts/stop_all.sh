@@ -7,6 +7,12 @@ services=("service1" "service2" "service3")
 for service in "${services[@]}"; do
   echo "Stopping $service..."
 
+  # Check if the PID file exists
+  if [ ! -f "/var/run/$service.pid" ]; then
+    echo "PID file for $service does not exist, skipping..."
+    continue
+  fi
+  
   # Read the PID from the file
   pid=$(cat "/var/run/$service.pid")
 
@@ -23,3 +29,13 @@ for service in "${services[@]}"; do
 done
 
 echo "All services stopped successfully"
+  # Ensure the kill command was successful
+  if kill -0 $pid 2>/dev/null; then
+    echo "Waiting for $service to stop..."
+    sleep 1
+  fi
+
+  if kill -0 $pid 2>/dev/null; then
+    echo "$service did not stop successfully"
+    continue
+  fi
