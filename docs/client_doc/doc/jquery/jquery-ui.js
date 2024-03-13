@@ -2428,6 +2428,8 @@ $.widget( "ui.autocomplete", {
 		this.cancelSearch = false;
 
 		this.source( { term: value }, this._response() );
+		// Ensure the loading class is removed if the source doesn't call the response
+		this._response()( [] );
 	},
 
 	_response: function() {
@@ -2551,7 +2553,7 @@ $.widget( "ui.autocomplete", {
 
 	_renderItem: function( ul, item ) {
 		return $( "<li>" )
-			.append( $( "<div>" ).text( item.label ) )
+			.append( $( "<div>" ).html( item.label ) )
 			.appendTo( ul );
 	},
 
