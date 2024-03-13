@@ -69,8 +69,8 @@ $GO_GITLINT_DIR \
 
 if [ $? -ne 0 ]
 then
-    if ! command -v $GITLINT_DIR &>/dev/null; then
-        printError "$GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
+    if ! command -v $GO_GITLINT_DIR &>/dev/null; then
+        printError "$GO_GITLINT_DIR not found. Please run 'make tools' OR 'make tools.verify.go-gitlint' make verto install it."
     fi
     printError "Please fix your commit message to match kubecub coding standards"
     printError "https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md"
