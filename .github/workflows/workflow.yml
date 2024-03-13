@@ -34,3 +34,10 @@ jobs:
         uses: some-deployment-action@v1
         with:
           # Deployment configuration
+      - name: "Close stale issues"
+        uses: actions/stale@v4
+        with:
+          days-before-stale: 60
+          days-before-close: 7
+          stale-issue-message: 'This issue is stale because it has been open 60 days with no activity.'
+          close-issue-message: 'This issue has been closed due to inactivity.'
