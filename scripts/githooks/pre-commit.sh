@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+make clean
+make lint
+make format
+make generate
+make tidy
 # Copyright © 2023 OpenIMSDK.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
