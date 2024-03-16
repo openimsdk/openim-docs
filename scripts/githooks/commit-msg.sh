@@ -85,6 +85,7 @@ EMAIL=$(git config user.email)
 # Check if the commit message contains a sign-off line
 grep -qs "^Signed-off-by: " "$1"
 SIGNED_OFF_BY_EXISTS=$?
+)
 
 # Add "Signed-off-by" line if it doesn't exist
 if [ $SIGNED_OFF_BY_EXISTS -ne 0 ]; then
