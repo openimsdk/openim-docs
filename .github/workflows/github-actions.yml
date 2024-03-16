@@ -1,0 +1,48 @@
+name: GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Build
+        run: go build -o myapp
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Deploy
+        run: |
+          # Add deployment steps here
+
+      - name: Analyze code
+        uses: github/codeql-action/analyze@v2
+        with:
+          languages: go
+          query: my-query.ql
+
+      - name: Publish code scanning results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: codeql-results.sarif
+
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Add deployment steps for production environment
