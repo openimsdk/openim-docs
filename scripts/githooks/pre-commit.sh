@@ -51,7 +51,7 @@ printMessage "Running local openim pre-commit hook."
 # https://gist.github.com/cubxxw/126b72104ac0b0ca484c9db09c3e5694#file-githook-md
 # TODO! GIT_FILE_SIZE_LIMIT=50000000 git commit -m "test: this commit is allowed file sizes up to 50MB"
 # Maximum file size limit in bytes
-limit=${GIT_FILE_SIZE_LIMIT:-2000000} # Default 2MB
+limit=${GIT_FILE_SIZE_LIMIT:-50000000} # Default 50MB
 limitInMB=$(( $limit / 1000000 ))
 
 function file_too_large(){
@@ -90,7 +90,7 @@ shouldFail=false
 for file in $( git diff-index --cached --name-only $against ); do
 	file_size=$(([ ! -f $file ] && echo 0) || (ls -la $file | awk '{ print $5 }'))
 	if [ "$file_size" -gt  "$limit" ]; then
-	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB"
+	    printError "File $file is $(( $file_size / 10**6 )) MB, which is larger than our configured limit of $limitInMB MB. The maximum allowed file size is $(( $limit / 1000000 )) MB."
         shouldFail=true
 	fi
 done
