@@ -33,7 +33,7 @@ on:
         - "docs/**"
 
 env:
-  GO_VERSION: "1.19"
+  GO_VERSION: "1.20"
   GOLANGCI_VERSION: "v1.50.1"
 
 jobs:
@@ -50,10 +50,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Go ${{ matrix.go_version }}
-      uses: actions/setup-go@v4
+    - name: Set up Go ${{ env.GO_VERSION }}
+      uses: actions/setup-go@v2
       with:
-        go-version: ${{ matrix.go_version }}
+        go-version: ${{ env.GO_VERSION }}
       id: go
 
     - name: Install Task
@@ -66,25 +66,25 @@ jobs:
       run: |
         curl -o docker-compose.yml https://raw.githubusercontent.com/OpenIMSDK/openim-docker/main/example/basic-openim-server-dependency.yml
         sudo docker compose up -d
-        sudo sleep 60
+        sleep 60
 
     - name: Module Operations
       run: |
-        sudo make tidy
-        sudo make tools.verify.go-gitlint
+        make tidy
+        make tools.verify.go-gitlint
 
     - name: Build, Start, Check Services and Print Logs
       run: |
-        sudo ./scripts/install/install.sh -i && \
-        sudo ./scripts/install/install.sh -s && \
-        (echo "An error occurred, printing logs:" && sudo cat ./_output/logs/* 2>/dev/null)
+        ./scripts/install/install.sh -i && \
+        ./scripts/install/install.sh -s && \
+        (echo "An error occurred, printing logs:" && cat ./_output/logs/* 2>/dev/null)
 
     - name: Run Test
       run: |
-        sudo make test-api && \
-        (echo "An error occurred, printing logs:" && sudo cat ./_output/logs/* 2>/dev/null)
+        make test-api && \
+        (echo "An error occurred, printing logs:" && cat ./_output/logs/* 2>/dev/null)
 
     - name: Stop Services
       run: |
-        sudo ./scripts/install/install.sh -u && \
-        (echo "An error occurred, printing logs:" && sudo cat ./_output/logs/* 2>/dev/null)
+        ./scripts/install/install.sh -u && \
+        (echo "An error occurred, printing logs:" && cat ./_output/logs/* 2>/dev/null)
