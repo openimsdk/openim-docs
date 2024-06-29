@@ -42,7 +42,7 @@ function getHighlightedText(item) {
 }
 function getURLPrefix(ui) {
     var urlPrefix="";
-    if (useModuleDirectories) {
+        if (useModuleDirectories.length > 0) {
         var slash = "/";
         if (ui.item.category === catModules) {
             return ui.item.l + slash;
