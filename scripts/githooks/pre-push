@@ -22,6 +22,8 @@ RED="\e[31m"
 ENDCOLOR="\e[0m"
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+"$SCRIPT_DIR/pre-push"
 valid_branch_regex="^(main|master|develop|release(-[a-zA-Z0-9._-]+)?)$|(feature|feat|openim|hotfix|test|bug|ci|cicd|style|)\/[a-z0-9._-]+$|^HEAD$"
 
 printMessage() {
@@ -71,6 +73,10 @@ print_separator() {
 
 # Get current time
 time=$(date +"%Y-%m-%d %H:%M:%S")
+
+mkdir -p "
+scripts/githooks"
+cp pre-push.sh scripts/githooks/pre-push
 
 # Print section separator
 print_separator
